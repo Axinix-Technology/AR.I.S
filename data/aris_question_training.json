@@ -1,0 +1,665 @@
+[
+  {
+    "question_id": "Q0001",
+    "split": "TRAIN",
+    "category": "direct_relation",
+    "question": "Where does Arun work?",
+    "expected_answer": "Axinix",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0002",
+    "split": "TRAIN",
+    "category": "direct_relation",
+    "question": "Who works at Axinix?",
+    "expected_answer": "Arun",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0003",
+    "split": "TRAIN",
+    "category": "direct_relation",
+    "question": "Where is Axinix located?",
+    "expected_answer": "Chennai",
+    "expected_semantic_target": {
+      "subject": "Axinix",
+      "relation": "located_in",
+      "object": "Chennai"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Axinix", "relation": "located_in", "object": "Chennai"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0004",
+    "split": "DEV",
+    "category": "direct_relation",
+    "question": "What does Axinix develop?",
+    "expected_answer": "WorkHub",
+    "expected_semantic_target": {
+      "subject": "Axinix",
+      "relation": "develops",
+      "object": "WorkHub"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Axinix", "relation": "develops", "object": "WorkHub"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0005",
+    "split": "TEST",
+    "category": "direct_relation",
+    "question": "Which company employs Arun?",
+    "expected_answer": "Axinix",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0006",
+    "split": "TEST",
+    "category": "paraphrase",
+    "question": "Which company does Arun work for?",
+    "expected_answer": "Axinix",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0007",
+    "split": "TEST",
+    "category": "paraphrase",
+    "question": "Where is Arun employed?",
+    "expected_answer": "Axinix",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0008",
+    "split": "TEST",
+    "category": "paraphrase",
+    "question": "Who employs Arun?",
+    "expected_answer": "Axinix",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0009",
+    "split": "TEST",
+    "category": "paraphrase",
+    "question": "What is Arun's workplace?",
+    "expected_answer": "Axinix",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0010",
+    "split": "TEST",
+    "category": "spelling_noise",
+    "question": "Where does Arun wrk?",
+    "expected_answer": "Axinix",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0011",
+    "split": "TEST",
+    "category": "spelling_noise",
+    "question": "Which company does Arun wrk for?",
+    "expected_answer": "Axinix",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0012",
+    "split": "TEST",
+    "category": "spelling_noise",
+    "question": "Wher is Arun employd?",
+    "expected_answer": "Axinix",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0013",
+    "split": "TEST",
+    "category": "grammar_noise",
+    "question": "Arun work where?",
+    "expected_answer": "Axinix",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0014",
+    "split": "TEST",
+    "category": "grammar_noise",
+    "question": "Arun company which?",
+    "expected_answer": "Axinix",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0015",
+    "split": "TEST",
+    "category": "grammar_noise",
+    "question": "Where Arun works?",
+    "expected_answer": "Axinix",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0016",
+    "split": "TEST",
+    "category": "grammar_noise",
+    "question": "Axinix Arun works?",
+    "expected_answer": "Axinix",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0017",
+    "split": "TEST",
+    "category": "directionality",
+    "question": "Who is Arun's brother?",
+    "expected_answer": null,
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "brother_of",
+      "object": null
+    },
+    "expected_reasoning": {
+      "mode": "no_supported_path",
+      "hops": 0,
+      "path": []
+    }
+  },
+  {
+    "question_id": "Q0018",
+    "split": "TEST",
+    "category": "directionality",
+    "question": "Who is Dhivya's brother?",
+    "expected_answer": "Arun",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "brother_of",
+      "object": "Dhivya"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "brother_of", "object": "Dhivya"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0019",
+    "split": "TEST",
+    "category": "directionality",
+    "question": "Who is the brother of Dhivya?",
+    "expected_answer": "Arun",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "brother_of",
+      "object": "Dhivya"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "brother_of", "object": "Dhivya"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0020",
+    "split": "TEST",
+    "category": "directionality",
+    "question": "Who is the sister of Arun?",
+    "expected_answer": "Dhivya",
+    "expected_semantic_target": {
+      "subject": "Dhivya",
+      "relation": "sister_of",
+      "object": "Arun"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Dhivya", "relation": "sister_of", "object": "Arun"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0021",
+    "split": "TEST",
+    "category": "multi_hop_2hop",
+    "question": "Which city is Arun's company in?",
+    "expected_answer": "Chennai",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "located_in",
+      "object": "Chennai"
+    },
+    "expected_reasoning": {
+      "mode": "symbolic_path",
+      "hops": 2,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"},
+        {"subject": "Axinix", "relation": "located_in", "object": "Chennai"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0022",
+    "split": "TEST",
+    "category": "multi_hop_3hop",
+    "question": "Which state is Arun's company in?",
+    "expected_answer": "Tamil Nadu",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "in",
+      "object": "Tamil Nadu"
+    },
+    "expected_reasoning": {
+      "mode": "symbolic_path",
+      "hops": 3,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"},
+        {"subject": "Axinix", "relation": "located_in", "object": "Chennai"},
+        {"subject": "Chennai", "relation": "in", "object": "Tamil Nadu"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0023",
+    "split": "TEST",
+    "category": "multi_hop_4hop",
+    "question": "Which country is Arun's company in?",
+    "expected_answer": "India",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "in",
+      "object": "India"
+    },
+    "expected_reasoning": {
+      "mode": "symbolic_path",
+      "hops": 4,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"},
+        {"subject": "Axinix", "relation": "located_in", "object": "Chennai"},
+        {"subject": "Chennai", "relation": "in", "object": "Tamil Nadu"},
+        {"subject": "Tamil Nadu", "relation": "in", "object": "India"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0024",
+    "split": "TEST",
+    "category": "multi_hop_5hop",
+    "question": "Which continent is Arun's company in?",
+    "expected_answer": "Asia",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "in",
+      "object": "Asia"
+    },
+    "expected_reasoning": {
+      "mode": "symbolic_path",
+      "hops": 5,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"},
+        {"subject": "Axinix", "relation": "located_in", "object": "Chennai"},
+        {"subject": "Chennai", "relation": "in", "object": "Tamil Nadu"},
+        {"subject": "Tamil Nadu", "relation": "in", "object": "India"},
+        {"subject": "India", "relation": "in", "object": "Asia"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0025",
+    "split": "TEST",
+    "category": "unsupported",
+    "question": "Does Arun work at OpenAI?",
+    "expected_answer": null,
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "OpenAI"
+    },
+    "expected_reasoning": {
+      "mode": "no_supported_path",
+      "hops": 0,
+      "path": []
+    }
+  },
+  {
+    "question_id": "Q0026",
+    "split": "TEST",
+    "category": "unsupported",
+    "question": "Is Arun located on Mars?",
+    "expected_answer": null,
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "located_on",
+      "object": "Mars"
+    },
+    "expected_reasoning": {
+      "mode": "no_supported_path",
+      "hops": 0,
+      "path": []
+    }
+  },
+  {
+    "question_id": "Q0027",
+    "split": "TEST",
+    "category": "unsupported",
+    "question": "Is Axinix a planet?",
+    "expected_answer": null,
+    "expected_semantic_target": {
+      "subject": "Axinix",
+      "relation": "is_a",
+      "object": "planet"
+    },
+    "expected_reasoning": {
+      "mode": "no_supported_path",
+      "hops": 0,
+      "path": []
+    }
+  },
+  {
+    "question_id": "Q0028",
+    "split": "TEST",
+    "category": "unsupported",
+    "question": "Is Moon connected to DNA?",
+    "expected_answer": null,
+    "expected_semantic_target": {
+      "subject": "Moon",
+      "relation": "connected_to",
+      "object": "DNA"
+    },
+    "expected_reasoning": {
+      "mode": "no_supported_path",
+      "hops": 0,
+      "path": []
+    }
+  },
+  {
+    "question_id": "Q0029",
+    "split": "TEST",
+    "category": "semantic_equivalence",
+    "question": "Is Chennai in Tamil Nadu?",
+    "expected_answer": "Tamil Nadu",
+    "expected_semantic_target": {
+      "subject": "Chennai",
+      "relation": "in",
+      "object": "Tamil Nadu"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Chennai", "relation": "in", "object": "Tamil Nadu"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0030",
+    "split": "TEST",
+    "category": "semantic_equivalence",
+    "question": "Is Chennai located in Tamil Nadu?",
+    "expected_answer": "Tamil Nadu",
+    "expected_semantic_target": {
+      "subject": "Chennai",
+      "relation": "in",
+      "object": "Tamil Nadu"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Chennai", "relation": "in", "object": "Tamil Nadu"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0031",
+    "split": "TEST",
+    "category": "semantic_equivalence",
+    "question": "Does Tamil Nadu contain Chennai?",
+    "expected_answer": "Chennai",
+    "expected_semantic_target": {
+      "subject": "Tamil Nadu",
+      "relation": "contains",
+      "object": "Chennai"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Chennai", "relation": "in", "object": "Tamil Nadu"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0032",
+    "split": "TEST",
+    "category": "entity_variation",
+    "question": "Where does ARUN work?",
+    "expected_answer": "Axinix",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0033",
+    "split": "TEST",
+    "category": "entity_variation",
+    "question": "Where does Arun's work?",
+    "expected_answer": "Axinix",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0034",
+    "split": "TEST",
+    "category": "entity_variation",
+    "question": "Where does the person Arun work?",
+    "expected_answer": "Axinix",
+    "expected_semantic_target": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix"
+    },
+    "expected_reasoning": {
+      "mode": "direct",
+      "hops": 1,
+      "path": [
+        {"subject": "Arun", "relation": "works_at", "object": "Axinix"}
+      ]
+    }
+  },
+  {
+    "question_id": "Q0035",
+    "split": "TEST",
+    "category": "correction_feedback",
+    "question": "Is Dhivya brother of Arun?",
+    "expected_answer": null,
+    "expected_semantic_target": {
+      "subject": "Dhivya",
+      "relation": "brother_of",
+      "object": "Arun"
+    },
+    "expected_reasoning": {
+      "mode": "no_supported_path",
+      "hops": 0,
+      "path": []
+    }
+  }
+]

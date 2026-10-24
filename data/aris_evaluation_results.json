@@ -1,0 +1,2396 @@
+{
+  "metrics": {
+    "Total Questions": 35,
+    "Entity Accuracy": 0.6857,
+    "Relation Accuracy": 0.2571,
+    "Direction Accuracy": 0.3429,
+    "Semantic Target Accuracy": 0.2286,
+    "Direct Answer Accuracy": 0.0,
+    "2-Hop Accuracy": 0.0,
+    "3-Hop Accuracy": 0.0,
+    "4-Hop Accuracy": 0.0,
+    "Unsupported Detection Accuracy": 1.0,
+    "Paraphrase Accuracy": 0.0,
+    "Spelling Robustness": 0.0,
+    "Grammar Robustness": 0.0,
+    "Generalization Accuracy": 0.1935
+  },
+  "category_breakdown": {
+    "direct_relation": {
+      "total": 5,
+      "passed": 0,
+      "failed": 5,
+      "failures": {
+        "RELATION_FAILURE": 4,
+        "PATH_DISCOVERY_FAILURE": 1
+      }
+    },
+    "paraphrase": {
+      "total": 4,
+      "passed": 0,
+      "failed": 4,
+      "failures": {
+        "RELATION_FAILURE": 3,
+        "ENTITY_FAILURE": 1
+      }
+    },
+    "spelling_noise": {
+      "total": 3,
+      "passed": 0,
+      "failed": 3,
+      "failures": {
+        "SEMANTIC_NORMALIZATION_FAILURE": 3
+      }
+    },
+    "grammar_noise": {
+      "total": 4,
+      "passed": 0,
+      "failed": 4,
+      "failures": {
+        "RELATION_FAILURE": 2,
+        "ENTITY_FAILURE": 2
+      }
+    },
+    "directionality": {
+      "total": 4,
+      "passed": 1,
+      "failed": 3,
+      "failures": {
+        "ENTITY_FAILURE": 1,
+        "PATH_DISCOVERY_FAILURE": 2
+      }
+    },
+    "multi_hop_2hop": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "failures": {
+        "ENTITY_FAILURE": 1
+      }
+    },
+    "multi_hop_3hop": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "failures": {
+        "ENTITY_FAILURE": 1
+      }
+    },
+    "multi_hop_4hop": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "failures": {
+        "ENTITY_FAILURE": 1
+      }
+    },
+    "multi_hop_5hop": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "failures": {
+        "ENTITY_FAILURE": 1
+      }
+    },
+    "unsupported": {
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "failures": {}
+    },
+    "semantic_equivalence": {
+      "total": 3,
+      "passed": 0,
+      "failed": 3,
+      "failures": {
+        "PATH_DISCOVERY_FAILURE": 2,
+        "RELATION_FAILURE": 1
+      }
+    },
+    "entity_variation": {
+      "total": 3,
+      "passed": 0,
+      "failed": 3,
+      "failures": {
+        "RELATION_FAILURE": 2,
+        "ENTITY_FAILURE": 1
+      }
+    },
+    "correction_feedback": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "failures": {}
+    }
+  },
+  "failure_distribution": {
+    "RELATION_FAILURE": 12,
+    "PATH_DISCOVERY_FAILURE": 5,
+    "ENTITY_FAILURE": 9,
+    "SEMANTIC_NORMALIZATION_FAILURE": 3
+  },
+  "primary_training_target": "Relational discovery & canonical phrase abstraction",
+  "results": [
+    {
+      "question_id": "Q0001",
+      "category": "direct_relation",
+      "split": "TRAIN",
+      "input": "Where does Arun work?",
+      "aris": {
+        "tokens": [
+          "Where",
+          "does",
+          "Arun",
+          "work",
+          "?"
+        ],
+        "candidates": [
+          "Where",
+          "Arun"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Where",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Arun",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Where",
+        "relation": "does",
+        "object": "Arun",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ]
+        ],
+        "answer": "Axinix"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0002",
+      "category": "direct_relation",
+      "split": "TRAIN",
+      "input": "Who works at Axinix?",
+      "aris": {
+        "tokens": [
+          "Who",
+          "works",
+          "at",
+          "Axinix",
+          "?"
+        ],
+        "candidates": [
+          "Who",
+          "Axinix"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Who",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Axinix",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Who",
+        "relation": "works at",
+        "object": "Axinix",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ]
+        ],
+        "answer": "Arun"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": true,
+        "direction": true,
+        "semantic": true,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "PATH_DISCOVERY_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0003",
+      "category": "direct_relation",
+      "split": "TRAIN",
+      "input": "Where is Axinix located?",
+      "aris": {
+        "tokens": [
+          "Where",
+          "is",
+          "Axinix",
+          "located",
+          "?"
+        ],
+        "candidates": [
+          "Where",
+          "Axinix"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Where",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Axinix",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Where",
+        "relation": "is",
+        "object": "Axinix",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Axinix",
+          "relation": "located_in",
+          "object": "Chennai"
+        },
+        "reasoning_path": [
+          [
+            "Axinix",
+            "located_in",
+            "Chennai"
+          ]
+        ],
+        "answer": "Chennai"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0004",
+      "category": "direct_relation",
+      "split": "DEV",
+      "input": "What does Axinix develop?",
+      "aris": {
+        "tokens": [
+          "What",
+          "does",
+          "Axinix",
+          "develop",
+          "?"
+        ],
+        "candidates": [
+          "What",
+          "Axinix"
+        ],
+        "semantic_representation": [
+          {
+            "text": "What",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Axinix",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "What",
+        "relation": "does",
+        "object": "Axinix",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Axinix",
+          "relation": "develops",
+          "object": "WorkHub"
+        },
+        "reasoning_path": [
+          [
+            "Axinix",
+            "develops",
+            "WorkHub"
+          ]
+        ],
+        "answer": "WorkHub"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0005",
+      "category": "direct_relation",
+      "split": "TEST",
+      "input": "Which company employs Arun?",
+      "aris": {
+        "tokens": [
+          "Which",
+          "company",
+          "employs",
+          "Arun",
+          "?"
+        ],
+        "candidates": [
+          "Which",
+          "Arun"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Which",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Arun",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Which",
+        "relation": "company employs",
+        "object": "Arun",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ]
+        ],
+        "answer": "Axinix"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0006",
+      "category": "paraphrase",
+      "split": "TEST",
+      "input": "Which company does Arun work for?",
+      "aris": {
+        "tokens": [
+          "Which",
+          "company",
+          "does",
+          "Arun",
+          "work",
+          "for",
+          "?"
+        ],
+        "candidates": [
+          "Which",
+          "Arun"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Which",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Arun",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Which",
+        "relation": "company does",
+        "object": "Arun",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ]
+        ],
+        "answer": "Axinix"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0007",
+      "category": "paraphrase",
+      "split": "TEST",
+      "input": "Where is Arun employed?",
+      "aris": {
+        "tokens": [
+          "Where",
+          "is",
+          "Arun",
+          "employed",
+          "?"
+        ],
+        "candidates": [
+          "Where",
+          "Arun"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Where",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Arun",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Where",
+        "relation": "is",
+        "object": "Arun",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ]
+        ],
+        "answer": "Axinix"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0008",
+      "category": "paraphrase",
+      "split": "TEST",
+      "input": "Who employs Arun?",
+      "aris": {
+        "tokens": [
+          "Who",
+          "employs",
+          "Arun",
+          "?"
+        ],
+        "candidates": [
+          "Who",
+          "Arun"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Who",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Arun",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Who",
+        "relation": "employs",
+        "object": "Arun",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ]
+        ],
+        "answer": "Axinix"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0009",
+      "category": "paraphrase",
+      "split": "TEST",
+      "input": "What is Arun's workplace?",
+      "aris": {
+        "tokens": [
+          "What",
+          "is",
+          "Arun's",
+          "workplace",
+          "?"
+        ],
+        "candidates": [
+          "What",
+          "Arun's"
+        ],
+        "semantic_representation": [
+          {
+            "text": "What",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Arun's",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "What",
+        "relation": "is",
+        "object": "Arun's",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ]
+        ],
+        "answer": "Axinix"
+      },
+      "evaluation": {
+        "entity": false,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "ENTITY_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0010",
+      "category": "spelling_noise",
+      "split": "TEST",
+      "input": "Where does Arun wrk?",
+      "aris": {
+        "tokens": [
+          "Where",
+          "does",
+          "Arun",
+          "wrk",
+          "?"
+        ],
+        "candidates": [
+          "Where",
+          "Arun"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Where",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Arun",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Where",
+        "relation": "does",
+        "object": "Arun",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ]
+        ],
+        "answer": "Axinix"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "SEMANTIC_NORMALIZATION_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0011",
+      "category": "spelling_noise",
+      "split": "TEST",
+      "input": "Which company does Arun wrk for?",
+      "aris": {
+        "tokens": [
+          "Which",
+          "company",
+          "does",
+          "Arun",
+          "wrk",
+          "for",
+          "?"
+        ],
+        "candidates": [
+          "Which",
+          "Arun"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Which",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Arun",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Which",
+        "relation": "company does",
+        "object": "Arun",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ]
+        ],
+        "answer": "Axinix"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "SEMANTIC_NORMALIZATION_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0012",
+      "category": "spelling_noise",
+      "split": "TEST",
+      "input": "Wher is Arun employd?",
+      "aris": {
+        "tokens": [
+          "Wher",
+          "is",
+          "Arun",
+          "employd",
+          "?"
+        ],
+        "candidates": [
+          "Wher",
+          "Arun"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Wher",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Arun",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Wher",
+        "relation": "is",
+        "object": "Arun",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ]
+        ],
+        "answer": "Axinix"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "SEMANTIC_NORMALIZATION_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0013",
+      "category": "grammar_noise",
+      "split": "TEST",
+      "input": "Arun work where?",
+      "aris": {
+        "tokens": [
+          "Arun",
+          "work",
+          "where",
+          "?"
+        ],
+        "candidates": [
+          "Arun"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Arun",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Arun",
+        "relation": null,
+        "object": null,
+        "status": "known",
+        "confidence": 1.0,
+        "reasoning_path": [
+          [
+            "Arun",
+            "works at",
+            "Axinix"
+          ]
+        ],
+        "provenance": [
+          "Arun --[works at]--> Axinix"
+        ],
+        "answer": "Axinix"
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ]
+        ],
+        "answer": "Axinix"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": false,
+        "direction": true,
+        "semantic": false,
+        "path": true,
+        "answer": true,
+        "overall": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0014",
+      "category": "grammar_noise",
+      "split": "TEST",
+      "input": "Arun company which?",
+      "aris": {
+        "tokens": [
+          "Arun",
+          "company",
+          "which",
+          "?"
+        ],
+        "candidates": [
+          "Arun"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Arun",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Arun",
+        "relation": null,
+        "object": null,
+        "status": "known",
+        "confidence": 1.0,
+        "reasoning_path": [
+          [
+            "Arun",
+            "son of",
+            "Meena"
+          ]
+        ],
+        "provenance": [
+          "Arun --[son of]--> Meena"
+        ],
+        "answer": "Meena"
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ]
+        ],
+        "answer": "Axinix"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": false,
+        "direction": true,
+        "semantic": false,
+        "path": true,
+        "answer": false,
+        "overall": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0015",
+      "category": "grammar_noise",
+      "split": "TEST",
+      "input": "Where Arun works?",
+      "aris": {
+        "tokens": [
+          "Where",
+          "Arun",
+          "works",
+          "?"
+        ],
+        "candidates": [
+          "Where Arun"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Where Arun",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Where Arun",
+        "relation": "Arun",
+        "object": null,
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ]
+        ],
+        "answer": "Axinix"
+      },
+      "evaluation": {
+        "entity": false,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "ENTITY_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0016",
+      "category": "grammar_noise",
+      "split": "TEST",
+      "input": "Axinix Arun works?",
+      "aris": {
+        "tokens": [
+          "Axinix",
+          "Arun",
+          "works",
+          "?"
+        ],
+        "candidates": [
+          "Axinix Arun"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Axinix Arun",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Axinix Arun",
+        "relation": null,
+        "object": null,
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ]
+        ],
+        "answer": "Axinix"
+      },
+      "evaluation": {
+        "entity": false,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "ENTITY_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0017",
+      "category": "directionality",
+      "split": "TEST",
+      "input": "Who is Arun's brother?",
+      "aris": {
+        "tokens": [
+          "Who",
+          "is",
+          "Arun's",
+          "brother",
+          "?"
+        ],
+        "candidates": [
+          "Who",
+          "Arun's"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Who",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Arun's",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Who",
+        "relation": "is",
+        "object": "Arun's",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "brother_of",
+          "object": null
+        },
+        "reasoning_path": [],
+        "answer": null
+      },
+      "evaluation": {
+        "entity": false,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": true,
+        "answer": true,
+        "overall": true,
+        "failure_category": "NONE"
+      }
+    },
+    {
+      "question_id": "Q0018",
+      "category": "directionality",
+      "split": "TEST",
+      "input": "Who is Dhivya's brother?",
+      "aris": {
+        "tokens": [
+          "Who",
+          "is",
+          "Dhivya's",
+          "brother",
+          "?"
+        ],
+        "candidates": [
+          "Who",
+          "Dhivya's"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Who",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Dhivya's",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Who",
+        "relation": "is",
+        "object": "Dhivya's",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "brother_of",
+          "object": "Dhivya"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "brother_of",
+            "Dhivya"
+          ]
+        ],
+        "answer": "Arun"
+      },
+      "evaluation": {
+        "entity": false,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "ENTITY_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0019",
+      "category": "directionality",
+      "split": "TEST",
+      "input": "Who is the brother of Dhivya?",
+      "aris": {
+        "tokens": [
+          "Who",
+          "is",
+          "the",
+          "brother",
+          "of",
+          "Dhivya",
+          "?"
+        ],
+        "candidates": [
+          "Who",
+          "Dhivya"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Who",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Dhivya",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Who",
+        "relation": "is the brother of",
+        "object": "Dhivya",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "brother_of",
+          "object": "Dhivya"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "brother_of",
+            "Dhivya"
+          ]
+        ],
+        "answer": "Arun"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": true,
+        "direction": true,
+        "semantic": true,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "PATH_DISCOVERY_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0020",
+      "category": "directionality",
+      "split": "TEST",
+      "input": "Who is the sister of Arun?",
+      "aris": {
+        "tokens": [
+          "Who",
+          "is",
+          "the",
+          "sister",
+          "of",
+          "Arun",
+          "?"
+        ],
+        "candidates": [
+          "Who",
+          "Arun"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Who",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Arun",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Who",
+        "relation": "is the sister of",
+        "object": "Arun",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Dhivya",
+          "relation": "sister_of",
+          "object": "Arun"
+        },
+        "reasoning_path": [
+          [
+            "Dhivya",
+            "sister_of",
+            "Arun"
+          ]
+        ],
+        "answer": "Dhivya"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": true,
+        "direction": true,
+        "semantic": true,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "PATH_DISCOVERY_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0021",
+      "category": "multi_hop_2hop",
+      "split": "TEST",
+      "input": "Which city is Arun's company in?",
+      "aris": {
+        "tokens": [
+          "Which",
+          "city",
+          "is",
+          "Arun's",
+          "company",
+          "in",
+          "?"
+        ],
+        "candidates": [
+          "Which",
+          "Arun's"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Which",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Arun's",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Which",
+        "relation": "city is",
+        "object": "Arun's",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "located_in",
+          "object": "Chennai"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ],
+          [
+            "Axinix",
+            "located_in",
+            "Chennai"
+          ]
+        ],
+        "answer": "Chennai"
+      },
+      "evaluation": {
+        "entity": false,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "ENTITY_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0022",
+      "category": "multi_hop_3hop",
+      "split": "TEST",
+      "input": "Which state is Arun's company in?",
+      "aris": {
+        "tokens": [
+          "Which",
+          "state",
+          "is",
+          "Arun's",
+          "company",
+          "in",
+          "?"
+        ],
+        "candidates": [
+          "Which",
+          "Arun's"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Which",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Arun's",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Which",
+        "relation": "state is",
+        "object": "Arun's",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "in",
+          "object": "Tamil Nadu"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ],
+          [
+            "Axinix",
+            "located_in",
+            "Chennai"
+          ],
+          [
+            "Chennai",
+            "in",
+            "Tamil Nadu"
+          ]
+        ],
+        "answer": "Tamil Nadu"
+      },
+      "evaluation": {
+        "entity": false,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "ENTITY_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0023",
+      "category": "multi_hop_4hop",
+      "split": "TEST",
+      "input": "Which country is Arun's company in?",
+      "aris": {
+        "tokens": [
+          "Which",
+          "country",
+          "is",
+          "Arun's",
+          "company",
+          "in",
+          "?"
+        ],
+        "candidates": [
+          "Which",
+          "Arun's"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Which",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Arun's",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Which",
+        "relation": "country is",
+        "object": "Arun's",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "in",
+          "object": "India"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ],
+          [
+            "Axinix",
+            "located_in",
+            "Chennai"
+          ],
+          [
+            "Chennai",
+            "in",
+            "Tamil Nadu"
+          ],
+          [
+            "Tamil Nadu",
+            "in",
+            "India"
+          ]
+        ],
+        "answer": "India"
+      },
+      "evaluation": {
+        "entity": false,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "ENTITY_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0024",
+      "category": "multi_hop_5hop",
+      "split": "TEST",
+      "input": "Which continent is Arun's company in?",
+      "aris": {
+        "tokens": [
+          "Which",
+          "continent",
+          "is",
+          "Arun's",
+          "company",
+          "in",
+          "?"
+        ],
+        "candidates": [
+          "Which",
+          "Arun's"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Which",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Arun's",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Which",
+        "relation": "continent is",
+        "object": "Arun's",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "in",
+          "object": "Asia"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ],
+          [
+            "Axinix",
+            "located_in",
+            "Chennai"
+          ],
+          [
+            "Chennai",
+            "in",
+            "Tamil Nadu"
+          ],
+          [
+            "Tamil Nadu",
+            "in",
+            "India"
+          ],
+          [
+            "India",
+            "in",
+            "Asia"
+          ]
+        ],
+        "answer": "Asia"
+      },
+      "evaluation": {
+        "entity": false,
+        "relation": true,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "ENTITY_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0025",
+      "category": "unsupported",
+      "split": "TEST",
+      "input": "Does Arun work at OpenAI?",
+      "aris": {
+        "tokens": [
+          "Does",
+          "Arun",
+          "work",
+          "at",
+          "OpenAI",
+          "?"
+        ],
+        "candidates": [
+          "Does Arun",
+          "OpenAI"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Does Arun",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "OpenAI",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Does Arun",
+        "relation": "work at",
+        "object": "OpenAI",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "OpenAI"
+        },
+        "reasoning_path": [],
+        "answer": null
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": false,
+        "direction": true,
+        "semantic": false,
+        "path": true,
+        "answer": true,
+        "overall": true,
+        "failure_category": "NONE"
+      }
+    },
+    {
+      "question_id": "Q0026",
+      "category": "unsupported",
+      "split": "TEST",
+      "input": "Is Arun located on Mars?",
+      "aris": {
+        "tokens": [
+          "Is",
+          "Arun",
+          "located",
+          "on",
+          "Mars",
+          "?"
+        ],
+        "candidates": [
+          "Is Arun",
+          "Mars"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Is Arun",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Mars",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Is Arun",
+        "relation": "located on",
+        "object": "Mars",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "located_on",
+          "object": "Mars"
+        },
+        "reasoning_path": [],
+        "answer": null
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": true,
+        "direction": true,
+        "semantic": true,
+        "path": true,
+        "answer": true,
+        "overall": true,
+        "failure_category": "NONE"
+      }
+    },
+    {
+      "question_id": "Q0027",
+      "category": "unsupported",
+      "split": "TEST",
+      "input": "Is Axinix a planet?",
+      "aris": {
+        "tokens": [
+          "Is",
+          "Axinix",
+          "a",
+          "planet",
+          "?"
+        ],
+        "candidates": [
+          "Is Axinix"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Is Axinix",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Is Axinix",
+        "relation": null,
+        "object": null,
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Axinix",
+          "relation": "is_a",
+          "object": "planet"
+        },
+        "reasoning_path": [],
+        "answer": null
+      },
+      "evaluation": {
+        "entity": false,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": true,
+        "answer": true,
+        "overall": true,
+        "failure_category": "NONE"
+      }
+    },
+    {
+      "question_id": "Q0028",
+      "category": "unsupported",
+      "split": "TEST",
+      "input": "Is Moon connected to DNA?",
+      "aris": {
+        "tokens": [
+          "Is",
+          "Moon",
+          "connected",
+          "to",
+          "DNA",
+          "?"
+        ],
+        "candidates": [
+          "Is Moon",
+          "DNA"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Is Moon",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "DNA",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Is Moon",
+        "relation": "connected to",
+        "object": "DNA",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Moon",
+          "relation": "connected_to",
+          "object": "DNA"
+        },
+        "reasoning_path": [],
+        "answer": null
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": true,
+        "direction": true,
+        "semantic": true,
+        "path": true,
+        "answer": true,
+        "overall": true,
+        "failure_category": "NONE"
+      }
+    },
+    {
+      "question_id": "Q0029",
+      "category": "semantic_equivalence",
+      "split": "TEST",
+      "input": "Is Chennai in Tamil Nadu?",
+      "aris": {
+        "tokens": [
+          "Is",
+          "Chennai",
+          "in",
+          "Tamil",
+          "Nadu",
+          "?"
+        ],
+        "candidates": [
+          "Is Chennai",
+          "Tamil Nadu"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Is Chennai",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Tamil Nadu",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Is Chennai",
+        "relation": "in",
+        "object": "Tamil Nadu",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Chennai",
+          "relation": "in",
+          "object": "Tamil Nadu"
+        },
+        "reasoning_path": [
+          [
+            "Chennai",
+            "in",
+            "Tamil Nadu"
+          ]
+        ],
+        "answer": "Tamil Nadu"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": true,
+        "direction": true,
+        "semantic": true,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "PATH_DISCOVERY_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0030",
+      "category": "semantic_equivalence",
+      "split": "TEST",
+      "input": "Is Chennai located in Tamil Nadu?",
+      "aris": {
+        "tokens": [
+          "Is",
+          "Chennai",
+          "located",
+          "in",
+          "Tamil",
+          "Nadu",
+          "?"
+        ],
+        "candidates": [
+          "Is Chennai",
+          "Tamil Nadu"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Is Chennai",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Tamil Nadu",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Is Chennai",
+        "relation": "located in",
+        "object": "Tamil Nadu",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Chennai",
+          "relation": "in",
+          "object": "Tamil Nadu"
+        },
+        "reasoning_path": [
+          [
+            "Chennai",
+            "in",
+            "Tamil Nadu"
+          ]
+        ],
+        "answer": "Tamil Nadu"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": true,
+        "direction": true,
+        "semantic": true,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "PATH_DISCOVERY_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0031",
+      "category": "semantic_equivalence",
+      "split": "TEST",
+      "input": "Does Tamil Nadu contain Chennai?",
+      "aris": {
+        "tokens": [
+          "Does",
+          "Tamil",
+          "Nadu",
+          "contain",
+          "Chennai",
+          "?"
+        ],
+        "candidates": [
+          "Does Tamil Nadu",
+          "Chennai"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Does Tamil Nadu",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Chennai",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Does Tamil Nadu",
+        "relation": "contain",
+        "object": "Chennai",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Tamil Nadu",
+          "relation": "contains",
+          "object": "Chennai"
+        },
+        "reasoning_path": [
+          [
+            "Chennai",
+            "in",
+            "Tamil Nadu"
+          ]
+        ],
+        "answer": "Chennai"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": false,
+        "direction": true,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0032",
+      "category": "entity_variation",
+      "split": "TEST",
+      "input": "Where does ARUN work?",
+      "aris": {
+        "tokens": [
+          "Where",
+          "does",
+          "ARUN",
+          "work",
+          "?"
+        ],
+        "candidates": [
+          "Where",
+          "ARUN"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Where",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "ARUN",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Where",
+        "relation": "does",
+        "object": "ARUN",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ]
+        ],
+        "answer": "Axinix"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0033",
+      "category": "entity_variation",
+      "split": "TEST",
+      "input": "Where does Arun's work?",
+      "aris": {
+        "tokens": [
+          "Where",
+          "does",
+          "Arun's",
+          "work",
+          "?"
+        ],
+        "candidates": [
+          "Where",
+          "Arun's"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Where",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Arun's",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Where",
+        "relation": "does",
+        "object": "Arun's",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ]
+        ],
+        "answer": "Axinix"
+      },
+      "evaluation": {
+        "entity": false,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "ENTITY_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0034",
+      "category": "entity_variation",
+      "split": "TEST",
+      "input": "Where does the person Arun work?",
+      "aris": {
+        "tokens": [
+          "Where",
+          "does",
+          "the",
+          "person",
+          "Arun",
+          "work",
+          "?"
+        ],
+        "candidates": [
+          "Where",
+          "Arun"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Where",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Arun",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Where",
+        "relation": "does the person",
+        "object": "Arun",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix"
+        },
+        "reasoning_path": [
+          [
+            "Arun",
+            "works_at",
+            "Axinix"
+          ]
+        ],
+        "answer": "Axinix"
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": false,
+        "direction": false,
+        "semantic": false,
+        "path": false,
+        "answer": false,
+        "overall": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "question_id": "Q0035",
+      "category": "correction_feedback",
+      "split": "TEST",
+      "input": "Is Dhivya brother of Arun?",
+      "aris": {
+        "tokens": [
+          "Is",
+          "Dhivya",
+          "brother",
+          "of",
+          "Arun",
+          "?"
+        ],
+        "candidates": [
+          "Is Dhivya",
+          "Arun"
+        ],
+        "semantic_representation": [
+          {
+            "text": "Is Dhivya",
+            "coord_dim": 64,
+            "norm": 1.0
+          },
+          {
+            "text": "Arun",
+            "coord_dim": 64,
+            "norm": 1.0
+          }
+        ],
+        "subject": "Is Dhivya",
+        "relation": "brother of",
+        "object": "Arun",
+        "status": "unsupported",
+        "confidence": 0.0,
+        "reasoning_path": [],
+        "provenance": [],
+        "answer": null
+      },
+      "expected": {
+        "semantic_representation": {
+          "subject": "Dhivya",
+          "relation": "brother_of",
+          "object": "Arun"
+        },
+        "reasoning_path": [],
+        "answer": null
+      },
+      "evaluation": {
+        "entity": true,
+        "relation": true,
+        "direction": true,
+        "semantic": true,
+        "path": true,
+        "answer": true,
+        "overall": true,
+        "failure_category": "NONE"
+      }
+    }
+  ]
+}

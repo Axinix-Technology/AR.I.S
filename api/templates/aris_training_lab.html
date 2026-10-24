@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AR.I.S • Generalization Training Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;0,800;1,400&family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #07090e;
+      --bg-panel: rgba(13, 17, 26, 0.85);
+      --bg-card: rgba(19, 26, 40, 0.65);
+      --border: rgba(56, 189, 248, 0.15);
+      --border-active: rgba(56, 189, 248, 0.5);
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.35);
+      --purple: #a855f7;
+      --purple-glow: rgba(168, 85, 247, 0.35);
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --amber: #f59e0b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-main: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(circle at 10% 10%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 90%, rgba(168, 85, 247, 0.08) 0%, transparent 40%),
+        linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6));
+      color: var(--text);
+      font-family: var(--font-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 18px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      background: rgba(7, 9, 14, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-badge {
+      background: linear-gradient(135deg, #0284c7, #9333ea);
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.2rem;
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    .brand h1 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      background: linear-gradient(to right, #fff, #93c5fd);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand span {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-family: var(--font-main);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .nav-btn:hover {
+      color: var(--text);
+      border-color: var(--accent);
+      background: rgba(56, 189, 248, 0.1);
+    }
+
+    .run-btn {
+      background: linear-gradient(135deg, #0284c7, #9333ea);
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 16px rgba(147, 51, 234, 0.4);
+      transition: all 0.25s ease;
+    }
+
+    .run-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(56, 189, 248, 0.6);
+    }
+
+    .run-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1500px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* KPI Summary Row */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .kpi-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 22px;
+      backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    .kpi-card.purple::before {
+      background: var(--purple);
+    }
+
+    .kpi-card.emerald::before {
+      background: var(--emerald);
+    }
+
+    .kpi-card.amber::before {
+      background: var(--amber);
+    }
+
+    .kpi-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .kpi-val {
+      font-size: 2rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .kpi-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* Generalization Chart Section */
+    .chart-section {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .section-header h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      border: 1px solid var(--border);
+    }
+
+    .curve-container {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      height: 200px;
+      padding: 16px 0 32px 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .bar-col {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+    }
+
+    .bar-fill {
+      width: 100%;
+      max-width: 42px;
+      border-radius: 6px 6px 0 0;
+      background: linear-gradient(to top, rgba(2, 132, 199, 0.5), #38bdf8);
+      transition: height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      min-height: 4px;
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    .bar-col.perfect .bar-fill {
+      background: linear-gradient(to top, rgba(16, 185, 129, 0.5), #10b981);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+    }
+
+    .bar-label {
+      position: absolute;
+      bottom: -24px;
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+
+    .bar-val {
+      position: absolute;
+      top: -22px;
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* Levels Grid */
+    .levels-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 16px;
+    }
+
+    .level-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .level-card:hover {
+      border-color: var(--border-active);
+      transform: translateY(-2px);
+    }
+
+    .level-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .level-num {
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .level-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 2px;
+    }
+
+    .level-status-pill {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-family: var(--font-mono);
+    }
+
+    .status-pass {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .status-partial {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .status-fail {
+      background: rgba(244, 63, 94, 0.15);
+      color: #fb7185;
+      border: 1px solid rgba(244, 63, 94, 0.4);
+    }
+
+    .level-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .tests-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 10px;
+    }
+
+    .test-item {
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .test-query {
+      color: #e2e8f0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 230px;
+    }
+
+    .test-state {
+      font-size: 0.68rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .test-pass {
+      color: #34d399;
+    }
+
+    .test-fail {
+      color: #fb7185;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="logo-badge">Γ</div>
+      <div>
+        <h1>AR.I.S GENERALIZATION LAB</h1>
+        <span>14-Tier Cognitive Curriculum Benchmark</span>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <a href="/visualizer/" class="nav-btn">🔬 Cognitive Microscope</a>
+      <button id="runAllBtn" class="run-btn" onclick="runBenchmark()">
+        <span id="btnIcon">⚡</span>
+        <span id="btnText">Run Full Benchmark</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- KPI Overview -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-title">Overall Generalization</div>
+        <div class="kpi-val" id="overallAcc">--%</div>
+        <div class="kpi-sub" id="passedCount">0 / 0 Tests Passed</div>
+      </div>
+      <div class="kpi-card purple">
+        <div class="kpi-title">Seen Knowledge Retention</div>
+        <div class="kpi-val" id="seenAcc">--%</div>
+        <div class="kpi-sub" id="seenCount">0 / 0 In-Distribution</div>
+      </div>
+      <div class="kpi-card emerald">
+        <div class="kpi-title">Zero-Shot Unseen Transfer</div>
+        <div class="kpi-val" id="unseenAcc">--%</div>
+        <div class="kpi-sub" id="unseenCount">0 / 0 Out-of-Distribution</div>
+      </div>
+      <div class="kpi-card amber">
+        <div class="kpi-title">Benchmark Duration</div>
+        <div class="kpi-val" id="durationSec">--s</div>
+        <div class="kpi-sub" id="lastRun">Not run yet</div>
+      </div>
+    </div>
+
+    <!-- Generalization Curve Chart -->
+    <div class="chart-section">
+      <div class="section-header">
+        <h2>
+          <span>Curriculum Generalization Curve</span>
+          <span class="badge">14 TIERS</span>
+        </h2>
+        <span class="badge" style="background: rgba(168, 85, 247, 0.15); color: var(--purple);">Zero-Hard-Patches
+          Invariant</span>
+      </div>
+      <div class="curve-container" id="curveChart">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+
+    <!-- Curriculum Level Details -->
+    <div class="section-header" style="margin-top: 8px;">
+      <h2><span>Curriculum Level Diagnostics</span></h2>
+    </div>
+    <div class="levels-grid" id="levelsGrid">
+      <!-- Injected via JavaScript -->
+    </div>
+  </main>
+
+  <script>
+    async function runBenchmark() {
+      const btn = document.getElementById('runAllBtn');
+      const btnIcon = document.getElementById('btnIcon');
+      const btnText = document.getElementById('btnText');
+
+      btn.disabled = true;
+      btnIcon.innerHTML = '<span class="spinner"></span>';
+      btnText.innerText = 'Evaluating Cognitive Brain...';
+
+      try {
+        const res = await fetch('/api/training-lab/run/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const data = await res.json();
+        renderResults(data);
+      } catch (err) {
+        console.error('Benchmark error:', err);
+        alert('Benchmark execution encountered an error: ' + err.message);
+      } finally {
+        btn.disabled = false;
+        btnIcon.innerHTML = '⚡';
+        btnText.innerText = 'Re-Run Benchmark';
+      }
+    }
+
+    function renderResults(data) {
+      const s = data.summary;
+      document.getElementById('overallAcc').innerText = s.overall_accuracy + '%';
+      document.getElementById('passedCount').innerText = `${s.total_passed} / ${s.total_tests} Tests Passed`;
+
+      document.getElementById('seenAcc').innerText = s.seen_accuracy + '%';
+      document.getElementById('seenCount').innerText = `${s.seen_passed} / ${s.seen_total} In-Distribution`;
+
+      document.getElementById('unseenAcc').innerText = s.unseen_accuracy + '%';
+      document.getElementById('unseenCount').innerText = `${s.unseen_passed} / ${s.unseen_total} Out-of-Distribution`;
+
+      document.getElementById('durationSec').innerText = s.total_duration_sec + 's';
+      document.getElementById('lastRun').innerText = `Ran at ${s.timestamp}`;
+
+      // Render Curve
+      const chart = document.getElementById('curveChart');
+      chart.innerHTML = '';
+      data.generalization_curve.forEach(pt => {
+        const col = document.createElement('div');
+        col.className = 'bar-col' + (pt.accuracy === 100 ? ' perfect' : '');
+        col.innerHTML = `
+          <div class="bar-val">${pt.accuracy}%</div>
+          <div class="bar-fill" style="height: ${Math.max(pt.accuracy, 5)}%"></div>
+          <div class="bar-label">L${pt.level}</div>
+        `;
+        chart.appendChild(col);
+      });
+
+      // Render Levels
+      const grid = document.getElementById('levelsGrid');
+      grid.innerHTML = '';
+      data.levels.forEach(lvl => {
+        const card = document.createElement('div');
+        card.className = 'level-card';
+
+        let statusClass = 'status-pass';
+        let statusText = `${lvl.passed_tests}/${lvl.total_tests} Passed (${lvl.accuracy}%)`;
+        if (lvl.accuracy < 100 && lvl.accuracy > 0) statusClass = 'status-partial';
+        if (lvl.accuracy === 0) statusClass = 'status-fail';
+
+        let testsHtml = '';
+        lvl.details.forEach(t => {
+          testsHtml += `
+            <div class="test-item">
+              <span class="test-query" title="${t.query}">"${t.query}"</span>
+              <span class="${t.passed ? 'test-pass' : 'test-fail'}">${t.passed ? '✓ PASS' : '✗ FAIL'} (${t.latency_ms}ms)</span>
+            </div>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="level-header">
+            <div>
+              <div class="level-num">LEVEL ${lvl.level}</div>
+              <div class="level-name">${lvl.name}</div>
+            </div>
+            <div class="level-status-pill ${statusClass}">${statusText}</div>
+          </div>
+          <div class="level-desc">${lvl.description}</div>
+          <div class="tests-list">
+            ${testsHtml}
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Auto-run on initial load
+    window.addEventListener('DOMContentLoaded', () => {
+      runBenchmark();
+    });
+  </script>
+</body>
+
+</html>

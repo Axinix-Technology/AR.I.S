@@ -1,0 +1,117 @@
+{
+  "math_computation": {
+    "name": "math_computation",
+    "aliases": [
+      "math",
+      "calculator",
+      "arithmetic"
+    ],
+    "domain": "numerical_computation",
+    "is_external": false,
+    "description": "Executes deterministic mathematical computations: expression evaluation, linear equation solving, and coordinate distance.",
+    "usage": "Use math_computation when a numerical arithmetic expression (+, -, *, /), linear algebraic equation (solve for variable), or coordinate distance calculation is required. Inputs: expression string or operand parameters (param1, op_str, param2). Produces: deterministic computed numerical result.",
+    "parameters_schema": {
+      "operation": "Mathematical operation ('evaluate', 'solve_linear', 'distance')",
+      "param1": "First operand or parameter value",
+      "op_str": "Arithmetic operator symbol (+, -, *, /)",
+      "param2": "Second operand or parameter value",
+      "expression": "Arithmetic expression string (e.g. '2015 - 1931' or '10 - 4')",
+      "equation": "Equation dict {'left': '...', 'right': '...'} or equation string",
+      "variable": "Variable name to solve for (e.g. 'x', 'y', 'n')",
+      "coord_a": "First coordinate / position index (scalar or list/tuple)",
+      "coord_b": "Second coordinate / position index (scalar or list/tuple)"
+    },
+    "accepts": {
+      "domain": "numerical_computation",
+      "requires": [
+        "expression",
+        "equation",
+        "coord_a",
+        "param1"
+      ]
+    },
+    "produces": {
+      "state_transition": "DERIVABLE -> KNOWN",
+      "output_type": "numerical_value"
+    },
+    "entrypoint": "api.semantic.executable_tools:ArisMathTool"
+  },
+  "browser_access": {
+    "name": "browser_access",
+    "aliases": [
+      "browser_search",
+      "web_search",
+      "internet_search"
+    ],
+    "domain": "external_knowledge_acquisition",
+    "is_external": true,
+    "description": "Performs browser access for web query search and retrieval.",
+    "usage": "Use browser_access when external real-world factual information, operational command syntax, or current web knowledge is needed that is not stored in AR.I.S cognitive memory. Inputs: query (search phrase or entity topic). Produces: ingested factual statements and textual summaries from verified web sources.",
+    "parameters_schema": {
+      "query": "The search query string to look up or navigate in the browser"
+    },
+    "accepts": {
+      "domain": "external_knowledge_acquisition",
+      "requires": [
+        "query"
+      ]
+    },
+    "produces": {
+      "state_transition": "ACQUIRABLE -> KNOWN",
+      "output_type": "ingested_memory_facts"
+    },
+    "entrypoint": "api.semantic.executable_tools:ArisBrowserAccessTool"
+  },
+  "command_prompt": {
+    "name": "command_prompt",
+    "aliases": [
+      "terminal",
+      "shell",
+      "git_tool",
+      "cli"
+    ],
+    "domain": "system_terminal_execution",
+    "is_external": false,
+    "description": "Executes command prompt shell commands within a specified working directory.",
+    "usage": "Use command_prompt when system terminal, command line, or local shell execution is required within a target repository or working directory (e.g. inspecting git status, validating directory paths, running CLI utilities). Inputs: command (shell command string), working_dir (optional target folder path). Produces: command execution output, stdout, stderr, and exit status code.",
+    "parameters_schema": {
+      "command": "The terminal command to execute (e.g. 'git status', 'dir', 'git branch')",
+      "working_dir": "The target working directory / folder path where the command should execute"
+    },
+    "accepts": {
+      "domain": "system_terminal_execution",
+      "requires": [
+        "command"
+      ]
+    },
+    "produces": {
+      "state_transition": "DERIVABLE -> KNOWN",
+      "output_type": "command_output"
+    },
+    "entrypoint": "api.semantic.executable_tools:ArisCommandPromptTool"
+  },
+  "sensor_monitor": {
+    "name": "sensor_monitor",
+    "aliases": [
+      "sensor",
+      "telemetry"
+    ],
+    "domain": "hardware_telemetry",
+    "is_external": false,
+    "description": "Monitors hardware temperatures and load telemetry.",
+    "usage": "Use sensor_monitor when system CPU or GPU telemetry is requested.",
+    "parameters_schema": {
+      "sensor_id": "Identifier of the sensor to query"
+    },
+    "accepts": {
+      "domain": "hardware_telemetry",
+      "requires": [
+        "sensor_id"
+      ]
+    },
+    "produces": {
+      "output_type": "telemetry_reading"
+    },
+    "entrypoint": "api.tests.test_capability_auto_resolve:MockAutonomousSensorTool"
+  }
+}

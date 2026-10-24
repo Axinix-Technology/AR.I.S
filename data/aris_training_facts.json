@@ -1,0 +1,114 @@
+[
+  {
+    "fact_id": "F0001",
+    "statement": "Arun works at Axinix.",
+    "subject": "Arun",
+    "relation": "works_at",
+    "object": "Axinix"
+  },
+  {
+    "fact_id": "F0002",
+    "statement": "Axinix is located in Chennai.",
+    "subject": "Axinix",
+    "relation": "located_in",
+    "object": "Chennai"
+  },
+  {
+    "fact_id": "F0003",
+    "statement": "Chennai is in Tamil Nadu.",
+    "subject": "Chennai",
+    "relation": "in",
+    "object": "Tamil Nadu"
+  },
+  {
+    "fact_id": "F0004",
+    "statement": "Tamil Nadu is in India.",
+    "subject": "Tamil Nadu",
+    "relation": "in",
+    "object": "India"
+  },
+  {
+    "fact_id": "F0005",
+    "statement": "India is in Asia.",
+    "subject": "India",
+    "relation": "in",
+    "object": "Asia"
+  },
+  {
+    "fact_id": "F0006",
+    "statement": "Asia is located on Earth.",
+    "subject": "Asia",
+    "relation": "located_on",
+    "object": "Earth"
+  },
+  {
+    "fact_id": "F0007",
+    "statement": "Arun is brother of Dhivya.",
+    "subject": "Arun",
+    "relation": "brother_of",
+    "object": "Dhivya"
+  },
+  {
+    "fact_id": "F0008",
+    "statement": "Dhivya is sister of Arun.",
+    "subject": "Dhivya",
+    "relation": "sister_of",
+    "object": "Arun"
+  },
+  {
+    "fact_id": "F0009",
+    "statement": "Ravi is father of Arun.",
+    "subject": "Ravi",
+    "relation": "father_of",
+    "object": "Arun"
+  },
+  {
+    "fact_id": "F0010",
+    "statement": "Meena is mother of Arun.",
+    "subject": "Meena",
+    "relation": "mother_of",
+    "object": "Arun"
+  },
+  {
+    "fact_id": "F0011",
+    "statement": "Axinix develops WorkHub.",
+    "subject": "Axinix",
+    "relation": "develops",
+    "object": "WorkHub"
+  },
+  {
+    "fact_id": "F0012",
+    "statement": "Axinix uses Python.",
+    "subject": "Axinix",
+    "relation": "uses",
+    "object": "Python"
+  },
+  {
+    "fact_id": "F0013",
+    "statement": "Django is built with Python.",
+    "subject": "Django",
+    "relation": "built_with",
+    "object": "Python"
+  },
+  {
+    "fact_id": "F0014",
+    "statement": "WorkHub is built with Django.",
+    "subject": "WorkHub",
+    "relation": "built_with",
+    "object": "Django"
+  },
+  {
+    "fact_id": "F0015",
+    "statement": "Earth orbits Sun.",
+    "subject": "Earth",
+    "relation": "orbits",
+    "object": "Sun"
+  },
+  {
+    "fact_id": "F0016",
+    "statement": "Moon orbits Earth.",
+    "subject": "Moon",
+    "relation": "orbits",
+    "object": "Earth"
+  }
+]

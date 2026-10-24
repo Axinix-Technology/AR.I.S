@@ -1,0 +1,909 @@
+{
+    "name": "ARIS-Bench-01",
+    "version": "1.0",
+    "purpose": "Controlled relational knowledge graph benchmark for AR.I.S Tier 1-6 testing.",
+    "format": "subject-relation-object",
+    "fact_count": 161,
+    "domains": [
+        "astronomy",
+        "geography",
+        "people",
+        "family",
+        "organizations",
+        "companies",
+        "computing",
+        "programming",
+        "software",
+        "biology",
+        "animals",
+        "science",
+        "education"
+    ],
+    "facts": [
+        {
+            "subject": "Sun",
+            "relation": "is_a",
+            "object": "star"
+        },
+        {
+            "subject": "Earth",
+            "relation": "is_a",
+            "object": "planet"
+        },
+        {
+            "subject": "Mars",
+            "relation": "is_a",
+            "object": "planet"
+        },
+        {
+            "subject": "Jupiter",
+            "relation": "is_a",
+            "object": "planet"
+        },
+        {
+            "subject": "Moon",
+            "relation": "is_a",
+            "object": "natural satellite"
+        },
+        {
+            "subject": "Phobos",
+            "relation": "is_a",
+            "object": "natural satellite"
+        },
+        {
+            "subject": "Earth",
+            "relation": "orbits",
+            "object": "Sun"
+        },
+        {
+            "subject": "Moon",
+            "relation": "orbits",
+            "object": "Earth"
+        },
+        {
+            "subject": "Mars",
+            "relation": "orbits",
+            "object": "Sun"
+        },
+        {
+            "subject": "Phobos",
+            "relation": "orbits",
+            "object": "Mars"
+        },
+        {
+            "subject": "Jupiter",
+            "relation": "orbits",
+            "object": "Sun"
+        },
+        {
+            "subject": "Solar System",
+            "relation": "contains",
+            "object": "Sun"
+        },
+        {
+            "subject": "Solar System",
+            "relation": "contains",
+            "object": "Earth"
+        },
+        {
+            "subject": "Solar System",
+            "relation": "contains",
+            "object": "Mars"
+        },
+        {
+            "subject": "Asia",
+            "relation": "is_a",
+            "object": "continent"
+        },
+        {
+            "subject": "Africa",
+            "relation": "is_a",
+            "object": "continent"
+        },
+        {
+            "subject": "Europe",
+            "relation": "is_a",
+            "object": "continent"
+        },
+        {
+            "subject": "India",
+            "relation": "is_a",
+            "object": "country"
+        },
+        {
+            "subject": "Japan",
+            "relation": "is_a",
+            "object": "country"
+        },
+        {
+            "subject": "France",
+            "relation": "is_a",
+            "object": "country"
+        },
+        {
+            "subject": "Germany",
+            "relation": "is_a",
+            "object": "country"
+        },
+        {
+            "subject": "Egypt",
+            "relation": "is_a",
+            "object": "country"
+        },
+        {
+            "subject": "Tamil Nadu",
+            "relation": "is_a",
+            "object": "state"
+        },
+        {
+            "subject": "Chennai",
+            "relation": "is_a",
+            "object": "city"
+        },
+        {
+            "subject": "Coimbatore",
+            "relation": "is_a",
+            "object": "city"
+        },
+        {
+            "subject": "Madurai",
+            "relation": "is_a",
+            "object": "city"
+        },
+        {
+            "subject": "Tokyo",
+            "relation": "is_a",
+            "object": "city"
+        },
+        {
+            "subject": "Paris",
+            "relation": "is_a",
+            "object": "city"
+        },
+        {
+            "subject": "Berlin",
+            "relation": "is_a",
+            "object": "city"
+        },
+        {
+            "subject": "Cairo",
+            "relation": "is_a",
+            "object": "city"
+        },
+        {
+            "subject": "Chennai",
+            "relation": "in",
+            "object": "Tamil Nadu"
+        },
+        {
+            "subject": "Coimbatore",
+            "relation": "in",
+            "object": "Tamil Nadu"
+        },
+        {
+            "subject": "Madurai",
+            "relation": "in",
+            "object": "Tamil Nadu"
+        },
+        {
+            "subject": "Tamil Nadu",
+            "relation": "in",
+            "object": "India"
+        },
+        {
+            "subject": "India",
+            "relation": "in",
+            "object": "Asia"
+        },
+        {
+            "subject": "Japan",
+            "relation": "in",
+            "object": "Asia"
+        },
+        {
+            "subject": "France",
+            "relation": "in",
+            "object": "Europe"
+        },
+        {
+            "subject": "Germany",
+            "relation": "in",
+            "object": "Europe"
+        },
+        {
+            "subject": "Egypt",
+            "relation": "in",
+            "object": "Africa"
+        },
+        {
+            "subject": "Paris",
+            "relation": "in",
+            "object": "France"
+        },
+        {
+            "subject": "Berlin",
+            "relation": "in",
+            "object": "Germany"
+        },
+        {
+            "subject": "Tokyo",
+            "relation": "in",
+            "object": "Japan"
+        },
+        {
+            "subject": "Cairo",
+            "relation": "in",
+            "object": "Egypt"
+        },
+        {
+            "subject": "Asia",
+            "relation": "part_of",
+            "object": "Earth"
+        },
+        {
+            "subject": "Europe",
+            "relation": "part_of",
+            "object": "Earth"
+        },
+        {
+            "subject": "Africa",
+            "relation": "part_of",
+            "object": "Earth"
+        },
+        {
+            "subject": "Arun",
+            "relation": "is_a",
+            "object": "person"
+        },
+        {
+            "subject": "Dhivya",
+            "relation": "is_a",
+            "object": "person"
+        },
+        {
+            "subject": "Ravi",
+            "relation": "is_a",
+            "object": "person"
+        },
+        {
+            "subject": "Meena",
+            "relation": "is_a",
+            "object": "person"
+        },
+        {
+            "subject": "Kumar",
+            "relation": "is_a",
+            "object": "person"
+        },
+        {
+            "subject": "Priya",
+            "relation": "is_a",
+            "object": "person"
+        },
+        {
+            "subject": "Arun",
+            "relation": "brother_of",
+            "object": "Dhivya"
+        },
+        {
+            "subject": "Dhivya",
+            "relation": "sister_of",
+            "object": "Arun"
+        },
+        {
+            "subject": "Ravi",
+            "relation": "father_of",
+            "object": "Arun"
+        },
+        {
+            "subject": "Meena",
+            "relation": "mother_of",
+            "object": "Arun"
+        },
+        {
+            "subject": "Arun",
+            "relation": "son_of",
+            "object": "Ravi"
+        },
+        {
+            "subject": "Arun",
+            "relation": "son_of",
+            "object": "Meena"
+        },
+        {
+            "subject": "Kumar",
+            "relation": "brother_of",
+            "object": "Arun"
+        },
+        {
+            "subject": "Priya",
+            "relation": "sister_of",
+            "object": "Dhivya"
+        },
+        {
+            "subject": "Ravi",
+            "relation": "parent_of",
+            "object": "Arun"
+        },
+        {
+            "subject": "Meena",
+            "relation": "parent_of",
+            "object": "Arun"
+        },
+        {
+            "subject": "Axinix",
+            "relation": "is_a",
+            "object": "company"
+        },
+        {
+            "subject": "OpenAI",
+            "relation": "is_a",
+            "object": "company"
+        },
+        {
+            "subject": "TechNova",
+            "relation": "is_a",
+            "object": "company"
+        },
+        {
+            "subject": "Axinix",
+            "relation": "located_in",
+            "object": "Chennai"
+        },
+        {
+            "subject": "OpenAI",
+            "relation": "located_in",
+            "object": "San Francisco"
+        },
+        {
+            "subject": "TechNova",
+            "relation": "located_in",
+            "object": "Bangalore"
+        },
+        {
+            "subject": "Arun",
+            "relation": "works_at",
+            "object": "Axinix"
+        },
+        {
+            "subject": "Dhivya",
+            "relation": "works_at",
+            "object": "Axinix"
+        },
+        {
+            "subject": "Kumar",
+            "relation": "works_at",
+            "object": "TechNova"
+        },
+        {
+            "subject": "Axinix",
+            "relation": "develops",
+            "object": "WorkHub"
+        },
+        {
+            "subject": "OpenAI",
+            "relation": "develops",
+            "object": "AI systems"
+        },
+        {
+            "subject": "TechNova",
+            "relation": "develops",
+            "object": "CloudBox"
+        },
+        {
+            "subject": "WorkHub",
+            "relation": "is_a",
+            "object": "software"
+        },
+        {
+            "subject": "CloudBox",
+            "relation": "is_a",
+            "object": "software"
+        },
+        {
+            "subject": "WorkHub",
+            "relation": "product_of",
+            "object": "Axinix"
+        },
+        {
+            "subject": "Computer",
+            "relation": "is_a",
+            "object": "machine"
+        },
+        {
+            "subject": "CPU",
+            "relation": "is_a",
+            "object": "computer component"
+        },
+        {
+            "subject": "RAM",
+            "relation": "is_a",
+            "object": "computer component"
+        },
+        {
+            "subject": "SSD",
+            "relation": "is_a",
+            "object": "computer component"
+        },
+        {
+            "subject": "Keyboard",
+            "relation": "is_a",
+            "object": "input device"
+        },
+        {
+            "subject": "Mouse",
+            "relation": "is_a",
+            "object": "input device"
+        },
+        {
+            "subject": "Monitor",
+            "relation": "is_a",
+            "object": "output device"
+        },
+        {
+            "subject": "CPU",
+            "relation": "part_of",
+            "object": "Computer"
+        },
+        {
+            "subject": "RAM",
+            "relation": "part_of",
+            "object": "Computer"
+        },
+        {
+            "subject": "SSD",
+            "relation": "part_of",
+            "object": "Computer"
+        },
+        {
+            "subject": "Keyboard",
+            "relation": "connected_to",
+            "object": "Computer"
+        },
+        {
+            "subject": "Mouse",
+            "relation": "connected_to",
+            "object": "Computer"
+        },
+        {
+            "subject": "Monitor",
+            "relation": "connected_to",
+            "object": "Computer"
+        },
+        {
+            "subject": "CPU",
+            "relation": "processes",
+            "object": "instructions"
+        },
+        {
+            "subject": "RAM",
+            "relation": "stores",
+            "object": "temporary data"
+        },
+        {
+            "subject": "SSD",
+            "relation": "stores",
+            "object": "persistent data"
+        },
+        {
+            "subject": "Python",
+            "relation": "is_a",
+            "object": "programming language"
+        },
+        {
+            "subject": "JavaScript",
+            "relation": "is_a",
+            "object": "programming language"
+        },
+        {
+            "subject": "Django",
+            "relation": "is_a",
+            "object": "framework"
+        },
+        {
+            "subject": "React",
+            "relation": "is_a",
+            "object": "framework"
+        },
+        {
+            "subject": "Python",
+            "relation": "used_for",
+            "object": "software development"
+        },
+        {
+            "subject": "Python",
+            "relation": "used_for",
+            "object": "AI"
+        },
+        {
+            "subject": "JavaScript",
+            "relation": "used_for",
+            "object": "web development"
+        },
+        {
+            "subject": "Django",
+            "relation": "built_with",
+            "object": "Python"
+        },
+        {
+            "subject": "React",
+            "relation": "used_with",
+            "object": "JavaScript"
+        },
+        {
+            "subject": "WorkHub",
+            "relation": "built_with",
+            "object": "Django"
+        },
+        {
+            "subject": "Cell",
+            "relation": "is_a",
+            "object": "biological unit"
+        },
+        {
+            "subject": "DNA",
+            "relation": "is_a",
+            "object": "genetic material"
+        },
+        {
+            "subject": "Gene",
+            "relation": "is_a",
+            "object": "biological sequence"
+        },
+        {
+            "subject": "Tissue",
+            "relation": "is_a",
+            "object": "biological structure"
+        },
+        {
+            "subject": "Heart",
+            "relation": "is_a",
+            "object": "organ"
+        },
+        {
+            "subject": "Brain",
+            "relation": "is_a",
+            "object": "organ"
+        },
+        {
+            "subject": "Gene",
+            "relation": "part_of",
+            "object": "DNA"
+        },
+        {
+            "subject": "DNA",
+            "relation": "exists_in",
+            "object": "Cell"
+        },
+        {
+            "subject": "Cell",
+            "relation": "forms",
+            "object": "Tissue"
+        },
+        {
+            "subject": "Tissue",
+            "relation": "forms",
+            "object": "organ"
+        },
+        {
+            "subject": "Heart",
+            "relation": "part_of",
+            "object": "human body"
+        },
+        {
+            "subject": "Brain",
+            "relation": "part_of",
+            "object": "human body"
+        },
+        {
+            "subject": "Dog",
+            "relation": "is_a",
+            "object": "animal"
+        },
+        {
+            "subject": "Cat",
+            "relation": "is_a",
+            "object": "animal"
+        },
+        {
+            "subject": "Tiger",
+            "relation": "is_a",
+            "object": "animal"
+        },
+        {
+            "subject": "Lion",
+            "relation": "is_a",
+            "object": "animal"
+        },
+        {
+            "subject": "Elephant",
+            "relation": "is_a",
+            "object": "animal"
+        },
+        {
+            "subject": "Dog",
+            "relation": "is_a",
+            "object": "mammal"
+        },
+        {
+            "subject": "Cat",
+            "relation": "is_a",
+            "object": "mammal"
+        },
+        {
+            "subject": "Tiger",
+            "relation": "is_a",
+            "object": "mammal"
+        },
+        {
+            "subject": "Lion",
+            "relation": "is_a",
+            "object": "mammal"
+        },
+        {
+            "subject": "Elephant",
+            "relation": "is_a",
+            "object": "mammal"
+        },
+        {
+            "subject": "Mammal",
+            "relation": "is_a",
+            "object": "animal"
+        },
+        {
+            "subject": "Dog",
+            "relation": "lives_in",
+            "object": "land"
+        },
+        {
+            "subject": "Tiger",
+            "relation": "lives_in",
+            "object": "forest"
+        },
+        {
+            "subject": "Lion",
+            "relation": "lives_in",
+            "object": "grassland"
+        },
+        {
+            "subject": "Fish",
+            "relation": "lives_in",
+            "object": "water"
+        },
+        {
+            "subject": "Water",
+            "relation": "is_a",
+            "object": "substance"
+        },
+        {
+            "subject": "Oxygen",
+            "relation": "is_a",
+            "object": "element"
+        },
+        {
+            "subject": "Hydrogen",
+            "relation": "is_a",
+            "object": "element"
+        },
+        {
+            "subject": "Water",
+            "relation": "contains",
+            "object": "Hydrogen"
+        },
+        {
+            "subject": "Water",
+            "relation": "contains",
+            "object": "Oxygen"
+        },
+        {
+            "subject": "Plant",
+            "relation": "needs",
+            "object": "Water"
+        },
+        {
+            "subject": "Plant",
+            "relation": "needs",
+            "object": "Sunlight"
+        },
+        {
+            "subject": "Fire",
+            "relation": "needs",
+            "object": "Oxygen"
+        },
+        {
+            "subject": "Earth",
+            "relation": "contains",
+            "object": "Water"
+        },
+        {
+            "subject": "Earth",
+            "relation": "supports",
+            "object": "Life"
+        },
+        {
+            "subject": "School",
+            "relation": "is_a",
+            "object": "educational institution"
+        },
+        {
+            "subject": "University",
+            "relation": "is_a",
+            "object": "educational institution"
+        },
+        {
+            "subject": "MIT",
+            "relation": "is_a",
+            "object": "university"
+        },
+        {
+            "subject": "IIT Madras",
+            "relation": "is_a",
+            "object": "university"
+        },
+        {
+            "subject": "Student",
+            "relation": "is_a",
+            "object": "person"
+        },
+        {
+            "subject": "Teacher",
+            "relation": "is_a",
+            "object": "person"
+        },
+        {
+            "subject": "Student",
+            "relation": "attends",
+            "object": "School"
+        },
+        {
+            "subject": "Student",
+            "relation": "learns",
+            "object": "Subject"
+        },
+        {
+            "subject": "Teacher",
+            "relation": "teaches",
+            "object": "Subject"
+        },
+        {
+            "subject": "MIT",
+            "relation": "located_in",
+            "object": "United States"
+        },
+        {
+            "subject": "IIT Madras",
+            "relation": "located_in",
+            "object": "Chennai"
+        },
+        {
+            "subject": "Chennai",
+            "relation": "located_on",
+            "object": "Earth"
+        },
+        {
+            "subject": "India",
+            "relation": "located_on",
+            "object": "Earth"
+        },
+        {
+            "subject": "Japan",
+            "relation": "located_on",
+            "object": "Earth"
+        },
+        {
+            "subject": "France",
+            "relation": "located_on",
+            "object": "Earth"
+        },
+        {
+            "subject": "Arun",
+            "relation": "lives_in",
+            "object": "Chennai"
+        },
+        {
+            "subject": "Dhivya",
+            "relation": "lives_in",
+            "object": "Coimbatore"
+        },
+        {
+            "subject": "Ravi",
+            "relation": "lives_in",
+            "object": "Madurai"
+        },
+        {
+            "subject": "Axinix",
+            "relation": "uses",
+            "object": "Python"
+        },
+        {
+            "subject": "WorkHub",
+            "relation": "runs_on",
+            "object": "Computer"
+        },
+        {
+            "subject": "AI",
+            "relation": "runs_on",
+            "object": "Computer"
+        }
+    ],
+    "recommended_tests": [
+        {
+            "query": [
+                "Moon",
+                "Sun"
+            ],
+            "expected": "CONNECTED",
+            "hops": 2
+        },
+        {
+            "query": [
+                "Phobos",
+                "Sun"
+            ],
+            "expected": "CONNECTED",
+            "hops": 2
+        },
+        {
+            "query": [
+                "Chennai",
+                "Earth"
+            ],
+            "expected": "CONNECTED",
+            "hops": 3
+        },
+        {
+            "query": [
+                "Arun",
+                "Earth"
+            ],
+            "expected": "CONNECTED",
+            "hops": 4
+        },
+        {
+            "query": [
+                "WorkHub",
+                "Python"
+            ],
+            "expected": "CONNECTED",
+            "hops": 1
+        },
+        {
+            "query": [
+                "Gene",
+                "Cell"
+            ],
+            "expected": "CONNECTED",
+            "hops": 2
+        },
+        {
+            "query": [
+                "Moon",
+                "DNA"
+            ],
+            "expected": "UNSUPPORTED"
+        },
+        {
+            "query": [
+                "Tiger",
+                "Paris"
+            ],
+            "expected": "UNSUPPORTED"
+        },
+        {
+            "query": [
+                "Arun",
+                "Axinix"
+            ],
+            "expected": "CONNECTED",
+            "hops": 1
+        },
+        {
+            "query": [
+                "IIT Madras",
+                "Asia"
+            ],
+            "expected": "CONNECTED",
+            "hops": 4
+        }
+    ]
+}

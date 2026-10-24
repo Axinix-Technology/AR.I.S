@@ -1,0 +1,1110 @@
+{
+  "dataset": "ARIS-MultiSentence-Complex-Reasoning-Supervision",
+  "version": "1.0",
+  "description": "High-difficulty multi-sentence reasoning and target discrimination dataset covering cross-sentence coreference, multi-hop transitive paths (up to 4 hops), derivational morphology matching, and answer-type discrimination.",
+  "total_scenarios": 6,
+  "total_qa_pairs": 29,
+  "scenarios": [
+    {
+      "scenario_id": "HARD_SCENARIO_001",
+      "domain": "enterprise_aerospace_and_defense",
+      "narrative_context": [
+        "Dr. Alistair Vance founded Stratos Dynamics in 2012.",
+        "Stratos Dynamics develops autonomous atmospheric gliders and is based in Bristol.",
+        "In 2018, Stratos Dynamics acquired Aetherial Systems, an avionics startup located in Toulouse.",
+        "Aetherial Systems is managed by Elena Rostova.",
+        "Elena Rostova formerly directed satellite telemetry at Zenith Orbitals in Munich."
+      ],
+      "entities": [
+        {
+          "text": "Dr. Alistair Vance",
+          "type": "PERSON",
+          "role": "founder"
+        },
+        {
+          "text": "Stratos Dynamics",
+          "type": "ORGANIZATION",
+          "role": "parent_company"
+        },
+        {
+          "text": "Bristol",
+          "type": "GPE_CITY",
+          "role": "headquarters_location"
+        },
+        {
+          "text": "Aetherial Systems",
+          "type": "ORGANIZATION",
+          "role": "subsidiary_company"
+        },
+        {
+          "text": "Toulouse",
+          "type": "GPE_CITY",
+          "role": "subsidiary_location"
+        },
+        {
+          "text": "Elena Rostova",
+          "type": "PERSON",
+          "role": "executive_manager"
+        },
+        {
+          "text": "Zenith Orbitals",
+          "type": "ORGANIZATION",
+          "role": "previous_employer"
+        },
+        {
+          "text": "Munich",
+          "type": "GPE_CITY",
+          "role": "organization_location"
+        }
+      ],
+      "formal_triples": [
+        {
+          "subject": "Dr. Alistair Vance",
+          "relation": "founded",
+          "object": "Stratos Dynamics"
+        },
+        {
+          "subject": "Stratos Dynamics",
+          "relation": "founded_by",
+          "object": "Dr. Alistair Vance"
+        },
+        {
+          "subject": "Stratos Dynamics",
+          "relation": "based in",
+          "object": "Bristol"
+        },
+        {
+          "subject": "Stratos Dynamics",
+          "relation": "acquired",
+          "object": "Aetherial Systems"
+        },
+        {
+          "subject": "Aetherial Systems",
+          "relation": "subsidiary of",
+          "object": "Stratos Dynamics"
+        },
+        {
+          "subject": "Aetherial Systems",
+          "relation": "located in",
+          "object": "Toulouse"
+        },
+        {
+          "subject": "Elena Rostova",
+          "relation": "manages",
+          "object": "Aetherial Systems"
+        },
+        {
+          "subject": "Aetherial Systems",
+          "relation": "managed by",
+          "object": "Elena Rostova"
+        },
+        {
+          "subject": "Elena Rostova",
+          "relation": "formerly directed",
+          "object": "Zenith Orbitals"
+        },
+        {
+          "subject": "Zenith Orbitals",
+          "relation": "located in",
+          "object": "Munich"
+        }
+      ],
+      "qa_pairs": [
+        {
+          "question_id": "Q_001_1",
+          "question": "Which company did Alistair Vance establish?",
+          "target_type": "ORGANIZATION",
+          "expected_answer": "Stratos Dynamics",
+          "reasoning_path": "Dr. Alistair Vance -> founded -> Stratos Dynamics",
+          "hop_count": 1,
+          "derivational_morphology": {
+            "query_predicate": "establish",
+            "fact_predicate": "founded"
+          },
+          "distractors": [
+            "Aetherial Systems",
+            "Zenith Orbitals",
+            "Bristol"
+          ]
+        },
+        {
+          "question_id": "Q_001_2",
+          "question": "Who is the founder of the company that acquired Aetherial Systems?",
+          "target_type": "PERSON",
+          "expected_answer": "Dr. Alistair Vance",
+          "reasoning_path": "Aetherial Systems <- acquired - Stratos Dynamics <- founded - Dr. Alistair Vance",
+          "hop_count": 2,
+          "derivational_morphology": {
+            "query_predicate": "founder of",
+            "fact_predicate": "founded"
+          },
+          "distractors": [
+            "Elena Rostova",
+            "Bristol"
+          ]
+        },
+        {
+          "question_id": "Q_001_3",
+          "question": "In which city is the company managed by Elena Rostova located?",
+          "target_type": "GPE_CITY",
+          "expected_answer": "Toulouse",
+          "reasoning_path": "Elena Rostova -> manages -> Aetherial Systems -> located in -> Toulouse",
+          "hop_count": 2,
+          "derivational_morphology": {
+            "query_predicate": "managed by",
+            "fact_predicate": "manages"
+          },
+          "distractors": [
+            "Bristol",
+            "Munich"
+          ]
+        },
+        {
+          "question_id": "Q_001_4",
+          "question": "Which subsidiary is owned by the firm headquartered in Bristol?",
+          "target_type": "ORGANIZATION",
+          "expected_answer": "Aetherial Systems",
+          "reasoning_path": "Bristol <- based in - Stratos Dynamics -> acquired -> Aetherial Systems",
+          "hop_count": 2,
+          "derivational_morphology": {
+            "query_predicate": "subsidiary / owned",
+            "fact_predicate": "acquired"
+          },
+          "distractors": [
+            "Stratos Dynamics",
+            "Toulouse",
+            "Zenith Orbitals"
+          ]
+        },
+        {
+          "question_id": "Q_001_5",
+          "question": "In which city is Elena Rostova's former company situated?",
+          "target_type": "GPE_CITY",
+          "expected_answer": "Munich",
+          "reasoning_path": "Elena Rostova -> formerly directed -> Zenith Orbitals -> located in -> Munich",
+          "hop_count": 2,
+          "derivational_morphology": {
+            "query_predicate": "situated",
+            "fact_predicate": "located in"
+          },
+          "distractors": [
+            "Toulouse",
+            "Bristol"
+          ]
+        },
+        {
+          "question_id": "Q_001_6",
+          "question": "Who is the partner of Alistair Vance?",
+          "target_type": "PERSON",
+          "expected_answer": null,
+          "is_unsupported": true,
+          "reasoning_path": null,
+          "hop_count": 0,
+          "distractors": [
+            "Elena Rostova"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario_id": "HARD_SCENARIO_002",
+      "domain": "global_biomedical_consortium",
+      "narrative_context": [
+        "Dr. Mira Chen leads the Genomic Therapy Institute in Singapore.",
+        "The Genomic Therapy Institute developed a CRISPR delivery vector called Vector-X.",
+        "Vector-X was licensed to Novabio Therapeutics, a biotechnology firm in Basel.",
+        "Novabio Therapeutics is chaired by Henrik Lindqvist.",
+        "Henrik Lindqvist also founded Arctic Diagnostics in Stockholm.",
+        "Arctic Diagnostics operates laboratories in Kiruna."
+      ],
+      "entities": [
+        {
+          "text": "Dr. Mira Chen",
+          "type": "PERSON",
+          "role": "research_director"
+        },
+        {
+          "text": "Genomic Therapy Institute",
+          "type": "ORGANIZATION",
+          "role": "research_institute"
+        },
+        {
+          "text": "Singapore",
+          "type": "GPE_CITY",
+          "role": "institute_location"
+        },
+        {
+          "text": "Vector-X",
+          "type": "PRODUCT_TECHNOLOGY",
+          "role": "licensed_asset"
+        },
+        {
+          "text": "Novabio Therapeutics",
+          "type": "ORGANIZATION",
+          "role": "commercial_licensee"
+        },
+        {
+          "text": "Basel",
+          "type": "GPE_CITY",
+          "role": "company_location"
+        },
+        {
+          "text": "Henrik Lindqvist",
+          "type": "PERSON",
+          "role": "corporate_chair"
+        },
+        {
+          "text": "Arctic Diagnostics",
+          "type": "ORGANIZATION",
+          "role": "sister_company"
+        },
+        {
+          "text": "Stockholm",
+          "type": "GPE_CITY",
+          "role": "headquarters_location"
+        },
+        {
+          "text": "Kiruna",
+          "type": "GPE_CITY",
+          "role": "facility_location"
+        }
+      ],
+      "formal_triples": [
+        {
+          "subject": "Dr. Mira Chen",
+          "relation": "leads",
+          "object": "Genomic Therapy Institute"
+        },
+        {
+          "subject": "Genomic Therapy Institute",
+          "relation": "located in",
+          "object": "Singapore"
+        },
+        {
+          "subject": "Genomic Therapy Institute",
+          "relation": "developed",
+          "object": "Vector-X"
+        },
+        {
+          "subject": "Vector-X",
+          "relation": "licensed to",
+          "object": "Novabio Therapeutics"
+        },
+        {
+          "subject": "Novabio Therapeutics",
+          "relation": "based in",
+          "object": "Basel"
+        },
+        {
+          "subject": "Henrik Lindqvist",
+          "relation": "chairs",
+          "object": "Novabio Therapeutics"
+        },
+        {
+          "subject": "Henrik Lindqvist",
+          "relation": "founded",
+          "object": "Arctic Diagnostics"
+        },
+        {
+          "subject": "Arctic Diagnostics",
+          "relation": "based in",
+          "object": "Stockholm"
+        },
+        {
+          "subject": "Arctic Diagnostics",
+          "relation": "operates in",
+          "object": "Kiruna"
+        }
+      ],
+      "qa_pairs": [
+        {
+          "question_id": "Q_002_1",
+          "question": "Which commercial company licensed the technology developed by Mira Chen's institute?",
+          "target_type": "ORGANIZATION",
+          "expected_answer": "Novabio Therapeutics",
+          "reasoning_path": "Dr. Mira Chen -> leads -> Genomic Therapy Institute -> developed -> Vector-X -> licensed to -> Novabio Therapeutics",
+          "hop_count": 3,
+          "derivational_morphology": {
+            "query_predicate": "licensed",
+            "fact_predicate": "licensed to"
+          },
+          "distractors": [
+            "Genomic Therapy Institute",
+            "Arctic Diagnostics",
+            "Basel",
+            "Vector-X"
+          ]
+        },
+        {
+          "question_id": "Q_002_2",
+          "question": "In which European city is the corporate licensee of Vector-X headquartered?",
+          "target_type": "GPE_CITY",
+          "expected_answer": "Basel",
+          "reasoning_path": "Vector-X -> licensed to -> Novabio Therapeutics -> based in -> Basel",
+          "hop_count": 2,
+          "derivational_morphology": {
+            "query_predicate": "headquartered",
+            "fact_predicate": "based in"
+          },
+          "distractors": [
+            "Singapore",
+            "Stockholm",
+            "Kiruna"
+          ]
+        },
+        {
+          "question_id": "Q_002_3",
+          "question": "Who is the founder of Arctic Diagnostics?",
+          "target_type": "PERSON",
+          "expected_answer": "Henrik Lindqvist",
+          "reasoning_path": "Arctic Diagnostics <- founded - Henrik Lindqvist",
+          "hop_count": 1,
+          "derivational_morphology": {
+            "query_predicate": "founder of",
+            "fact_predicate": "founded"
+          },
+          "distractors": [
+            "Dr. Mira Chen"
+          ]
+        },
+        {
+          "question_id": "Q_002_4",
+          "question": "Where does the diagnostic firm established by Henrik Lindqvist run its laboratories?",
+          "target_type": "GPE_CITY",
+          "expected_answer": "Kiruna",
+          "reasoning_path": "Henrik Lindqvist -> founded -> Arctic Diagnostics -> operates in -> Kiruna",
+          "hop_count": 2,
+          "derivational_morphology": {
+            "query_predicate": "established / run",
+            "fact_predicate": "founded / operates in"
+          },
+          "distractors": [
+            "Stockholm",
+            "Basel",
+            "Singapore"
+          ]
+        },
+        {
+          "question_id": "Q_002_5",
+          "question": "Which technology was created by the organization directed by Dr. Mira Chen?",
+          "target_type": "PRODUCT_TECHNOLOGY",
+          "expected_answer": "Vector-X",
+          "reasoning_path": "Dr. Mira Chen -> leads -> Genomic Therapy Institute -> developed -> Vector-X",
+          "hop_count": 2,
+          "derivational_morphology": {
+            "query_predicate": "created",
+            "fact_predicate": "developed"
+          },
+          "distractors": [
+            "Novabio Therapeutics",
+            "Singapore"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario_id": "HARD_SCENARIO_003",
+      "domain": "cloud_computing_and_distributed_systems",
+      "narrative_context": [
+        "Kavitha Raman created HyperScale Cloud at Chennai.",
+        "HyperScale Cloud provides distributed databases to FinServe Global.",
+        "FinServe Global is headquartered in London.",
+        "FinServe Global operates a security subsidiary named CryptaLogic.",
+        "CryptaLogic is situated in Edinburgh.",
+        "CryptaLogic is supervised by Marcus Thorne.",
+        "Marcus Thorne reports to Sophia Sterling in London."
+      ],
+      "entities": [
+        {
+          "text": "Kavitha Raman",
+          "type": "PERSON",
+          "role": "cloud_architect"
+        },
+        {
+          "text": "HyperScale Cloud",
+          "type": "ORGANIZATION",
+          "role": "cloud_provider"
+        },
+        {
+          "text": "Chennai",
+          "type": "GPE_CITY",
+          "role": "provider_origin"
+        },
+        {
+          "text": "FinServe Global",
+          "type": "ORGANIZATION",
+          "role": "enterprise_client"
+        },
+        {
+          "text": "London",
+          "type": "GPE_CITY",
+          "role": "corporate_hq"
+        },
+        {
+          "text": "CryptaLogic",
+          "type": "ORGANIZATION",
+          "role": "security_subsidiary"
+        },
+        {
+          "text": "Edinburgh",
+          "type": "GPE_CITY",
+          "role": "subsidiary_location"
+        },
+        {
+          "text": "Marcus Thorne",
+          "type": "PERSON",
+          "role": "security_director"
+        },
+        {
+          "text": "Sophia Sterling",
+          "type": "PERSON",
+          "role": "group_executive"
+        }
+      ],
+      "formal_triples": [
+        {
+          "subject": "Kavitha Raman",
+          "relation": "created",
+          "object": "HyperScale Cloud"
+        },
+        {
+          "subject": "HyperScale Cloud",
+          "relation": "based in",
+          "object": "Chennai"
+        },
+        {
+          "subject": "HyperScale Cloud",
+          "relation": "provides services to",
+          "object": "FinServe Global"
+        },
+        {
+          "subject": "FinServe Global",
+          "relation": "headquartered in",
+          "object": "London"
+        },
+        {
+          "subject": "FinServe Global",
+          "relation": "owns subsidiary",
+          "object": "CryptaLogic"
+        },
+        {
+          "subject": "CryptaLogic",
+          "relation": "situated in",
+          "object": "Edinburgh"
+        },
+        {
+          "subject": "Marcus Thorne",
+          "relation": "supervises",
+          "object": "CryptaLogic"
+        },
+        {
+          "subject": "Marcus Thorne",
+          "relation": "reports to",
+          "object": "Sophia Sterling"
+        }
+      ],
+      "qa_pairs": [
+        {
+          "question_id": "Q_003_1",
+          "question": "Which enterprise client receives database services from the platform Kavitha Raman created?",
+          "target_type": "ORGANIZATION",
+          "expected_answer": "FinServe Global",
+          "reasoning_path": "Kavitha Raman -> created -> HyperScale Cloud -> provides services to -> FinServe Global",
+          "hop_count": 2,
+          "derivational_morphology": {
+            "query_predicate": "receives services",
+            "fact_predicate": "provides services to"
+          },
+          "distractors": [
+            "HyperScale Cloud",
+            "CryptaLogic",
+            "Chennai",
+            "London"
+          ]
+        },
+        {
+          "question_id": "Q_003_2",
+          "question": "In which city does the security unit of FinServe Global operate?",
+          "target_type": "GPE_CITY",
+          "expected_answer": "Edinburgh",
+          "reasoning_path": "FinServe Global -> owns subsidiary -> CryptaLogic -> situated in -> Edinburgh",
+          "hop_count": 2,
+          "derivational_morphology": {
+            "query_predicate": "operate",
+            "fact_predicate": "situated in"
+          },
+          "distractors": [
+            "London",
+            "Chennai"
+          ]
+        },
+        {
+          "question_id": "Q_003_3",
+          "question": "Who is the manager overseeing CryptaLogic?",
+          "target_type": "PERSON",
+          "expected_answer": "Marcus Thorne",
+          "reasoning_path": "CryptaLogic <- supervises - Marcus Thorne",
+          "hop_count": 1,
+          "derivational_morphology": {
+            "query_predicate": "overseeing",
+            "fact_predicate": "supervises"
+          },
+          "distractors": [
+            "Sophia Sterling",
+            "Kavitha Raman"
+          ]
+        },
+        {
+          "question_id": "Q_003_4",
+          "question": "To whom does the supervisor of CryptaLogic report?",
+          "target_type": "PERSON",
+          "expected_answer": "Sophia Sterling",
+          "reasoning_path": "CryptaLogic <- supervises - Marcus Thorne -> reports to -> Sophia Sterling",
+          "hop_count": 2,
+          "derivational_morphology": {
+            "query_predicate": "supervisor",
+            "fact_predicate": "supervises"
+          },
+          "distractors": [
+            "Marcus Thorne",
+            "Kavitha Raman"
+          ]
+        },
+        {
+          "question_id": "Q_003_5",
+          "question": "Which city is the birthplace or founding base of HyperScale Cloud?",
+          "target_type": "GPE_CITY",
+          "expected_answer": "Chennai",
+          "reasoning_path": "HyperScale Cloud -> based in -> Chennai",
+          "hop_count": 1,
+          "derivational_morphology": {
+            "query_predicate": "founding base",
+            "fact_predicate": "based in"
+          },
+          "distractors": [
+            "London",
+            "Edinburgh"
+          ]
+        },
+        {
+          "question_id": "Q_003_6",
+          "question": "What is the partner of Kavitha Raman?",
+          "target_type": "PERSON",
+          "expected_answer": null,
+          "is_unsupported": true,
+          "reasoning_path": null,
+          "hop_count": 0,
+          "distractors": [
+            "Marcus Thorne",
+            "Sophia Sterling"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario_id": "HARD_SCENARIO_004",
+      "domain": "renewable_energy_and_grid_infrastructure",
+      "narrative_context": [
+        "Solaria Green Energy was established by Tariq Al-Mansoor in Abu Dhabi.",
+        "Solaria Green Energy built the Helios Solar Farm in Ouarzazate.",
+        "Power generated by Helios Solar Farm is transmitted to Iberia Grid in Seville.",
+        "Iberia Grid is operated by Andalucia Power Authority.",
+        "Andalucia Power Authority is managed by Carmen Ortiz in Madrid."
+      ],
+      "entities": [
+        {
+          "text": "Tariq Al-Mansoor",
+          "type": "PERSON",
+          "role": "founder"
+        },
+        {
+          "text": "Solaria Green Energy",
+          "type": "ORGANIZATION",
+          "role": "energy_developer"
+        },
+        {
+          "text": "Abu Dhabi",
+          "type": "GPE_CITY",
+          "role": "developer_hq"
+        },
+        {
+          "text": "Helios Solar Farm",
+          "type": "FACILITY_INFRASTRUCTURE",
+          "role": "generation_facility"
+        },
+        {
+          "text": "Ouarzazate",
+          "type": "GPE_CITY",
+          "role": "facility_location"
+        },
+        {
+          "text": "Iberia Grid",
+          "type": "ORGANIZATION",
+          "role": "transmission_network"
+        },
+        {
+          "text": "Seville",
+          "type": "GPE_CITY",
+          "role": "grid_location"
+        },
+        {
+          "text": "Andalucia Power Authority",
+          "type": "ORGANIZATION",
+          "role": "operating_utility"
+        },
+        {
+          "text": "Carmen Ortiz",
+          "type": "PERSON",
+          "role": "utility_director"
+        },
+        {
+          "text": "Madrid",
+          "type": "GPE_CITY",
+          "role": "director_office"
+        }
+      ],
+      "formal_triples": [
+        {
+          "subject": "Tariq Al-Mansoor",
+          "relation": "established",
+          "object": "Solaria Green Energy"
+        },
+        {
+          "subject": "Solaria Green Energy",
+          "relation": "based in",
+          "object": "Abu Dhabi"
+        },
+        {
+          "subject": "Solaria Green Energy",
+          "relation": "built",
+          "object": "Helios Solar Farm"
+        },
+        {
+          "subject": "Helios Solar Farm",
+          "relation": "located in",
+          "object": "Ouarzazate"
+        },
+        {
+          "subject": "Helios Solar Farm",
+          "relation": "transmits power to",
+          "object": "Iberia Grid"
+        },
+        {
+          "subject": "Iberia Grid",
+          "relation": "situated in",
+          "object": "Seville"
+        },
+        {
+          "subject": "Andalucia Power Authority",
+          "relation": "operates",
+          "object": "Iberia Grid"
+        },
+        {
+          "subject": "Carmen Ortiz",
+          "relation": "manages",
+          "object": "Andalucia Power Authority"
+        },
+        {
+          "subject": "Carmen Ortiz",
+          "relation": "based in",
+          "object": "Madrid"
+        }
+      ],
+      "qa_pairs": [
+        {
+          "question_id": "Q_004_1",
+          "question": "Where is the solar generation facility built by Tariq Al-Mansoor's company located?",
+          "target_type": "GPE_CITY",
+          "expected_answer": "Ouarzazate",
+          "reasoning_path": "Tariq Al-Mansoor -> established -> Solaria Green Energy -> built -> Helios Solar Farm -> located in -> Ouarzazate",
+          "hop_count": 3,
+          "derivational_morphology": {
+            "query_predicate": "built / located",
+            "fact_predicate": "built / located in"
+          },
+          "distractors": [
+            "Abu Dhabi",
+            "Seville",
+            "Madrid"
+          ]
+        },
+        {
+          "question_id": "Q_004_2",
+          "question": "Which grid operator receives energy from Helios Solar Farm?",
+          "target_type": "ORGANIZATION",
+          "expected_answer": "Iberia Grid",
+          "reasoning_path": "Helios Solar Farm -> transmits power to -> Iberia Grid",
+          "hop_count": 1,
+          "derivational_morphology": {
+            "query_predicate": "receives energy",
+            "fact_predicate": "transmits power to"
+          },
+          "distractors": [
+            "Solaria Green Energy",
+            "Andalucia Power Authority",
+            "Seville"
+          ]
+        },
+        {
+          "question_id": "Q_004_3",
+          "question": "Who directs the organization that operates Iberia Grid?",
+          "target_type": "PERSON",
+          "expected_answer": "Carmen Ortiz",
+          "reasoning_path": "Iberia Grid <- operates - Andalucia Power Authority <- manages - Carmen Ortiz",
+          "hop_count": 2,
+          "derivational_morphology": {
+            "query_predicate": "directs",
+            "fact_predicate": "manages"
+          },
+          "distractors": [
+            "Tariq Al-Mansoor"
+          ]
+        },
+        {
+          "question_id": "Q_004_4",
+          "question": "In which city is the executive managing Andalucia Power Authority stationed?",
+          "target_type": "GPE_CITY",
+          "expected_answer": "Madrid",
+          "reasoning_path": "Andalucia Power Authority <- manages - Carmen Ortiz -> based in -> Madrid",
+          "hop_count": 2,
+          "derivational_morphology": {
+            "query_predicate": "stationed",
+            "fact_predicate": "based in"
+          },
+          "distractors": [
+            "Seville",
+            "Ouarzazate",
+            "Abu Dhabi"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario_id": "HARD_SCENARIO_005",
+      "domain": "maritime_transport_and_logistics",
+      "narrative_context": [
+        "Captain Rajiv Nair captains the container vessel Ocean Titan.",
+        "Ocean Titan is registered in Monrovia.",
+        "Ocean Titan is operated by Pacific Wave Shipping, which has headquarters in Singapore.",
+        "Pacific Wave Shipping owns the deepwater terminal at Port Klang.",
+        "Port Klang is situated in Selangor.",
+        "Selangor is a state in Malaysia."
+      ],
+      "entities": [
+        {
+          "text": "Captain Rajiv Nair",
+          "type": "PERSON",
+          "role": "ship_captain"
+        },
+        {
+          "text": "Ocean Titan",
+          "type": "VEHICLE_VESSEL",
+          "role": "cargo_ship"
+        },
+        {
+          "text": "Monrovia",
+          "type": "GPE_CITY",
+          "role": "port_of_registry"
+        },
+        {
+          "text": "Pacific Wave Shipping",
+          "type": "ORGANIZATION",
+          "role": "shipping_operator"
+        },
+        {
+          "text": "Singapore",
+          "type": "GPE_CITY",
+          "role": "operator_hq"
+        },
+        {
+          "text": "Port Klang",
+          "type": "FACILITY_INFRASTRUCTURE",
+          "role": "terminal_port"
+        },
+        {
+          "text": "Selangor",
+          "type": "GPE_STATE",
+          "role": "state_region"
+        },
+        {
+          "text": "Malaysia",
+          "type": "GPE_COUNTRY",
+          "role": "nation"
+        }
+      ],
+      "formal_triples": [
+        {
+          "subject": "Captain Rajiv Nair",
+          "relation": "captains",
+          "object": "Ocean Titan"
+        },
+        {
+          "subject": "Ocean Titan",
+          "relation": "registered in",
+          "object": "Monrovia"
+        },
+        {
+          "subject": "Pacific Wave Shipping",
+          "relation": "operates",
+          "object": "Ocean Titan"
+        },
+        {
+          "subject": "Pacific Wave Shipping",
+          "relation": "headquarters in",
+          "object": "Singapore"
+        },
+        {
+          "subject": "Pacific Wave Shipping",
+          "relation": "owns terminal at",
+          "object": "Port Klang"
+        },
+        {
+          "subject": "Port Klang",
+          "relation": "situated in",
+          "object": "Selangor"
+        },
+        {
+          "subject": "Selangor",
+          "relation": "is in",
+          "object": "Malaysia"
+        }
+      ],
+      "qa_pairs": [
+        {
+          "question_id": "Q_005_1",
+          "question": "Which shipping company operates the vessel commanded by Rajiv Nair?",
+          "target_type": "ORGANIZATION",
+          "expected_answer": "Pacific Wave Shipping",
+          "reasoning_path": "Captain Rajiv Nair -> captains -> Ocean Titan <- operates - Pacific Wave Shipping",
+          "hop_count": 2,
+          "derivational_morphology": {
+            "query_predicate": "commanded",
+            "fact_predicate": "captains"
+          },
+          "distractors": [
+            "Ocean Titan",
+            "Singapore",
+            "Port Klang"
+          ]
+        },
+        {
+          "question_id": "Q_005_2",
+          "question": "In which state is the deepwater terminal owned by Pacific Wave Shipping located?",
+          "target_type": "GPE_STATE",
+          "expected_answer": "Selangor",
+          "reasoning_path": "Pacific Wave Shipping -> owns terminal at -> Port Klang -> situated in -> Selangor",
+          "hop_count": 2,
+          "derivational_morphology": {
+            "query_predicate": "state located",
+            "fact_predicate": "situated in"
+          },
+          "distractors": [
+            "Port Klang",
+            "Malaysia",
+            "Singapore"
+          ]
+        },
+        {
+          "question_id": "Q_005_3",
+          "question": "In which country is Port Klang situated?",
+          "target_type": "GPE_COUNTRY",
+          "expected_answer": "Malaysia",
+          "reasoning_path": "Port Klang -> situated in -> Selangor -> is in -> Malaysia",
+          "hop_count": 2,
+          "derivational_morphology": {
+            "query_predicate": "country situated",
+            "fact_predicate": "is in"
+          },
+          "distractors": [
+            "Selangor",
+            "Singapore",
+            "Monrovia"
+          ]
+        },
+        {
+          "question_id": "Q_005_4",
+          "question": "What is the port of registry for Ocean Titan?",
+          "target_type": "GPE_CITY",
+          "expected_answer": "Monrovia",
+          "reasoning_path": "Ocean Titan -> registered in -> Monrovia",
+          "hop_count": 1,
+          "derivational_morphology": {
+            "query_predicate": "port of registry",
+            "fact_predicate": "registered in"
+          },
+          "distractors": [
+            "Singapore",
+            "Port Klang"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario_id": "HARD_SCENARIO_006",
+      "domain": "academic_research_and_scientific_discovery",
+      "narrative_context": [
+        "Professor Ada Lovelace founded the Institute for Computational Intelligence at Cambridge.",
+        "The Institute for Computational Intelligence designed the Analytical Core neural architecture.",
+        "The Analytical Core architecture is sponsored by the Royal Cybernetic Society in London.",
+        "The Royal Cybernetic Society is presided over by Sir Arthur Pendelton.",
+        "Sir Arthur Pendelton was awarded the Turing Memorial Laureate in Oxford."
+      ],
+      "entities": [
+        {
+          "text": "Professor Ada Lovelace",
+          "type": "PERSON",
+          "role": "institute_founder"
+        },
+        {
+          "text": "Institute for Computational Intelligence",
+          "type": "ORGANIZATION",
+          "role": "research_institute"
+        },
+        {
+          "text": "Cambridge",
+          "type": "GPE_CITY",
+          "role": "institute_location"
+        },
+        {
+          "text": "Analytical Core",
+          "type": "PRODUCT_TECHNOLOGY",
+          "role": "architecture_model"
+        },
+        {
+          "text": "Royal Cybernetic Society",
+          "type": "ORGANIZATION",
+          "role": "funding_society"
+        },
+        {
+          "text": "London",
+          "type": "GPE_CITY",
+          "role": "society_location"
+        },
+        {
+          "text": "Sir Arthur Pendelton",
+          "type": "PERSON",
+          "role": "society_president"
+        },
+        {
+          "text": "Turing Memorial Laureate",
+          "type": "AWARD_HONOR",
+          "role": "distinction"
+        },
+        {
+          "text": "Oxford",
+          "type": "GPE_CITY",
+          "role": "award_venue"
+        }
+      ],
+      "formal_triples": [
+        {
+          "subject": "Professor Ada Lovelace",
+          "relation": "founded",
+          "object": "Institute for Computational Intelligence"
+        },
+        {
+          "subject": "Institute for Computational Intelligence",
+          "relation": "located in",
+          "object": "Cambridge"
+        },
+        {
+          "subject": "Institute for Computational Intelligence",
+          "relation": "designed",
+          "object": "Analytical Core"
+        },
+        {
+          "subject": "Analytical Core",
+          "relation": "sponsored by",
+          "object": "Royal Cybernetic Society"
+        },
+        {
+          "subject": "Royal Cybernetic Society",
+          "relation": "based in",
+          "object": "London"
+        },
+        {
+          "subject": "Sir Arthur Pendelton",
+          "relation": "presides over",
+          "object": "Royal Cybernetic Society"
+        },
+        {
+          "subject": "Sir Arthur Pendelton",
+          "relation": "awarded",
+          "object": "Turing Memorial Laureate"
+        },
+        {
+          "subject": "Turing Memorial Laureate",
+          "relation": "conferred in",
+          "object": "Oxford"
+        }
+      ],
+      "qa_pairs": [
+        {
+          "question_id": "Q_006_1",
+          "question": "Which learned society funds the architecture designed by Ada Lovelace's institute?",
+          "target_type": "ORGANIZATION",
+          "expected_answer": "Royal Cybernetic Society",
+          "reasoning_path": "Professor Ada Lovelace -> founded -> Institute for Computational Intelligence -> designed -> Analytical Core -> sponsored by -> Royal Cybernetic Society",
+          "hop_count": 3,
+          "derivational_morphology": {
+            "query_predicate": "funds",
+            "fact_predicate": "sponsored by"
+          },
+          "distractors": [
+            "Institute for Computational Intelligence",
+            "Analytical Core",
+            "London"
+          ]
+        },
+        {
+          "question_id": "Q_006_2",
+          "question": "Who is the president of the society that sponsors Analytical Core?",
+          "target_type": "PERSON",
+          "expected_answer": "Sir Arthur Pendelton",
+          "reasoning_path": "Analytical Core -> sponsored by -> Royal Cybernetic Society <- presides over - Sir Arthur Pendelton",
+          "hop_count": 2,
+          "derivational_morphology": {
+            "query_predicate": "president",
+            "fact_predicate": "presides over"
+          },
+          "distractors": [
+            "Professor Ada Lovelace"
+          ]
+        },
+        {
+          "question_id": "Q_006_3",
+          "question": "What award was received by the president of the Royal Cybernetic Society?",
+          "target_type": "AWARD_HONOR",
+          "expected_answer": "Turing Memorial Laureate",
+          "reasoning_path": "Royal Cybernetic Society <- presides over - Sir Arthur Pendelton -> awarded -> Turing Memorial Laureate",
+          "hop_count": 2,
+          "derivational_morphology": {
+            "query_predicate": "award received",
+            "fact_predicate": "awarded"
+          },
+          "distractors": [
+            "Analytical Core",
+            "Oxford",
+            "London"
+          ]
+        },
+        {
+          "question_id": "Q_006_4",
+          "question": "In which city was the Turing Memorial Laureate conferred?",
+          "target_type": "GPE_CITY",
+          "expected_answer": "Oxford",
+          "reasoning_path": "Turing Memorial Laureate -> conferred in -> Oxford",
+          "hop_count": 1,
+          "derivational_morphology": {
+            "query_predicate": "conferred",
+            "fact_predicate": "conferred in"
+          },
+          "distractors": [
+            "Cambridge",
+            "London"
+          ]
+        }
+      ]
+    }
+  ]
+}

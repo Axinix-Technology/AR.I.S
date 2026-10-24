@@ -1,0 +1,5507 @@
+{
+  "metrics": {
+    "Total Questions": 100,
+    "Entity extraction": 100.0,
+    "Question type": 100.0,
+    "Relation extraction": 95.0,
+    "Canonical relation": 58.0,
+    "Subject binding": 98.0,
+    "Object binding": 91.0,
+    "Answer slot": 91.0,
+    "Semantic Query Accuracy": 56.0,
+    "Graph Path Accuracy": 3.0,
+    "Final Answer Accuracy": 33.0
+  },
+  "failure_distribution": {
+    "ENTITY_FAILURE": 0,
+    "RELATION_FAILURE": 35,
+    "DIRECTION_FAILURE": 0,
+    "QUESTION_STRUCTURE_FAILURE": 0,
+    "ANSWER_SLOT_FAILURE": 9
+  },
+  "results": [
+    {
+      "input": "Where does Arun work?",
+      "query_understanding": {
+        "entities": [
+          "Arun"
+        ],
+        "wh_type": "where",
+        "subject": "Arun",
+        "relation_surface": "work",
+        "relation_canonical": "works_at",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Arun",
+        "relation": "works_at",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "work",
+          "question_type": "where"
+        },
+        "semantic_query": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Where does Dhivya work?",
+      "query_understanding": {
+        "entities": [
+          "Dhivya"
+        ],
+        "wh_type": "where",
+        "subject": "Dhivya",
+        "relation_surface": "work",
+        "relation_canonical": "works_at",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Dhivya",
+        "relation": "works_at",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Dhivya",
+          "relation_phrase": "work",
+          "question_type": "where"
+        },
+        "semantic_query": {
+          "subject": "Dhivya",
+          "relation": "works_at",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Where does Ravi work?",
+      "query_understanding": {
+        "entities": [
+          "Ravi"
+        ],
+        "wh_type": "where",
+        "subject": "Ravi",
+        "relation_surface": "work",
+        "relation_canonical": "works_at",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Ravi",
+        "relation": "works_at",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Ravi",
+          "relation_phrase": "work",
+          "question_type": "where"
+        },
+        "semantic_query": {
+          "subject": "Ravi",
+          "relation": "works_at",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Where does Meena work?",
+      "query_understanding": {
+        "entities": [
+          "Meena"
+        ],
+        "wh_type": "where",
+        "subject": "Meena",
+        "relation_surface": "work",
+        "relation_canonical": "works_at",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Meena",
+        "relation": "works_at",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Meena",
+          "relation_phrase": "work",
+          "question_type": "where"
+        },
+        "semantic_query": {
+          "subject": "Meena",
+          "relation": "works_at",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Which company does Arun work for?",
+      "query_understanding": {
+        "entities": [
+          "Arun"
+        ],
+        "wh_type": "which",
+        "subject": "Arun",
+        "relation_surface": "work for",
+        "relation_canonical": "works_at",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Arun",
+        "relation": "works_at",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "work for",
+          "question_type": "which"
+        },
+        "semantic_query": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Which company does Dhivya work for?",
+      "query_understanding": {
+        "entities": [
+          "Dhivya"
+        ],
+        "wh_type": "which",
+        "subject": "Dhivya",
+        "relation_surface": "work for",
+        "relation_canonical": "works_at",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Dhivya",
+        "relation": "works_at",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Dhivya",
+          "relation_phrase": "work for",
+          "question_type": "which"
+        },
+        "semantic_query": {
+          "subject": "Dhivya",
+          "relation": "works_at",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Where is Arun employed?",
+      "query_understanding": {
+        "entities": [
+          "Arun"
+        ],
+        "wh_type": "where",
+        "subject": "Arun",
+        "relation_surface": "employed",
+        "relation_canonical": "located_on",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Arun",
+        "relation": "located_on",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "employed",
+          "question_type": "where"
+        },
+        "semantic_query": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Where is Dhivya employed?",
+      "query_understanding": {
+        "entities": [
+          "Dhivya"
+        ],
+        "wh_type": "where",
+        "subject": "Dhivya",
+        "relation_surface": "employed",
+        "relation_canonical": "located_on",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Dhivya",
+        "relation": "located_on",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Dhivya",
+          "relation_phrase": "employed",
+          "question_type": "where"
+        },
+        "semantic_query": {
+          "subject": "Dhivya",
+          "relation": "works_at",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "What is Arun's workplace?",
+      "query_understanding": {
+        "entities": [
+          "Arun",
+          "Arun"
+        ],
+        "wh_type": "what",
+        "subject": "Arun",
+        "relation_surface": "",
+        "relation_canonical": "works_at",
+        "object": "Arun",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Arun",
+        "relation": "works_at",
+        "object": "Arun",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "workplace",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": false,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": false,
+        "answer_slot_match": false,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "ANSWER_SLOT_FAILURE"
+      }
+    },
+    {
+      "input": "What is Meena's workplace?",
+      "query_understanding": {
+        "entities": [
+          "Meena",
+          "Meena"
+        ],
+        "wh_type": "what",
+        "subject": "Meena",
+        "relation_surface": "",
+        "relation_canonical": "works_at",
+        "object": "Meena",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Meena",
+        "relation": "works_at",
+        "object": "Meena",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Meena",
+          "relation_phrase": "workplace",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": "Meena",
+          "relation": "works_at",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": false,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": false,
+        "answer_slot_match": false,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "ANSWER_SLOT_FAILURE"
+      }
+    },
+    {
+      "input": "Who works at Axinix?",
+      "query_understanding": {
+        "entities": [
+          "Axinix"
+        ],
+        "wh_type": "who",
+        "subject": null,
+        "relation_surface": "works at",
+        "relation_canonical": "works_at",
+        "object": "Axinix",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "works_at",
+        "object": "Axinix",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Axinix",
+          "relation_phrase": "works at",
+          "question_type": "who"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "works_at",
+          "object": "Axinix",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Who works at WorkHub?",
+      "query_understanding": {
+        "entities": [
+          "WorkHub"
+        ],
+        "wh_type": "who",
+        "subject": null,
+        "relation_surface": "works at",
+        "relation_canonical": "works_at",
+        "object": "WorkHub",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "works_at",
+        "object": "WorkHub",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "WorkHub",
+          "relation_phrase": "works at",
+          "question_type": "who"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "works_at",
+          "object": "WorkHub",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Who is employed at Axinix?",
+      "query_understanding": {
+        "entities": [
+          "Axinix"
+        ],
+        "wh_type": "who",
+        "subject": null,
+        "relation_surface": "is employed at",
+        "relation_canonical": "uses",
+        "object": "Axinix",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "uses",
+        "object": "Axinix",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Axinix",
+          "relation_phrase": "employed at",
+          "question_type": "who"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "works_at",
+          "object": "Axinix",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Who is employed at WorkHub?",
+      "query_understanding": {
+        "entities": [
+          "WorkHub"
+        ],
+        "wh_type": "who",
+        "subject": null,
+        "relation_surface": "is employed at",
+        "relation_canonical": "uses",
+        "object": "WorkHub",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "uses",
+        "object": "WorkHub",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "WorkHub",
+          "relation_phrase": "employed at",
+          "question_type": "who"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "works_at",
+          "object": "WorkHub",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Does Arun work at Axinix?",
+      "query_understanding": {
+        "entities": [
+          "Arun",
+          "Axinix"
+        ],
+        "wh_type": null,
+        "subject": "Arun",
+        "relation_surface": "work at",
+        "relation_canonical": "works_at",
+        "object": "Axinix",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Arun",
+        "relation": "works_at",
+        "object": "Axinix",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "work at",
+          "question_type": "does"
+        },
+        "semantic_query": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Does Dhivya work at Axinix?",
+      "query_understanding": {
+        "entities": [
+          "Dhivya",
+          "Axinix"
+        ],
+        "wh_type": null,
+        "subject": "Dhivya",
+        "relation_surface": "work at",
+        "relation_canonical": "works_at",
+        "object": "Axinix",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Dhivya",
+        "relation": "works_at",
+        "object": "Axinix",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Dhivya",
+          "relation_phrase": "work at",
+          "question_type": "does"
+        },
+        "semantic_query": {
+          "subject": "Dhivya",
+          "relation": "works_at",
+          "object": "Axinix",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Does Ravi work at Axinix?",
+      "query_understanding": {
+        "entities": [
+          "Ravi",
+          "Axinix"
+        ],
+        "wh_type": null,
+        "subject": "Ravi",
+        "relation_surface": "work at",
+        "relation_canonical": "works_at",
+        "object": "Axinix",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Ravi",
+        "relation": "works_at",
+        "object": "Axinix",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Ravi",
+          "relation_phrase": "work at",
+          "question_type": "does"
+        },
+        "semantic_query": {
+          "subject": "Ravi",
+          "relation": "works_at",
+          "object": "Axinix",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Does Meena work at Axinix?",
+      "query_understanding": {
+        "entities": [
+          "Meena",
+          "Axinix"
+        ],
+        "wh_type": null,
+        "subject": "Meena",
+        "relation_surface": "work at",
+        "relation_canonical": "works_at",
+        "object": "Axinix",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Meena",
+        "relation": "works_at",
+        "object": "Axinix",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Meena",
+          "relation_phrase": "work at",
+          "question_type": "does"
+        },
+        "semantic_query": {
+          "subject": "Meena",
+          "relation": "works_at",
+          "object": "Axinix",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Does Meena work at WorkHub?",
+      "query_understanding": {
+        "entities": [
+          "Meena",
+          "WorkHub"
+        ],
+        "wh_type": null,
+        "subject": "Meena",
+        "relation_surface": "work at",
+        "relation_canonical": "works_at",
+        "object": "WorkHub",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Meena",
+        "relation": "works_at",
+        "object": "WorkHub",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Meena",
+          "relation_phrase": "work at",
+          "question_type": "does"
+        },
+        "semantic_query": {
+          "subject": "Meena",
+          "relation": "works_at",
+          "object": "WorkHub",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Where is Axinix located?",
+      "query_understanding": {
+        "entities": [
+          "Axinix"
+        ],
+        "wh_type": "where",
+        "subject": "Axinix",
+        "relation_surface": "located",
+        "relation_canonical": "located_in",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Axinix",
+        "relation": "located_in",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Axinix",
+          "relation_phrase": "located",
+          "question_type": "where"
+        },
+        "semantic_query": {
+          "subject": "Axinix",
+          "relation": "located_in",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Where is Chennai located?",
+      "query_understanding": {
+        "entities": [
+          "Chennai"
+        ],
+        "wh_type": "where",
+        "subject": "Chennai",
+        "relation_surface": "located",
+        "relation_canonical": "located_in",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Chennai",
+        "relation": "located_in",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Chennai",
+          "relation_phrase": "located",
+          "question_type": "where"
+        },
+        "semantic_query": {
+          "subject": "Chennai",
+          "relation": "located_in",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Where is Tamil Nadu located?",
+      "query_understanding": {
+        "entities": [
+          "Tamil Nadu"
+        ],
+        "wh_type": "where",
+        "subject": "Tamil Nadu",
+        "relation_surface": "located",
+        "relation_canonical": "located_in",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Tamil Nadu",
+        "relation": "located_in",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Tamil Nadu",
+          "relation_phrase": "located",
+          "question_type": "where"
+        },
+        "semantic_query": {
+          "subject": "Tamil Nadu",
+          "relation": "located_in",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Where is India located?",
+      "query_understanding": {
+        "entities": [
+          "India"
+        ],
+        "wh_type": "where",
+        "subject": "India",
+        "relation_surface": "located",
+        "relation_canonical": "located_in",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "India",
+        "relation": "located_in",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "India",
+          "relation_phrase": "located",
+          "question_type": "where"
+        },
+        "semantic_query": {
+          "subject": "India",
+          "relation": "located_in",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Where is Asia located?",
+      "query_understanding": {
+        "entities": [
+          "Asia"
+        ],
+        "wh_type": "where",
+        "subject": "Asia",
+        "relation_surface": "located",
+        "relation_canonical": "located_in",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Asia",
+        "relation": "located_in",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Asia",
+          "relation_phrase": "located",
+          "question_type": "where"
+        },
+        "semantic_query": {
+          "subject": "Asia",
+          "relation": "located_in",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "What is the location of Axinix?",
+      "query_understanding": {
+        "entities": [
+          "Axinix"
+        ],
+        "wh_type": "what",
+        "subject": null,
+        "relation_surface": "is the location of",
+        "relation_canonical": "uses",
+        "object": "Axinix",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "uses",
+        "object": "Axinix",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Axinix",
+          "relation_phrase": "location",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": "Axinix",
+          "relation": "located_in",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": false,
+        "object_match": false,
+        "answer_slot_match": false,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "ANSWER_SLOT_FAILURE"
+      }
+    },
+    {
+      "input": "In which state is Chennai located?",
+      "query_understanding": {
+        "entities": [
+          "Chennai"
+        ],
+        "wh_type": "which",
+        "subject": "Chennai",
+        "relation_surface": "located",
+        "relation_canonical": "located_in",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Chennai",
+        "relation": "located_in",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Chennai",
+          "relation_phrase": "state located",
+          "question_type": "which"
+        },
+        "semantic_query": {
+          "subject": "Chennai",
+          "relation": "located_in",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "In which country is Tamil Nadu situated?",
+      "query_understanding": {
+        "entities": [
+          "Tamil Nadu"
+        ],
+        "wh_type": "which",
+        "subject": "Tamil Nadu",
+        "relation_surface": "situated",
+        "relation_canonical": "located_on",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Tamil Nadu",
+        "relation": "located_on",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Tamil Nadu",
+          "relation_phrase": "country situated",
+          "question_type": "which"
+        },
+        "semantic_query": {
+          "subject": "Tamil Nadu",
+          "relation": "located_in",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "What is located in Chennai?",
+      "query_understanding": {
+        "entities": [
+          "Chennai"
+        ],
+        "wh_type": "what",
+        "subject": null,
+        "relation_surface": "is located in",
+        "relation_canonical": "located_in",
+        "object": "Chennai",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "located_in",
+        "object": "Chennai",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Chennai",
+          "relation_phrase": "located in",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "located_in",
+          "object": "Chennai",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "What is located in Tamil Nadu?",
+      "query_understanding": {
+        "entities": [
+          "Tamil Nadu"
+        ],
+        "wh_type": "what",
+        "subject": null,
+        "relation_surface": "is located in",
+        "relation_canonical": "located_in",
+        "object": "Tamil Nadu",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "located_in",
+        "object": "Tamil Nadu",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Tamil Nadu",
+          "relation_phrase": "located in",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "located_in",
+          "object": "Tamil Nadu",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "What is located in India?",
+      "query_understanding": {
+        "entities": [
+          "India"
+        ],
+        "wh_type": "what",
+        "subject": null,
+        "relation_surface": "is located in",
+        "relation_canonical": "located_in",
+        "object": "India",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "located_in",
+        "object": "India",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "India",
+          "relation_phrase": "located in",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "located_in",
+          "object": "India",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "What is located in Asia?",
+      "query_understanding": {
+        "entities": [
+          "Asia"
+        ],
+        "wh_type": "what",
+        "subject": null,
+        "relation_surface": "is located in",
+        "relation_canonical": "located_in",
+        "object": "Asia",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "located_in",
+        "object": "Asia",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Asia",
+          "relation_phrase": "located in",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "located_in",
+          "object": "Asia",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Is Axinix located in Chennai?",
+      "query_understanding": {
+        "entities": [
+          "Axinix",
+          "Chennai"
+        ],
+        "wh_type": null,
+        "subject": "Axinix",
+        "relation_surface": "located in",
+        "relation_canonical": "located_in",
+        "object": "Chennai",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Axinix",
+        "relation": "located_in",
+        "object": "Chennai",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Axinix",
+          "relation_phrase": "located in",
+          "question_type": "is"
+        },
+        "semantic_query": {
+          "subject": "Axinix",
+          "relation": "located_in",
+          "object": "Chennai",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Is Chennai located in Tamil Nadu?",
+      "query_understanding": {
+        "entities": [
+          "Chennai",
+          "Tamil Nadu"
+        ],
+        "wh_type": null,
+        "subject": "Chennai",
+        "relation_surface": "located in",
+        "relation_canonical": "located_in",
+        "object": "Tamil Nadu",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Chennai",
+        "relation": "located_in",
+        "object": "Tamil Nadu",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Chennai",
+          "relation_phrase": "located in",
+          "question_type": "is"
+        },
+        "semantic_query": {
+          "subject": "Chennai",
+          "relation": "located_in",
+          "object": "Tamil Nadu",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Is Tamil Nadu located in India?",
+      "query_understanding": {
+        "entities": [
+          "Tamil Nadu",
+          "India"
+        ],
+        "wh_type": null,
+        "subject": "Tamil Nadu",
+        "relation_surface": "located in",
+        "relation_canonical": "located_in",
+        "object": "India",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Tamil Nadu",
+        "relation": "located_in",
+        "object": "India",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Tamil Nadu",
+          "relation_phrase": "located in",
+          "question_type": "is"
+        },
+        "semantic_query": {
+          "subject": "Tamil Nadu",
+          "relation": "located_in",
+          "object": "India",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Is India located in Asia?",
+      "query_understanding": {
+        "entities": [
+          "India",
+          "Asia"
+        ],
+        "wh_type": null,
+        "subject": "India",
+        "relation_surface": "located in",
+        "relation_canonical": "located_in",
+        "object": "Asia",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "India",
+        "relation": "located_in",
+        "object": "Asia",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "India",
+          "relation_phrase": "located in",
+          "question_type": "is"
+        },
+        "semantic_query": {
+          "subject": "India",
+          "relation": "located_in",
+          "object": "Asia",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Is Asia located on Earth?",
+      "query_understanding": {
+        "entities": [
+          "Asia",
+          "Earth"
+        ],
+        "wh_type": null,
+        "subject": "Asia",
+        "relation_surface": "located on",
+        "relation_canonical": "located_on",
+        "object": "Earth",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Asia",
+        "relation": "located_on",
+        "object": "Earth",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Asia",
+          "relation_phrase": "located on",
+          "question_type": "is"
+        },
+        "semantic_query": {
+          "subject": "Asia",
+          "relation": "located_in",
+          "object": "Earth",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Is Axinix located in Tokyo?",
+      "query_understanding": {
+        "entities": [
+          "Axinix",
+          "Tokyo"
+        ],
+        "wh_type": null,
+        "subject": "Axinix",
+        "relation_surface": "located in",
+        "relation_canonical": "located_in",
+        "object": "Tokyo",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Axinix",
+        "relation": "located_in",
+        "object": "Tokyo",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Axinix",
+          "relation_phrase": "located in",
+          "question_type": "is"
+        },
+        "semantic_query": {
+          "subject": "Axinix",
+          "relation": "located_in",
+          "object": "Tokyo",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Who is a colleague of Arun?",
+      "query_understanding": {
+        "entities": [
+          "Arun"
+        ],
+        "wh_type": "who",
+        "subject": null,
+        "relation_surface": "is a colleague of",
+        "relation_canonical": "uses",
+        "object": "Arun",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "uses",
+        "object": "Arun",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "colleague of",
+          "question_type": "who"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "colleague_of",
+          "object": "Arun",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Who is Arun's colleague?",
+      "query_understanding": {
+        "entities": [
+          "Arun",
+          "Arun"
+        ],
+        "wh_type": "who",
+        "subject": "Arun",
+        "relation_surface": "",
+        "relation_canonical": "works_at",
+        "object": "Arun",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Arun",
+        "relation": "works_at",
+        "object": "Arun",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "colleague",
+          "question_type": "who"
+        },
+        "semantic_query": {
+          "subject": "Arun",
+          "relation": "colleague_of",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": false,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": false,
+        "answer_slot_match": false,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "ANSWER_SLOT_FAILURE"
+      }
+    },
+    {
+      "input": "Who is a coworker of Arun?",
+      "query_understanding": {
+        "entities": [
+          "Arun"
+        ],
+        "wh_type": "who",
+        "subject": null,
+        "relation_surface": "is a coworker of",
+        "relation_canonical": "works_at",
+        "object": "Arun",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "works_at",
+        "object": "Arun",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "coworker of",
+          "question_type": "who"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "colleague_of",
+          "object": "Arun",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Is Dhivya a colleague of Arun?",
+      "query_understanding": {
+        "entities": [
+          "Dhivya",
+          "Arun"
+        ],
+        "wh_type": null,
+        "subject": "Dhivya",
+        "relation_surface": "a colleague of",
+        "relation_canonical": "brother_of",
+        "object": "Arun",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Dhivya",
+        "relation": "brother_of",
+        "object": "Arun",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Dhivya",
+          "relation_phrase": "colleague of",
+          "question_type": "is"
+        },
+        "semantic_query": {
+          "subject": "Dhivya",
+          "relation": "colleague_of",
+          "object": "Arun",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Is Meena a colleague of Arun?",
+      "query_understanding": {
+        "entities": [
+          "Meena",
+          "Arun"
+        ],
+        "wh_type": null,
+        "subject": "Meena",
+        "relation_surface": "a colleague of",
+        "relation_canonical": "brother_of",
+        "object": "Arun",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Meena",
+        "relation": "brother_of",
+        "object": "Arun",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Meena",
+          "relation_phrase": "colleague of",
+          "question_type": "is"
+        },
+        "semantic_query": {
+          "subject": "Meena",
+          "relation": "colleague_of",
+          "object": "Arun",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Who manages Arun?",
+      "query_understanding": {
+        "entities": [
+          "Arun"
+        ],
+        "wh_type": "who",
+        "subject": null,
+        "relation_surface": "manages",
+        "relation_canonical": "works_at",
+        "object": "Arun",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "works_at",
+        "object": "Arun",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "manages",
+          "question_type": "who"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "manages",
+          "object": "Arun",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Who is the manager of Arun?",
+      "query_understanding": {
+        "entities": [
+          "Arun"
+        ],
+        "wh_type": "who",
+        "subject": null,
+        "relation_surface": "is the manager of",
+        "relation_canonical": "uses",
+        "object": "Arun",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "uses",
+        "object": "Arun",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "manager of",
+          "question_type": "who"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "manages",
+          "object": "Arun",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "What is Arun's manager?",
+      "query_understanding": {
+        "entities": [
+          "Arun",
+          "Arun"
+        ],
+        "wh_type": "what",
+        "subject": "Arun",
+        "relation_surface": "",
+        "relation_canonical": "works_at",
+        "object": "Arun",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Arun",
+        "relation": "works_at",
+        "object": "Arun",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "manager",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": "Arun",
+          "relation": "manages",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": false,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": false,
+        "answer_slot_match": false,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "ANSWER_SLOT_FAILURE"
+      }
+    },
+    {
+      "input": "Who does Ravi manage?",
+      "query_understanding": {
+        "entities": [
+          "Ravi"
+        ],
+        "wh_type": "who",
+        "subject": "Ravi",
+        "relation_surface": "manage",
+        "relation_canonical": "built_with",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Ravi",
+        "relation": "built_with",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Ravi",
+          "relation_phrase": "manage",
+          "question_type": "who"
+        },
+        "semantic_query": {
+          "subject": "Ravi",
+          "relation": "manages",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Does Ravi manage Arun?",
+      "query_understanding": {
+        "entities": [
+          "Ravi",
+          "Arun"
+        ],
+        "wh_type": null,
+        "subject": "Ravi",
+        "relation_surface": "manage",
+        "relation_canonical": "built_with",
+        "object": "Arun",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Ravi",
+        "relation": "built_with",
+        "object": "Arun",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Ravi",
+          "relation_phrase": "manage",
+          "question_type": "does"
+        },
+        "semantic_query": {
+          "subject": "Ravi",
+          "relation": "manages",
+          "object": "Arun",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Does Arun manage Ravi?",
+      "query_understanding": {
+        "entities": [
+          "Arun",
+          "Ravi"
+        ],
+        "wh_type": null,
+        "subject": "Arun",
+        "relation_surface": "manage",
+        "relation_canonical": "built_with",
+        "object": "Ravi",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Arun",
+        "relation": "built_with",
+        "object": "Ravi",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "manage",
+          "question_type": "does"
+        },
+        "semantic_query": {
+          "subject": "Arun",
+          "relation": "manages",
+          "object": "Ravi",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "What does Axinix use?",
+      "query_understanding": {
+        "entities": [
+          "Axinix"
+        ],
+        "wh_type": "what",
+        "subject": "Axinix",
+        "relation_surface": "use",
+        "relation_canonical": "uses",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Axinix",
+        "relation": "uses",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Axinix",
+          "relation_phrase": "use",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": "Axinix",
+          "relation": "uses",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Which technology does Axinix use?",
+      "query_understanding": {
+        "entities": [
+          "Axinix"
+        ],
+        "wh_type": "which",
+        "subject": "Axinix",
+        "relation_surface": "use",
+        "relation_canonical": "uses",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Axinix",
+        "relation": "uses",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Axinix",
+          "relation_phrase": "technology use",
+          "question_type": "which"
+        },
+        "semantic_query": {
+          "subject": "Axinix",
+          "relation": "uses",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "What programming language does Axinix use?",
+      "query_understanding": {
+        "entities": [
+          "Axinix"
+        ],
+        "wh_type": "what",
+        "subject": "Axinix",
+        "relation_surface": "use",
+        "relation_canonical": "uses",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Axinix",
+        "relation": "uses",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Axinix",
+          "relation_phrase": "programming language use",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": "Axinix",
+          "relation": "uses",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Does Axinix use Python?",
+      "query_understanding": {
+        "entities": [
+          "Axinix",
+          "Python"
+        ],
+        "wh_type": null,
+        "subject": "Axinix",
+        "relation_surface": "use",
+        "relation_canonical": "uses",
+        "object": "Python",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Axinix",
+        "relation": "uses",
+        "object": "Python",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Axinix",
+          "relation_phrase": "use",
+          "question_type": "does"
+        },
+        "semantic_query": {
+          "subject": "Axinix",
+          "relation": "uses",
+          "object": "Python",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Does Axinix use Java?",
+      "query_understanding": {
+        "entities": [
+          "Axinix",
+          "Java"
+        ],
+        "wh_type": null,
+        "subject": "Axinix",
+        "relation_surface": "use",
+        "relation_canonical": "uses",
+        "object": "Java",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Axinix",
+        "relation": "uses",
+        "object": "Java",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Axinix",
+          "relation_phrase": "use",
+          "question_type": "does"
+        },
+        "semantic_query": {
+          "subject": "Axinix",
+          "relation": "uses",
+          "object": "Java",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "What does Python support?",
+      "query_understanding": {
+        "entities": [
+          "Python"
+        ],
+        "wh_type": "what",
+        "subject": "Python",
+        "relation_surface": "support",
+        "relation_canonical": "develops",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Python",
+        "relation": "develops",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Python",
+          "relation_phrase": "support",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": "Python",
+          "relation": "supports",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Which framework does Python support?",
+      "query_understanding": {
+        "entities": [
+          "Python"
+        ],
+        "wh_type": "which",
+        "subject": "Python",
+        "relation_surface": "support",
+        "relation_canonical": "develops",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Python",
+        "relation": "develops",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Python",
+          "relation_phrase": "framework support",
+          "question_type": "which"
+        },
+        "semantic_query": {
+          "subject": "Python",
+          "relation": "supports",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Does Python support Django?",
+      "query_understanding": {
+        "entities": [
+          "Python",
+          "Django"
+        ],
+        "wh_type": null,
+        "subject": "Python",
+        "relation_surface": "support",
+        "relation_canonical": "develops",
+        "object": "Django",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Python",
+        "relation": "develops",
+        "object": "Django",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Python",
+          "relation_phrase": "support",
+          "question_type": "does"
+        },
+        "semantic_query": {
+          "subject": "Python",
+          "relation": "supports",
+          "object": "Django",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Does Python support Rails?",
+      "query_understanding": {
+        "entities": [
+          "Python",
+          "Rails"
+        ],
+        "wh_type": null,
+        "subject": "Python",
+        "relation_surface": "support",
+        "relation_canonical": "develops",
+        "object": "Rails",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Python",
+        "relation": "develops",
+        "object": "Rails",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Python",
+          "relation_phrase": "support",
+          "question_type": "does"
+        },
+        "semantic_query": {
+          "subject": "Python",
+          "relation": "supports",
+          "object": "Rails",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "What orbits Earth?",
+      "query_understanding": {
+        "entities": [
+          "Earth"
+        ],
+        "wh_type": "what",
+        "subject": null,
+        "relation_surface": "orbits",
+        "relation_canonical": "orbits",
+        "object": "Earth",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "orbits",
+        "object": "Earth",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [
+          [
+            "Moon",
+            "orbits",
+            "Earth"
+          ]
+        ],
+        "answer": "Moon"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Earth",
+          "relation_phrase": "orbits",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "orbits",
+          "object": "Earth",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [
+            [
+              "Moon",
+              "orbits",
+              "Earth"
+            ]
+          ],
+          "answer": "Moon"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": true,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "What does Earth orbit?",
+      "query_understanding": {
+        "entities": [
+          "Earth"
+        ],
+        "wh_type": "what",
+        "subject": "Earth",
+        "relation_surface": "orbit",
+        "relation_canonical": "orbits",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Earth",
+        "relation": "orbits",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Earth",
+          "relation_phrase": "orbit",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": "Earth",
+          "relation": "orbits",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "What does Moon orbit?",
+      "query_understanding": {
+        "entities": [
+          "Moon"
+        ],
+        "wh_type": "what",
+        "subject": "Moon",
+        "relation_surface": "orbit",
+        "relation_canonical": "orbits",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Moon",
+        "relation": "orbits",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Moon",
+          "relation_phrase": "orbit",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": "Moon",
+          "relation": "orbits",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Does Moon orbit Earth?",
+      "query_understanding": {
+        "entities": [
+          "Moon",
+          "Earth"
+        ],
+        "wh_type": null,
+        "subject": "Moon",
+        "relation_surface": "orbit",
+        "relation_canonical": "orbits",
+        "object": "Earth",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Moon",
+        "relation": "orbits",
+        "object": "Earth",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Moon",
+          "relation_phrase": "orbit",
+          "question_type": "does"
+        },
+        "semantic_query": {
+          "subject": "Moon",
+          "relation": "orbits",
+          "object": "Earth",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Does Earth orbit Sun?",
+      "query_understanding": {
+        "entities": [
+          "Earth",
+          "Sun"
+        ],
+        "wh_type": null,
+        "subject": "Earth",
+        "relation_surface": "orbit",
+        "relation_canonical": "orbits",
+        "object": "Sun",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Earth",
+        "relation": "orbits",
+        "object": "Sun",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Earth",
+          "relation_phrase": "orbit",
+          "question_type": "does"
+        },
+        "semantic_query": {
+          "subject": "Earth",
+          "relation": "orbits",
+          "object": "Sun",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Does Moon orbit Sun?",
+      "query_understanding": {
+        "entities": [
+          "Moon",
+          "Sun"
+        ],
+        "wh_type": null,
+        "subject": "Moon",
+        "relation_surface": "orbit",
+        "relation_canonical": "orbits",
+        "object": "Sun",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Moon",
+        "relation": "orbits",
+        "object": "Sun",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Moon",
+          "relation_phrase": "orbit",
+          "question_type": "does"
+        },
+        "semantic_query": {
+          "subject": "Moon",
+          "relation": "orbits",
+          "object": "Sun",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "What is Sun?",
+      "query_understanding": {
+        "entities": [
+          "Sun"
+        ],
+        "wh_type": "what",
+        "subject": null,
+        "relation_surface": "is",
+        "relation_canonical": "sister_of",
+        "object": "Sun",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "sister_of",
+        "object": "Sun",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Sun",
+          "relation_phrase": "is",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": "Sun",
+          "relation": "is_a",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": false,
+        "object_match": false,
+        "answer_slot_match": false,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "ANSWER_SLOT_FAILURE"
+      }
+    },
+    {
+      "input": "Is Sun a star?",
+      "query_understanding": {
+        "entities": [
+          "Sun"
+        ],
+        "wh_type": null,
+        "subject": "Sun",
+        "relation_surface": "a star",
+        "relation_canonical": "built_with",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Sun",
+        "relation": "built_with",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Sun",
+          "relation_phrase": "is a",
+          "question_type": "is"
+        },
+        "semantic_query": {
+          "subject": "Sun",
+          "relation": "is_a",
+          "object": "star",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": false,
+        "answer_slot_match": false,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "ANSWER_SLOT_FAILURE"
+      }
+    },
+    {
+      "input": "Is Sun a planet?",
+      "query_understanding": {
+        "entities": [
+          "Sun"
+        ],
+        "wh_type": null,
+        "subject": "Sun",
+        "relation_surface": "a planet",
+        "relation_canonical": "built_with",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Sun",
+        "relation": "built_with",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Sun",
+          "relation_phrase": "is a",
+          "question_type": "is"
+        },
+        "semantic_query": {
+          "subject": "Sun",
+          "relation": "is_a",
+          "object": "planet",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": false,
+        "answer_slot_match": false,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "ANSWER_SLOT_FAILURE"
+      }
+    },
+    {
+      "input": "Who is the brother of Dhivya?",
+      "query_understanding": {
+        "entities": [
+          "Dhivya"
+        ],
+        "wh_type": "who",
+        "subject": null,
+        "relation_surface": "is the brother of",
+        "relation_canonical": "brother_of",
+        "object": "Dhivya",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "brother_of",
+        "object": "Dhivya",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Dhivya",
+          "relation_phrase": "brother of",
+          "question_type": "who"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "brother_of",
+          "object": "Dhivya",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Who is Dhivya's brother?",
+      "query_understanding": {
+        "entities": [
+          "Dhivya",
+          "Dhivya"
+        ],
+        "wh_type": "who",
+        "subject": "Dhivya",
+        "relation_surface": "",
+        "relation_canonical": "works_at",
+        "object": "Dhivya",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Dhivya",
+        "relation": "works_at",
+        "object": "Dhivya",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Dhivya",
+          "relation_phrase": "brother",
+          "question_type": "who"
+        },
+        "semantic_query": {
+          "subject": "Dhivya",
+          "relation": "brother_of",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": false,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": false,
+        "answer_slot_match": false,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "ANSWER_SLOT_FAILURE"
+      }
+    },
+    {
+      "input": "Where does Arun wrk?",
+      "query_understanding": {
+        "entities": [
+          "Arun"
+        ],
+        "wh_type": "where",
+        "subject": "Arun",
+        "relation_surface": "wrk",
+        "relation_canonical": "works_at",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Arun",
+        "relation": "works_at",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "wrk",
+          "question_type": "where"
+        },
+        "semantic_query": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Wher does Arun work?",
+      "query_understanding": {
+        "entities": [
+          "Arun"
+        ],
+        "wh_type": "wher",
+        "subject": "Arun",
+        "relation_surface": "work",
+        "relation_canonical": "works_at",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Arun",
+        "relation": "works_at",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "work",
+          "question_type": "wher"
+        },
+        "semantic_query": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Which compny does Arun work for?",
+      "query_understanding": {
+        "entities": [
+          "Arun"
+        ],
+        "wh_type": "which",
+        "subject": "Arun",
+        "relation_surface": "work for",
+        "relation_canonical": "works_at",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Arun",
+        "relation": "works_at",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "compny work for",
+          "question_type": "which"
+        },
+        "semantic_query": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Where is Axinix locted?",
+      "query_understanding": {
+        "entities": [
+          "Axinix"
+        ],
+        "wh_type": "where",
+        "subject": "Axinix",
+        "relation_surface": "locted",
+        "relation_canonical": "located_in",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Axinix",
+        "relation": "located_in",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Axinix",
+          "relation_phrase": "locted",
+          "question_type": "where"
+        },
+        "semantic_query": {
+          "subject": "Axinix",
+          "relation": "located_in",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Who manges Arun?",
+      "query_understanding": {
+        "entities": [
+          "Arun"
+        ],
+        "wh_type": "who",
+        "subject": null,
+        "relation_surface": "manges",
+        "relation_canonical": "uses",
+        "object": "Arun",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "uses",
+        "object": "Arun",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "manges",
+          "question_type": "who"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "manages",
+          "object": "Arun",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "What orbts Earth?",
+      "query_understanding": {
+        "entities": [
+          "Earth"
+        ],
+        "wh_type": "what",
+        "subject": null,
+        "relation_surface": "orbts",
+        "relation_canonical": "brother_of",
+        "object": "Earth",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "brother_of",
+        "object": "Earth",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Earth",
+          "relation_phrase": "orbts",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "orbits",
+          "object": "Earth",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [
+            [
+              "Moon",
+              "orbits",
+              "Earth"
+            ]
+          ],
+          "answer": "Moon"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Dose Arun work at Axinix?",
+      "query_understanding": {
+        "entities": [
+          "Arun",
+          "Axinix"
+        ],
+        "wh_type": null,
+        "subject": "Arun",
+        "relation_surface": "work at",
+        "relation_canonical": "works_at",
+        "object": "Axinix",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Arun",
+        "relation": "works_at",
+        "object": "Axinix",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "work at",
+          "question_type": "dose"
+        },
+        "semantic_query": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": "Axinix",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Where does Dhivya work at?",
+      "query_understanding": {
+        "entities": [
+          "Dhivya"
+        ],
+        "wh_type": "where",
+        "subject": "Dhivya",
+        "relation_surface": "work at",
+        "relation_canonical": "works_at",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Dhivya",
+        "relation": "works_at",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Dhivya",
+          "relation_phrase": "work at",
+          "question_type": "where"
+        },
+        "semantic_query": {
+          "subject": "Dhivya",
+          "relation": "works_at",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "What company is Dhivya employed by?",
+      "query_understanding": {
+        "entities": [
+          "Dhivya"
+        ],
+        "wh_type": "what",
+        "subject": "Dhivya",
+        "relation_surface": "employed by",
+        "relation_canonical": "located_in",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Dhivya",
+        "relation": "located_in",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Dhivya",
+          "relation_phrase": "company employed by",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": "Dhivya",
+          "relation": "works_at",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "What company is Arun employed by?",
+      "query_understanding": {
+        "entities": [
+          "Arun"
+        ],
+        "wh_type": "what",
+        "subject": "Arun",
+        "relation_surface": "employed by",
+        "relation_canonical": "located_in",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Arun",
+        "relation": "located_in",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "company employed by",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": "Arun",
+          "relation": "works_at",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Who works with Arun?",
+      "query_understanding": {
+        "entities": [
+          "Arun"
+        ],
+        "wh_type": "who",
+        "subject": null,
+        "relation_surface": "works with",
+        "relation_canonical": "works_at",
+        "object": "Arun",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "works_at",
+        "object": "Arun",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "works with",
+          "question_type": "who"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "colleague_of",
+          "object": "Arun",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Who works with Dhivya?",
+      "query_understanding": {
+        "entities": [
+          "Dhivya"
+        ],
+        "wh_type": "who",
+        "subject": null,
+        "relation_surface": "works with",
+        "relation_canonical": "works_at",
+        "object": "Dhivya",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "works_at",
+        "object": "Dhivya",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Dhivya",
+          "relation_phrase": "works with",
+          "question_type": "who"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "colleague_of",
+          "object": "Dhivya",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Who is the supervisor of Arun?",
+      "query_understanding": {
+        "entities": [
+          "Arun"
+        ],
+        "wh_type": "who",
+        "subject": null,
+        "relation_surface": "is the supervisor of",
+        "relation_canonical": "uses",
+        "object": "Arun",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "uses",
+        "object": "Arun",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "supervisor of",
+          "question_type": "who"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "manages",
+          "object": "Arun",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Who leads Arun?",
+      "query_understanding": {
+        "entities": [
+          "Arun"
+        ],
+        "wh_type": "who",
+        "subject": null,
+        "relation_surface": "leads",
+        "relation_canonical": "develops",
+        "object": "Arun",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "develops",
+        "object": "Arun",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "leads",
+          "question_type": "who"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "manages",
+          "object": "Arun",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Where is WorkHub located?",
+      "query_understanding": {
+        "entities": [
+          "WorkHub"
+        ],
+        "wh_type": "where",
+        "subject": "WorkHub",
+        "relation_surface": "located",
+        "relation_canonical": "located_in",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "WorkHub",
+        "relation": "located_in",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "WorkHub",
+          "relation_phrase": "located",
+          "question_type": "where"
+        },
+        "semantic_query": {
+          "subject": "WorkHub",
+          "relation": "located_in",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Is Ravi the manager of Arun?",
+      "query_understanding": {
+        "entities": [
+          "Ravi",
+          "Arun"
+        ],
+        "wh_type": null,
+        "subject": "Ravi",
+        "relation_surface": "the manager of",
+        "relation_canonical": "father_of",
+        "object": "Arun",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Ravi",
+        "relation": "father_of",
+        "object": "Arun",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Ravi",
+          "relation_phrase": "manager of",
+          "question_type": "is"
+        },
+        "semantic_query": {
+          "subject": "Ravi",
+          "relation": "manages",
+          "object": "Arun",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Is Moon a satellite of Earth?",
+      "query_understanding": {
+        "entities": [
+          "Moon",
+          "Earth"
+        ],
+        "wh_type": null,
+        "subject": "Moon",
+        "relation_surface": "a satellite of",
+        "relation_canonical": "built_with",
+        "object": "Earth",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Moon",
+        "relation": "built_with",
+        "object": "Earth",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Moon",
+          "relation_phrase": "satellite of",
+          "question_type": "is"
+        },
+        "semantic_query": {
+          "subject": "Moon",
+          "relation": "orbits",
+          "object": "Earth",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "What orbits around Sun?",
+      "query_understanding": {
+        "entities": [
+          "Sun"
+        ],
+        "wh_type": "what",
+        "subject": null,
+        "relation_surface": "orbits around",
+        "relation_canonical": "orbits",
+        "object": "Sun",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "orbits",
+        "object": "Sun",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [
+          [
+            "Earth",
+            "orbits",
+            "Sun"
+          ]
+        ],
+        "answer": "Earth"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Sun",
+          "relation_phrase": "orbits around",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "orbits",
+          "object": "Sun",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [
+            [
+              "Earth",
+              "orbits",
+              "Sun"
+            ]
+          ],
+          "answer": "Earth"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": true,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "What circles around Earth?",
+      "query_understanding": {
+        "entities": [
+          "Earth"
+        ],
+        "wh_type": "what",
+        "subject": null,
+        "relation_surface": "circles around",
+        "relation_canonical": "orbits",
+        "object": "Earth",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "orbits",
+        "object": "Earth",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [
+          [
+            "Moon",
+            "orbits",
+            "Earth"
+          ]
+        ],
+        "answer": "Moon"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Earth",
+          "relation_phrase": "circles around",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "orbits",
+          "object": "Earth",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [
+            [
+              "Moon",
+              "orbits",
+              "Earth"
+            ]
+          ],
+          "answer": "Moon"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": true,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "What revolves around Sun?",
+      "query_understanding": {
+        "entities": [
+          "Sun"
+        ],
+        "wh_type": "what",
+        "subject": null,
+        "relation_surface": "revolves around",
+        "relation_canonical": "develops",
+        "object": "Sun",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "develops",
+        "object": "Sun",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Sun",
+          "relation_phrase": "revolves around",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "orbits",
+          "object": "Sun",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [
+            [
+              "Earth",
+              "orbits",
+              "Sun"
+            ]
+          ],
+          "answer": "Earth"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Does Sun orbit Earth?",
+      "query_understanding": {
+        "entities": [
+          "Sun",
+          "Earth"
+        ],
+        "wh_type": null,
+        "subject": "Sun",
+        "relation_surface": "orbit",
+        "relation_canonical": "orbits",
+        "object": "Earth",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Sun",
+        "relation": "orbits",
+        "object": "Earth",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Sun",
+          "relation_phrase": "orbit",
+          "question_type": "does"
+        },
+        "semantic_query": {
+          "subject": "Sun",
+          "relation": "orbits",
+          "object": "Earth",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Does Earth orbit Moon?",
+      "query_understanding": {
+        "entities": [
+          "Earth",
+          "Moon"
+        ],
+        "wh_type": null,
+        "subject": "Earth",
+        "relation_surface": "orbit",
+        "relation_canonical": "orbits",
+        "object": "Moon",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Earth",
+        "relation": "orbits",
+        "object": "Moon",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Earth",
+          "relation_phrase": "orbit",
+          "question_type": "does"
+        },
+        "semantic_query": {
+          "subject": "Earth",
+          "relation": "orbits",
+          "object": "Moon",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Where does Ravi work at?",
+      "query_understanding": {
+        "entities": [
+          "Ravi"
+        ],
+        "wh_type": "where",
+        "subject": "Ravi",
+        "relation_surface": "work at",
+        "relation_canonical": "works_at",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Ravi",
+        "relation": "works_at",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Ravi",
+          "relation_phrase": "work at",
+          "question_type": "where"
+        },
+        "semantic_query": {
+          "subject": "Ravi",
+          "relation": "works_at",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Where does Meena work at?",
+      "query_understanding": {
+        "entities": [
+          "Meena"
+        ],
+        "wh_type": "where",
+        "subject": "Meena",
+        "relation_surface": "work at",
+        "relation_canonical": "works_at",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Meena",
+        "relation": "works_at",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Meena",
+          "relation_phrase": "work at",
+          "question_type": "where"
+        },
+        "semantic_query": {
+          "subject": "Meena",
+          "relation": "works_at",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Which state is Chennai located in?",
+      "query_understanding": {
+        "entities": [
+          "Chennai"
+        ],
+        "wh_type": "which",
+        "subject": "Chennai",
+        "relation_surface": "located in",
+        "relation_canonical": "located_in",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Chennai",
+        "relation": "located_in",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Chennai",
+          "relation_phrase": "state located in",
+          "question_type": "which"
+        },
+        "semantic_query": {
+          "subject": "Chennai",
+          "relation": "located_in",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Which country is Tamil Nadu located in?",
+      "query_understanding": {
+        "entities": [
+          "Tamil Nadu"
+        ],
+        "wh_type": "which",
+        "subject": "Tamil Nadu",
+        "relation_surface": "located in",
+        "relation_canonical": "located_in",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Tamil Nadu",
+        "relation": "located_in",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Tamil Nadu",
+          "relation_phrase": "country located in",
+          "question_type": "which"
+        },
+        "semantic_query": {
+          "subject": "Tamil Nadu",
+          "relation": "located_in",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "Which continent is India located in?",
+      "query_understanding": {
+        "entities": [
+          "India"
+        ],
+        "wh_type": "which",
+        "subject": "India",
+        "relation_surface": "located in",
+        "relation_canonical": "located_in",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "India",
+        "relation": "located_in",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "India",
+          "relation_phrase": "continent located in",
+          "question_type": "which"
+        },
+        "semantic_query": {
+          "subject": "India",
+          "relation": "located_in",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": true,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": true,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": null
+      }
+    },
+    {
+      "input": "What planet is Asia located on?",
+      "query_understanding": {
+        "entities": [
+          "Asia"
+        ],
+        "wh_type": "what",
+        "subject": "Asia",
+        "relation_surface": "located on",
+        "relation_canonical": "located_on",
+        "object": null,
+        "answer_slot": "object"
+      },
+      "semantic_query": {
+        "subject": "Asia",
+        "relation": "located_on",
+        "object": "?",
+        "answer_slot": "object"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Asia",
+          "relation_phrase": "planet located on",
+          "question_type": "what"
+        },
+        "semantic_query": {
+          "subject": "Asia",
+          "relation": "located_in",
+          "object": null,
+          "answer_slot": "object"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Is Chennai a city in Tamil Nadu?",
+      "query_understanding": {
+        "entities": [
+          "Chennai",
+          "Tamil Nadu"
+        ],
+        "wh_type": null,
+        "subject": "Chennai",
+        "relation_surface": "a city in",
+        "relation_canonical": "in",
+        "object": "Tamil Nadu",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Chennai",
+        "relation": "in",
+        "object": "Tamil Nadu",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Chennai",
+          "relation_phrase": "city in",
+          "question_type": "is"
+        },
+        "semantic_query": {
+          "subject": "Chennai",
+          "relation": "located_in",
+          "object": "Tamil Nadu",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Is Tamil Nadu a state in India?",
+      "query_understanding": {
+        "entities": [
+          "Tamil Nadu",
+          "India"
+        ],
+        "wh_type": null,
+        "subject": "Tamil Nadu",
+        "relation_surface": "a state in",
+        "relation_canonical": "in",
+        "object": "India",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "Tamil Nadu",
+        "relation": "in",
+        "object": "India",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Tamil Nadu",
+          "relation_phrase": "state in",
+          "question_type": "is"
+        },
+        "semantic_query": {
+          "subject": "Tamil Nadu",
+          "relation": "located_in",
+          "object": "India",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Is India a country in Asia?",
+      "query_understanding": {
+        "entities": [
+          "India",
+          "Asia"
+        ],
+        "wh_type": null,
+        "subject": "India",
+        "relation_surface": "a country in",
+        "relation_canonical": "in",
+        "object": "Asia",
+        "answer_slot": "boolean"
+      },
+      "semantic_query": {
+        "subject": "India",
+        "relation": "in",
+        "object": "Asia",
+        "answer_slot": "boolean"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": "No"
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "India",
+          "relation_phrase": "country in",
+          "question_type": "is"
+        },
+        "semantic_query": {
+          "subject": "India",
+          "relation": "located_in",
+          "object": "Asia",
+          "answer_slot": "boolean"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": "No"
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": true,
+        "failure_category": "RELATION_FAILURE"
+      }
+    },
+    {
+      "input": "Who directs Arun?",
+      "query_understanding": {
+        "entities": [
+          "Arun"
+        ],
+        "wh_type": "who",
+        "subject": null,
+        "relation_surface": "directs",
+        "relation_canonical": "develops",
+        "object": "Arun",
+        "answer_slot": "subject"
+      },
+      "semantic_query": {
+        "subject": "?",
+        "relation": "develops",
+        "object": "Arun",
+        "answer_slot": "subject"
+      },
+      "reasoning": {
+        "path": [],
+        "answer": null
+      },
+      "expected": {
+        "surface_form": {
+          "entity": "Arun",
+          "relation_phrase": "directs",
+          "question_type": "who"
+        },
+        "semantic_query": {
+          "subject": null,
+          "relation": "manages",
+          "object": "Arun",
+          "answer_slot": "subject"
+        },
+        "reasoning": {
+          "path": [],
+          "answer": null
+        }
+      },
+      "evaluation": {
+        "entity_match": true,
+        "qtype_match": true,
+        "relation_phrase_match": true,
+        "canonical_relation_match": false,
+        "subject_match": true,
+        "object_match": true,
+        "answer_slot_match": true,
+        "semantic_query_match": false,
+        "graph_path_match": false,
+        "final_answer_match": false,
+        "failure_category": "RELATION_FAILURE"
+      }
+    }
+  ]
+}

@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR.I.S — Conversational Intelligence & Coreference Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #0a0e17;
+            --bg-surface: #111827;
+            --bg-card: rgba(17, 24, 39, 0.85);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-highlight: rgba(99, 102, 241, 0.35);
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.25);
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-purple: #a855f7;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-dim: #6b7280;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Top Header */
+        header {
+            background: rgba(17, 24, 39, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-logo {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--accent-cyan));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: linear-gradient(to right, #fff, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-subtitle {
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-reset {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-reset:hover {
+            background: rgba(239, 68, 68, 0.25);
+        }
+
+        /* Main Container */
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            flex: 1;
+            height: calc(100vh - 73px);
+            overflow: hidden;
+        }
+
+        @media (max-width: 960px) {
+            .container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+        }
+
+        /* Chat Panel */
+        .chat-panel {
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border);
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(99, 102, 241, 0.04), transparent 60%);
+        }
+
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .message {
+            display: flex;
+            gap: 1rem;
+            max-width: 85%;
+            animation: fadeIn 0.25s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .avatar.agent {
+            background: linear-gradient(135deg, var(--primary), var(--accent-purple));
+            color: #fff;
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .avatar.user {
+            background: #374151;
+            color: #e5e7eb;
+        }
+
+        .bubble {
+            padding: 0.9rem 1.2rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .message.agent .bubble {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-highlight);
+            color: var(--text-main);
+            border-top-left-radius: 2px;
+        }
+
+        .message.user .bubble {
+            background: linear-gradient(135deg, #4f46e5, #4338ca);
+            color: #fff;
+            border-top-right-radius: 2px;
+        }
+
+        .bubble-meta {
+            margin-top: 0.4rem;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-known { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-stored { background: rgba(6, 182, 212, 0.2); color: #06b6d4; border: 1px solid rgba(6, 182, 212, 0.3); }
+        .badge-unsupported { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+
+        /* Quick Suggestions */
+        .suggestions {
+            padding: 0.6rem 2rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(17, 24, 39, 0.4);
+        }
+
+        .suggestion-pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.35rem 0.8rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .suggestion-pill:hover {
+            background: rgba(99, 102, 241, 0.15);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        /* Input Bar */
+        .input-bar {
+            padding: 1.25rem 2rem;
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: rgba(10, 14, 23, 0.7);
+            border: 1px solid var(--border);
+            padding: 0.85rem 1.2rem;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-glow);
+        }
+
+        .btn-send {
+            background: linear-gradient(135deg, var(--primary), #4f46e5);
+            color: #fff;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        .btn-send:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 18px var(--primary-glow);
+        }
+
+        /* Sidebar Cognitive Inspector */
+        .sidebar {
+            background: var(--bg-surface);
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .sidebar-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .card-header {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .stat-box {
+            background: rgba(0, 0, 0, 0.25);
+            padding: 0.6rem;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-top: 0.2rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .salience-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .salience-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.82rem;
+            border-left: 3px solid var(--accent-purple);
+        }
+
+        .salience-score {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .coref-box {
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px dashed rgba(99, 102, 241, 0.3);
+            border-radius: 6px;
+            padding: 0.6rem 0.8rem;
+            font-size: 0.8rem;
+            color: #e0e7ff;
+            line-height: 1.4;
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">
+            <div class="brand-logo">A</div>
+            <div>
+                <div class="brand-title">AR.I.S Conversational Agent</div>
+                <div class="brand-subtitle">Phase 1: Multi-Turn Context & Coreference</div>
+            </div>
+        </div>
+        <div class="header-actions">
+            <a href="/visualizer/" class="nav-link">Cognitive Visualizer</a>
+            <a href="/training-lab/" class="nav-link">Training Lab</a>
+            <button class="btn-reset" onclick="resetSession()">Reset Context</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Chat Interaction Stream -->
+        <div class="chat-panel">
+            <div class="messages-container" id="messagesContainer">
+                <div class="message agent">
+                    <div class="avatar agent">AR</div>
+                    <div>
+                        <div class="bubble">
+                            Greetings. I am AR.I.S. My multi-turn conversational working memory and dynamic coreference grounding are active. State a fact or ask a question.
+                        </div>
+                        <div class="bubble-meta">
+                            <span class="badge badge-known">READY</span>
+                            <span>Turn 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Suggestions -->
+            <div class="suggestions">
+                <span class="suggestion-pill" onclick="sendSuggestion('My name is Alex.')">"My name is Alex."</span>
+                <span class="suggestion-pill" onclick="sendSuggestion('I founded NovaTech.')">"I founded NovaTech."</span>
+                <span class="suggestion-pill" onclick="sendSuggestion('Who am I?')">"Who am I?"</span>
+                <span class="suggestion-pill" onclick="sendSuggestion('What is my company?')">"What is my company?"</span>
+                <span class="suggestion-pill" onclick="sendSuggestion('It is located in Berlin.')">"It is located in Berlin."</span>
+                <span class="suggestion-pill" onclick="sendSuggestion('Where is NovaTech located?')">"Where is NovaTech located?"</span>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-bar">
+                <input type="text" id="userInput" class="chat-input" placeholder="Type a message (e.g. 'My name is Alex. It is located in Berlin.')..." onkeydown="handleKeyDown(event)">
+                <button class="btn-send" id="sendBtn" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+
+        <!-- Sidebar Cognitive Inspector -->
+        <div class="sidebar">
+            <div class="sidebar-title">
+                <span>Cognitive State Inspector</span>
+            </div>
+
+            <!-- Session Stats -->
+            <div class="card">
+                <div class="card-header">
+                    <span>DIALOGUE CONTEXT</span>
+                    <span id="sessionDisplay" style="font-family: monospace;">---</span>
+                </div>
+                <div class="stat-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Turns</div>
+                        <div class="stat-value" id="turnCount">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">User Identity</div>
+                        <div class="stat-value" id="userIdentity">Unknown</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resolved Coreferences in Last Turn -->
+            <div class="card">
+                <div class="card-header">
+                    <span>LAST TURN COREFERENCE</span>
+                </div>
+                <div id="corefDisplay" class="coref-box">
+                    No active coreferences resolved yet.
+                </div>
+            </div>
+
+            <!-- Dynamic Entity Salience Ranking -->
+            <div class="card">
+                <div class="card-header">
+                    <span>ACTIVE ENTITY SALIENCE</span>
+                </div>
+                <div class="salience-list" id="salienceList">
+                    <div style="font-size: 0.8rem; color: var(--text-dim); text-align: center; padding: 0.5rem;">
+                        No entities tracked in working memory.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let sessionId = localStorage.getItem('aris_session_id') || ('sess_' + Math.random().toString(36).substring(2, 10));
+        localStorage.setItem('aris_session_id', sessionId);
+        document.getElementById('sessionDisplay').textContent = sessionId.substring(0, 10) + '...';
+
+        function handleKeyDown(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendSuggestion(text) {
+            document.getElementById('userInput').value = text;
+            sendMessage();
+        }
+
+        const API_BASE = (window.location.protocol === 'file:' || !window.location.host) ? 'http://127.0.0.1:8000' : '';
+
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            input.value = '';
+            appendMessage('user', message, null, null);
+
+            try {
+                const res = await fetch(`${API_BASE}/api/chat/`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        session_id: sessionId,
+                        message: message
+                    })
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    appendMessage('agent', data.response, data.epistemic_state, data.turn_index);
+                    updateInspector(data);
+                } else {
+                    appendMessage('agent', 'Error: ' + (data.error || 'Server error'), 'ERROR', null);
+                }
+            } catch (err) {
+                appendMessage('agent', 'Connection error: ' + err.message, 'ERROR', null);
+            }
+        }
+
+        function appendMessage(role, text, epistemicState, turnIndex) {
+            const container = document.getElementById('messagesContainer');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message ' + role;
+
+            const avatarDiv = document.createElement('div');
+            avatarDiv.className = 'avatar ' + role;
+            avatarDiv.textContent = role === 'user' ? 'U' : 'AR';
+
+            const bodyDiv = document.createElement('div');
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            bubble.textContent = text;
+            bodyDiv.appendChild(bubble);
+
+            if (epistemicState) {
+                const meta = document.createElement('div');
+                meta.className = 'bubble-meta';
+
+                let badgeClass = 'badge-known';
+                if (epistemicState === 'STORED') badgeClass = 'badge-stored';
+                if (epistemicState === 'UNSUPPORTED') badgeClass = 'badge-unsupported';
+
+                meta.innerHTML = `<span class="badge ${badgeClass}">${epistemicState}</span><span>Turn ${turnIndex || ''}</span>`;
+                bodyDiv.appendChild(meta);
+            }
+
+            msgDiv.appendChild(avatarDiv);
+            msgDiv.appendChild(bodyDiv);
+            container.appendChild(msgDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function updateInspector(data) {
+            if (data.turn_index) {
+                document.getElementById('turnCount').textContent = data.turn_index;
+            }
+
+            // Coreference Display
+            const corefDiv = document.getElementById('corefDisplay');
+            if (data.resolved_coreferences && data.resolved_coreferences.length > 0) {
+                corefDiv.innerHTML = data.resolved_coreferences.map(c => 
+                    `<div><strong>${c.referent}</strong> &rarr; <span style="color: #34d399;">${c.resolved_entity}</span> <span style="color: #818cf8; font-size: 0.7rem;">(${c.resolution_type})</span></div>`
+                ).join('');
+            } else {
+                corefDiv.innerHTML = `<div>Resolved Text: <em>"${data.resolved_utterance}"</em></div>`;
+            }
+
+            // Entity Salience
+            const salienceList = document.getElementById('salienceList');
+            if (data.active_salience_ranking && data.active_salience_ranking.length > 0) {
+                salienceList.innerHTML = data.active_salience_ranking.map(item => `
+                    <div class="salience-item">
+                        <span>${item.entity}</span>
+                        <span class="salience-score">${item.salience_score.toFixed(2)}</span>
+                    </div>
+                `).join('');
+
+                // Check for user name
+                const userEnt = data.active_salience_ranking.find(s => s.speaker === 'USER');
+                if (userEnt) {
+                    document.getElementById('userIdentity').textContent = userEnt.entity;
+                }
+            }
+        }
+
+        async function resetSession() {
+            try {
+                await fetch(`${API_BASE}/api/chat/sessions/${sessionId}/`, { method: 'DELETE' });
+            } catch (e) {}
+
+            sessionId = 'sess_' + Math.random().toString(36).substring(2, 10);
+            localStorage.setItem('aris_session_id', sessionId);
+            document.getElementById('sessionDisplay').textContent = sessionId.substring(0, 10) + '...';
+            document.getElementById('messagesContainer').innerHTML = `
+                <div class="message agent">
+                    <div class="avatar agent">AR</div>
+                    <div>
+                        <div class="bubble">Context reset. A new session has started.</div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('turnCount').textContent = '0';
+            document.getElementById('userIdentity').textContent = 'Unknown';
+            document.getElementById('corefDisplay').textContent = 'No active coreferences resolved yet.';
+            document.getElementById('salienceList').innerHTML = '<div style="font-size: 0.8rem; color: var(--text-dim); text-align: center; padding: 0.5rem;">No entities tracked in working memory.</div>';
+        }
+    </script>
+</body>
+</html>

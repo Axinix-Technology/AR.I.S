@@ -1,0 +1,606 @@
+{
+  "name": "ARIS-Structural-Tensor-Generalization",
+  "version": "1.0",
+  "source": "ARIS_CAPABILITY_AND_COGNITIVE_STRUCTURE.md",
+  "design_rule": "Raw language is sensory input; supervision is structural/numeric rather than English semantic labels.",
+  "architectural_basis": {
+    "token_representation": "sequence index, raw token, type, character position",
+    "syntactic_frame": "speech_act, subject, predicate, object, answer_slot",
+    "relation": "continuous relation representation + graph direction",
+    "epistemic": "numeric state index",
+    "affordance": "goal/capability compatibility vector",
+    "slot_binding": "candidate-to-slot alignment",
+    "planning": "dependency graph + variable propagation"
+  },
+  "vocabularies": {
+    "token_type": {
+      "word": 0,
+      "number": 1,
+      "path": 2,
+      "punct": 3
+    },
+    "speech_act": {
+      "PHATIC": 0,
+      "DECLARATIVE": 1,
+      "INTERROGATIVE": 2,
+      "IMPERATIVE": 3
+    },
+    "role": {
+      "subject": 0,
+      "predicate": 1,
+      "object": 2,
+      "answer_slot": 3
+    },
+    "direction": {
+      "forward": 0,
+      "reverse": 1
+    },
+    "epistemic": {
+      "KNOWN": 0,
+      "DERIVABLE": 1,
+      "ACQUIRABLE": 2,
+      "UNSUPPORTED": 3,
+      "AMBIGUOUS": 4
+    }
+  },
+  "records": [
+    {
+      "id": "g0_001",
+      "split": "train",
+      "generalization": "G0",
+      "raw": "2015 - 1931",
+      "tokens": [
+        {
+          "type": 1,
+          "position": 0
+        },
+        {
+          "type": 1,
+          "position": 5
+        },
+        {
+          "type": 1,
+          "position": 10
+        }
+      ],
+      "frame": {
+        "speech_act": 1,
+        "subject": -1,
+        "predicate": 1,
+        "object": -1,
+        "answer_slot": 3
+      },
+      "goal_vector_seed": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "epistemic": 1,
+      "affordance_relation": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "slot_schema": [
+        [
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0
+        ]
+      ],
+      "slot_alignment": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "operation_type": 2,
+      "negative_mask": [
+        0
+      ]
+    },
+    {
+      "id": "g0_002",
+      "split": "train",
+      "generalization": "G0",
+      "raw": "2*x + 4 = 10",
+      "tokens": [
+        {
+          "type": 1,
+          "position": 0
+        },
+        {
+          "type": 3,
+          "position": 1
+        },
+        {
+          "type": 1,
+          "position": 2
+        },
+        {
+          "type": 1,
+          "position": 4
+        },
+        {
+          "type": 3,
+          "position": 6
+        },
+        {
+          "type": 1,
+          "position": 8
+        }
+      ],
+      "frame": {
+        "speech_act": 1,
+        "subject": -1,
+        "predicate": 1,
+        "object": -1,
+        "answer_slot": 3
+      },
+      "goal_vector_seed": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "epistemic": 1,
+      "affordance_relation": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "slot_schema": [
+        [
+          1,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          0
+        ]
+      ],
+      "slot_alignment": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "operation_type": 2,
+      "negative_mask": [
+        0
+      ]
+    },
+    {
+      "id": "g1_001",
+      "split": "train",
+      "generalization": "G1",
+      "raw": "Kalam was born in Rameswaram",
+      "tokens": [
+        {
+          "type": 0,
+          "position": 0
+        },
+        {
+          "type": 0,
+          "position": 6
+        },
+        {
+          "type": 0,
+          "position": 11
+        },
+        {
+          "type": 0,
+          "position": 16
+        }
+      ],
+      "frame": {
+        "speech_act": 1,
+        "subject": 0,
+        "predicate": 1,
+        "object": 2,
+        "answer_slot": -1
+      },
+      "relation_vector_target": [
+        0.0,
+        1.0
+      ],
+      "edge": {
+        "direction": 0,
+        "confidence": 1.0
+      },
+      "epistemic": 0,
+      "operation_type": 0
+    },
+    {
+      "id": "g1_002",
+      "split": "train",
+      "generalization": "G1",
+      "raw": "X was founded by Y",
+      "tokens": [
+        {
+          "type": 0,
+          "position": 0
+        },
+        {
+          "type": 0,
+          "position": 2
+        },
+        {
+          "type": 0,
+          "position": 6
+        },
+        {
+          "type": 0,
+          "position": 14
+        },
+        {
+          "type": 0,
+          "position": 17
+        }
+      ],
+      "frame": {
+        "speech_act": 1,
+        "subject": 0,
+        "predicate": 2,
+        "object": 3,
+        "answer_slot": 0
+      },
+      "relation_vector_target": [
+        0.0,
+        1.0
+      ],
+      "edge": {
+        "direction": 1,
+        "confidence": 1.0
+      },
+      "epistemic": 0,
+      "operation_type": 1
+    },
+    {
+      "id": "g2_001",
+      "split": "train",
+      "generalization": "G2",
+      "raw": "Inspect E:\\Loigmax\\tracker-v2",
+      "tokens": [
+        {
+          "type": 0,
+          "position": 0
+        },
+        {
+          "type": 2,
+          "position": 8
+        }
+      ],
+      "frame": {
+        "speech_act": 3,
+        "subject": -1,
+        "predicate": 0,
+        "object": 1,
+        "answer_slot": 3
+      },
+      "goal_vector_seed": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "parameter_slots": [
+        {
+          "slot_index": 0,
+          "slot_type": 0
+        },
+        {
+          "slot_index": 1,
+          "slot_type": 2
+        }
+      ],
+      "slot_alignment": [
+        [
+          0,
+          1
+        ]
+      ],
+      "epistemic": 2,
+      "operation_type": 2
+    },
+    {
+      "id": "g2_002",
+      "split": "train",
+      "generalization": "G2",
+      "raw": "Find information about Universal Dependencies",
+      "tokens": [
+        {
+          "type": 0,
+          "position": 0
+        },
+        {
+          "type": 0,
+          "position": 5
+        },
+        {
+          "type": 0,
+          "position": 17
+        },
+        {
+          "type": 0,
+          "position": 24
+        }
+      ],
+      "frame": {
+        "speech_act": 3,
+        "subject": -1,
+        "predicate": 0,
+        "object": 2,
+        "answer_slot": 3
+      },
+      "goal_vector_seed": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "parameter_slots": [
+        {
+          "slot_index": 0,
+          "slot_type": 0
+        }
+      ],
+      "slot_alignment": [
+        [
+          0
+        ]
+      ],
+      "epistemic": 2,
+      "operation_type": 2
+    },
+    {
+      "id": "g3_001",
+      "split": "train",
+      "generalization": "G3",
+      "raw": "Check stored fact for entity",
+      "tokens": [
+        {
+          "type": 0,
+          "position": 0
+        },
+        {
+          "type": 0,
+          "position": 6
+        },
+        {
+          "type": 0,
+          "position": 13
+        },
+        {
+          "type": 0,
+          "position": 17
+        }
+      ],
+      "frame": {
+        "speech_act": 3,
+        "subject": -1,
+        "predicate": 0,
+        "object": 3,
+        "answer_slot": 3
+      },
+      "goal_vector_seed": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "epistemic": 0,
+      "parameter_slots": [
+        {
+          "slot_index": 0,
+          "slot_type": 0
+        }
+      ],
+      "slot_alignment": [
+        [
+          0
+        ]
+      ],
+      "operation_type": 2
+    },
+    {
+      "id": "g3_002",
+      "split": "train",
+      "generalization": "G3",
+      "raw": "Trace a connected relation",
+      "tokens": [
+        {
+          "type": 0,
+          "position": 0
+        },
+        {
+          "type": 0,
+          "position": 6
+        },
+        {
+          "type": 0,
+          "position": 8
+        },
+        {
+          "type": 0,
+          "position": 19
+        }
+      ],
+      "frame": {
+        "speech_act": 3,
+        "subject": -1,
+        "predicate": 0,
+        "object": 3,
+        "answer_slot": 3
+      },
+      "goal_vector_seed": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "parameter_slots": [
+        {
+          "slot_index": 0,
+          "slot_type": 0
+        }
+      ],
+      "slot_alignment": [
+        [
+          0
+        ]
+      ],
+      "epistemic": 1,
+      "operation_type": 2
+    },
+    {
+      "id": "g5_001",
+      "split": "test",
+      "generalization": "G5",
+      "raw": "Acquire a fact and then calculate from it",
+      "tokens": [
+        {
+          "type": 0,
+          "position": 0
+        },
+        {
+          "type": 0,
+          "position": 8
+        },
+        {
+          "type": 0,
+          "position": 10
+        },
+        {
+          "type": 0,
+          "position": 15
+        },
+        {
+          "type": 0,
+          "position": 19
+        },
+        {
+          "type": 0,
+          "position": 28
+        }
+      ],
+      "dependency_graph": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "subgoals": [
+        {
+          "index": 0,
+          "type": 0,
+          "depends": [],
+          "output": 0
+        },
+        {
+          "index": 1,
+          "type": 1,
+          "depends": [
+            0
+          ],
+          "input_from": 0
+        }
+      ],
+      "composition_target": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "g6_001",
+      "split": "test",
+      "generalization": "G6",
+      "raw": "Inspect a local target and verify the observation",
+      "tokens": [
+        {
+          "type": 0,
+          "position": 0
+        },
+        {
+          "type": 0,
+          "position": 8
+        },
+        {
+          "type": 0,
+          "position": 10
+        },
+        {
+          "type": 0,
+          "position": 16
+        },
+        {
+          "type": 0,
+          "position": 20
+        },
+        {
+          "type": 0,
+          "position": 28
+        }
+      ],
+      "dependency_graph": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "subgoals": [
+        {
+          "index": 0,
+          "type": 2,
+          "depends": [],
+          "output": 0
+        },
+        {
+          "index": 1,
+          "type": 3,
+          "depends": [
+            0
+          ],
+          "input_from": 0
+        }
+      ],
+      "composition_target": [
+        2,
+        3
+      ]
+    }
+  ],
+  "important_constraint": "This seed intentionally does not assign English words to capability IDs. Continuous semantic embeddings must be produced by AR.I.S neural encoders."
+}

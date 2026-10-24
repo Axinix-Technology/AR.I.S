@@ -1,0 +1,647 @@
+{
+  "dataset": "ARIS-Declarative-Cognitive-Supervision",
+  "version": "1.0",
+  "purpose": "Comprehensive cognitive training dataset for multi-dimensional understanding, token-level decomposition, semantic frame extraction, relational grounding, syntactic paraphrasing, and interrogative query projection of declarative assertions.",
+  "canonical_declarative_corpus": [
+    {
+      "id": "DECL_001",
+      "raw_text": "Arun is the founder of Axinix.",
+      "tokens": [
+        { "index": 0, "token": "Arun", "lemma": "Arun", "pos": "PROPN", "type": "proper_noun", "role": "agent_entity", "subwords": ["arun", "aru", "run"], "is_named_entity": true, "entity_type": "PERSON" },
+        { "index": 1, "token": "is", "lemma": "be", "pos": "AUX", "type": "copula", "role": "state_predicate", "subwords": ["is"], "is_named_entity": false },
+        { "index": 2, "token": "the", "lemma": "the", "pos": "DET", "type": "determiner", "role": "definite_specifier", "subwords": ["the"], "is_named_entity": false },
+        { "index": 3, "token": "founder", "lemma": "founder", "pos": "NOUN", "type": "noun", "role": "relational_role", "subwords": ["found", "founder", "er"], "is_named_entity": false },
+        { "index": 4, "token": "of", "lemma": "of", "pos": "ADP", "type": "preposition", "role": "genitive_link", "subwords": ["of"], "is_named_entity": false },
+        { "index": 5, "token": "Axinix", "lemma": "Axinix", "pos": "PROPN", "type": "proper_noun", "role": "patient_entity", "subwords": ["axinix", "axi", "nix"], "is_named_entity": true, "entity_type": "ORGANIZATION" },
+        { "index": 6, "token": ".", "lemma": ".", "pos": "PUNCT", "type": "punctuation", "role": "clause_boundary", "subwords": ["."], "is_named_entity": false }
+      ],
+      "cognitive_semantic_frame": {
+        "frame_name": "Organizational_Founding",
+        "predicate": "founder_of",
+        "frame_elements": {
+          "Founder": "Arun",
+          "Organization": "Axinix",
+          "Role": "founder"
+        }
+      },
+      "relational_triples": [
+        { "subject": "Arun", "relation": "is_founder_of", "object": "Axinix", "confidence": 1.0, "is_canonical": true },
+        { "subject": "Arun", "relation": "founded", "object": "Axinix", "confidence": 0.98 },
+        { "subject": "Axinix", "relation": "founded_by", "object": "Arun", "confidence": 0.98, "is_inverse": true },
+        { "subject": "Axinix", "relation": "has_founder", "object": "Arun", "confidence": 0.95 }
+      ],
+      "syntactic_variations": [
+        "Arun founded Axinix.",
+        "Axinix was founded by Arun.",
+        "The founder of Axinix is Arun.",
+        "Arun is the creator and founder of Axinix.",
+        "Axinix's founder is Arun."
+      ],
+      "cross_lingual_variants": [
+        { "language": "Tamil (transliterated)", "text": "Arun Axinix-in niruvanar." },
+        { "language": "French", "text": "Arun est le fondateur d'Axinix." },
+        { "language": "Hindi (transliterated)", "text": "Arun Axinix ke sansthapak hain." }
+      ],
+      "entailments": [
+        "Arun created Axinix.",
+        "Arun holds a leadership role at Axinix.",
+        "Axinix is an organization with a founder named Arun."
+      ],
+      "interrogative_query_projections": [
+        { "question": "Who is the founder of Axinix?", "target_variable": "?founder", "expected_answer": "Arun", "query_type": "person" },
+        { "question": "Who founded Axinix?", "target_variable": "?agent", "expected_answer": "Arun", "query_type": "person" },
+        { "question": "What did Arun found?", "target_variable": "?org", "expected_answer": "Axinix", "query_type": "entity" },
+        { "question": "What is Arun's position in Axinix?", "target_variable": "?role", "expected_answer": "founder", "query_type": "entity" },
+        { "question": "Is Arun the founder of Axinix?", "target_variable": "?boolean", "expected_answer": "true", "query_type": "verification" }
+      ],
+      "pragmatics_and_discourse": {
+        "speech_act": "DECLARATIVE",
+        "salience_rank": 1,
+        "anaphoric_entities": {
+          "animate_he": "Arun",
+          "inanimate_it": "Axinix"
+        }
+      }
+    },
+    {
+      "id": "DECL_002",
+      "raw_text": "Dhivya lives in Chennai.",
+      "tokens": [
+        { "index": 0, "token": "Dhivya", "lemma": "Dhivya", "pos": "PROPN", "type": "proper_noun", "role": "resident_entity", "subwords": ["dhivya", "dhi", "vya"], "is_named_entity": true, "entity_type": "PERSON" },
+        { "index": 1, "token": "lives", "lemma": "live", "pos": "VERB", "type": "verb", "role": "residence_predicate", "subwords": ["live", "lives", "es"], "is_named_entity": false },
+        { "index": 2, "token": "in", "lemma": "in", "pos": "ADP", "type": "preposition", "role": "locative_marker", "subwords": ["in"], "is_named_entity": false },
+        { "index": 3, "token": "Chennai", "lemma": "Chennai", "pos": "PROPN", "type": "proper_noun", "role": "location_entity", "subwords": ["chennai", "chen", "nai"], "is_named_entity": true, "entity_type": "LOCATION" },
+        { "index": 4, "token": ".", "lemma": ".", "pos": "PUNCT", "type": "punctuation", "role": "clause_boundary", "subwords": ["."], "is_named_entity": false }
+      ],
+      "cognitive_semantic_frame": {
+        "frame_name": "Residence_And_Habitation",
+        "predicate": "lives_in",
+        "frame_elements": {
+          "Resident": "Dhivya",
+          "Location": "Chennai",
+          "HabitationStatus": "current"
+        }
+      },
+      "relational_triples": [
+        { "subject": "Dhivya", "relation": "lives_in", "object": "Chennai", "confidence": 1.0, "is_canonical": true },
+        { "subject": "Dhivya", "relation": "resides_in", "object": "Chennai", "confidence": 0.98 },
+        { "subject": "Chennai", "relation": "residence_of", "object": "Dhivya", "confidence": 0.95, "is_inverse": true }
+      ],
+      "syntactic_variations": [
+        "Dhivya resides in Chennai.",
+        "Dhivya is staying in Chennai.",
+        "Chennai is where Dhivya lives.",
+        "Dhivya has her home in Chennai."
+      ],
+      "cross_lingual_variants": [
+        { "language": "Tamil (transliterated)", "text": "Dhivya Chennaiyil vasikiraar." },
+        { "language": "French", "text": "Dhivya vit a Chennai." },
+        { "language": "Hindi (transliterated)", "text": "Dhivya Chennai mein rehti hai." }
+      ],
+      "entailments": [
+        "Dhivya is located in Chennai.",
+        "Dhivya's primary dwelling is situated in Chennai."
+      ],
+      "interrogative_query_projections": [
+        { "question": "Where does Dhivya live?", "target_variable": "?location", "expected_answer": "Chennai", "query_type": "location" },
+        { "question": "Where is Dhivya residing?", "target_variable": "?location", "expected_answer": "Chennai", "query_type": "location" },
+        { "question": "Who lives in Chennai?", "target_variable": "?person", "expected_answer": "Dhivya", "query_type": "person" },
+        { "question": "Does Dhivya live in Chennai?", "target_variable": "?boolean", "expected_answer": "true", "query_type": "verification" }
+      ],
+      "pragmatics_and_discourse": {
+        "speech_act": "DECLARATIVE",
+        "salience_rank": 1,
+        "anaphoric_entities": {
+          "animate_she": "Dhivya",
+          "inanimate_it": "Chennai"
+        }
+      }
+    },
+    {
+      "id": "DECL_003",
+      "raw_text": "The server is running on port 8000.",
+      "tokens": [
+        { "index": 0, "token": "The", "lemma": "the", "pos": "DET", "type": "determiner", "role": "definite_specifier", "subwords": ["the"], "is_named_entity": false },
+        { "index": 1, "token": "server", "lemma": "server", "pos": "NOUN", "type": "noun", "role": "system_process", "subwords": ["serv", "server", "er"], "is_named_entity": false },
+        { "index": 2, "token": "is", "lemma": "be", "pos": "AUX", "type": "auxiliary", "role": "aspect_marker", "subwords": ["is"], "is_named_entity": false },
+        { "index": 3, "token": "running", "lemma": "run", "pos": "VERB", "type": "verb", "role": "execution_predicate", "subwords": ["run", "running", "ing"], "is_named_entity": false },
+        { "index": 4, "token": "on", "lemma": "on", "pos": "ADP", "type": "preposition", "role": "network_binding_link", "subwords": ["on"], "is_named_entity": false },
+        { "index": 5, "token": "port", "lemma": "port", "pos": "NOUN", "type": "noun", "role": "port_descriptor", "subwords": ["port"], "is_named_entity": false },
+        { "index": 6, "token": "8000", "lemma": "8000", "pos": "NUM", "type": "number", "role": "port_value", "subwords": ["8000", "800", "000"], "is_named_entity": true, "entity_type": "PORT" },
+        { "index": 7, "token": ".", "lemma": ".", "pos": "PUNCT", "type": "punctuation", "role": "clause_boundary", "subwords": ["."], "is_named_entity": false }
+      ],
+      "cognitive_semantic_frame": {
+        "frame_name": "System_Network_Execution",
+        "predicate": "running_on_port",
+        "frame_elements": {
+          "Process": "server",
+          "State": "running",
+          "NetworkPort": "8000"
+        }
+      },
+      "relational_triples": [
+        { "subject": "server", "relation": "running_on_port", "object": "8000", "confidence": 1.0, "is_canonical": true },
+        { "subject": "server", "relation": "state", "object": "running", "confidence": 0.95 },
+        { "subject": "server", "relation": "port", "object": "8000", "confidence": 0.95 }
+      ],
+      "syntactic_variations": [
+        "The server is listening on port 8000.",
+        "Port 8000 is hosting the active server process.",
+        "The web server execution is bound to port 8000."
+      ],
+      "cross_lingual_variants": [
+        { "language": "French", "text": "Le serveur tourne sur le port 8000." },
+        { "language": "German", "text": "Der Server lauft auf Port 8000." }
+      ],
+      "entailments": [
+        "The server is active.",
+        "Network requests on port 8000 are received by the server."
+      ],
+      "interrogative_query_projections": [
+        { "question": "Which port is the server running on?", "target_variable": "?port", "expected_answer": "8000", "query_type": "quantity" },
+        { "question": "Where is the server running?", "target_variable": "?endpoint", "expected_answer": "port 8000", "query_type": "location" },
+        { "question": "What is running on port 8000?", "target_variable": "?service", "expected_answer": "server", "query_type": "entity" },
+        { "question": "Is the server running on port 8000?", "target_variable": "?boolean", "expected_answer": "true", "query_type": "verification" }
+      ],
+      "pragmatics_and_discourse": {
+        "speech_act": "DECLARATIVE",
+        "salience_rank": 1,
+        "anaphoric_entities": {
+          "inanimate_it": "server"
+        }
+      }
+    },
+    {
+      "id": "DECL_004",
+      "raw_text": "TCS is a technology consulting company.",
+      "tokens": [
+        { "index": 0, "token": "TCS", "lemma": "TCS", "pos": "PROPN", "type": "proper_noun", "role": "subject_entity", "subwords": ["tcs", "tc", "cs"], "is_named_entity": true, "entity_type": "ORGANIZATION" },
+        { "index": 1, "token": "is", "lemma": "be", "pos": "AUX", "type": "copula", "role": "classification_predicate", "subwords": ["is"], "is_named_entity": false },
+        { "index": 2, "token": "a", "lemma": "a", "pos": "DET", "type": "determiner", "role": "indefinite_specifier", "subwords": ["a"], "is_named_entity": false },
+        { "index": 3, "token": "technology", "lemma": "technology", "pos": "NOUN", "type": "noun", "role": "domain_modifier", "subwords": ["tech", "techno", "technology"], "is_named_entity": false },
+        { "index": 4, "token": "consulting", "lemma": "consulting", "pos": "NOUN", "type": "noun", "role": "service_modifier", "subwords": ["consult", "consulting", "ing"], "is_named_entity": false },
+        { "index": 5, "token": "company", "lemma": "company", "pos": "NOUN", "type": "noun", "role": "category_hypernym", "subwords": ["comp", "company", "any"], "is_named_entity": false },
+        { "index": 6, "token": ".", "lemma": ".", "pos": "PUNCT", "type": "punctuation", "role": "clause_boundary", "subwords": ["."], "is_named_entity": false }
+      ],
+      "cognitive_semantic_frame": {
+        "frame_name": "Organizational_Classification",
+        "predicate": "is_a",
+        "frame_elements": {
+          "Entity": "TCS",
+          "Domain": "technology",
+          "Service": "consulting",
+          "Hypernym": "company"
+        }
+      },
+      "relational_triples": [
+        { "subject": "TCS", "relation": "is_a", "object": "technology consulting company", "confidence": 1.0, "is_canonical": true },
+        { "subject": "TCS", "relation": "industry", "object": "technology consulting", "confidence": 0.95 },
+        { "subject": "TCS", "relation": "entity_type", "object": "company", "confidence": 0.95 }
+      ],
+      "syntactic_variations": [
+        "TCS is an enterprise technology and IT consulting firm.",
+        "Tata Consultancy Services is a consulting corporation in tech.",
+        "TCS provides technology consulting services as a company."
+      ],
+      "cross_lingual_variants": [
+        { "language": "French", "text": "TCS est une societe de conseil en technologie." },
+        { "language": "German", "text": "TCS ist ein Technologieberatungsunternehmen." }
+      ],
+      "entailments": [
+        "TCS operates in the technology domain.",
+        "TCS is a commercial corporate organization."
+      ],
+      "interrogative_query_projections": [
+        { "question": "What is TCS?", "target_variable": "?definition", "expected_answer": "technology consulting company", "query_type": "entity" },
+        { "question": "What kind of company is TCS?", "target_variable": "?type", "expected_answer": "technology consulting company", "query_type": "entity" },
+        { "question": "Is TCS a technology company?", "target_variable": "?boolean", "expected_answer": "true", "query_type": "verification" }
+      ],
+      "pragmatics_and_discourse": {
+        "speech_act": "DECLARATIVE",
+        "salience_rank": 1,
+        "anaphoric_entities": {
+          "inanimate_it": "TCS"
+        }
+      }
+    },
+    {
+      "id": "DECL_005",
+      "raw_text": "My name is Arun.",
+      "tokens": [
+        { "index": 0, "token": "My", "lemma": "my", "pos": "PRON", "type": "deictic_possessive", "role": "speaker_possessive_marker", "subwords": ["my"], "is_named_entity": false },
+        { "index": 1, "token": "name", "lemma": "name", "pos": "NOUN", "type": "noun", "role": "identity_attribute", "subwords": ["name"], "is_named_entity": false },
+        { "index": 2, "token": "is", "lemma": "be", "pos": "AUX", "type": "copula", "role": "identity_copula", "subwords": ["is"], "is_named_entity": false },
+        { "index": 3, "token": "Arun", "lemma": "Arun", "pos": "PROPN", "type": "proper_noun", "role": "speaker_name_value", "subwords": ["arun", "aru", "run"], "is_named_entity": true, "entity_type": "PERSON" },
+        { "index": 4, "token": ".", "lemma": ".", "pos": "PUNCT", "type": "punctuation", "role": "clause_boundary", "subwords": ["."], "is_named_entity": false }
+      ],
+      "cognitive_semantic_frame": {
+        "frame_name": "Speaker_Identity_Assertion",
+        "predicate": "speaker_identity",
+        "frame_elements": {
+          "DeicticSource": "SPEAKER",
+          "Attribute": "name",
+          "Value": "Arun"
+        }
+      },
+      "relational_triples": [
+        { "subject": "SPEAKER", "relation": "has_name", "object": "Arun", "confidence": 1.0, "is_canonical": true },
+        { "subject": "SPEAKER", "relation": "is_identified_as", "object": "Arun", "confidence": 0.98 }
+      ],
+      "syntactic_variations": [
+        "I am Arun.",
+        "Call me Arun.",
+        "Arun is my name.",
+        "I go by the name Arun."
+      ],
+      "cross_lingual_variants": [
+        { "language": "Tamil (transliterated)", "text": "En peyar Arun." },
+        { "language": "French", "text": "Je m'appelle Arun." },
+        { "language": "Hindi (transliterated)", "text": "Mera naam Arun hai." }
+      ],
+      "entailments": [
+        "The speaker's name is Arun.",
+        "First-person singular pronouns refer to Arun in this conversational context."
+      ],
+      "interrogative_query_projections": [
+        { "question": "What is your name?", "target_variable": "?speaker_name", "expected_answer": "Arun", "query_type": "entity" },
+        { "question": "Who is speaking?", "target_variable": "?speaker", "expected_answer": "Arun", "query_type": "person" }
+      ],
+      "pragmatics_and_discourse": {
+        "speech_act": "DECLARATIVE",
+        "salience_rank": 1,
+        "deictic_grounding": {
+          "speaker_name": "Arun",
+          "speaker_anchor": "USER"
+        }
+      }
+    },
+    {
+      "id": "DECL_006",
+      "raw_text": "She is working in TCS.",
+      "tokens": [
+        { "index": 0, "token": "She", "lemma": "she", "pos": "PRON", "type": "anaphora_animate_female", "role": "anaphoric_subject", "subwords": ["she"], "is_named_entity": false },
+        { "index": 1, "token": "is", "lemma": "be", "pos": "AUX", "type": "auxiliary", "role": "aspect_marker", "subwords": ["is"], "is_named_entity": false },
+        { "index": 2, "token": "working", "lemma": "work", "pos": "VERB", "type": "verb", "role": "employment_action", "subwords": ["work", "working", "ing"], "is_named_entity": false },
+        { "index": 3, "token": "in", "lemma": "in", "pos": "ADP", "type": "preposition", "role": "organizational_marker", "subwords": ["in"], "is_named_entity": false },
+        { "index": 4, "token": "TCS", "lemma": "TCS", "pos": "PROPN", "type": "proper_noun", "role": "employer_entity", "subwords": ["tcs", "tc", "cs"], "is_named_entity": true, "entity_type": "ORGANIZATION" },
+        { "index": 5, "token": ".", "lemma": ".", "pos": "PUNCT", "type": "punctuation", "role": "clause_boundary", "subwords": ["."], "is_named_entity": false }
+      ],
+      "cognitive_semantic_frame": {
+        "frame_name": "Professional_Employment",
+        "predicate": "works_in",
+        "frame_elements": {
+          "Employee": "antecedent(She)",
+          "Employer": "TCS",
+          "EmploymentStatus": "active"
+        }
+      },
+      "relational_triples": [
+        { "subject": "antecedent(She)", "relation": "works_in", "object": "TCS", "confidence": 1.0, "is_canonical": true },
+        { "subject": "antecedent(She)", "relation": "employed_at", "object": "TCS", "confidence": 0.98 },
+        { "subject": "TCS", "relation": "employs", "object": "antecedent(She)", "confidence": 0.95, "is_inverse": true }
+      ],
+      "syntactic_variations": [
+        "She works for TCS.",
+        "She is employed at TCS company.",
+        "TCS employs her.",
+        "She has a job in TCS."
+      ],
+      "cross_lingual_variants": [
+        { "language": "Tamil (transliterated)", "text": "Aval TCS-il velai seigiraal." },
+        { "language": "French", "text": "Elle travaille chez TCS." },
+        { "language": "Hindi (transliterated)", "text": "Vah TCS mein kaam karti hai." }
+      ],
+      "entailments": [
+        "She is an employee of TCS.",
+        "TCS is her current workplace."
+      ],
+      "interrogative_query_projections": [
+        { "question": "Where is she working?", "target_variable": "?company", "expected_answer": "TCS", "query_type": "location" },
+        { "question": "Which company is she working for?", "target_variable": "?company", "expected_answer": "TCS", "query_type": "entity" },
+        { "question": "Does she work in TCS?", "target_variable": "?boolean", "expected_answer": "true", "query_type": "verification" }
+      ],
+      "pragmatics_and_discourse": {
+        "speech_act": "DECLARATIVE",
+        "salience_rank": 1,
+        "anaphoric_resolution": {
+          "pronoun": "She",
+          "expected_antecedent_gender": "FEMALE",
+          "expected_antecedent_animacy": "ANIMATE"
+        }
+      }
+    },
+    {
+      "id": "DECL_007",
+      "raw_text": "Workhub is an ERP software.",
+      "tokens": [
+        { "index": 0, "token": "Workhub", "lemma": "Workhub", "pos": "PROPN", "type": "proper_noun", "role": "product_entity", "subwords": ["workhub", "work", "hub"], "is_named_entity": true, "entity_type": "PRODUCT" },
+        { "index": 1, "token": "is", "lemma": "be", "pos": "AUX", "type": "copula", "role": "classification_predicate", "subwords": ["is"], "is_named_entity": false },
+        { "index": 2, "token": "an", "lemma": "a", "pos": "DET", "type": "determiner", "role": "indefinite_specifier", "subwords": ["an"], "is_named_entity": false },
+        { "index": 3, "token": "ERP", "lemma": "ERP", "pos": "PROPN", "type": "acronym", "role": "domain_category", "subwords": ["erp", "er", "rp"], "is_named_entity": false },
+        { "index": 4, "token": "software", "lemma": "software", "pos": "NOUN", "type": "noun", "role": "artifact_class", "subwords": ["soft", "software", "ware"], "is_named_entity": false },
+        { "index": 5, "token": ".", "lemma": ".", "pos": "PUNCT", "type": "punctuation", "role": "clause_boundary", "subwords": ["."], "is_named_entity": false }
+      ],
+      "cognitive_semantic_frame": {
+        "frame_name": "Software_Artifact_Classification",
+        "predicate": "is_a",
+        "frame_elements": {
+          "Product": "Workhub",
+          "Category": "ERP",
+          "ArtifactType": "software"
+        }
+      },
+      "relational_triples": [
+        { "subject": "Workhub", "relation": "is_a", "object": "ERP software", "confidence": 1.0, "is_canonical": true },
+        { "subject": "Workhub", "relation": "product_type", "object": "ERP", "confidence": 0.95 },
+        { "subject": "Workhub", "relation": "category", "object": "software", "confidence": 0.95 }
+      ],
+      "syntactic_variations": [
+        "Workhub is enterprise resource planning software.",
+        "Workhub serves as an ERP system.",
+        "The software known as Workhub is an ERP application."
+      ],
+      "cross_lingual_variants": [
+        { "language": "French", "text": "Workhub est un logiciel ERP." },
+        { "language": "German", "text": "Workhub ist eine ERP-Software." }
+      ],
+      "entailments": [
+        "Workhub is a computer program.",
+        "Workhub provides enterprise management capabilities."
+      ],
+      "interrogative_query_projections": [
+        { "question": "What is Workhub?", "target_variable": "?definition", "expected_answer": "ERP software", "query_type": "entity" },
+        { "question": "What type of software is Workhub?", "target_variable": "?type", "expected_answer": "ERP software", "query_type": "entity" },
+        { "question": "Is Workhub an ERP software?", "target_variable": "?boolean", "expected_answer": "true", "query_type": "verification" }
+      ],
+      "pragmatics_and_discourse": {
+        "speech_act": "DECLARATIVE",
+        "salience_rank": 1,
+        "anaphoric_entities": {
+          "inanimate_it": "Workhub"
+        }
+      }
+    },
+    {
+      "id": "DECL_008",
+      "raw_text": "QuantumEngine was developed in Zurich.",
+      "tokens": [
+        { "index": 0, "token": "QuantumEngine", "lemma": "QuantumEngine", "pos": "PROPN", "type": "proper_noun", "role": "artifact_subject", "subwords": ["quantumengine", "quantum", "engine"], "is_named_entity": true, "entity_type": "PRODUCT" },
+        { "index": 1, "token": "was", "lemma": "be", "pos": "AUX", "type": "auxiliary_passive", "role": "tense_voice_marker", "subwords": ["was"], "is_named_entity": false },
+        { "index": 2, "token": "developed", "lemma": "develop", "pos": "VERB", "type": "verb_past_participle", "role": "creation_predicate", "subwords": ["develop", "developed", "ed"], "is_named_entity": false },
+        { "index": 3, "token": "in", "lemma": "in", "pos": "ADP", "type": "preposition", "role": "locative_origin_marker", "subwords": ["in"], "is_named_entity": false },
+        { "index": 4, "token": "Zurich", "lemma": "Zurich", "pos": "PROPN", "type": "proper_noun", "role": "location_entity", "subwords": ["zurich", "zur", "ich"], "is_named_entity": true, "entity_type": "LOCATION" },
+        { "index": 5, "token": ".", "lemma": ".", "pos": "PUNCT", "type": "punctuation", "role": "clause_boundary", "subwords": ["."], "is_named_entity": false }
+      ],
+      "cognitive_semantic_frame": {
+        "frame_name": "Artifact_Development_Origin",
+        "predicate": "developed_in",
+        "frame_elements": {
+          "Artifact": "QuantumEngine",
+          "Action": "developed",
+          "Location": "Zurich"
+        }
+      },
+      "relational_triples": [
+        { "subject": "QuantumEngine", "relation": "developed_in", "object": "Zurich", "confidence": 1.0, "is_canonical": true },
+        { "subject": "QuantumEngine", "relation": "origin_city", "object": "Zurich", "confidence": 0.95 },
+        { "subject": "Zurich", "relation": "development_site_of", "object": "QuantumEngine", "confidence": 0.95, "is_inverse": true }
+      ],
+      "syntactic_variations": [
+        "Zurich is where QuantumEngine was developed.",
+        "The development of QuantumEngine took place in Zurich.",
+        "Engineers in Zurich developed QuantumEngine."
+      ],
+      "cross_lingual_variants": [
+        { "language": "French", "text": "QuantumEngine a ete developpe a Zurich." },
+        { "language": "German", "text": "QuantumEngine wurde in Zurich entwickelt." }
+      ],
+      "entailments": [
+        "QuantumEngine originated in Zurich.",
+        "Zurich is the creation location of QuantumEngine."
+      ],
+      "interrogative_query_projections": [
+        { "question": "Where was QuantumEngine developed?", "target_variable": "?location", "expected_answer": "Zurich", "query_type": "location" },
+        { "question": "What was developed in Zurich?", "target_variable": "?product", "expected_answer": "QuantumEngine", "query_type": "entity" },
+        { "question": "Was QuantumEngine developed in Zurich?", "target_variable": "?boolean", "expected_answer": "true", "query_type": "verification" }
+      ],
+      "pragmatics_and_discourse": {
+        "speech_act": "DECLARATIVE",
+        "salience_rank": 1,
+        "anaphoric_entities": {
+          "inanimate_it": "QuantumEngine"
+        }
+      }
+    },
+    {
+      "id": "DECL_009",
+      "raw_text": "It is located in Berlin.",
+      "tokens": [
+        { "index": 0, "token": "It", "lemma": "it", "pos": "PRON", "type": "anaphora_inanimate", "role": "anaphoric_subject", "subwords": ["it"], "is_named_entity": false },
+        { "index": 1, "token": "is", "lemma": "be", "pos": "AUX", "type": "copula", "role": "state_predicate", "subwords": ["is"], "is_named_entity": false },
+        { "index": 2, "token": "located", "lemma": "locate", "pos": "ADJ", "type": "participle_adjective", "role": "spatial_state", "subwords": ["locate", "located", "ed"], "is_named_entity": false },
+        { "index": 3, "token": "in", "lemma": "in", "pos": "ADP", "type": "preposition", "role": "locative_marker", "subwords": ["in"], "is_named_entity": false },
+        { "index": 4, "token": "Berlin", "lemma": "Berlin", "pos": "PROPN", "type": "proper_noun", "role": "location_entity", "subwords": ["berlin", "ber", "lin"], "is_named_entity": true, "entity_type": "LOCATION" },
+        { "index": 5, "token": ".", "lemma": ".", "pos": "PUNCT", "type": "punctuation", "role": "clause_boundary", "subwords": ["."], "is_named_entity": false }
+      ],
+      "cognitive_semantic_frame": {
+        "frame_name": "Spatial_Placement",
+        "predicate": "located_in",
+        "frame_elements": {
+          "Entity": "antecedent(It)",
+          "Location": "Berlin",
+          "SpatialState": "located"
+        }
+      },
+      "relational_triples": [
+        { "subject": "antecedent(It)", "relation": "located_in", "object": "Berlin", "confidence": 1.0, "is_canonical": true },
+        { "subject": "antecedent(It)", "relation": "situated_in", "object": "Berlin", "confidence": 0.98 },
+        { "subject": "Berlin", "relation": "location_of", "object": "antecedent(It)", "confidence": 0.95, "is_inverse": true }
+      ],
+      "syntactic_variations": [
+        "It is situated in Berlin.",
+        "Its location is Berlin.",
+        "Berlin is where it is located."
+      ],
+      "cross_lingual_variants": [
+        { "language": "French", "text": "Il est situe a Berlin." },
+        { "language": "German", "text": "Es befindet sich in Berlin." }
+      ],
+      "entailments": [
+        "The referenced entity resides or is situated in Berlin."
+      ],
+      "interrogative_query_projections": [
+        { "question": "Where is it located?", "target_variable": "?city", "expected_answer": "Berlin", "query_type": "location" },
+        { "question": "Which city is it located in?", "target_variable": "?city", "expected_answer": "Berlin", "query_type": "location" },
+        { "question": "Is it in Berlin?", "target_variable": "?boolean", "expected_answer": "true", "query_type": "verification" }
+      ],
+      "pragmatics_and_discourse": {
+        "speech_act": "DECLARATIVE",
+        "salience_rank": 1,
+        "anaphoric_resolution": {
+          "pronoun": "It",
+          "expected_antecedent_animacy": "INANIMATE"
+        }
+      }
+    },
+    {
+      "id": "DECL_010",
+      "raw_text": "She manages the team.",
+      "tokens": [
+        { "index": 0, "token": "She", "lemma": "she", "pos": "PRON", "type": "anaphora_animate_female", "role": "anaphoric_subject_leader", "subwords": ["she"], "is_named_entity": false },
+        { "index": 1, "token": "manages", "lemma": "manage", "pos": "VERB", "type": "verb", "role": "management_action", "subwords": ["manage", "manages", "es"], "is_named_entity": false },
+        { "index": 2, "token": "the", "lemma": "the", "pos": "DET", "type": "determiner", "role": "definite_specifier", "subwords": ["the"], "is_named_entity": false },
+        { "index": 3, "token": "team", "lemma": "team", "pos": "NOUN", "type": "noun", "role": "managed_group_entity", "subwords": ["team"], "is_named_entity": false },
+        { "index": 4, "token": ".", "lemma": ".", "pos": "PUNCT", "type": "punctuation", "role": "clause_boundary", "subwords": ["."], "is_named_entity": false }
+      ],
+      "cognitive_semantic_frame": {
+        "frame_name": "Leadership_And_Supervision",
+        "predicate": "manages",
+        "frame_elements": {
+          "Leader": "antecedent(She)",
+          "ManagedEntity": "the team",
+          "Role": "manager"
+        }
+      },
+      "relational_triples": [
+        { "subject": "antecedent(She)", "relation": "manages", "object": "the team", "confidence": 1.0, "is_canonical": true },
+        { "subject": "antecedent(She)", "relation": "leader_of", "object": "the team", "confidence": 0.98 },
+        { "subject": "the team", "relation": "managed_by", "object": "antecedent(She)", "confidence": 0.95, "is_inverse": true }
+      ],
+      "syntactic_variations": [
+        "She is the manager of the team.",
+        "The team is managed by her.",
+        "She oversees the team.",
+        "She leads the team."
+      ],
+      "cross_lingual_variants": [
+        { "language": "French", "text": "Elle dirige l'equipe." },
+        { "language": "German", "text": "Sie leitet das Team." }
+      ],
+      "entailments": [
+        "The team reports to her.",
+        "She holds supervisory authority over the team members."
+      ],
+      "interrogative_query_projections": [
+        { "question": "Who manages the team?", "target_variable": "?leader", "expected_answer": "She (antecedent)", "query_type": "person" },
+        { "question": "What does she manage?", "target_variable": "?group", "expected_answer": "the team", "query_type": "entity" },
+        { "question": "Is she the manager of the team?", "target_variable": "?boolean", "expected_answer": "true", "query_type": "verification" }
+      ],
+      "pragmatics_and_discourse": {
+        "speech_act": "DECLARATIVE",
+        "salience_rank": 1,
+        "anaphoric_resolution": {
+          "pronoun": "She",
+          "expected_antecedent_gender": "FEMALE",
+          "expected_antecedent_animacy": "ANIMATE"
+        }
+      }
+    },
+    {
+      "id": "DECL_011",
+      "raw_text": "He is an engineer at Google.",
+      "tokens": [
+        { "index": 0, "token": "He", "lemma": "he", "pos": "PRON", "type": "anaphora_animate_male", "role": "anaphoric_subject_person", "subwords": ["he"], "is_named_entity": false },
+        { "index": 1, "token": "is", "lemma": "be", "pos": "AUX", "type": "copula", "role": "state_predicate", "subwords": ["is"], "is_named_entity": false },
+        { "index": 2, "token": "an", "lemma": "a", "pos": "DET", "type": "determiner", "role": "indefinite_specifier", "subwords": ["an"], "is_named_entity": false },
+        { "index": 3, "token": "engineer", "lemma": "engineer", "pos": "NOUN", "type": "noun", "role": "profession_role", "subwords": ["engine", "engineer", "er"], "is_named_entity": false },
+        { "index": 4, "token": "at", "lemma": "at", "pos": "ADP", "type": "preposition", "role": "organizational_marker", "subwords": ["at"], "is_named_entity": false },
+        { "index": 5, "token": "Google", "lemma": "Google", "pos": "PROPN", "type": "proper_noun", "role": "employer_entity", "subwords": ["google", "goog", "gle"], "is_named_entity": true, "entity_type": "ORGANIZATION" },
+        { "index": 6, "token": ".", "lemma": ".", "pos": "PUNCT", "type": "punctuation", "role": "clause_boundary", "subwords": ["."], "is_named_entity": false }
+      ],
+      "cognitive_semantic_frame": {
+        "frame_name": "Professional_Role_Affiliation",
+        "predicate": "works_as_at",
+        "frame_elements": {
+          "Person": "antecedent(He)",
+          "Profession": "engineer",
+          "Employer": "Google"
+        }
+      },
+      "relational_triples": [
+        { "subject": "antecedent(He)", "relation": "profession", "object": "engineer", "confidence": 1.0, "is_canonical": true },
+        { "subject": "antecedent(He)", "relation": "works_at", "object": "Google", "confidence": 0.98 },
+        { "subject": "antecedent(He)", "relation": "role_at_company", "object": "engineer at Google", "confidence": 0.95 }
+      ],
+      "syntactic_variations": [
+        "He works as an engineer for Google.",
+        "Google employs him as an engineer.",
+        "He is employed by Google in an engineering role."
+      ],
+      "cross_lingual_variants": [
+        { "language": "French", "text": "Il est ingenieur chez Google." },
+        { "language": "German", "text": "Er ist Ingenieur bei Google." }
+      ],
+      "entailments": [
+        "He is an employee of Google.",
+        "His occupation is engineering."
+      ],
+      "interrogative_query_projections": [
+        { "question": "Where does he work?", "target_variable": "?company", "expected_answer": "Google", "query_type": "location" },
+        { "question": "What is his profession?", "target_variable": "?profession", "expected_answer": "engineer", "query_type": "entity" },
+        { "question": "Who is an engineer at Google?", "target_variable": "?person", "expected_answer": "He (antecedent)", "query_type": "person" },
+        { "question": "Is he an engineer at Google?", "target_variable": "?boolean", "expected_answer": "true", "query_type": "verification" }
+      ],
+      "pragmatics_and_discourse": {
+        "speech_act": "DECLARATIVE",
+        "salience_rank": 1,
+        "anaphoric_resolution": {
+          "pronoun": "He",
+          "expected_antecedent_gender": "MALE",
+          "expected_antecedent_animacy": "ANIMATE"
+        }
+      }
+    },
+    {
+      "id": "DECL_012",
+      "raw_text": "The headquarters is located in California.",
+      "tokens": [
+        { "index": 0, "token": "The", "lemma": "the", "pos": "DET", "type": "determiner", "role": "definite_specifier", "subwords": ["the"], "is_named_entity": false },
+        { "index": 1, "token": "headquarters", "lemma": "headquarters", "pos": "NOUN", "type": "noun", "role": "facility_entity", "subwords": ["head", "quarters", "headquarters"], "is_named_entity": false },
+        { "index": 2, "token": "is", "lemma": "be", "pos": "AUX", "type": "copula", "role": "state_predicate", "subwords": ["is"], "is_named_entity": false },
+        { "index": 3, "token": "located", "lemma": "locate", "pos": "ADJ", "type": "participle_adjective", "role": "spatial_state", "subwords": ["locate", "located", "ed"], "is_named_entity": false },
+        { "index": 4, "token": "in", "lemma": "in", "pos": "ADP", "type": "preposition", "role": "geographic_marker", "subwords": ["in"], "is_named_entity": false },
+        { "index": 5, "token": "California", "lemma": "California", "pos": "PROPN", "type": "proper_noun", "role": "geographic_region", "subwords": ["california", "cali", "fornia"], "is_named_entity": true, "entity_type": "LOCATION" },
+        { "index": 6, "token": ".", "lemma": ".", "pos": "PUNCT", "type": "punctuation", "role": "clause_boundary", "subwords": ["."], "is_named_entity": false }
+      ],
+      "cognitive_semantic_frame": {
+        "frame_name": "Corporate_Headquarters_Location",
+        "predicate": "located_in",
+        "frame_elements": {
+          "Facility": "headquarters",
+          "Region": "California",
+          "SpatialState": "located"
+        }
+      },
+      "relational_triples": [
+        { "subject": "headquarters", "relation": "located_in", "object": "California", "confidence": 1.0, "is_canonical": true },
+        { "subject": "headquarters", "relation": "situated_in", "object": "California", "confidence": 0.98 },
+        { "subject": "California", "relation": "headquarters_site_of", "object": "headquarters", "confidence": 0.95, "is_inverse": true }
+      ],
+      "syntactic_variations": [
+        "The corporate headquarters is situated in California.",
+        "The main head office is located in California.",
+        "California is the location of the headquarters."
+      ],
+      "cross_lingual_variants": [
+        { "language": "French", "text": "Le siege social est situe en Californie." },
+        { "language": "German", "text": "Der Hauptsitz befindet sich in Kalifornien." }
+      ],
+      "entailments": [
+        "The primary organizational office resides in the state of California."
+      ],
+      "interrogative_query_projections": [
+        { "question": "Where is the headquarters located?", "target_variable": "?location", "expected_answer": "California", "query_type": "location" },
+        { "question": "Which state is the headquarters situated in?", "target_variable": "?region", "expected_answer": "California", "query_type": "location" },
+        { "question": "What is located in California?", "target_variable": "?facility", "expected_answer": "headquarters", "query_type": "entity" },
+        { "question": "Is the headquarters located in California?", "target_variable": "?boolean", "expected_answer": "true", "query_type": "verification" }
+      ],
+      "pragmatics_and_discourse": {
+        "speech_act": "DECLARATIVE",
+        "salience_rank": 1,
+        "anaphoric_entities": {
+          "inanimate_it": "headquarters"
+        }
+      }
+    }
+  ]
+}

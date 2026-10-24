@@ -1,0 +1,126 @@
+{
+  "version": "1.0_held_out",
+  "description": "Completely unseen held-out multi-sentence relational reasoning benchmark to verify generalization without overfitting",
+  "scenarios": [
+    {
+      "scenario_id": "held_out_sc_01",
+      "domain": "Astronomical History",
+      "entities": [
+        {"text": "Ulugh Beg Observatory", "type": "FACILITY"},
+        {"text": "Samarkand", "type": "GPE_CITY"},
+        {"text": "Timurid Empire", "type": "ORGANIZATION"},
+        {"text": "Central Asia", "type": "GPE_REGION"},
+        {"text": "Mirza Ulugh Beg", "type": "PERSON"},
+        {"text": "Takht-e Soleyman", "type": "FACILITY"}
+      ],
+      "formal_triples": [
+        {"subject": "Mirza Ulugh Beg", "relation": "constructed", "object": "Ulugh Beg Observatory"},
+        {"subject": "Ulugh Beg Observatory", "relation": "situated in", "object": "Samarkand"},
+        {"subject": "Samarkand", "relation": "served as capital of", "object": "Timurid Empire"},
+        {"subject": "Timurid Empire", "relation": "spanned across", "object": "Central Asia"}
+      ],
+      "qa_pairs": [
+        {
+          "question_id": "ho_01_01",
+          "question": "Who constructed Ulugh Beg Observatory?",
+          "expected_answer": "Mirza Ulugh Beg",
+          "target_type": "PERSON",
+          "hop_count": 1,
+          "is_unsupported": false,
+          "distractors": ["Samarkand", "Central Asia"]
+        },
+        {
+          "question_id": "ho_01_02",
+          "question": "Which city is the Ulugh Beg Observatory situated in?",
+          "expected_answer": "Samarkand",
+          "target_type": "GPE_CITY",
+          "hop_count": 1,
+          "is_unsupported": false,
+          "distractors": ["Central Asia", "Mirza Ulugh Beg"]
+        },
+        {
+          "question_id": "ho_01_03",
+          "question": "Which empire did the city of Samarkand serve as capital of?",
+          "expected_answer": "Timurid Empire",
+          "target_type": "ORGANIZATION",
+          "hop_count": 1,
+          "is_unsupported": false,
+          "distractors": ["Central Asia", "Samarkand"]
+        },
+        {
+          "question_id": "ho_01_04",
+          "question": "Which region did the Timurid Empire span across?",
+          "expected_answer": "Central Asia",
+          "target_type": "GPE_REGION",
+          "hop_count": 1,
+          "is_unsupported": false,
+          "distractors": ["Samarkand", "Mirza Ulugh Beg"]
+        },
+        {
+          "question_id": "ho_01_05",
+          "question": "Who was the chief astronomer of Takht-e Soleyman?",
+          "expected_answer": null,
+          "target_type": "PERSON",
+          "hop_count": 1,
+          "is_unsupported": true,
+          "distractors": ["Mirza Ulugh Beg", "Samarkand"]
+        }
+      ]
+    },
+    {
+      "scenario_id": "held_out_sc_02",
+      "domain": "Quantum Photonics",
+      "entities": [
+        {"text": "QuBitix Core", "type": "PRODUCT"},
+        {"text": "Helvetic Photonics", "type": "ORGANIZATION"},
+        {"text": "PhotonLab Zurich", "type": "FACILITY"},
+        {"text": "Zurich", "type": "GPE_CITY"},
+        {"text": "Switzerland", "type": "GPE_COUNTRY"}
+      ],
+      "formal_triples": [
+        {"subject": "Helvetic Photonics", "relation": "manufactures", "object": "QuBitix Core"},
+        {"subject": "PhotonLab Zurich", "relation": "evaluates", "object": "QuBitix Core"},
+        {"subject": "Helvetic Photonics", "relation": "headquartered in", "object": "Zurich"},
+        {"subject": "Zurich", "relation": "located in", "object": "Switzerland"}
+      ],
+      "qa_pairs": [
+        {
+          "question_id": "ho_02_01",
+          "question": "Which company manufactures QuBitix Core?",
+          "expected_answer": "Helvetic Photonics",
+          "target_type": "ORGANIZATION",
+          "hop_count": 1,
+          "is_unsupported": false,
+          "distractors": ["PhotonLab Zurich", "Zurich", "Switzerland"]
+        },
+        {
+          "question_id": "ho_02_02",
+          "question": "Where is the manufacturer of QuBitix Core headquartered?",
+          "expected_answer": "Zurich",
+          "target_type": "GPE_CITY",
+          "hop_count": 2,
+          "is_unsupported": false,
+          "distractors": ["Switzerland", "Helvetic Photonics"]
+        },
+        {
+          "question_id": "ho_02_03",
+          "question": "Which country is Zurich located in?",
+          "expected_answer": "Switzerland",
+          "target_type": "GPE_COUNTRY",
+          "hop_count": 1,
+          "is_unsupported": false,
+          "distractors": ["Zurich", "QuBitix Core"]
+        },
+        {
+          "question_id": "ho_02_04",
+          "question": "Which enterprise client receives cloud services from QuBitix Core?",
+          "expected_answer": null,
+          "target_type": "ORGANIZATION",
+          "hop_count": 1,
+          "is_unsupported": true,
+          "distractors": ["Helvetic Photonics", "PhotonLab Zurich"]
+        }
+      ]
+    }
+  ]
+}

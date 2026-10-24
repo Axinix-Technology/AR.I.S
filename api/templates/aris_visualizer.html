@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR.I.S — Cognitive Pipeline Visualizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #06080d;
+            --bg-surface: rgba(14, 18, 28, 0.75);
+            --bg-surface-elevated: rgba(20, 26, 40, 0.9);
+            --border-subtle: rgba(255, 255, 255, 0.07);
+            --border-active: rgba(0, 245, 255, 0.4);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --cyan-glow: #00f5ff;
+            --purple-glow: #a855f7;
+            --pink-glow: #ec4899;
+            --emerald-glow: #10b981;
+            --amber-glow: #f59e0b;
+            --indigo-glow: #6366f1;
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 10px;
+            --font-sans: 'Space Grotesk', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            background-image:
+                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.08) 0%, transparent 35%),
+                radial-gradient(circle at 90% 90%, rgba(0, 245, 255, 0.06) 0%, transparent 35%),
+                linear-gradient(to bottom, #06080d, #090c14);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            font-size: 13px;
+        }
+
+        /* Header Bar - Compact */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1.25rem;
+            background: rgba(9, 12, 20, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .logo-icon {
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, #00f5ff, #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #07090e;
+            box-shadow: 0 0 12px rgba(0, 245, 255, 0.3);
+        }
+
+        .logo-text h1 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            background: linear-gradient(90deg, #ffffff, #cbd5e1);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text p {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        .status-pill {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.2rem 0.6rem;
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 999px;
+            font-size: 0.68rem;
+            font-family: var(--font-mono);
+            color: #34d399;
+        }
+
+        .pulse-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 6px #10b981;
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.35; transform: scale(0.8); }
+        }
+
+        /* Main Container - Compact Layout */
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0.85rem 1.25rem;
+            width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        /* Control Panel - Streamlined Toolbar */
+        .control-panel {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 0.65rem 0.85rem;
+            backdrop-filter: blur(14px);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .query-input {
+            width: 100%;
+            background: rgba(6, 8, 13, 0.8);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 0.45rem 0.75rem;
+            color: var(--text-primary);
+            font-size: 0.88rem;
+            font-family: var(--font-sans);
+            outline: none;
+            transition: all 0.2s ease;
+            height: 34px;
+        }
+
+        .query-input:focus {
+            border-color: var(--cyan-glow);
+            box-shadow: 0 0 10px rgba(0, 245, 255, 0.15);
+            background: rgba(9, 12, 20, 0.95);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #00f5ff, #3b82f6);
+            color: #07090e;
+            border: none;
+            border-radius: var(--radius-md);
+            padding: 0 1.1rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: all 0.2s ease;
+            height: 34px;
+            box-shadow: 0 2px 10px rgba(0, 245, 255, 0.25);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(0, 245, 255, 0.4);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Presets & Controls Bar */
+        .preset-group {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .preset-label {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .preset-chip {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            border-radius: 999px;
+            padding: 0.15rem 0.55rem;
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .preset-chip:hover {
+            background: rgba(0, 245, 255, 0.08);
+            border-color: rgba(0, 245, 255, 0.25);
+            color: var(--cyan-glow);
+        }
+
+        .speed-control {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .speed-select {
+            background: rgba(6, 8, 13, 0.8);
+            border: 1px solid var(--border-subtle);
+            border-radius: 5px;
+            color: var(--text-secondary);
+            padding: 0.15rem 0.4rem;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            outline: none;
+            height: 24px;
+        }
+
+        /* 8 Cognitive Pipeline Grid - 4 Columns x 2 Rows */
+        .pipeline-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.65rem;
+            position: relative;
+        }
+
+        @media (max-width: 1200px) {
+            .pipeline-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .pipeline-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Stage Card - Compact & Crisp */
+        .stage-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 0.65rem 0.75rem;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0.4;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stage-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: transparent;
+            transition: background 0.2s ease;
+        }
+
+        .stage-card.pending {
+            opacity: 0.35;
+        }
+
+        .stage-card.active {
+            opacity: 1;
+            border-color: var(--cyan-glow);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(0, 245, 255, 0.12);
+        }
+
+        .stage-card.active::before {
+            background: linear-gradient(90deg, #00f5ff, #6366f1);
+        }
+
+        .stage-card.completed {
+            opacity: 1;
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .stage-card.completed::before {
+            background: #10b981;
+        }
+
+        /* Card Header */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stage-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .stage-num {
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            color: var(--text-secondary);
+        }
+
+        .stage-card.active .stage-num {
+            background: var(--cyan-glow);
+            color: #07090e;
+        }
+
+        .stage-card.completed .stage-num {
+            background: #10b981;
+            color: #07090e;
+        }
+
+        .stage-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+        }
+
+        .stage-status {
+            font-size: 0.62rem;
+            font-family: var(--font-mono);
+            padding: 0.1rem 0.35rem;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
+        }
+
+        .stage-card.active .stage-status {
+            background: rgba(0, 245, 255, 0.15);
+            color: var(--cyan-glow);
+        }
+
+        .stage-card.completed .stage-status {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+        }
+
+        .stage-desc {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            line-height: 1.25;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Card Content Area - Compact */
+        .card-content {
+            background: rgba(6, 8, 13, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius-md);
+            padding: 0.45rem 0.55rem;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            min-height: 60px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            overflow-y: auto;
+            max-height: 120px;
+        }
+
+        /* Specific Visual Elements */
+        .token-chip-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+        }
+
+        .token-chip {
+            background: rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            border-radius: 4px;
+            padding: 0.1rem 0.35rem;
+            font-size: 0.68rem;
+            color: #d8b4fe;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .token-chip .type-tag {
+            font-size: 0.58rem;
+            color: var(--text-muted);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.05rem 0.2rem;
+            border-radius: 2px;
+        }
+
+        .cand-chip {
+            background: rgba(236, 72, 153, 0.12);
+            border: 1px solid rgba(236, 72, 153, 0.25);
+            border-radius: 4px;
+            padding: 0.1rem 0.4rem;
+            font-size: 0.68rem;
+            color: #f472b6;
+        }
+
+        .binding-row {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            padding: 0.25rem 0.5rem;
+            border-radius: 5px;
+            color: #fbbf24;
+            font-size: 0.68rem;
+        }
+
+        .binding-arrow {
+            color: var(--text-muted);
+            font-size: 0.62rem;
+        }
+
+        .epistemic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 0.72rem;
+            letter-spacing: 0.04em;
+        }
+
+        .state-KNOWN {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid #10b981;
+            color: #34d399;
+        }
+
+        .state-DERIVABLE {
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid #3b82f6;
+            color: #60a5fa;
+        }
+
+        .state-ACQUIRABLE {
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid #f59e0b;
+            color: #fbbf24;
+        }
+
+        .state-UNSUPPORTED {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid #ef4444;
+            color: #f87171;
+        }
+
+        .answer-box {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #4ade80;
+            padding: 0.15rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .provenance-tag {
+            font-size: 0.64rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            padding-top: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* JSON Inspector Modal / Bottom Drawer - Compact */
+        .drawer {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .drawer-header {
+            padding: 0.45rem 0.85rem;
+            background: rgba(6, 8, 13, 0.8);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .drawer-title {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+        }
+
+        .drawer-body {
+            padding: 0.65rem;
+            background: #05070a;
+            max-height: 160px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .drawer.open .drawer-body {
+            display: block;
+        }
+
+        pre {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: #38bdf8;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        /* Mode Switcher Tabs */
+        .mode-tab {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 0.35rem 0.85rem;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            font-weight: 600;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .mode-tab:hover {
+            color: var(--text-primary);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .mode-tab.active {
+            color: var(--cyan-glow);
+            border-color: var(--cyan-glow);
+            background: rgba(0, 245, 255, 0.1);
+            box-shadow: 0 0 10px rgba(0, 245, 255, 0.15);
+        }
+
+        /* Modal Overlay & Card */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(3, 5, 8, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .modal-card {
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border-active);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 850px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 245, 255, 0.15);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            padding: 0.75rem 1.25rem;
+            background: rgba(6, 8, 13, 0.9);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: 1rem 1.25rem;
+            overflow-y: auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .fact-card {
+            background: rgba(6, 8, 13, 0.6);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 0.65rem 0.85rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            transition: all 0.2s ease;
+        }
+
+        .fact-card:hover {
+            border-color: rgba(0, 245, 255, 0.3);
+            background: rgba(9, 14, 24, 0.8);
+        }
+
+        /* Footer - Compact */
+        footer {
+            padding: 0.6rem 1rem;
+            text-align: center;
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-subtle);
+            font-family: var(--font-mono);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo-group">
+            <div class="logo-icon">Λ</div>
+            <div class="logo-text">
+                <h1>AR.I.S COGNITIVE PIPELINE</h1>
+                <p>Real-Time Neural & Relational Reasoning Visualizer</p>
+            </div>
+        <div style="display: flex; align-items: center; gap: 0.65rem;">
+            <button id="btnMemoryExplorer" class="preset-chip" style="display: flex; align-items: center; gap: 0.35rem; padding: 0.25rem 0.65rem; background: rgba(56, 189, 248, 0.1); border-color: rgba(56, 189, 248, 0.3); color: #38bdf8; font-weight: 600;">
+                <span>📚</span> Memory Store (<span id="headerFactCount">...</span>)
+            </button>
+            <a href="/training-lab/" style="display: flex; align-items: center; gap: 0.35rem; padding: 0.25rem 0.75rem; background: rgba(168, 85, 247, 0.12); border: 1px solid rgba(168, 85, 247, 0.35); border-radius: 6px; font-size: 0.72rem; font-family: var(--font-mono); color: #c084fc; text-decoration: none; font-weight: 600; transition: all 0.2s;">
+                <span>⚡</span> Training Lab
+            </a>
+            <div class="status-pill">
+                <div class="pulse-dot"></div>
+                <span>BRAIN CORE ACTIVE</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Mode Tabs -->
+        <div style="display: flex; gap: 0.5rem; margin-bottom: -0.25rem;">
+            <button id="tabReason" class="mode-tab active" onclick="switchMode('reason')">
+                <span>🧠</span> Reason & Query Pipeline
+            </button>
+            <button id="tabStore" class="mode-tab" onclick="switchMode('store')">
+                <span>📥</span> Ingest & Store Knowledge Fact
+            </button>
+            <button id="tabExplorer" class="mode-tab" onclick="openMemoryModal()">
+                <span>📚</span> Memory Explorer (<span id="tabFactCount">0</span>)
+            </button>
+        </div>
+
+        <!-- Panel 1: Reason Mode Controls -->
+        <section class="control-panel" id="panelReason">
+            <div class="input-row">
+                <div class="input-wrapper">
+                    <input type="text" id="queryInput" class="query-input"
+                        placeholder="Enter query (e.g. 'Who was President of India?' or '1 + x = 3')" />
+                </div>
+                <button id="btnSubmit" class="btn-submit">
+                    <span>Reason</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="preset-group">
+                <span class="preset-label">Presets:</span>
+                <button class="preset-chip" data-query="Who leads Axinix Technologies Development Team?">Who leads Axinix?</button>
+                <button class="preset-chip" data-query="Who was President of India?">Dr. Kalam President</button>
+                <button class="preset-chip" data-query="1 + x = 3">Algebra: 1 + x = 3</button>
+                <button class="preset-chip" data-query="What is 10 - 4?">Math: 10 - 4</button>
+                <button class="preset-chip" data-query="What is the capital of France?">Unsupported Query</button>
+
+                <div class="speed-control">
+                    <label for="speedSelect">Speed:</label>
+                    <select id="speedSelect" class="speed-select">
+                        <option value="250">Normal (250ms)</option>
+                        <option value="100">Fast (100ms)</option>
+                        <option value="0">Instant (0ms)</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Panel 2: Store Fact Mode -->
+        <section class="control-panel" id="panelStore" style="display: none; border-color: rgba(16, 185, 129, 0.4);">
+            <div style="font-size: 0.78rem; font-weight: 700; color: #34d399; margin-bottom: 2px;">
+                📥 Ingest New Knowledge Fact into AR.I.S Brain
+            </div>
+            <div class="input-row">
+                <div class="input-wrapper" style="flex: 3;">
+                    <input type="text" id="factStatementInput" class="query-input"
+                        placeholder="Enter statement to store (e.g. 'Dr. Kalam was President of India' or 'Axinix builds AI OS')" />
+                </div>
+                <div class="input-wrapper" style="flex: 1;">
+                    <input type="text" id="factTopicInput" class="query-input" placeholder="Topic (default: general)" value="general" />
+                </div>
+                <div class="input-wrapper" style="flex: 1;">
+                    <input type="text" id="factTagsInput" class="query-input" placeholder="Tags (e.g. ai,core)" />
+                </div>
+                <button id="btnStoreFact" class="btn-submit" style="background: linear-gradient(135deg, #10b981, #0284c7);" onclick="storeFactFromUI()">
+                    <span>Store Fact</span>
+                    <span>💾</span>
+                </button>
+            </div>
+            <div id="storeFeedbackBox" style="display: none; padding: 8px 12px; border-radius: 6px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); font-size: 0.72rem; font-family: var(--font-mono);">
+                <!-- Dynamic feedback injected here -->
+            </div>
+        </section>
+
+        <!-- 8 Cognitive Pipeline Stages Grid (4x2 Compact) -->
+        <section class="pipeline-grid" id="pipelineGrid">
+            <!-- Stage 1: Input -->
+            <div class="stage-card" id="card-input">
+                <div class="card-header">
+                    <div class="stage-badge">
+                        <span class="stage-num">1</span>
+                        <span class="stage-title">Raw Ingestion</span>
+                    </div>
+                    <span class="stage-status" id="status-input">STANDBY</span>
+                </div>
+                <div class="stage-desc">Natural language stream ingested into sensory interface.</div>
+                <div class="card-content" id="content-input">
+                    <span style="color: var(--text-muted);">Awaiting query...</span>
+                </div>
+            </div>
+
+            <!-- Stage 2: Tokenization -->
+            <div class="stage-card" id="card-tokens">
+                <div class="card-header">
+                    <div class="stage-badge">
+                        <span class="stage-num">2</span>
+                        <span class="stage-title">Lexical Tokenizer (Tier 1)</span>
+                    </div>
+                    <span class="stage-status" id="status-tokens">STANDBY</span>
+                </div>
+                <div class="stage-desc">Deterministic tokenizer segmenting tokens & positions.</div>
+                <div class="card-content" id="content-tokens">
+                    <span style="color: var(--text-muted);">Awaiting query...</span>
+                </div>
+            </div>
+
+            <!-- Stage 3: Candidate Spans -->
+            <div class="stage-card" id="card-candidates">
+                <div class="card-header">
+                    <div class="stage-badge">
+                        <span class="stage-num">3</span>
+                        <span class="stage-title">Candidates (Tier 2)</span>
+                    </div>
+                    <span class="stage-status" id="status-candidates">STANDBY</span>
+                </div>
+                <div class="stage-desc">Dynamic multi-token entity span extraction without dictionaries.</div>
+                <div class="card-content" id="content-candidates">
+                    <span style="color: var(--text-muted);">Awaiting query...</span>
+                </div>
+            </div>
+
+            <!-- Stage 4: Relational Binding -->
+            <div class="stage-card" id="card-bindings">
+                <div class="card-header">
+                    <div class="stage-badge">
+                        <span class="stage-num">4</span>
+                        <span class="stage-title">Relational Binding (Tier 3)</span>
+                    </div>
+                    <span class="stage-status" id="status-bindings">STANDBY</span>
+                </div>
+                <div class="stage-desc">Subject → Relation → Object structural triples binding.</div>
+                <div class="card-content" id="content-bindings">
+                    <span style="color: var(--text-muted);">Awaiting query...</span>
+                </div>
+            </div>
+
+            <!-- Stage 5: Epistemic State -->
+            <div class="stage-card" id="card-epistemic">
+                <div class="card-header">
+                    <div class="stage-badge">
+                        <span class="stage-num">5</span>
+                        <span class="stage-title">Epistemic Assessment</span>
+                    </div>
+                    <span class="stage-status" id="status-epistemic">STANDBY</span>
+                </div>
+                <div class="stage-desc">Appraisal (KNOWN / DERIVABLE / ACQUIRABLE / UNSUPPORTED).</div>
+                <div class="card-content" id="content-epistemic">
+                    <span style="color: var(--text-muted);">Awaiting query...</span>
+                </div>
+            </div>
+
+            <!-- Stage 6: Capability Selection -->
+            <div class="stage-card" id="card-decision">
+                <div class="card-header">
+                    <div class="stage-badge">
+                        <span class="stage-num">6</span>
+                        <span class="stage-title">Capability Dispatch</span>
+                    </div>
+                    <span class="stage-status" id="status-decision">STANDBY</span>
+                </div>
+                <div class="stage-desc">Autonomous routing to neural frame, traversal, or executor.</div>
+                <div class="card-content" id="content-decision">
+                    <span style="color: var(--text-muted);">Awaiting query...</span>
+                </div>
+            </div>
+
+            <!-- Stage 7: Graph Traversal / Retrieval -->
+            <div class="stage-card" id="card-retrieval">
+                <div class="card-header">
+                    <div class="stage-badge">
+                        <span class="stage-num">7</span>
+                        <span class="stage-title">Graph Retrieval</span>
+                    </div>
+                    <span class="stage-status" id="status-retrieval">STANDBY</span>
+                </div>
+                <div class="stage-desc">Symbolic graph traversal and multi-hop belief memory query.</div>
+                <div class="card-content" id="content-retrieval">
+                    <span style="color: var(--text-muted);">Awaiting query...</span>
+                </div>
+            </div>
+
+            <!-- Stage 8: Cognitive Answer -->
+            <div class="stage-card" id="card-answer">
+                <div class="card-header">
+                    <div class="stage-badge">
+                        <span class="stage-num">8</span>
+                        <span class="stage-title">Answer Synthesis</span>
+                    </div>
+                    <span class="stage-status" id="status-answer">STANDBY</span>
+                </div>
+                <div class="stage-desc">Final deduced output with provenance and confidence.</div>
+                <div class="card-content" id="content-answer">
+                    <span style="color: var(--text-muted);">Awaiting query...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Raw Trace JSON Inspector -->
+        <section class="drawer" id="jsonDrawer">
+            <div class="drawer-header" id="drawerToggle">
+                <span class="drawer-title">{ } RAW REASONING TRACE (INSPECTOR)</span>
+                <span style="font-size: 0.68rem; color: var(--text-muted);" id="drawerIcon">▼ Expand</span>
+            </div>
+            <div class="drawer-body" id="drawerBody">
+                <pre id="jsonTraceContent">// Raw execution trace payload will appear here after execution</pre>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        AR.I.S &bull; Artificial Intelligent System &bull; Zero Hard Patches &bull; Generic Cognitive Architecture
+    </footer>
+
+    <script>
+        const STAGE_IDS = ['input', 'tokens', 'candidates', 'bindings', 'epistemic', 'decision', 'retrieval', 'answer'];
+        const queryInput = document.getElementById('queryInput');
+        const btnSubmit = document.getElementById('btnSubmit');
+        const speedSelect = document.getElementById('speedSelect');
+        const jsonDrawer = document.getElementById('jsonDrawer');
+        const drawerToggle = document.getElementById('drawerToggle');
+        const jsonTraceContent = document.getElementById('jsonTraceContent');
+        const drawerIcon = document.getElementById('drawerIcon');
+
+        let isRunning = false;
+        let allLoadedFacts = [];
+
+        // Mode Switching
+        function switchMode(mode) {
+            const panelReason = document.getElementById('panelReason');
+            const panelStore = document.getElementById('panelStore');
+            const tabReason = document.getElementById('tabReason');
+            const tabStore = document.getElementById('tabStore');
+
+            if (mode === 'store') {
+                panelReason.style.display = 'none';
+                panelStore.style.display = 'flex';
+                tabReason.classList.remove('active');
+                tabStore.classList.add('active');
+                document.getElementById('factStatementInput').focus();
+            } else {
+                panelReason.style.display = 'flex';
+                panelStore.style.display = 'none';
+                tabReason.classList.add('active');
+                tabStore.classList.remove('active');
+                queryInput.focus();
+            }
+        }
+
+        // Store Fact from UI
+        async function storeFactFromUI() {
+            const stmtInput = document.getElementById('factStatementInput');
+            const topicInput = document.getElementById('factTopicInput');
+            const tagsInput = document.getElementById('factTagsInput');
+            const btn = document.getElementById('btnStoreFact');
+            const feedback = document.getElementById('storeFeedbackBox');
+
+            const stmt = stmtInput.value.trim();
+            if (!stmt) {
+                alert('Please enter a fact statement to store.');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<span>Storing...</span> <span class="spinner"></span>';
+            feedback.style.display = 'none';
+
+            try {
+                const tagsList = tagsInput.value ? tagsInput.value.split(',').map(t => t.trim()).filter(Boolean) : [];
+                const res = await fetch('/api/brain/facts/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        statement: stmt,
+                        topic: topicInput.value.trim() || 'general',
+                        tags: tagsList,
+                        confidence: 1.0
+                    })
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    const fact = data.fact || {};
+                    let relHtml = '';
+                    if (fact.relations && fact.relations.length > 0) {
+                        relHtml = '<div style="margin-top: 4px; color: #a5f3fc;"><b>Extracted Relations:</b> ' +
+                            fact.relations.map(r => `[${r.subject?.text || r.subject} --(${r.relation?.text || r.relation})--> ${r.object?.text || r.object}]`).join(', ') +
+                            '</div>';
+                    }
+
+                    feedback.style.display = 'block';
+                    feedback.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+                    feedback.style.background = 'rgba(16, 185, 129, 0.08)';
+                    feedback.innerHTML = `
+                        <div style="color: #4ade80; font-weight: 700; margin-bottom: 3px;">✓ Fact Stored in AR.I.S Memory [ID: ${fact.id || 'N/A'}]</div>
+                        <div style="color: #cbd5e1;">"${escapeHtml(fact.statement || stmt)}"</div>
+                        <div style="color: var(--text-muted); margin-top: 2px;">Tokens: <b>${fact.token_count || (fact.tokens?.length || 0)}</b> &bull; Candidates: <b>${fact.candidate_count || (fact.candidates?.length || 0)}</b> &bull; Relations: <b>${fact.relation_count || (fact.relations?.length || 0)}</b></div>
+                        ${relHtml}
+                        <div style="margin-top: 6px;">
+                            <button class="preset-chip" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.4);" onclick="reasonAboutFact('${escapeHtml(stmt)}')">
+                                🧠 Reason about this fact now &rarr;
+                            </button>
+                        </div>
+                    `;
+
+                    stmtInput.value = '';
+                    fetchFactCount();
+                } else {
+                    feedback.style.display = 'block';
+                    feedback.style.borderColor = 'rgba(239, 68, 68, 0.4)';
+                    feedback.style.background = 'rgba(239, 68, 68, 0.08)';
+                    feedback.innerHTML = `<span style="color: #f87171; font-weight: 700;">Error:</span> ${escapeHtml(JSON.stringify(data.errors || data.error || 'Failed to store fact'))}`;
+                }
+            } catch (err) {
+                feedback.style.display = 'block';
+                feedback.innerHTML = `<span style="color: #f87171;">Network Error: ${escapeHtml(err.message)}</span>`;
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<span>Store Fact</span> <span>💾</span>';
+            }
+        }
+
+        function reasonAboutFact(stmt) {
+            switchMode('reason');
+            queryInput.value = `Who or what relates to: ${stmt}`;
+            executeReasoning(stmt);
+        }
+
+        // Memory Explorer Modal Handlers
+        async function openMemoryModal() {
+            document.getElementById('memoryModal').style.display = 'flex';
+            await fetchMemoryFacts();
+        }
+
+        function closeMemoryModal() {
+            document.getElementById('memoryModal').style.display = 'none';
+        }
+
+        async function fetchFactCount() {
+            try {
+                const res = await fetch('/api/brain/facts/?limit=1');
+                const data = await res.json();
+                const total = data.total || data.count || 0;
+                document.getElementById('headerFactCount').innerText = `${total} Facts`;
+                document.getElementById('tabFactCount').innerText = `${total}`;
+                document.getElementById('modalFactCountBadge').innerText = `${total} Facts`;
+            } catch (e) {}
+        }
+
+        async function fetchMemoryFacts() {
+            const list = document.getElementById('memoryFactsList');
+            list.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 1.5rem;">Loading facts from AR.I.S Brain...</div>';
+
+            try {
+                const res = await fetch('/api/brain/facts/?limit=50');
+                const data = await res.json();
+                allLoadedFacts = data.results || [];
+                renderMemoryFactsList(allLoadedFacts);
+                fetchFactCount();
+            } catch (err) {
+                list.innerHTML = `<div style="color: #f87171; text-align: center;">Failed to load memory facts: ${escapeHtml(err.message)}</div>`;
+            }
+        }
+
+        function renderMemoryFactsList(facts) {
+            const list = document.getElementById('memoryFactsList');
+            if (!facts || facts.length === 0) {
+                list.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 1.5rem;">No facts found in AR.I.S memory. Store some facts first!</div>';
+                return;
+            }
+
+            let html = '';
+            facts.forEach((f, idx) => {
+                let tagsBadge = '';
+                if (f.tags && f.tags.length > 0) {
+                    tagsBadge = f.tags.map(t => `<span class="badge" style="font-size: 0.65rem; padding: 1px 5px;">#${escapeHtml(t)}</span>`).join(' ');
+                }
+
+                html += `
+                    <div class="fact-card">
+                        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                            <div style="font-size: 0.82rem; font-weight: 600; color: #f8fafc;">${idx + 1}. "${escapeHtml(f.statement)}"</div>
+                            <span class="badge" style="font-size: 0.65rem;">${escapeHtml(f.topic || 'general')}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.68rem; color: var(--text-muted); font-family: var(--font-mono); margin-top: 2px;">
+                            <div>
+                                Tokens: <b>${f.token_count || 0}</b> &bull; Candidates: <b>${f.candidate_count || 0}</b> &bull; Relations: <b>${f.relation_count || 0}</b>
+                                ${tagsBadge}
+                            </div>
+                            <button class="preset-chip" style="font-size: 0.68rem; padding: 1px 6px; color: #38bdf8;" onclick="closeMemoryModal(); queryInput.value='${escapeHtml(f.statement)}'; executeReasoning('${escapeHtml(f.statement)}');">
+                                🔬 Inspect / Reason
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            list.innerHTML = html;
+        }
+
+        function filterMemoryFacts() {
+            const query = document.getElementById('memorySearchInput').value.toLowerCase().trim();
+            if (!query) {
+                renderMemoryFactsList(allLoadedFacts);
+                return;
+            }
+            const filtered = allLoadedFacts.filter(f => (f.statement || '').toLowerCase().includes(query) || (f.topic || '').toLowerCase().includes(query));
+            renderMemoryFactsList(filtered);
+        }
+
+        // Wire Memory Explorer button
+        document.getElementById('btnMemoryExplorer').addEventListener('click', openMemoryModal);
+
+        // Toggle JSON Drawer
+        drawerToggle.addEventListener('click', () => {
+            jsonDrawer.classList.toggle('open');
+            const isOpen = jsonDrawer.classList.contains('open');
+            if (drawerIcon) drawerIcon.textContent = isOpen ? '▲ Collapse' : '▼ Expand';
+        });
+
+        // Speed mapping
+        function getSpeedMs() {
+            return parseInt(speedSelect.value, 10);
+        }
+
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Presets Binding
+        document.querySelectorAll('.preset-chip[data-query]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const q = btn.getAttribute('data-query');
+                queryInput.value = q;
+                executeReasoning(q);
+            });
+        });
+
+        // Submit Button Event
+        btnSubmit.addEventListener('click', () => {
+            const query = queryInput.value.trim();
+            if (query) {
+                executeReasoning(query);
+            }
+        });
+
+        queryInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const query = queryInput.value.trim();
+                if (query) {
+                    executeReasoning(query);
+                }
+            }
+        });
+
+        async function executeReasoning(queryText) {
+            if (isRunning) return;
+            isRunning = true;
+            btnSubmit.disabled = true;
+
+            resetPipelineUI();
+
+            const speed = getSpeedMs();
+
+            try {
+                const res = await fetch('/api/brain/trace/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: queryText })
+                });
+
+                if (!res.ok) {
+                    throw new Error(`Server returned HTTP ${res.status}`);
+                }
+
+                const data = await res.json();
+                jsonTraceContent.textContent = JSON.stringify(data, null, 2);
+
+                const stages = data.stages || [];
+                for (let i = 0; i < stages.length; i++) {
+                    const st = stages[i];
+                    await renderStageStep(st, speed);
+                }
+
+            } catch (err) {
+                console.error(err);
+                const answerCard = document.getElementById('card-answer');
+                answerCard.className = 'stage-card active';
+                document.getElementById('status-answer').innerText = 'ERROR';
+                document.getElementById('content-answer').innerHTML = `
+                    <div style="color: #f87171; font-weight: 600;">Execution Error</div>
+                    <div style="font-size: 0.68rem; color: var(--text-muted);">${escapeHtml(err.message)}</div>
+                `;
+            } finally {
+                isRunning = false;
+                btnSubmit.disabled = false;
+            }
+        }
+
+        function resetPipelineUI() {
+            STAGE_IDS.forEach(id => {
+                const card = document.getElementById(`card-${id}`);
+                const status = document.getElementById(`status-${id}`);
+                const content = document.getElementById(`content-${id}`);
+
+                card.className = 'stage-card pending';
+                status.innerText = 'WAITING';
+                status.style.color = 'var(--text-muted)';
+                content.innerHTML = '<span style="color: var(--text-muted); font-size: 0.68rem;">...</span>';
+            });
+        }
+
+        async function renderStageStep(stage, speed) {
+            const id = stage.stage_id;
+            const card = document.getElementById(`card-${id}`);
+            const status = document.getElementById(`status-${id}`);
+            const content = document.getElementById(`content-${id}`);
+
+            card.className = 'stage-card active';
+            status.innerText = 'PROCESSING';
+            status.style.color = 'var(--cyan-glow)';
+
+            if (speed > 0) {
+                await delay(speed);
+            }
+
+            renderStageContent(id, stage.data, content);
+
+            card.className = 'stage-card completed';
+            status.innerText = 'DONE';
+            status.style.color = '#34d399';
+        }
+
+        function renderStageContent(stageId, data, container) {
+            container.innerHTML = '';
+
+            switch (stageId) {
+                case 'input':
+                    container.innerHTML = `
+                        <div style="color: #cbd5e1; font-weight: 600;">"${escapeHtml(data.raw_query || '')}"</div>
+                        <div style="font-size: 0.68rem; color: var(--text-muted); margin-top: 2px;">
+                            Length: <b>${data.char_length || 0}</b> chars &bull; Words: <b>${data.word_count || 0}</b>
+                        </div>
+                    `;
+                    break;
+
+                case 'tokens':
+                    const tokens = data.tokens || [];
+                    if (tokens.length === 0) {
+                        container.innerHTML = '<span style="color: var(--text-muted);">No tokens</span>';
+                        return;
+                    }
+                    const tokenContainer = document.createElement('div');
+                    tokenContainer.className = 'token-list';
+                    tokens.forEach(t => {
+                        const chip = document.createElement('span');
+                        chip.className = 'token-chip';
+                        chip.innerHTML = `${escapeHtml(t.raw || t.token)}<span class="token-pos">${escapeHtml(t.token_type || 'token')}</span>`;
+                        tokenContainer.appendChild(chip);
+                    });
+                    container.appendChild(tokenContainer);
+                    break;
+
+                case 'candidates':
+                    const cands = data.candidates || [];
+                    if (cands.length === 0) {
+                        container.innerHTML = '<span style="color: var(--text-muted);">No candidates extracted</span>';
+                        return;
+                    }
+                    const candContainer = document.createElement('div');
+                    candContainer.className = 'candidate-list';
+                    cands.forEach(c => {
+                        const chip = document.createElement('span');
+                        chip.className = 'candidate-chip';
+                        chip.innerText = c.text || c.raw || c;
+                        candContainer.appendChild(chip);
+                    });
+                    container.appendChild(candContainer);
+                    break;
+
+                case 'bindings':
+                    const bindings = data.bindings || [];
+                    if (bindings.length === 0) {
+                        container.innerHTML = '<span style="color: var(--text-muted);">No relational bindings extracted.</span>';
+                        return;
+                    }
+                    bindings.forEach(b => {
+                        const row = document.createElement('div');
+                        row.className = 'binding-row';
+                        row.innerHTML = `
+                            <span>${escapeHtml(b.subject || '?')}</span>
+                            <span class="binding-arrow">&rarr; ${escapeHtml(b.relation || 'rel')} &rarr;</span>
+                            <span>${escapeHtml(b.object || '?')}</span>
+                        `;
+                        container.appendChild(row);
+                    });
+                    break;
+
+                case 'epistemic':
+                    const stateClass = `state-${data.state || 'UNSUPPORTED'}`;
+                    const goalDisplay = typeof data.goal === 'object' && data.goal !== null
+                        ? (data.goal.target_variable || data.goal.target_type || JSON.stringify(data.goal))
+                        : (data.goal || 'General Reason');
+                    container.innerHTML = `
+                        <div>
+                            <span class="epistemic-badge ${stateClass}">${escapeHtml(data.state || 'UNKNOWN')}</span>
+                        </div>
+                        <div style="font-size: 0.68rem; color: var(--text-muted); margin-top: 3px;">
+                            Deficit: <b>${escapeHtml(data.deficit || 'None')}</b><br>
+                            Goal: <b>${escapeHtml(goalDisplay)}</b>
+                        </div>
+                    `;
+                    break;
+
+                case 'decision':
+                    const op = data.cognitive_decision?.operation || data.matched_capability || 'Direct Evaluation';
+                    container.innerHTML = `
+                        <div style="color: #818cf8; font-weight: 600;">Dispatched: ${escapeHtml(data.matched_capability || 'none')}</div>
+                        <div style="font-size: 0.68rem; color: var(--text-secondary); margin-top: 2px;">
+                            Op: <b>${escapeHtml(op)}</b> &bull; Anchor: <b>${escapeHtml(data.cognitive_decision?.anchor || 'N/A')}</b>
+                        </div>
+                    `;
+                    break;
+
+                case 'retrieval':
+                    if (data.matches_count > 0 && data.matched_facts && data.matched_facts.length > 0) {
+                        let html = `<div style="color: #06b6d4; margin-bottom: 2px;">${data.matches_count} matching memory node(s):</div>`;
+                        data.matched_facts.forEach(f => {
+                            const stmt = typeof f === 'object' && f !== null ? (f.statement || f.text || f.answer || JSON.stringify(f)) : String(f);
+                            html += `<div style="padding: 2px 5px; background: rgba(6, 182, 212, 0.08); border-radius: 3px; margin-bottom: 2px; font-size: 0.68rem; color: #a5f3fc;">${escapeHtml(stmt)}</div>`;
+                        });
+                        container.innerHTML = html;
+                    } else if (data.applied_template && data.applied_template.path_summary) {
+                        container.innerHTML = `<div style="color: #06b6d4; font-size: 0.68rem;">Path: ${escapeHtml(data.applied_template.path_summary)}</div>`;
+                    } else {
+                        container.innerHTML = `<span style="color: var(--text-muted);">Matches: 0 (No memory path found)</span>`;
+                    }
+                    break;
+
+                case 'answer':
+                    const naturalSentence = data.sentence || (data.answers && data.answers.length > 0 ? data.answers.map(a => typeof a === 'object' ? (a.statement || a.answer || JSON.stringify(a)) : a).join(', ') : '');
+
+                    if (naturalSentence) {
+                        let provHtml = '';
+                        if (data.provenance && data.provenance.length > 0) {
+                            const provText = data.provenance.map(p => typeof p === 'object' ? (p.statement || JSON.stringify(p)) : p).join('; ');
+                            provHtml = `<div class="provenance-tag">Source: ${escapeHtml(provText)}</div>`;
+                        }
+                        container.innerHTML = `
+                            <div class="answer-box">
+                                <span style="color: #22c55e;">✔</span>
+                                <span>${escapeHtml(naturalSentence)}</span>
+                            </div>
+                            ${provHtml}
+                        `;
+                    } else {
+                        container.innerHTML = `
+                            <div style="color: #f87171; font-weight: 600; padding: 2px 0;">
+                                No answer deduced.
+                            </div>
+                            <div style="font-size: 0.68rem; color: var(--text-muted);">Status: ${escapeHtml(data.status || 'unsupported')}</div>
+                        `;
+                    }
+                    break;
+            }
+        }
+
+        function escapeHtml(str) {
+            if (str === null || str === undefined) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchFactCount();
+        });
+    </script>
+</body>
+
+</html>

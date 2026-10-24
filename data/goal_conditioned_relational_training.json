@@ -1,0 +1,2193 @@
+{
+  "metadata": {
+    "name": "AR.I.S Goal-Conditioned Relational Training & Target Discrimination Dataset",
+    "version": "1.0",
+    "principle": "Synthetic relational worlds with counterfactual same-graph negatives",
+    "subspaces": [
+      "Subspace A: Goal -> Path / Candidate Compatibility",
+      "Subspace B: Predicate Semantic Alignment",
+      "Subspace C: Entity & Target Semantic Types",
+      "Subspace D: Epistemic Support"
+    ]
+  },
+  "predicate_semantic_alignment": {
+    "derivational_morphology": [
+      {
+        "source": "founder",
+        "target": "founded",
+        "relation_cluster": "founding"
+      },
+      {
+        "source": "founder of",
+        "target": "founded",
+        "relation_cluster": "founding"
+      },
+      {
+        "source": "co-founder",
+        "target": "founded",
+        "relation_cluster": "founding"
+      },
+      {
+        "source": "sponsor",
+        "target": "sponsored by",
+        "relation_cluster": "sponsorship"
+      },
+      {
+        "source": "sponsor of",
+        "target": "sponsored",
+        "relation_cluster": "sponsorship"
+      },
+      {
+        "source": "captains",
+        "target": "commanded",
+        "relation_cluster": "command"
+      },
+      {
+        "source": "captain of",
+        "target": "commands",
+        "relation_cluster": "command"
+      },
+      {
+        "source": "inventor of",
+        "target": "invented",
+        "relation_cluster": "invention"
+      },
+      {
+        "source": "creator of",
+        "target": "created",
+        "relation_cluster": "creation"
+      },
+      {
+        "source": "director of",
+        "target": "directed",
+        "relation_cluster": "direction"
+      },
+      {
+        "source": "operator of",
+        "target": "operates",
+        "relation_cluster": "operation"
+      },
+      {
+        "source": "designer of",
+        "target": "designed",
+        "relation_cluster": "design"
+      },
+      {
+        "source": "author of",
+        "target": "authored",
+        "relation_cluster": "authorship"
+      },
+      {
+        "source": "chair of",
+        "target": "chairs",
+        "relation_cluster": "leadership"
+      },
+      {
+        "source": "manager of",
+        "target": "managed by",
+        "relation_cluster": "management"
+      },
+      {
+        "source": "manager",
+        "target": "managed",
+        "relation_cluster": "management"
+      },
+      {
+        "source": "integrated by",
+        "target": "integrated into",
+        "relation_cluster": "integration"
+      },
+      {
+        "source": "integrated",
+        "target": "integrated into",
+        "relation_cluster": "integration"
+      },
+      {
+        "source": "command",
+        "target": "executes",
+        "relation_cluster": "execution"
+      },
+      {
+        "source": "operation",
+        "target": "operates",
+        "relation_cluster": "operation"
+      },
+      {
+        "source": "execution",
+        "target": "executed",
+        "relation_cluster": "execution"
+      },
+      {
+        "source": "launch",
+        "target": "launched",
+        "relation_cluster": "execution"
+      },
+      {
+        "source": "launcher",
+        "target": "launches",
+        "relation_cluster": "execution"
+      },
+      {
+        "source": "instruction",
+        "target": "instructed",
+        "relation_cluster": "command"
+      }
+    ],
+    "lexical_semantic_alignment": [
+      {
+        "source": "established",
+        "target": "founded",
+        "relation_cluster": "founding"
+      },
+      {
+        "source": "establish",
+        "target": "founded",
+        "relation_cluster": "founding"
+      },
+      {
+        "source": "started",
+        "target": "founded",
+        "relation_cluster": "founding"
+      },
+      {
+        "source": "set up",
+        "target": "founded",
+        "relation_cluster": "founding"
+      },
+      {
+        "source": "supervises",
+        "target": "overseeing",
+        "relation_cluster": "supervision"
+      },
+      {
+        "source": "supervised",
+        "target": "oversees",
+        "relation_cluster": "supervision"
+      },
+      {
+        "source": "oversees",
+        "target": "supervises",
+        "relation_cluster": "supervision"
+      },
+      {
+        "source": "heads",
+        "target": "leads",
+        "relation_cluster": "leadership"
+      },
+      {
+        "source": "leads",
+        "target": "heads",
+        "relation_cluster": "leadership"
+      },
+      {
+        "source": "manages",
+        "target": "directs",
+        "relation_cluster": "management"
+      },
+      {
+        "source": "purchased",
+        "target": "acquired",
+        "relation_cluster": "acquisition"
+      },
+      {
+        "source": "bought",
+        "target": "acquired",
+        "relation_cluster": "acquisition"
+      },
+      {
+        "source": "constructed",
+        "target": "built",
+        "relation_cluster": "construction"
+      },
+      {
+        "source": "situated in",
+        "target": "located in",
+        "relation_cluster": "location"
+      },
+      {
+        "source": "based in",
+        "target": "headquartered in",
+        "relation_cluster": "headquarters"
+      },
+      {
+        "source": "stationed in",
+        "target": "based in",
+        "relation_cluster": "location"
+      },
+      {
+        "source": "open",
+        "target": "launch",
+        "relation_cluster": "execution"
+      },
+      {
+        "source": "start",
+        "target": "run",
+        "relation_cluster": "execution"
+      },
+      {
+        "source": "execute",
+        "target": "run",
+        "relation_cluster": "execution"
+      },
+      {
+        "source": "command prompt",
+        "target": "terminal",
+        "relation_cluster": "instrumentation"
+      },
+      {
+        "source": "shell",
+        "target": "command line",
+        "relation_cluster": "instrumentation"
+      },
+      {
+        "source": "using command prompt",
+        "target": "in command prompt",
+        "relation_cluster": "instrumentation"
+      },
+      {
+        "source": "how to open",
+        "target": "command to open",
+        "relation_cluster": "query_formulation"
+      },
+      {
+        "source": "how to launch",
+        "target": "syntax to run",
+        "relation_cluster": "query_formulation"
+      },
+      {
+        "source": "using terminal",
+        "target": "in shell",
+        "relation_cluster": "instrumentation"
+      }
+    ],
+    "paraphrastic_relational_transforms": [
+      {
+        "source": "receives power from",
+        "target": "transmits power to",
+        "relation_cluster": "energy_transfer",
+        "inverse": true
+      },
+      {
+        "source": "receives energy from",
+        "target": "delivers energy to",
+        "relation_cluster": "energy_transfer",
+        "inverse": true
+      },
+      {
+        "source": "supplies components to",
+        "target": "receives components from",
+        "relation_cluster": "supply_chain",
+        "inverse": true
+      },
+      {
+        "source": "subsidiary of",
+        "target": "parent company of",
+        "relation_cluster": "ownership",
+        "inverse": true
+      },
+      {
+        "source": "operates vessel",
+        "target": "vessel operated by",
+        "relation_cluster": "operation",
+        "inverse": true
+      },
+      {
+        "source": "awarded",
+        "target": "recipient of",
+        "relation_cluster": "honor",
+        "inverse": true
+      },
+      {
+        "source": "granted prize to",
+        "target": "won prize from",
+        "relation_cluster": "honor",
+        "inverse": true
+      }
+    ]
+  },
+  "target_semantic_types": {
+    "ORGANIZATION": {
+      "query_patterns": [
+        "Which company",
+        "Which organization",
+        "Which enterprise",
+        "Which corporation",
+        "Which firm",
+        "Which institution",
+        "Which agency",
+        "Which consortium",
+        "Which startup"
+      ],
+      "context_indicators": [
+        "company",
+        "corporation",
+        "inc",
+        "ltd",
+        "technologies",
+        "firm",
+        "institute",
+        "enterprise",
+        "group",
+        "labs",
+        "organization",
+        "dynamics",
+        "systems",
+        "aerospace",
+        "commission",
+        "authority",
+        "tribunal",
+        "agency",
+        "registry",
+        "administration",
+        "council",
+        "board",
+        "bureau"
+      ],
+      "incoming_relations": [
+        "founded",
+        "established",
+        "chairs",
+        "directs",
+        "operates",
+        "supplies power to",
+        "provides services to",
+        "owns terminal at",
+        "acquired",
+        "company of",
+        "integrated into",
+        "procures components from",
+        "procured from",
+        "audited by",
+        "governed by",
+        "appeals to"
+      ],
+      "outgoing_relations": [
+        "headquartered in",
+        "based in",
+        "stationed in",
+        "operates in",
+        "supplies power to",
+        "manufactures",
+        "developed",
+        "owns terminal at",
+        "partner of",
+        "provides services to"
+      ],
+      "interrogative_prior": 0.4
+    },
+    "PERSON": {
+      "query_patterns": [
+        "Who",
+        "Which researcher",
+        "Which founder",
+        "Which scientist",
+        "Which engineer",
+        "Which director",
+        "Which captain",
+        "Which executive",
+        "Who is the person",
+        "Who led",
+        "Who captains"
+      ],
+      "context_indicators": [
+        "dr",
+        "mr",
+        "ms",
+        "prof",
+        "researcher",
+        "engineer",
+        "director",
+        "founder",
+        "captain",
+        "scientist",
+        "partner",
+        "justice"
+      ],
+      "incoming_relations": [
+        "is brother of",
+        "brother of",
+        "partner of",
+        "patner of",
+        "supervises",
+        "supervised by",
+        "mentor is",
+        "mentors",
+        "name is",
+        "chairs",
+        "leads",
+        "presided over by",
+        "managed by"
+      ],
+      "outgoing_relations": [
+        "founded",
+        "leads",
+        "chairs",
+        "supervises",
+        "commanded",
+        "captains",
+        "directs",
+        "invented",
+        "authored",
+        "is brother of",
+        "partner of",
+        "directs infrastructure at"
+      ],
+      "interrogative_prior": 0.5
+    },
+    "GPE_CITY": {
+      "query_patterns": [
+        "Which city",
+        "In which city",
+        "Where is headquartered",
+        "Where is based",
+        "What city is",
+        "Where is the terminal located",
+        "where does company",
+        "where does",
+        "Where is located",
+        "port of registry"
+      ],
+      "context_indicators": [
+        "city",
+        "port",
+        "capital",
+        "metropolis",
+        "town",
+        "urban center"
+      ],
+      "incoming_relations": [
+        "headquartered in",
+        "based in",
+        "stationed in",
+        "located in",
+        "owns terminal at",
+        "port of registry",
+        "operates in"
+      ],
+      "outgoing_relations": [
+        "situated in",
+        "is in"
+      ],
+      "interrogative_prior": 0.3
+    },
+    "GPE_STATE": {
+      "query_patterns": [
+        "Which state",
+        "In which state",
+        "In which province",
+        "Which province",
+        "What state is",
+        "What province is",
+        "In which prefecture",
+        "Which prefecture"
+      ],
+      "context_indicators": [
+        "state",
+        "province",
+        "prefecture",
+        "region",
+        "territory",
+        "canton"
+      ],
+      "incoming_relations": [
+        "is in province",
+        "in state",
+        "province of",
+        "prefecture of",
+        "canton of"
+      ],
+      "outgoing_relations": [
+        "is in",
+        "part of",
+        "situated in"
+      ],
+      "interrogative_prior": 0.2
+    },
+    "GPE_COUNTRY": {
+      "query_patterns": [
+        "Which country",
+        "In which country",
+        "Which nation",
+        "What country is",
+        "In which nation is",
+        "Which state of registry",
+        "What nation"
+      ],
+      "context_indicators": [
+        "country",
+        "nation",
+        "republic",
+        "kingdom",
+        "federation",
+        "commonwealth",
+        "sovereign",
+        "principality",
+        "realm",
+        "homeland"
+      ],
+      "incoming_relations": [
+        "is in",
+        "located in country",
+        "nation of",
+        "situated in",
+        "sovereign territory of",
+        "jurisdiction of"
+      ],
+      "outgoing_relations": [],
+      "interrogative_prior": 0.2
+    },
+    "PRODUCT_TECHNOLOGY": {
+      "query_patterns": [
+        "Which product",
+        "Which technology",
+        "Which platform",
+        "Which system",
+        "Which spacecraft",
+        "Which algorithm",
+        "Which telescope",
+        "Which vessel"
+      ],
+      "context_indicators": [
+        "platform",
+        "engine",
+        "system",
+        "satellite",
+        "vessel",
+        "module",
+        "model",
+        "network"
+      ],
+      "incoming_relations": [
+        "manufactures",
+        "developed",
+        "commanded",
+        "captains",
+        "operates vessel",
+        "built"
+      ],
+      "outgoing_relations": [
+        "awarded",
+        "recipient of",
+        "operated by",
+        "receives power from",
+        "transmits power to"
+      ],
+      "interrogative_prior": 0.2
+    },
+    "AWARD_HONOR": {
+      "query_patterns": [
+        "Which award",
+        "Which prize",
+        "Which honor",
+        "What medal",
+        "Which fellowship"
+      ],
+      "context_indicators": [
+        "prize",
+        "award",
+        "medal",
+        "fellowship",
+        "honor",
+        "trophy"
+      ],
+      "incoming_relations": [
+        "awarded",
+        "granted prize to",
+        "recipient of",
+        "won",
+        "granted award"
+      ],
+      "outgoing_relations": [],
+      "interrogative_prior": 0.1
+    },
+    "FACILITY": {
+      "query_patterns": [
+        "Which facility",
+        "What facility",
+        "Which hangar",
+        "What hangar",
+        "Which center",
+        "What center",
+        "Which complex",
+        "Which station",
+        "Which site"
+      ],
+      "context_indicators": [
+        "facility",
+        "hangar",
+        "center",
+        "centre",
+        "station",
+        "grid",
+        "complex",
+        "site",
+        "terminal",
+        "lab",
+        "laboratory"
+      ],
+      "incoming_relations": [
+        "operates out of",
+        "receives power from",
+        "hosts servers at",
+        "stationed at",
+        "situated at"
+      ],
+      "outgoing_relations": [
+        "receives power from",
+        "hosts servers at",
+        "supplies power to",
+        "situated in",
+        "interconnected with"
+      ],
+      "interrogative_prior": 0.3
+    },
+    "CAPABILITY_ENVIRONMENT": {
+      "query_patterns": [
+        "Using command prompt",
+        "In command prompt",
+        "Via terminal",
+        "In the shell",
+        "Using powershell",
+        "Which command prompt",
+        "Which terminal",
+        "Which execution tool",
+        "Which capability",
+        "Open command prompt",
+        "Using terminal",
+        "Using shell"
+      ],
+      "context_indicators": [
+        "command prompt",
+        "cmd",
+        "terminal",
+        "shell",
+        "powershell",
+        "cli",
+        "command line",
+        "console",
+        "browser",
+        "python",
+        "environment"
+      ],
+      "incoming_relations": [
+        "executed in",
+        "runs on",
+        "invoked via",
+        "opened in",
+        "launched through"
+      ],
+      "outgoing_relations": [
+        "executes",
+        "runs",
+        "launches",
+        "opens",
+        "dispatches"
+      ],
+      "interrogative_prior": 0.5
+    },
+    "COMMAND_OPERATION": {
+      "query_patterns": [
+        "Open notepad",
+        "Open calculator",
+        "Launch program",
+        "Open application",
+        "How to open",
+        "How to launch",
+        "Run command",
+        "Check git status",
+        "Check status",
+        "List directory",
+        "How to run",
+        "Open notepad using command prompt",
+        "Using command prompt how to open notepad"
+      ],
+      "context_indicators": [
+        "open",
+        "launch",
+        "start",
+        "run",
+        "execute",
+        "inspect",
+        "check",
+        "notepad",
+        "calculator",
+        "status",
+        "process",
+        "program",
+        "application",
+        "command"
+      ],
+      "incoming_relations": [
+        "requires command",
+        "executed by",
+        "command to open",
+        "syntax for"
+      ],
+      "outgoing_relations": [
+        "executes on",
+        "requires tool",
+        "launches in"
+      ],
+      "interrogative_prior": 0.6
+    }
+  },
+  "synthetic_graphs": [
+    {
+      "graph_id": "synth_graph_01",
+      "domain": "aerospace_and_manufacturing",
+      "facts": [
+        {
+          "subject": "Elena Rostova",
+          "relation": "founded",
+          "object": "Vanguard Dynamics",
+          "statement": "Elena Rostova founded Vanguard Dynamics."
+        },
+        {
+          "subject": "Vanguard Dynamics",
+          "relation": "headquartered in",
+          "object": "Austin",
+          "statement": "Vanguard Dynamics is headquartered in Austin."
+        },
+        {
+          "subject": "Austin",
+          "relation": "situated in",
+          "object": "Texas",
+          "statement": "Austin is situated in Texas."
+        },
+        {
+          "subject": "Texas",
+          "relation": "is in",
+          "object": "United States",
+          "statement": "Texas is in the United States."
+        },
+        {
+          "subject": "Vanguard Dynamics",
+          "relation": "manufactures",
+          "object": "AeroStrobe Propulsion",
+          "statement": "Vanguard Dynamics manufactures AeroStrobe Propulsion."
+        },
+        {
+          "subject": "Elena Rostova",
+          "relation": "supervises",
+          "object": "Marcus Chen",
+          "statement": "Elena Rostova supervises Marcus Chen."
+        }
+      ],
+      "entities": {
+        "Elena Rostova": "PERSON",
+        "Vanguard Dynamics": "ORGANIZATION",
+        "Austin": "GPE_CITY",
+        "Texas": "GPE_STATE",
+        "United States": "GPE_COUNTRY",
+        "AeroStrobe Propulsion": "PRODUCT_TECHNOLOGY",
+        "Marcus Chen": "PERSON"
+      },
+      "qa_pairs": [
+        {
+          "question": "Who is the founder of Vanguard Dynamics?",
+          "target_type": "PERSON",
+          "goal_relation": "founded",
+          "anchor": "Vanguard Dynamics",
+          "positive_candidate": {
+            "entity": "Elena Rostova",
+            "type": "PERSON",
+            "path": [
+              "Vanguard Dynamics",
+              "founded",
+              "Elena Rostova"
+            ],
+            "hop_count": 1
+          },
+          "negative_candidates": [
+            {
+              "entity": "Austin",
+              "type": "GPE_CITY",
+              "reason": "overshot_target",
+              "path": [
+                "Vanguard Dynamics",
+                "headquartered in",
+                "Austin"
+              ]
+            },
+            {
+              "entity": "Texas",
+              "type": "GPE_STATE",
+              "reason": "overshot_target",
+              "path": [
+                "Vanguard Dynamics",
+                "headquartered in",
+                "Austin",
+                "situated in",
+                "Texas"
+              ]
+            },
+            {
+              "entity": "United States",
+              "type": "GPE_COUNTRY",
+              "reason": "overshot_target",
+              "path": [
+                "Vanguard Dynamics",
+                "headquartered in",
+                "Austin",
+                "situated in",
+                "Texas",
+                "is in",
+                "United States"
+              ]
+            },
+            {
+              "entity": "AeroStrobe Propulsion",
+              "type": "PRODUCT_TECHNOLOGY",
+              "reason": "wrong_target_type",
+              "path": [
+                "Vanguard Dynamics",
+                "manufactures",
+                "AeroStrobe Propulsion"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        },
+        {
+          "question": "Which company was established by Elena Rostova?",
+          "target_type": "ORGANIZATION",
+          "goal_relation": "established",
+          "anchor": "Elena Rostova",
+          "positive_candidate": {
+            "entity": "Vanguard Dynamics",
+            "type": "ORGANIZATION",
+            "path": [
+              "Elena Rostova",
+              "founded",
+              "Vanguard Dynamics"
+            ],
+            "hop_count": 1
+          },
+          "negative_candidates": [
+            {
+              "entity": "Marcus Chen",
+              "type": "PERSON",
+              "reason": "wrong_branch",
+              "path": [
+                "Elena Rostova",
+                "supervises",
+                "Marcus Chen"
+              ]
+            },
+            {
+              "entity": "Austin",
+              "type": "GPE_CITY",
+              "reason": "overshot_target",
+              "path": [
+                "Elena Rostova",
+                "founded",
+                "Vanguard Dynamics",
+                "headquartered in",
+                "Austin"
+              ]
+            },
+            {
+              "entity": "Texas",
+              "type": "GPE_STATE",
+              "reason": "overshot_target",
+              "path": [
+                "Elena Rostova",
+                "founded",
+                "Vanguard Dynamics",
+                "headquartered in",
+                "Austin",
+                "situated in",
+                "Texas"
+              ]
+            },
+            {
+              "entity": "AeroStrobe Propulsion",
+              "type": "PRODUCT_TECHNOLOGY",
+              "reason": "wrong_target_type",
+              "path": [
+                "Elena Rostova",
+                "founded",
+                "Vanguard Dynamics",
+                "manufactures",
+                "AeroStrobe Propulsion"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        },
+        {
+          "question": "In which city is the company founded by Elena Rostova headquartered?",
+          "target_type": "GPE_CITY",
+          "goal_relation": "headquartered in",
+          "anchor": "Elena Rostova",
+          "positive_candidate": {
+            "entity": "Austin",
+            "type": "GPE_CITY",
+            "path": [
+              "Elena Rostova",
+              "founded",
+              "Vanguard Dynamics",
+              "headquartered in",
+              "Austin"
+            ],
+            "hop_count": 2
+          },
+          "negative_candidates": [
+            {
+              "entity": "Vanguard Dynamics",
+              "type": "ORGANIZATION",
+              "reason": "undershot_target",
+              "path": [
+                "Elena Rostova",
+                "founded",
+                "Vanguard Dynamics"
+              ]
+            },
+            {
+              "entity": "Texas",
+              "type": "GPE_STATE",
+              "reason": "overshot_target",
+              "path": [
+                "Elena Rostova",
+                "founded",
+                "Vanguard Dynamics",
+                "headquartered in",
+                "Austin",
+                "situated in",
+                "Texas"
+              ]
+            },
+            {
+              "entity": "United States",
+              "type": "GPE_COUNTRY",
+              "reason": "overshot_target",
+              "path": [
+                "Elena Rostova",
+                "founded",
+                "Vanguard Dynamics",
+                "headquartered in",
+                "Austin",
+                "situated in",
+                "Texas",
+                "is in",
+                "United States"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        },
+        {
+          "question": "Which state is the headquarters of Vanguard Dynamics located in?",
+          "target_type": "GPE_STATE",
+          "goal_relation": "situated in",
+          "anchor": "Vanguard Dynamics",
+          "positive_candidate": {
+            "entity": "Texas",
+            "type": "GPE_STATE",
+            "path": [
+              "Vanguard Dynamics",
+              "headquartered in",
+              "Austin",
+              "situated in",
+              "Texas"
+            ],
+            "hop_count": 2
+          },
+          "negative_candidates": [
+            {
+              "entity": "Austin",
+              "type": "GPE_CITY",
+              "reason": "undershot_target",
+              "path": [
+                "Vanguard Dynamics",
+                "headquartered in",
+                "Austin"
+              ]
+            },
+            {
+              "entity": "United States",
+              "type": "GPE_COUNTRY",
+              "reason": "overshot_target",
+              "path": [
+                "Vanguard Dynamics",
+                "headquartered in",
+                "Austin",
+                "situated in",
+                "Texas",
+                "is in",
+                "United States"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        },
+        {
+          "question": "Which country is the headquarters of Elena Rostova's company in?",
+          "target_type": "GPE_COUNTRY",
+          "goal_relation": "is in",
+          "anchor": "Elena Rostova",
+          "positive_candidate": {
+            "entity": "United States",
+            "type": "GPE_COUNTRY",
+            "path": [
+              "Elena Rostova",
+              "founded",
+              "Vanguard Dynamics",
+              "headquartered in",
+              "Austin",
+              "situated in",
+              "Texas",
+              "is in",
+              "United States"
+            ],
+            "hop_count": 4
+          },
+          "negative_candidates": [
+            {
+              "entity": "Austin",
+              "type": "GPE_CITY",
+              "reason": "undershot_target",
+              "path": [
+                "Elena Rostova",
+                "founded",
+                "Vanguard Dynamics",
+                "headquartered in",
+                "Austin"
+              ]
+            },
+            {
+              "entity": "Texas",
+              "type": "GPE_STATE",
+              "reason": "undershot_target",
+              "path": [
+                "Elena Rostova",
+                "founded",
+                "Vanguard Dynamics",
+                "headquartered in",
+                "Austin",
+                "situated in",
+                "Texas"
+              ]
+            },
+            {
+              "entity": "Vanguard Dynamics",
+              "type": "ORGANIZATION",
+              "reason": "undershot_target",
+              "path": [
+                "Elena Rostova",
+                "founded",
+                "Vanguard Dynamics"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        },
+        {
+          "question": "Who is partner of Elena Rostova?",
+          "target_type": "PERSON",
+          "goal_relation": "partner of",
+          "anchor": "Elena Rostova",
+          "positive_candidate": null,
+          "negative_candidates": [
+            {
+              "entity": "Marcus Chen",
+              "type": "PERSON",
+              "reason": "unsupported_reachable",
+              "path": [
+                "Elena Rostova",
+                "supervises",
+                "Marcus Chen"
+              ]
+            },
+            {
+              "entity": "Vanguard Dynamics",
+              "type": "ORGANIZATION",
+              "reason": "unsupported_reachable",
+              "path": [
+                "Elena Rostova",
+                "founded",
+                "Vanguard Dynamics"
+              ]
+            },
+            {
+              "entity": "Austin",
+              "type": "GPE_CITY",
+              "reason": "unsupported_reachable",
+              "path": [
+                "Elena Rostova",
+                "founded",
+                "Vanguard Dynamics",
+                "headquartered in",
+                "Austin"
+              ]
+            }
+          ],
+          "epistemic_status": "UNSUPPORTED"
+        }
+      ]
+    },
+    {
+      "graph_id": "synth_graph_02",
+      "domain": "maritime_logistics",
+      "facts": [
+        {
+          "subject": "Solaria Express",
+          "relation": "operated by",
+          "object": "Meridian Maritime",
+          "statement": "Solaria Express is operated by Meridian Maritime."
+        },
+        {
+          "subject": "Meridian Maritime",
+          "relation": "owns terminal at",
+          "object": "Port Da Nang",
+          "statement": "Meridian Maritime owns terminal at Port Da Nang."
+        },
+        {
+          "subject": "Port Da Nang",
+          "relation": "situated in",
+          "object": "Quang Nam",
+          "statement": "Port Da Nang is situated in Quang Nam."
+        },
+        {
+          "subject": "Quang Nam",
+          "relation": "is in",
+          "object": "Vietnam",
+          "statement": "Quang Nam is in Vietnam."
+        },
+        {
+          "subject": "Meridian Maritime",
+          "relation": "partner of",
+          "object": "Oceanic Alliance",
+          "statement": "Meridian Maritime is partner of Oceanic Alliance."
+        }
+      ],
+      "entities": {
+        "Solaria Express": "PRODUCT_TECHNOLOGY",
+        "Meridian Maritime": "ORGANIZATION",
+        "Port Da Nang": "GPE_CITY",
+        "Quang Nam": "GPE_STATE",
+        "Vietnam": "GPE_COUNTRY",
+        "Oceanic Alliance": "ORGANIZATION"
+      },
+      "qa_pairs": [
+        {
+          "question": "In which province is the terminal owned by Meridian Maritime situated?",
+          "target_type": "GPE_STATE",
+          "goal_relation": "situated in",
+          "anchor": "Meridian Maritime",
+          "positive_candidate": {
+            "entity": "Quang Nam",
+            "type": "GPE_STATE",
+            "path": [
+              "Meridian Maritime",
+              "owns terminal at",
+              "Port Da Nang",
+              "situated in",
+              "Quang Nam"
+            ],
+            "hop_count": 2
+          },
+          "negative_candidates": [
+            {
+              "entity": "Vietnam",
+              "type": "GPE_COUNTRY",
+              "reason": "overshot_target",
+              "path": [
+                "Meridian Maritime",
+                "owns terminal at",
+                "Port Da Nang",
+                "situated in",
+                "Quang Nam",
+                "is in",
+                "Vietnam"
+              ]
+            },
+            {
+              "entity": "Port Da Nang",
+              "type": "GPE_CITY",
+              "reason": "undershot_target",
+              "path": [
+                "Meridian Maritime",
+                "owns terminal at",
+                "Port Da Nang"
+              ]
+            },
+            {
+              "entity": "Oceanic Alliance",
+              "type": "ORGANIZATION",
+              "reason": "wrong_branch",
+              "path": [
+                "Meridian Maritime",
+                "partner of",
+                "Oceanic Alliance"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        },
+        {
+          "question": "Which country is Port Da Nang in?",
+          "target_type": "GPE_COUNTRY",
+          "goal_relation": "is in",
+          "anchor": "Port Da Nang",
+          "positive_candidate": {
+            "entity": "Vietnam",
+            "type": "GPE_COUNTRY",
+            "path": [
+              "Port Da Nang",
+              "situated in",
+              "Quang Nam",
+              "is in",
+              "Vietnam"
+            ],
+            "hop_count": 2
+          },
+          "negative_candidates": [
+            {
+              "entity": "Quang Nam",
+              "type": "GPE_STATE",
+              "reason": "undershot_target",
+              "path": [
+                "Port Da Nang",
+                "situated in",
+                "Quang Nam"
+              ]
+            },
+            {
+              "entity": "Meridian Maritime",
+              "type": "ORGANIZATION",
+              "reason": "wrong_direction",
+              "path": [
+                "Port Da Nang",
+                "owns terminal at",
+                "Meridian Maritime"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        },
+        {
+          "question": "Which company operates Solaria Express?",
+          "target_type": "ORGANIZATION",
+          "goal_relation": "operates",
+          "anchor": "Solaria Express",
+          "positive_candidate": {
+            "entity": "Meridian Maritime",
+            "type": "ORGANIZATION",
+            "path": [
+              "Solaria Express",
+              "operated by",
+              "Meridian Maritime"
+            ],
+            "hop_count": 1
+          },
+          "negative_candidates": [
+            {
+              "entity": "Port Da Nang",
+              "type": "GPE_CITY",
+              "reason": "overshot_target",
+              "path": [
+                "Solaria Express",
+                "operated by",
+                "Meridian Maritime",
+                "owns terminal at",
+                "Port Da Nang"
+              ]
+            },
+            {
+              "entity": "Quang Nam",
+              "type": "GPE_STATE",
+              "reason": "overshot_target",
+              "path": [
+                "Solaria Express",
+                "operated by",
+                "Meridian Maritime",
+                "owns terminal at",
+                "Port Da Nang",
+                "situated in",
+                "Quang Nam"
+              ]
+            },
+            {
+              "entity": "Vietnam",
+              "type": "GPE_COUNTRY",
+              "reason": "overshot_target",
+              "path": [
+                "Solaria Express",
+                "operated by",
+                "Meridian Maritime",
+                "owns terminal at",
+                "Port Da Nang",
+                "situated in",
+                "Quang Nam",
+                "is in",
+                "Vietnam"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        },
+        {
+          "question": "What is the port of registry for Solaria Express?",
+          "target_type": "GPE_CITY",
+          "goal_relation": "port of registry",
+          "anchor": "Solaria Express",
+          "positive_candidate": null,
+          "negative_candidates": [
+            {
+              "entity": "Port Da Nang",
+              "type": "GPE_CITY",
+              "reason": "unsupported_reachable",
+              "path": [
+                "Solaria Express",
+                "operated by",
+                "Meridian Maritime",
+                "owns terminal at",
+                "Port Da Nang"
+              ]
+            },
+            {
+              "entity": "Vietnam",
+              "type": "GPE_COUNTRY",
+              "reason": "unsupported_reachable",
+              "path": [
+                "Solaria Express",
+                "operated by",
+                "Meridian Maritime",
+                "owns terminal at",
+                "Port Da Nang",
+                "situated in",
+                "Quang Nam",
+                "is in",
+                "Vietnam"
+              ]
+            }
+          ],
+          "epistemic_status": "UNSUPPORTED"
+        }
+      ]
+    },
+    {
+      "graph_id": "synth_graph_03",
+      "domain": "biomedical_science",
+      "facts": [
+        {
+          "subject": "Dr. Aris Thorne",
+          "relation": "leads",
+          "object": "Helios Genomics",
+          "statement": "Dr. Aris Thorne leads Helios Genomics."
+        },
+        {
+          "subject": "Helios Genomics",
+          "relation": "developed",
+          "object": "NeuroShield Peptide",
+          "statement": "Helios Genomics developed NeuroShield Peptide."
+        },
+        {
+          "subject": "NeuroShield Peptide",
+          "relation": "awarded",
+          "object": "Galien Medallion",
+          "statement": "NeuroShield Peptide was awarded the Galien Medallion."
+        },
+        {
+          "subject": "Helios Genomics",
+          "relation": "based in",
+          "object": "Cambridge",
+          "statement": "Helios Genomics is based in Cambridge."
+        },
+        {
+          "subject": "Cambridge",
+          "relation": "is in",
+          "object": "Cambridgeshire",
+          "statement": "Cambridge is in Cambridgeshire."
+        },
+        {
+          "subject": "Cambridgeshire",
+          "relation": "is in",
+          "object": "United Kingdom",
+          "statement": "Cambridgeshire is in the United Kingdom."
+        }
+      ],
+      "entities": {
+        "Dr. Aris Thorne": "PERSON",
+        "Helios Genomics": "ORGANIZATION",
+        "NeuroShield Peptide": "PRODUCT_TECHNOLOGY",
+        "Galien Medallion": "AWARD_HONOR",
+        "Cambridge": "GPE_CITY",
+        "Cambridgeshire": "GPE_STATE",
+        "United Kingdom": "GPE_COUNTRY"
+      },
+      "qa_pairs": [
+        {
+          "question": "Which technology was developed by the organization led by Dr. Aris Thorne?",
+          "target_type": "PRODUCT_TECHNOLOGY",
+          "goal_relation": "developed",
+          "anchor": "Dr. Aris Thorne",
+          "positive_candidate": {
+            "entity": "NeuroShield Peptide",
+            "type": "PRODUCT_TECHNOLOGY",
+            "path": [
+              "Dr. Aris Thorne",
+              "leads",
+              "Helios Genomics",
+              "developed",
+              "NeuroShield Peptide"
+            ],
+            "hop_count": 2
+          },
+          "negative_candidates": [
+            {
+              "entity": "Galien Medallion",
+              "type": "AWARD_HONOR",
+              "reason": "overshot_target",
+              "path": [
+                "Dr. Aris Thorne",
+                "leads",
+                "Helios Genomics",
+                "developed",
+                "NeuroShield Peptide",
+                "awarded",
+                "Galien Medallion"
+              ]
+            },
+            {
+              "entity": "Helios Genomics",
+              "type": "ORGANIZATION",
+              "reason": "undershot_target",
+              "path": [
+                "Dr. Aris Thorne",
+                "leads",
+                "Helios Genomics"
+              ]
+            },
+            {
+              "entity": "Cambridge",
+              "type": "GPE_CITY",
+              "reason": "wrong_branch",
+              "path": [
+                "Dr. Aris Thorne",
+                "leads",
+                "Helios Genomics",
+                "based in",
+                "Cambridge"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        },
+        {
+          "question": "Which honor was awarded to the peptide developed by Helios Genomics?",
+          "target_type": "AWARD_HONOR",
+          "goal_relation": "awarded",
+          "anchor": "Helios Genomics",
+          "positive_candidate": {
+            "entity": "Galien Medallion",
+            "type": "AWARD_HONOR",
+            "path": [
+              "Helios Genomics",
+              "developed",
+              "NeuroShield Peptide",
+              "awarded",
+              "Galien Medallion"
+            ],
+            "hop_count": 2
+          },
+          "negative_candidates": [
+            {
+              "entity": "NeuroShield Peptide",
+              "type": "PRODUCT_TECHNOLOGY",
+              "reason": "undershot_target",
+              "path": [
+                "Helios Genomics",
+                "developed",
+                "NeuroShield Peptide"
+              ]
+            },
+            {
+              "entity": "Cambridge",
+              "type": "GPE_CITY",
+              "reason": "wrong_branch",
+              "path": [
+                "Helios Genomics",
+                "based in",
+                "Cambridge"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        },
+        {
+          "question": "In which city is Helios Genomics based?",
+          "target_type": "GPE_CITY",
+          "goal_relation": "based in",
+          "anchor": "Helios Genomics",
+          "positive_candidate": {
+            "entity": "Cambridge",
+            "type": "GPE_CITY",
+            "path": [
+              "Helios Genomics",
+              "based in",
+              "Cambridge"
+            ],
+            "hop_count": 1
+          },
+          "negative_candidates": [
+            {
+              "entity": "Cambridgeshire",
+              "type": "GPE_STATE",
+              "reason": "overshot_target",
+              "path": [
+                "Helios Genomics",
+                "based in",
+                "Cambridge",
+                "is in",
+                "Cambridgeshire"
+              ]
+            },
+            {
+              "entity": "United Kingdom",
+              "type": "GPE_COUNTRY",
+              "reason": "overshot_target",
+              "path": [
+                "Helios Genomics",
+                "based in",
+                "Cambridge",
+                "is in",
+                "Cambridgeshire",
+                "is in",
+                "United Kingdom"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        }
+      ]
+    },
+    {
+      "graph_id": "synth_graph_04",
+      "domain": "cloud_computing",
+      "facts": [
+        {
+          "subject": "Siddharth Verma",
+          "relation": "directs infrastructure at",
+          "object": "Stratus Core",
+          "statement": "Siddharth Verma directs infrastructure at Stratus Core."
+        },
+        {
+          "subject": "Stratus Core",
+          "relation": "provides services to",
+          "object": "Aethelgard Financial",
+          "statement": "Stratus Core provides services to Aethelgard Financial."
+        },
+        {
+          "subject": "Aethelgard Financial",
+          "relation": "headquartered in",
+          "object": "Zurich",
+          "statement": "Aethelgard Financial is headquartered in Zurich."
+        },
+        {
+          "subject": "Zurich",
+          "relation": "situated in",
+          "object": "Zurich Canton",
+          "statement": "Zurich is situated in Zurich Canton."
+        },
+        {
+          "subject": "Zurich Canton",
+          "relation": "is in",
+          "object": "Switzerland",
+          "statement": "Zurich Canton is in Switzerland."
+        }
+      ],
+      "entities": {
+        "Siddharth Verma": "PERSON",
+        "Stratus Core": "ORGANIZATION",
+        "Aethelgard Financial": "ORGANIZATION",
+        "Zurich": "GPE_CITY",
+        "Zurich Canton": "GPE_STATE",
+        "Switzerland": "GPE_COUNTRY"
+      },
+      "qa_pairs": [
+        {
+          "question": "Which enterprise client receives services from the cloud platform where Siddharth Verma directs infrastructure?",
+          "target_type": "ORGANIZATION",
+          "goal_relation": "provides services to",
+          "anchor": "Siddharth Verma",
+          "positive_candidate": {
+            "entity": "Aethelgard Financial",
+            "type": "ORGANIZATION",
+            "path": [
+              "Siddharth Verma",
+              "directs infrastructure at",
+              "Stratus Core",
+              "provides services to",
+              "Aethelgard Financial"
+            ],
+            "hop_count": 2
+          },
+          "negative_candidates": [
+            {
+              "entity": "Zurich",
+              "type": "GPE_CITY",
+              "reason": "overshot_target",
+              "path": [
+                "Siddharth Verma",
+                "directs infrastructure at",
+                "Stratus Core",
+                "provides services to",
+                "Aethelgard Financial",
+                "headquartered in",
+                "Zurich"
+              ]
+            },
+            {
+              "entity": "Switzerland",
+              "type": "GPE_COUNTRY",
+              "reason": "overshot_target",
+              "path": [
+                "Siddharth Verma",
+                "directs infrastructure at",
+                "Stratus Core",
+                "provides services to",
+                "Aethelgard Financial",
+                "headquartered in",
+                "Zurich",
+                "situated in",
+                "Zurich Canton",
+                "is in",
+                "Switzerland"
+              ]
+            },
+            {
+              "entity": "Stratus Core",
+              "type": "ORGANIZATION",
+              "reason": "undershot_target",
+              "path": [
+                "Siddharth Verma",
+                "directs infrastructure at",
+                "Stratus Core"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        },
+        {
+          "question": "Where is the client of Stratus Core headquartered?",
+          "target_type": "GPE_CITY",
+          "goal_relation": "headquartered in",
+          "anchor": "Stratus Core",
+          "positive_candidate": {
+            "entity": "Zurich",
+            "type": "GPE_CITY",
+            "path": [
+              "Stratus Core",
+              "provides services to",
+              "Aethelgard Financial",
+              "headquartered in",
+              "Zurich"
+            ],
+            "hop_count": 2
+          },
+          "negative_candidates": [
+            {
+              "entity": "Aethelgard Financial",
+              "type": "ORGANIZATION",
+              "reason": "undershot_target",
+              "path": [
+                "Stratus Core",
+                "provides services to",
+                "Aethelgard Financial"
+              ]
+            },
+            {
+              "entity": "Switzerland",
+              "type": "GPE_COUNTRY",
+              "reason": "overshot_target",
+              "path": [
+                "Stratus Core",
+                "provides services to",
+                "Aethelgard Financial",
+                "headquartered in",
+                "Zurich",
+                "situated in",
+                "Zurich Canton",
+                "is in",
+                "Switzerland"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        },
+        {
+          "question": "In which country is the headquarters of Aethelgard Financial located?",
+          "target_type": "GPE_COUNTRY",
+          "goal_relation": "is in",
+          "anchor": "Aethelgard Financial",
+          "positive_candidate": {
+            "entity": "Switzerland",
+            "type": "GPE_COUNTRY",
+            "path": [
+              "Aethelgard Financial",
+              "headquartered in",
+              "Zurich",
+              "situated in",
+              "Zurich Canton",
+              "is in",
+              "Switzerland"
+            ],
+            "hop_count": 3
+          },
+          "negative_candidates": [
+            {
+              "entity": "Zurich",
+              "type": "GPE_CITY",
+              "reason": "undershot_target",
+              "path": [
+                "Aethelgard Financial",
+                "headquartered in",
+                "Zurich"
+              ]
+            },
+            {
+              "entity": "Zurich Canton",
+              "type": "GPE_STATE",
+              "reason": "undershot_target",
+              "path": [
+                "Aethelgard Financial",
+                "headquartered in",
+                "Zurich",
+                "situated in",
+                "Zurich Canton"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        }
+      ]
+    },
+    {
+      "graph_id": "synth_graph_05",
+      "domain": "renewable_energy",
+      "facts": [
+        {
+          "subject": "Kenji Takahashi",
+          "relation": "founded",
+          "object": "Solaris Grid Technologies",
+          "statement": "Kenji Takahashi founded Solaris Grid Technologies."
+        },
+        {
+          "subject": "Solaris Grid Technologies",
+          "relation": "supplies power to",
+          "object": "Hokkaido Silicon Works",
+          "statement": "Solaris Grid Technologies supplies power to Hokkaido Silicon Works."
+        },
+        {
+          "subject": "Hokkaido Silicon Works",
+          "relation": "located in",
+          "object": "Sapporo",
+          "statement": "Hokkaido Silicon Works is located in Sapporo."
+        },
+        {
+          "subject": "Sapporo",
+          "relation": "situated in",
+          "object": "Hokkaido Prefecture",
+          "statement": "Sapporo is situated in Hokkaido Prefecture."
+        },
+        {
+          "subject": "Hokkaido Prefecture",
+          "relation": "is in",
+          "object": "Japan",
+          "statement": "Hokkaido Prefecture is in Japan."
+        }
+      ],
+      "entities": {
+        "Kenji Takahashi": "PERSON",
+        "Solaris Grid Technologies": "ORGANIZATION",
+        "Hokkaido Silicon Works": "ORGANIZATION",
+        "Sapporo": "GPE_CITY",
+        "Hokkaido Prefecture": "GPE_STATE",
+        "Japan": "GPE_COUNTRY"
+      },
+      "qa_pairs": [
+        {
+          "question": "Who is the founder of Solaris Grid Technologies?",
+          "target_type": "PERSON",
+          "goal_relation": "founded",
+          "anchor": "Solaris Grid Technologies",
+          "positive_candidate": {
+            "entity": "Kenji Takahashi",
+            "type": "PERSON",
+            "path": [
+              "Solaris Grid Technologies",
+              "founded",
+              "Kenji Takahashi"
+            ],
+            "hop_count": 1
+          },
+          "negative_candidates": [
+            {
+              "entity": "Sapporo",
+              "type": "GPE_CITY",
+              "reason": "overshot_target",
+              "path": [
+                "Solaris Grid Technologies",
+                "supplies power to",
+                "Hokkaido Silicon Works",
+                "located in",
+                "Sapporo"
+              ]
+            },
+            {
+              "entity": "Japan",
+              "type": "GPE_COUNTRY",
+              "reason": "overshot_target",
+              "path": [
+                "Solaris Grid Technologies",
+                "supplies power to",
+                "Hokkaido Silicon Works",
+                "located in",
+                "Sapporo",
+                "situated in",
+                "Hokkaido Prefecture",
+                "is in",
+                "Japan"
+              ]
+            },
+            {
+              "entity": "Hokkaido Silicon Works",
+              "type": "ORGANIZATION",
+              "reason": "wrong_target_type",
+              "path": [
+                "Solaris Grid Technologies",
+                "supplies power to",
+                "Hokkaido Silicon Works"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        },
+        {
+          "question": "Which company receives power from Solaris Grid Technologies?",
+          "target_type": "ORGANIZATION",
+          "goal_relation": "supplies power to",
+          "anchor": "Solaris Grid Technologies",
+          "positive_candidate": {
+            "entity": "Hokkaido Silicon Works",
+            "type": "ORGANIZATION",
+            "path": [
+              "Solaris Grid Technologies",
+              "supplies power to",
+              "Hokkaido Silicon Works"
+            ],
+            "hop_count": 1
+          },
+          "negative_candidates": [
+            {
+              "entity": "Sapporo",
+              "type": "GPE_CITY",
+              "reason": "overshot_target",
+              "path": [
+                "Solaris Grid Technologies",
+                "supplies power to",
+                "Hokkaido Silicon Works",
+                "located in",
+                "Sapporo"
+              ]
+            },
+            {
+              "entity": "Hokkaido Prefecture",
+              "type": "GPE_STATE",
+              "reason": "overshot_target",
+              "path": [
+                "Solaris Grid Technologies",
+                "supplies power to",
+                "Hokkaido Silicon Works",
+                "located in",
+                "Sapporo",
+                "situated in",
+                "Hokkaido Prefecture"
+              ]
+            },
+            {
+              "entity": "Kenji Takahashi",
+              "type": "PERSON",
+              "reason": "wrong_target_type",
+              "path": [
+                "Solaris Grid Technologies",
+                "founded",
+                "Kenji Takahashi"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        },
+        {
+          "question": "In which prefecture is Hokkaido Silicon Works situated?",
+          "target_type": "GPE_STATE",
+          "goal_relation": "situated in",
+          "anchor": "Hokkaido Silicon Works",
+          "positive_candidate": {
+            "entity": "Hokkaido Prefecture",
+            "type": "GPE_STATE",
+            "path": [
+              "Hokkaido Silicon Works",
+              "located in",
+              "Sapporo",
+              "situated in",
+              "Hokkaido Prefecture"
+            ],
+            "hop_count": 2
+          },
+          "negative_candidates": [
+            {
+              "entity": "Japan",
+              "type": "GPE_COUNTRY",
+              "reason": "overshot_target",
+              "path": [
+                "Hokkaido Silicon Works",
+                "located in",
+                "Sapporo",
+                "situated in",
+                "Hokkaido Prefecture",
+                "is in",
+                "Japan"
+              ]
+            },
+            {
+              "entity": "Sapporo",
+              "type": "GPE_CITY",
+              "reason": "undershot_target",
+              "path": [
+                "Hokkaido Silicon Works",
+                "located in",
+                "Sapporo"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        }
+      ]
+    },
+    {
+      "graph_id": "synth_graph_06",
+      "domain": "oceanography",
+      "facts": [
+        {
+          "subject": "Capt. Nathanial Cross",
+          "relation": "commanded",
+          "object": "Nautilus Horizon",
+          "statement": "Capt. Nathanial Cross commanded Nautilus Horizon."
+        },
+        {
+          "subject": "Nautilus Horizon",
+          "relation": "operated by",
+          "object": "Pacific Deepwater Research",
+          "statement": "Nautilus Horizon is operated by Pacific Deepwater Research."
+        },
+        {
+          "subject": "Pacific Deepwater Research",
+          "relation": "stationed in",
+          "object": "Valparaiso",
+          "statement": "Pacific Deepwater Research is stationed in Valparaiso."
+        },
+        {
+          "subject": "Valparaiso",
+          "relation": "is in",
+          "object": "Chile",
+          "statement": "Valparaiso is in Chile."
+        }
+      ],
+      "entities": {
+        "Capt. Nathanial Cross": "PERSON",
+        "Nautilus Horizon": "PRODUCT_TECHNOLOGY",
+        "Pacific Deepwater Research": "ORGANIZATION",
+        "Valparaiso": "GPE_CITY",
+        "Chile": "GPE_COUNTRY"
+      },
+      "qa_pairs": [
+        {
+          "question": "Who captains Nautilus Horizon?",
+          "target_type": "PERSON",
+          "goal_relation": "commanded",
+          "anchor": "Nautilus Horizon",
+          "positive_candidate": {
+            "entity": "Capt. Nathanial Cross",
+            "type": "PERSON",
+            "path": [
+              "Nautilus Horizon",
+              "commanded",
+              "Capt. Nathanial Cross"
+            ],
+            "hop_count": 1
+          },
+          "negative_candidates": [
+            {
+              "entity": "Pacific Deepwater Research",
+              "type": "ORGANIZATION",
+              "reason": "wrong_target_type",
+              "path": [
+                "Nautilus Horizon",
+                "operated by",
+                "Pacific Deepwater Research"
+              ]
+            },
+            {
+              "entity": "Valparaiso",
+              "type": "GPE_CITY",
+              "reason": "overshot_target",
+              "path": [
+                "Nautilus Horizon",
+                "operated by",
+                "Pacific Deepwater Research",
+                "stationed in",
+                "Valparaiso"
+              ]
+            },
+            {
+              "entity": "Chile",
+              "type": "GPE_COUNTRY",
+              "reason": "overshot_target",
+              "path": [
+                "Nautilus Horizon",
+                "operated by",
+                "Pacific Deepwater Research",
+                "stationed in",
+                "Valparaiso",
+                "is in",
+                "Chile"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        },
+        {
+          "question": "Which research organization operates the vessel commanded by Capt. Nathanial Cross?",
+          "target_type": "ORGANIZATION",
+          "goal_relation": "operated by",
+          "anchor": "Capt. Nathanial Cross",
+          "positive_candidate": {
+            "entity": "Pacific Deepwater Research",
+            "type": "ORGANIZATION",
+            "path": [
+              "Capt. Nathanial Cross",
+              "commanded",
+              "Nautilus Horizon",
+              "operated by",
+              "Pacific Deepwater Research"
+            ],
+            "hop_count": 2
+          },
+          "negative_candidates": [
+            {
+              "entity": "Nautilus Horizon",
+              "type": "PRODUCT_TECHNOLOGY",
+              "reason": "undershot_target",
+              "path": [
+                "Capt. Nathanial Cross",
+                "commanded",
+                "Nautilus Horizon"
+              ]
+            },
+            {
+              "entity": "Valparaiso",
+              "type": "GPE_CITY",
+              "reason": "overshot_target",
+              "path": [
+                "Capt. Nathanial Cross",
+                "commanded",
+                "Nautilus Horizon",
+                "operated by",
+                "Pacific Deepwater Research",
+                "stationed in",
+                "Valparaiso"
+              ]
+            }
+          ],
+          "epistemic_status": "SUPPORTED"
+        },
+        {
+          "question": "What award was granted to Nautilus Horizon?",
+          "target_type": "AWARD_HONOR",
+          "goal_relation": "granted award",
+          "anchor": "Nautilus Horizon",
+          "positive_candidate": null,
+          "negative_candidates": [
+            {
+              "entity": "Pacific Deepwater Research",
+              "type": "ORGANIZATION",
+              "reason": "unsupported_reachable",
+              "path": [
+                "Nautilus Horizon",
+                "operated by",
+                "Pacific Deepwater Research"
+              ]
+            },
+            {
+              "entity": "Valparaiso",
+              "type": "GPE_CITY",
+              "reason": "unsupported_reachable",
+              "path": [
+                "Nautilus Horizon",
+                "operated by",
+                "Pacific Deepwater Research",
+                "stationed in",
+                "Valparaiso"
+              ]
+            }
+          ],
+          "epistemic_status": "UNSUPPORTED"
+        }
+      ]
+    },
+    {
+      "graph_id": "synth_graph_capability_01",
+      "domain": "system_and_terminal_execution",
+      "facts": [
+        {
+          "subject": "command prompt",
+          "relation": "executes",
+          "object": "notepad",
+          "statement": "Command prompt executes notepad."
+        },
+        {
+          "subject": "notepad",
+          "relation": "launched through",
+          "object": "command prompt",
+          "statement": "Notepad is launched through command prompt."
+        },
+        {
+          "subject": "notepad",
+          "relation": "command to open",
+          "object": "start notepad",
+          "statement": "The command to open notepad is start notepad."
+        }
+      ],
+      "qa_pairs": [
+        {
+          "question": "How to open notepad in command prompt?",
+          "goal_relation": "command to open",
+          "target_type": "COMMAND_OPERATION",
+          "positive_candidate": {
+            "entity": "start notepad",
+            "type": "COMMAND_OPERATION",
+            "path": [
+              "notepad",
+              "command to open",
+              "start notepad"
+            ]
+          },
+          "negative_candidates": [
+            {
+              "entity": "Austin",
+              "type": "GPE_CITY",
+              "path": [
+                "notepad",
+                "situated in",
+                "Austin"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

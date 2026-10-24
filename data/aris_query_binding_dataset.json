@@ -1,0 +1,1402 @@
+[
+  {
+    "question": "Where does Arun work?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "work",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Where does Dhivya work?",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "work",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Dhivya",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Where does Ravi work?",
+    "surface_form": {
+      "entity": "Ravi",
+      "relation_phrase": "work",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Ravi",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Where does Meena work?",
+    "surface_form": {
+      "entity": "Meena",
+      "relation_phrase": "work",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Meena",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Which company does Arun work for?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "work for",
+      "question_type": "which"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Which company does Dhivya work for?",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "work for",
+      "question_type": "which"
+    },
+    "semantic_query": {
+      "subject": "Dhivya",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Where is Arun employed?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "employed",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Where is Dhivya employed?",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "employed",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Dhivya",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "What is Arun's workplace?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "workplace",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "What is Meena's workplace?",
+    "surface_form": {
+      "entity": "Meena",
+      "relation_phrase": "workplace",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Meena",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Who works at Axinix?",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "works at",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "works_at",
+      "object": "Axinix",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "Who works at WorkHub?",
+    "surface_form": {
+      "entity": "WorkHub",
+      "relation_phrase": "works at",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "works_at",
+      "object": "WorkHub",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "Who is employed at Axinix?",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "employed at",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "works_at",
+      "object": "Axinix",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "Who is employed at WorkHub?",
+    "surface_form": {
+      "entity": "WorkHub",
+      "relation_phrase": "employed at",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "works_at",
+      "object": "WorkHub",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "Does Arun work at Axinix?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "work at",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Does Dhivya work at Axinix?",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "work at",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Dhivya",
+      "relation": "works_at",
+      "object": "Axinix",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Does Ravi work at Axinix?",
+    "surface_form": {
+      "entity": "Ravi",
+      "relation_phrase": "work at",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Ravi",
+      "relation": "works_at",
+      "object": "Axinix",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Does Meena work at Axinix?",
+    "surface_form": {
+      "entity": "Meena",
+      "relation_phrase": "work at",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Meena",
+      "relation": "works_at",
+      "object": "Axinix",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Does Meena work at WorkHub?",
+    "surface_form": {
+      "entity": "Meena",
+      "relation_phrase": "work at",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Meena",
+      "relation": "works_at",
+      "object": "WorkHub",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Where is Axinix located?",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "located",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Where is Chennai located?",
+    "surface_form": {
+      "entity": "Chennai",
+      "relation_phrase": "located",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Chennai",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Where is Tamil Nadu located?",
+    "surface_form": {
+      "entity": "Tamil Nadu",
+      "relation_phrase": "located",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Tamil Nadu",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Where is India located?",
+    "surface_form": {
+      "entity": "India",
+      "relation_phrase": "located",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "India",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Where is Asia located?",
+    "surface_form": {
+      "entity": "Asia",
+      "relation_phrase": "located",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Asia",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "What is the location of Axinix?",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "location",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "In which state is Chennai located?",
+    "surface_form": {
+      "entity": "Chennai",
+      "relation_phrase": "state located",
+      "question_type": "which"
+    },
+    "semantic_query": {
+      "subject": "Chennai",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "In which country is Tamil Nadu situated?",
+    "surface_form": {
+      "entity": "Tamil Nadu",
+      "relation_phrase": "country situated",
+      "question_type": "which"
+    },
+    "semantic_query": {
+      "subject": "Tamil Nadu",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "What is located in Chennai?",
+    "surface_form": {
+      "entity": "Chennai",
+      "relation_phrase": "located in",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "located_in",
+      "object": "Chennai",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "What is located in Tamil Nadu?",
+    "surface_form": {
+      "entity": "Tamil Nadu",
+      "relation_phrase": "located in",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "located_in",
+      "object": "Tamil Nadu",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "What is located in India?",
+    "surface_form": {
+      "entity": "India",
+      "relation_phrase": "located in",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "located_in",
+      "object": "India",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "What is located in Asia?",
+    "surface_form": {
+      "entity": "Asia",
+      "relation_phrase": "located in",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "located_in",
+      "object": "Asia",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "Is Axinix located in Chennai?",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "located in",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "located_in",
+      "object": "Chennai",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Is Chennai located in Tamil Nadu?",
+    "surface_form": {
+      "entity": "Chennai",
+      "relation_phrase": "located in",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Chennai",
+      "relation": "located_in",
+      "object": "Tamil Nadu",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Is Tamil Nadu located in India?",
+    "surface_form": {
+      "entity": "Tamil Nadu",
+      "relation_phrase": "located in",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Tamil Nadu",
+      "relation": "located_in",
+      "object": "India",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Is India located in Asia?",
+    "surface_form": {
+      "entity": "India",
+      "relation_phrase": "located in",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "India",
+      "relation": "located_in",
+      "object": "Asia",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Is Asia located on Earth?",
+    "surface_form": {
+      "entity": "Asia",
+      "relation_phrase": "located on",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Asia",
+      "relation": "located_in",
+      "object": "Earth",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Is Axinix located in Tokyo?",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "located in",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "located_in",
+      "object": "Tokyo",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Who is a colleague of Arun?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "colleague of",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "colleague_of",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "Who is Arun's colleague?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "colleague",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "colleague_of",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Who is a coworker of Arun?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "coworker of",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "colleague_of",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "Is Dhivya a colleague of Arun?",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "colleague of",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Dhivya",
+      "relation": "colleague_of",
+      "object": "Arun",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Is Meena a colleague of Arun?",
+    "surface_form": {
+      "entity": "Meena",
+      "relation_phrase": "colleague of",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Meena",
+      "relation": "colleague_of",
+      "object": "Arun",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Who manages Arun?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "manages",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "Who is the manager of Arun?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "manager of",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "What is Arun's manager?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "manager",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "manages",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Who does Ravi manage?",
+    "surface_form": {
+      "entity": "Ravi",
+      "relation_phrase": "manage",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": "Ravi",
+      "relation": "manages",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Does Ravi manage Arun?",
+    "surface_form": {
+      "entity": "Ravi",
+      "relation_phrase": "manage",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Ravi",
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Does Arun manage Ravi?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "manage",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "manages",
+      "object": "Ravi",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "What does Axinix use?",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "use",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "uses",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Which technology does Axinix use?",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "technology use",
+      "question_type": "which"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "uses",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "What programming language does Axinix use?",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "programming language use",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "uses",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Does Axinix use Python?",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "use",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "uses",
+      "object": "Python",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Does Axinix use Java?",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "use",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "uses",
+      "object": "Java",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "What does Python support?",
+    "surface_form": {
+      "entity": "Python",
+      "relation_phrase": "support",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Python",
+      "relation": "supports",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Which framework does Python support?",
+    "surface_form": {
+      "entity": "Python",
+      "relation_phrase": "framework support",
+      "question_type": "which"
+    },
+    "semantic_query": {
+      "subject": "Python",
+      "relation": "supports",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Does Python support Django?",
+    "surface_form": {
+      "entity": "Python",
+      "relation_phrase": "support",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Python",
+      "relation": "supports",
+      "object": "Django",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Does Python support Rails?",
+    "surface_form": {
+      "entity": "Python",
+      "relation_phrase": "support",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Python",
+      "relation": "supports",
+      "object": "Rails",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "What orbits Earth?",
+    "surface_form": {
+      "entity": "Earth",
+      "relation_phrase": "orbits",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "orbits",
+      "object": "Earth",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "What does Earth orbit?",
+    "surface_form": {
+      "entity": "Earth",
+      "relation_phrase": "orbit",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Earth",
+      "relation": "orbits",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "What does Moon orbit?",
+    "surface_form": {
+      "entity": "Moon",
+      "relation_phrase": "orbit",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Moon",
+      "relation": "orbits",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Does Moon orbit Earth?",
+    "surface_form": {
+      "entity": "Moon",
+      "relation_phrase": "orbit",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Moon",
+      "relation": "orbits",
+      "object": "Earth",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Does Earth orbit Sun?",
+    "surface_form": {
+      "entity": "Earth",
+      "relation_phrase": "orbit",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Earth",
+      "relation": "orbits",
+      "object": "Sun",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Does Moon orbit Sun?",
+    "surface_form": {
+      "entity": "Moon",
+      "relation_phrase": "orbit",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Moon",
+      "relation": "orbits",
+      "object": "Sun",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "What is Sun?",
+    "surface_form": {
+      "entity": "Sun",
+      "relation_phrase": "is",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Sun",
+      "relation": "is_a",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Is Sun a star?",
+    "surface_form": {
+      "entity": "Sun",
+      "relation_phrase": "is a",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Sun",
+      "relation": "is_a",
+      "object": "star",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Is Sun a planet?",
+    "surface_form": {
+      "entity": "Sun",
+      "relation_phrase": "is a",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Sun",
+      "relation": "is_a",
+      "object": "planet",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Who is the brother of Dhivya?",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "brother of",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "brother_of",
+      "object": "Dhivya",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "Who is Dhivya's brother?",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "brother",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": "Dhivya",
+      "relation": "brother_of",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Where does Arun wrk?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "wrk",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Wher does Arun work?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "work",
+      "question_type": "wher"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Which compny does Arun work for?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "compny work for",
+      "question_type": "which"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Where is Axinix locted?",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "locted",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Who manges Arun?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "manges",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "What orbts Earth?",
+    "surface_form": {
+      "entity": "Earth",
+      "relation_phrase": "orbts",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "orbits",
+      "object": "Earth",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "Dose Arun work at Axinix?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "work at",
+      "question_type": "dose"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Where does Dhivya work at?",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "work at",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Dhivya",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "What company is Dhivya employed by?",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "company employed by",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Dhivya",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "What company is Arun employed by?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "company employed by",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Who works with Arun?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "works with",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "colleague_of",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "Who works with Dhivya?",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "works with",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "colleague_of",
+      "object": "Dhivya",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "Who is the supervisor of Arun?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "supervisor of",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "Who leads Arun?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "leads",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "Where is WorkHub located?",
+    "surface_form": {
+      "entity": "WorkHub",
+      "relation_phrase": "located",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "WorkHub",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Is Ravi the manager of Arun?",
+    "surface_form": {
+      "entity": "Ravi",
+      "relation_phrase": "manager of",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Ravi",
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Is Moon a satellite of Earth?",
+    "surface_form": {
+      "entity": "Moon",
+      "relation_phrase": "satellite of",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Moon",
+      "relation": "orbits",
+      "object": "Earth",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "What orbits around Sun?",
+    "surface_form": {
+      "entity": "Sun",
+      "relation_phrase": "orbits around",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "orbits",
+      "object": "Sun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "What circles around Earth?",
+    "surface_form": {
+      "entity": "Earth",
+      "relation_phrase": "circles around",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "orbits",
+      "object": "Earth",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "What revolves around Sun?",
+    "surface_form": {
+      "entity": "Sun",
+      "relation_phrase": "revolves around",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "orbits",
+      "object": "Sun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "question": "Does Sun orbit Earth?",
+    "surface_form": {
+      "entity": "Sun",
+      "relation_phrase": "orbit",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Sun",
+      "relation": "orbits",
+      "object": "Earth",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Does Earth orbit Moon?",
+    "surface_form": {
+      "entity": "Earth",
+      "relation_phrase": "orbit",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Earth",
+      "relation": "orbits",
+      "object": "Moon",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Where does Ravi work at?",
+    "surface_form": {
+      "entity": "Ravi",
+      "relation_phrase": "work at",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Ravi",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Where does Meena work at?",
+    "surface_form": {
+      "entity": "Meena",
+      "relation_phrase": "work at",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Meena",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Which state is Chennai located in?",
+    "surface_form": {
+      "entity": "Chennai",
+      "relation_phrase": "state located in",
+      "question_type": "which"
+    },
+    "semantic_query": {
+      "subject": "Chennai",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Which country is Tamil Nadu located in?",
+    "surface_form": {
+      "entity": "Tamil Nadu",
+      "relation_phrase": "country located in",
+      "question_type": "which"
+    },
+    "semantic_query": {
+      "subject": "Tamil Nadu",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Which continent is India located in?",
+    "surface_form": {
+      "entity": "India",
+      "relation_phrase": "continent located in",
+      "question_type": "which"
+    },
+    "semantic_query": {
+      "subject": "India",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "What planet is Asia located on?",
+    "surface_form": {
+      "entity": "Asia",
+      "relation_phrase": "planet located on",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Asia",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "question": "Is Chennai a city in Tamil Nadu?",
+    "surface_form": {
+      "entity": "Chennai",
+      "relation_phrase": "city in",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Chennai",
+      "relation": "located_in",
+      "object": "Tamil Nadu",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Is Tamil Nadu a state in India?",
+    "surface_form": {
+      "entity": "Tamil Nadu",
+      "relation_phrase": "state in",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Tamil Nadu",
+      "relation": "located_in",
+      "object": "India",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Is India a country in Asia?",
+    "surface_form": {
+      "entity": "India",
+      "relation_phrase": "country in",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "India",
+      "relation": "located_in",
+      "object": "Asia",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "question": "Who directs Arun?",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "directs",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  }
+]

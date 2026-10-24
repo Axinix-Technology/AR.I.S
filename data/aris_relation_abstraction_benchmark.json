@@ -1,0 +1,2002 @@
+[
+  {
+    "id": "R0001",
+    "split": "TRAIN",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Where does Arun work?",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "work",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0002",
+    "split": "TRAIN",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Where does Dhivya work?",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "work",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Dhivya",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0003",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Which company does Arun work for?",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "work for",
+      "question_type": "which"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0004",
+    "split": "TRAIN",
+    "category": "inflection",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who works at Axinix?",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "works at",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "works_at",
+      "object": "Axinix",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0005",
+    "split": "TRAIN",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Does Arun work at Axinix?",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "work at",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0006",
+    "split": "TRAIN",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Does Dhivya work at Axinix?",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "work at",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Dhivya",
+      "relation": "works_at",
+      "object": "Axinix",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0007",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who has a job at Axinix?",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "job at",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "works_at",
+      "object": "Axinix",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0008",
+    "split": "TRAIN",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Arun works at Axinix.",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "works at",
+      "question_type": null
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix",
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0009",
+    "split": "TRAIN",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Where is Axinix located?",
+    "expected_relation": "located_in",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "located",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0010",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Is Axinix located in Chennai?",
+    "expected_relation": "located_in",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "located in",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "located_in",
+      "object": "Chennai",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0011",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Is Chennai in Tamil Nadu?",
+    "expected_relation": "located_in",
+    "surface_form": {
+      "entity": "Chennai",
+      "relation_phrase": "in",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Chennai",
+      "relation": "located_in",
+      "object": "Tamil Nadu",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0012",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Where is Chennai located?",
+    "expected_relation": "located_in",
+    "surface_form": {
+      "entity": "Chennai",
+      "relation_phrase": "located",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Chennai",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0013",
+    "split": "TRAIN",
+    "category": "nominalization",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "What is the location of Axinix?",
+    "expected_relation": "located_in",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "location",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0014",
+    "split": "TRAIN",
+    "category": "word_order",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "What is located in Chennai?",
+    "expected_relation": "located_in",
+    "surface_form": {
+      "entity": "Chennai",
+      "relation_phrase": "located in",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "located_in",
+      "object": "Chennai",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0015",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Is Tamil Nadu located in India?",
+    "expected_relation": "located_in",
+    "surface_form": {
+      "entity": "Tamil Nadu",
+      "relation_phrase": "located in",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Tamil Nadu",
+      "relation": "located_in",
+      "object": "India",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0016",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Where is Tamil Nadu located?",
+    "expected_relation": "located_in",
+    "surface_form": {
+      "entity": "Tamil Nadu",
+      "relation_phrase": "located",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Tamil Nadu",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0017",
+    "split": "TRAIN",
+    "category": "inflection",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who manages Arun?",
+    "expected_relation": "manages",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "manages",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0018",
+    "split": "TRAIN",
+    "category": "nominalization",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who is the manager of Arun?",
+    "expected_relation": "manages",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "manager of",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0019",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who leads Arun?",
+    "expected_relation": "manages",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "leads",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0020",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who directs Arun?",
+    "expected_relation": "manages",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "directs",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0021",
+    "split": "TRAIN",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Does Ravi manage Arun?",
+    "expected_relation": "manages",
+    "surface_form": {
+      "entity": "Ravi",
+      "relation_phrase": "manage",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Ravi",
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0022",
+    "split": "TRAIN",
+    "category": "word_order",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who does Ravi manage?",
+    "expected_relation": "manages",
+    "surface_form": {
+      "entity": "Ravi",
+      "relation_phrase": "manage",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": "Ravi",
+      "relation": "manages",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0023",
+    "split": "TRAIN",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who is the brother of Dhivya?",
+    "expected_relation": "brother_of",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "brother of",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "brother_of",
+      "object": "Dhivya",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0024",
+    "split": "TRAIN",
+    "category": "nominalization",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who is Dhivya's brother?",
+    "expected_relation": "brother_of",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "brother",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": "Dhivya",
+      "relation": "brother_of",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0025",
+    "split": "TRAIN",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Is Arun the brother of Dhivya?",
+    "expected_relation": "brother_of",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "brother of",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "brother_of",
+      "object": "Dhivya",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0026",
+    "split": "TRAIN",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Arun is brother of Dhivya.",
+    "expected_relation": "brother_of",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "brother of",
+      "question_type": null
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "brother_of",
+      "object": "Dhivya",
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0027",
+    "split": "TRAIN",
+    "category": "collision",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who works with Arun?",
+    "expected_relation": "colleague_of",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "works with",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "colleague_of",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0028",
+    "split": "TRAIN",
+    "category": "collision",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who works with Dhivya?",
+    "expected_relation": "colleague_of",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "works with",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "colleague_of",
+      "object": "Dhivya",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0029",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who is a coworker of Arun?",
+    "expected_relation": "colleague_of",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "coworker of",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "colleague_of",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0030",
+    "split": "TRAIN",
+    "category": "nominalization",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who is Arun's colleague?",
+    "expected_relation": "colleague_of",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "colleague",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "colleague_of",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0031",
+    "split": "TRAIN",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Is Dhivya a colleague of Arun?",
+    "expected_relation": "colleague_of",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "colleague of",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Dhivya",
+      "relation": "colleague_of",
+      "object": "Arun",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0032",
+    "split": "TRAIN",
+    "category": "inflection",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "What orbits Earth?",
+    "expected_relation": "orbits",
+    "surface_form": {
+      "entity": "Earth",
+      "relation_phrase": "orbits",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "orbits",
+      "object": "Earth",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0033",
+    "split": "TRAIN",
+    "category": "word_order",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "What does Moon orbit?",
+    "expected_relation": "orbits",
+    "surface_form": {
+      "entity": "Moon",
+      "relation_phrase": "orbit",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Moon",
+      "relation": "orbits",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0034",
+    "split": "TRAIN",
+    "category": "word_order",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "What does Earth orbit?",
+    "expected_relation": "orbits",
+    "surface_form": {
+      "entity": "Earth",
+      "relation_phrase": "orbit",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Earth",
+      "relation": "orbits",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0035",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "What circles around Earth?",
+    "expected_relation": "orbits",
+    "surface_form": {
+      "entity": "Earth",
+      "relation_phrase": "circles around",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "orbits",
+      "object": "Earth",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0036",
+    "split": "TRAIN",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Does Moon orbit Earth?",
+    "expected_relation": "orbits",
+    "surface_form": {
+      "entity": "Moon",
+      "relation_phrase": "orbit",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Moon",
+      "relation": "orbits",
+      "object": "Earth",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0037",
+    "split": "TRAIN",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Does Earth orbit Sun?",
+    "expected_relation": "orbits",
+    "surface_form": {
+      "entity": "Earth",
+      "relation_phrase": "orbit",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Earth",
+      "relation": "orbits",
+      "object": "Sun",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0038",
+    "split": "TRAIN",
+    "category": "word_order",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "What does Axinix use?",
+    "expected_relation": "uses",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "use",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "uses",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0039",
+    "split": "TRAIN",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Does Axinix use Python?",
+    "expected_relation": "uses",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "use",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "uses",
+      "object": "Python",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0040",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Which programming language does Axinix use?",
+    "expected_relation": "uses",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "programming language use",
+      "question_type": "which"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "uses",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0041",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "What technology does Axinix use?",
+    "expected_relation": "uses",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "technology use",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "uses",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0042",
+    "split": "TRAIN",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Axinix uses Python.",
+    "expected_relation": "uses",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "uses",
+      "question_type": null
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "uses",
+      "object": "Python",
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0043",
+    "split": "TRAIN",
+    "category": "collision",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "What does Axinix develop?",
+    "expected_relation": "develops",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "develop",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "develops",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0044",
+    "split": "TRAIN",
+    "category": "collision",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Does Axinix develop WorkHub?",
+    "expected_relation": "develops",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "develop",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "develops",
+      "object": "WorkHub",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0045",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who develops WorkHub?",
+    "expected_relation": "develops",
+    "surface_form": {
+      "entity": "WorkHub",
+      "relation_phrase": "develops",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "develops",
+      "object": "WorkHub",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0046",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "What product does Axinix create?",
+    "expected_relation": "develops",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "product create",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "develops",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0047",
+    "split": "TRAIN",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Axinix develops WorkHub.",
+    "expected_relation": "develops",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "develops",
+      "question_type": null
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "develops",
+      "object": "WorkHub",
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0048",
+    "split": "TRAIN",
+    "category": "inflection",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Where does Ravi work?",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Ravi",
+      "relation_phrase": "work",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Ravi",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0049",
+    "split": "TRAIN",
+    "category": "inflection",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Where does Meena work?",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Meena",
+      "relation_phrase": "work",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Meena",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0050",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Where is Asia situated?",
+    "expected_relation": "located_in",
+    "surface_form": {
+      "entity": "Asia",
+      "relation_phrase": "situated",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Asia",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0051",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Where is India located?",
+    "expected_relation": "located_in",
+    "surface_form": {
+      "entity": "India",
+      "relation_phrase": "located",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "India",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0052",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who supervises Arun?",
+    "expected_relation": "manages",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "supervises",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0053",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Ravi manages Arun.",
+    "expected_relation": "manages",
+    "surface_form": {
+      "entity": "Ravi",
+      "relation_phrase": "manages",
+      "question_type": null
+    },
+    "semantic_query": {
+      "subject": "Ravi",
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0054",
+    "split": "TRAIN",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Dhivya is the sister of Arun.",
+    "expected_relation": "brother_of",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "sister of",
+      "question_type": null
+    },
+    "semantic_query": {
+      "subject": "Dhivya",
+      "relation": "brother_of",
+      "object": "Arun",
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0055",
+    "split": "TRAIN",
+    "category": "collision",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Does Arun work with Dhivya?",
+    "expected_relation": "colleague_of",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "work with",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "colleague_of",
+      "object": "Dhivya",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0056",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Earth orbits Sun.",
+    "expected_relation": "orbits",
+    "surface_form": {
+      "entity": "Earth",
+      "relation_phrase": "orbits",
+      "question_type": null
+    },
+    "semantic_query": {
+      "subject": "Earth",
+      "relation": "orbits",
+      "object": "Sun",
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0057",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Moon orbits Earth.",
+    "expected_relation": "orbits",
+    "surface_form": {
+      "entity": "Moon",
+      "relation_phrase": "orbits",
+      "question_type": null
+    },
+    "semantic_query": {
+      "subject": "Moon",
+      "relation": "orbits",
+      "object": "Earth",
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0058",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Axinix utilizes Python.",
+    "expected_relation": "uses",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "utilizes",
+      "question_type": null
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "uses",
+      "object": "Python",
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0059",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Axinix builds WorkHub.",
+    "expected_relation": "develops",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "builds",
+      "question_type": null
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "develops",
+      "object": "WorkHub",
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0060",
+    "split": "TRAIN",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Axinix is based in Chennai.",
+    "expected_relation": "located_in",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "based in",
+      "question_type": null
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "located_in",
+      "object": "Chennai",
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0061",
+    "split": "DEV",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Where does Ravi work at?",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Ravi",
+      "relation_phrase": "work at",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Ravi",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0062",
+    "split": "DEV",
+    "category": "inflection",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who works at WorkHub?",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "WorkHub",
+      "relation_phrase": "works at",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "works_at",
+      "object": "WorkHub",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0063",
+    "split": "DEV",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Is Ravi working at Axinix?",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Ravi",
+      "relation_phrase": "working at",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Ravi",
+      "relation": "works_at",
+      "object": "Axinix",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0064",
+    "split": "DEV",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Is Tamil Nadu situated in India?",
+    "expected_relation": "located_in",
+    "surface_form": {
+      "entity": "Tamil Nadu",
+      "relation_phrase": "situated in",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Tamil Nadu",
+      "relation": "located_in",
+      "object": "India",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0065",
+    "split": "DEV",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Is Chennai based in Tamil Nadu?",
+    "expected_relation": "located_in",
+    "surface_form": {
+      "entity": "Chennai",
+      "relation_phrase": "based in",
+      "question_type": "is"
+    },
+    "semantic_query": {
+      "subject": "Chennai",
+      "relation": "located_in",
+      "object": "Tamil Nadu",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0066",
+    "split": "DEV",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who is the head of Arun?",
+    "expected_relation": "manages",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "head of",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0067",
+    "split": "DEV",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Does Ravi lead Arun?",
+    "expected_relation": "manages",
+    "surface_form": {
+      "entity": "Ravi",
+      "relation_phrase": "lead",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Ravi",
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0068",
+    "split": "DEV",
+    "category": "nominalization",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "What is Arun's manager?",
+    "expected_relation": "manages",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "manager",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "manages",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0069",
+    "split": "DEV",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who is the sibling of Dhivya?",
+    "expected_relation": "brother_of",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "sibling of",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "brother_of",
+      "object": "Dhivya",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0070",
+    "split": "DEV",
+    "category": "collision",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who is a coworker of Dhivya?",
+    "expected_relation": "colleague_of",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "coworker of",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "colleague_of",
+      "object": "Dhivya",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0071",
+    "split": "DEV",
+    "category": "nominalization",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Who is Dhivya's colleague?",
+    "expected_relation": "colleague_of",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "colleague",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": "Dhivya",
+      "relation": "colleague_of",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0072",
+    "split": "DEV",
+    "category": "synonym",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "What circles around Sun?",
+    "expected_relation": "orbits",
+    "surface_form": {
+      "entity": "Sun",
+      "relation_phrase": "circles around",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "orbits",
+      "object": "Sun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0073",
+    "split": "DEV",
+    "category": "word_order",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Does Sun orbit Earth?",
+    "expected_relation": "orbits",
+    "surface_form": {
+      "entity": "Sun",
+      "relation_phrase": "orbit",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Sun",
+      "relation": "orbits",
+      "object": "Earth",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0074",
+    "split": "DEV",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Does Axinix utilize Python?",
+    "expected_relation": "uses",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "utilize",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "uses",
+      "object": "Python",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0075",
+    "split": "DEV",
+    "category": "paraphrase",
+    "is_unseen": false,
+    "is_noisy": false,
+    "question": "Does Axinix build WorkHub?",
+    "expected_relation": "develops",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "build",
+      "question_type": "does"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "develops",
+      "object": "WorkHub",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0076",
+    "split": "DEV",
+    "category": "spelling_noise",
+    "is_unseen": false,
+    "is_noisy": true,
+    "question": "Where does Arun wrk?",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "wrk",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0077",
+    "split": "DEV",
+    "category": "spelling_noise",
+    "is_unseen": false,
+    "is_noisy": true,
+    "question": "Where is Axinix locted?",
+    "expected_relation": "located_in",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "locted",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0078",
+    "split": "DEV",
+    "category": "spelling_noise",
+    "is_unseen": false,
+    "is_noisy": true,
+    "question": "Who manges Arun?",
+    "expected_relation": "manages",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "manges",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0079",
+    "split": "DEV",
+    "category": "spelling_noise",
+    "is_unseen": false,
+    "is_noisy": true,
+    "question": "What orbts Earth?",
+    "expected_relation": "orbits",
+    "surface_form": {
+      "entity": "Earth",
+      "relation_phrase": "orbts",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "orbits",
+      "object": "Earth",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0080",
+    "split": "DEV",
+    "category": "spelling_noise",
+    "is_unseen": false,
+    "is_noisy": true,
+    "question": "Dose Arun work at Axinix?",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "work at",
+      "question_type": "dose"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix",
+      "answer_slot": "boolean"
+    }
+  },
+  {
+    "id": "R0081",
+    "split": "TEST",
+    "category": "paraphrase",
+    "is_unseen": true,
+    "is_noisy": false,
+    "question": "Where is Arun employed by?",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "employed by",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0082",
+    "split": "TEST",
+    "category": "nominalization",
+    "is_unseen": true,
+    "is_noisy": false,
+    "question": "What is Arun's workplace?",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "workplace",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0083",
+    "split": "TEST",
+    "category": "inverse",
+    "is_unseen": true,
+    "is_noisy": false,
+    "question": "Arun is employed by Axinix.",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "employed by",
+      "question_type": null
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": "Axinix",
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0084",
+    "split": "TEST",
+    "category": "synonym",
+    "is_unseen": true,
+    "is_noisy": false,
+    "question": "Where does India lie in?",
+    "expected_relation": "located_in",
+    "surface_form": {
+      "entity": "India",
+      "relation_phrase": "lie in",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "India",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0085",
+    "split": "TEST",
+    "category": "synonym",
+    "is_unseen": true,
+    "is_noisy": false,
+    "question": "What is found in Chennai?",
+    "expected_relation": "located_in",
+    "surface_form": {
+      "entity": "Chennai",
+      "relation_phrase": "found in",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "located_in",
+      "object": "Chennai",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0086",
+    "split": "TEST",
+    "category": "nominalization",
+    "is_unseen": true,
+    "is_noisy": false,
+    "question": "Who is the supervisor of Arun?",
+    "expected_relation": "manages",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "supervisor of",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0087",
+    "split": "TEST",
+    "category": "inverse",
+    "is_unseen": true,
+    "is_noisy": false,
+    "question": "Arun is managed by Ravi.",
+    "expected_relation": "manages",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "managed by",
+      "question_type": null
+    },
+    "semantic_query": {
+      "subject": "Ravi",
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0088",
+    "split": "TEST",
+    "category": "paraphrase",
+    "is_unseen": true,
+    "is_noisy": false,
+    "question": "Who is a brother to Dhivya?",
+    "expected_relation": "brother_of",
+    "surface_form": {
+      "entity": "Dhivya",
+      "relation_phrase": "brother to",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "brother_of",
+      "object": "Dhivya",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0089",
+    "split": "TEST",
+    "category": "collision",
+    "is_unseen": true,
+    "is_noisy": false,
+    "question": "Who collaborates with Arun?",
+    "expected_relation": "colleague_of",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "collaborates with",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "colleague_of",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0090",
+    "split": "TEST",
+    "category": "synonym",
+    "is_unseen": true,
+    "is_noisy": false,
+    "question": "Who is a peer of Arun?",
+    "expected_relation": "colleague_of",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "peer of",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "colleague_of",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0091",
+    "split": "TEST",
+    "category": "synonym",
+    "is_unseen": true,
+    "is_noisy": false,
+    "question": "What revolves around Sun?",
+    "expected_relation": "orbits",
+    "surface_form": {
+      "entity": "Sun",
+      "relation_phrase": "revolves around",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "orbits",
+      "object": "Sun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0092",
+    "split": "TEST",
+    "category": "synonym",
+    "is_unseen": true,
+    "is_noisy": false,
+    "question": "What travels around Earth?",
+    "expected_relation": "orbits",
+    "surface_form": {
+      "entity": "Earth",
+      "relation_phrase": "travels around",
+      "question_type": "what"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "orbits",
+      "object": "Earth",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0093",
+    "split": "TEST",
+    "category": "inverse",
+    "is_unseen": true,
+    "is_noisy": false,
+    "question": "Earth is orbited by Moon.",
+    "expected_relation": "orbits",
+    "surface_form": {
+      "entity": "Earth",
+      "relation_phrase": "orbited by",
+      "question_type": null
+    },
+    "semantic_query": {
+      "subject": "Moon",
+      "relation": "orbits",
+      "object": "Earth",
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0094",
+    "split": "TEST",
+    "category": "synonym",
+    "is_unseen": true,
+    "is_noisy": false,
+    "question": "Axinix is coded in Python.",
+    "expected_relation": "uses",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "coded in",
+      "question_type": null
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "uses",
+      "object": "Python",
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0095",
+    "split": "TEST",
+    "category": "synonym",
+    "is_unseen": true,
+    "is_noisy": false,
+    "question": "Axinix is the creator of WorkHub.",
+    "expected_relation": "develops",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "creator of",
+      "question_type": null
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "develops",
+      "object": "WorkHub",
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0096",
+    "split": "TEST",
+    "category": "collision",
+    "is_unseen": true,
+    "is_noisy": false,
+    "question": "Axinix develops WorkHub with Python.",
+    "expected_relation": "develops",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "develops",
+      "question_type": null
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "develops",
+      "object": "WorkHub",
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0097",
+    "split": "TEST",
+    "category": "spelling_noise",
+    "is_unseen": true,
+    "is_noisy": true,
+    "question": "Where is Arun employd?",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "employd",
+      "question_type": "where"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0098",
+    "split": "TEST",
+    "category": "spelling_noise",
+    "is_unseen": true,
+    "is_noisy": true,
+    "question": "Who directs Arun?",
+    "expected_relation": "manages",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "directs",
+      "question_type": "who"
+    },
+    "semantic_query": {
+      "subject": null,
+      "relation": "manages",
+      "object": "Arun",
+      "answer_slot": "subject"
+    }
+  },
+  {
+    "id": "R0099",
+    "split": "TEST",
+    "category": "spelling_noise",
+    "is_unseen": true,
+    "is_noisy": true,
+    "question": "Which compny does Arun work for?",
+    "expected_relation": "works_at",
+    "surface_form": {
+      "entity": "Arun",
+      "relation_phrase": "compny work for",
+      "question_type": "which"
+    },
+    "semantic_query": {
+      "subject": "Arun",
+      "relation": "works_at",
+      "object": null,
+      "answer_slot": "object"
+    }
+  },
+  {
+    "id": "R0100",
+    "split": "TEST",
+    "category": "spelling_noise",
+    "is_unseen": true,
+    "is_noisy": true,
+    "question": "Wher is Axinix located?",
+    "expected_relation": "located_in",
+    "surface_form": {
+      "entity": "Axinix",
+      "relation_phrase": "located",
+      "question_type": "wher"
+    },
+    "semantic_query": {
+      "subject": "Axinix",
+      "relation": "located_in",
+      "object": null,
+      "answer_slot": "object"
+    }
+  }
+]
