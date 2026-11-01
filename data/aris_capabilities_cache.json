@@ -113,5 +113,38 @@
       "output_type": "telemetry_reading"
     },
     "entrypoint": "api.tests.test_capability_auto_resolve:MockAutonomousSensorTool"
+  },
+  "code_synthesis": {
+    "name": "code_synthesis",
+    "aliases": [
+      "code",
+      "write_code",
+      "generate_code",
+      "program",
+      "script"
+    ],
+    "domain": "programming",
+    "is_external": false,
+    "description": "Synthesizes, writes, tests, and executes software code and computer programs.",
+    "usage": "Use when the goal requires authoring, generating, saving, or running code, scripts, algorithms, or automated software tasks.",
+    "parameters_schema": {
+      "specification": "Detailed functional requirements for the program to write",
+      "language": "Target programming language (e.g. python, sql, javascript, bash)",
+      "target_file": "Optional file path to persist the code",
+      "run_test": "Whether to verify execution of the synthesized program"
+    },
+    "accepts": {
+      "requires": [
+        "specification"
+      ],
+      "domain": "programming"
+    },
+    "produces": {
+      "code": "str",
+      "file_path": "str",
+      "execution_output": "str",
+      "status": "str"
+    },
+    "entrypoint": "api.semantic.executable_tools:ArisCodeSynthesisTool"
   }
 }

@@ -181,7 +181,7 @@ cython_debug/
 .cursorindexingignore
 
 # Model Folder 
-models/
+/models/
 
 # Large Datasets & Archives (>100MB)
 *.zip
@@ -191,4 +191,12 @@ Offile/
 db.sqlite3
 db.sqlite3-journal
 AR.I.S/
-
+
+*.tar
+*.tar.gz
+*.jsonl.gz
+*.parquet
+data/hotpotqa/
+data/ultrachat_200k/
+data/qasrl_gs/
+data/aris_ultrachat_conversations.json
