@@ -182,6 +182,9 @@ cython_debug/
 
 # Model Folder 
 /models/
+!/aris/models/
+!/aris/models/*.py
+!/aris/models/*/
 
 # Large Datasets & Archives (>100MB)
 *.zip
