@@ -1,5 +1,5 @@
 """
-AR.I.S — Command Line Interface & Cognitive Runtime (2026 Modern Architecture)
+AR.I.S â€” Command Line Interface & Cognitive Runtime (2026 Modern Architecture)
 Features:
   - BPE Tokenizer training with ChatML support and exact byte-level roundtripping
   - ArisLM training (RoPE + GQA + SwiGLU + RMSNorm + AdamW + Cosine Warmup)
@@ -117,11 +117,35 @@ def handle_train_lm(args):
     elif hotpotqa_dir:
         print(f"Loaded HotpotQA Directory: {hotpotqa_dir}")
 
+    gsm8k_dir = Path(args.gsm8k_dir) if getattr(args, "gsm8k_dir", None) else None
+    if gsm8k_dir and not gsm8k_dir.exists():
+        print(f"Warning: GSM8K directory not found at {gsm8k_dir}, proceeding without GSM8K.")
+        gsm8k_dir = None
+    elif gsm8k_dir:
+        print(f"Loaded GSM8K Directory: {gsm8k_dir}")
+
+    mbpp_dir = Path(args.mbpp_dir) if getattr(args, "mbpp_dir", None) else None
+    if mbpp_dir and not mbpp_dir.exists():
+        print(f"Warning: MBPP directory not found at {mbpp_dir}, proceeding without MBPP.")
+        mbpp_dir = None
+    elif mbpp_dir:
+        print(f"Loaded MBPP Directory: {mbpp_dir}")
+
+    vision_dir = Path(args.vision_dir) if getattr(args, "vision_dir", None) else None
+    if vision_dir and not vision_dir.exists():
+        print(f"Warning: Vision directory not found at {vision_dir}, proceeding without Vision.")
+        vision_dir = None
+    elif vision_dir:
+        print(f"Loaded Vision Directory: {vision_dir}")
+
     trainer.train(
         parquet_dir=parquet_dir,
         ud_archive_path=ud_path,
         qasrl_dir=qasrl_dir,
         hotpotqa_dir=hotpotqa_dir,
+        gsm8k_dir=gsm8k_dir,
+        mbpp_dir=mbpp_dir,
+        vision_dir=vision_dir,
         additional_steps=args.steps,
         batch_size=args.batch_size,
         accum_steps=args.accum_steps,
@@ -155,7 +179,7 @@ def handle_chat(args):
 
     print(f"\n=======================================================")
     print(f"  AR.I.S Autonomous Cognitive Language Agent")
-    print(f"  Architecture: RoPE · GQA · SwiGLU · RMSNorm · KV-Cache")
+    print(f"  Architecture: RoPE Â· GQA Â· SwiGLU Â· RMSNorm Â· KV-Cache")
     print(f"=======================================================")
     print(f"Device:     {DEVICE}")
     print(f"Model:      {ckpt_path.name}")
@@ -319,7 +343,7 @@ def handle_merge(args):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="AR.I.S — Artificial Intelligent System CLI (2026)")
+    parser = argparse.ArgumentParser(description="AR.I.S â€” Artificial Intelligent System CLI (2026)")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     # Train Tokenizer
@@ -347,7 +371,16 @@ def main():
     p_lm.add_argument("--ud-archive", type=str, default="ud-treebanks-v2.18.tgz")
     p_lm.add_argument("--qasrl-dir", type=str, default="data/qasrl_gs/qasrl-gs")
     p_lm.add_argument("--hotpotqa-dir", type=str, default="data/hotpotqa/distractor")
-    p_lm.add_argument("--focus", type=str, default="all", choices=["all", "language", "reasoning"], help="Cognitive domain focus: 'all', 'language' (UltraChat+UD), or 'reasoning' (HotpotQA+QA-SRL)")
+    p_lm.add_argument("--gsm8k-dir", type=str, default="data/gsm8k")
+    p_lm.add_argument("--mbpp-dir", type=str, default="data/mbpp")
+    p_lm.add_argument("--vision-dir", type=str, default="data/vision")
+    p_lm.add_argument(
+        "--focus",
+        type=str,
+        default="all",
+        choices=["all", "language", "reasoning", "problem_solving", "coding", "vision"],
+        help="Cognitive domain focus: 'all', 'language', 'reasoning', 'problem_solving' (GSM8K), 'coding' (MBPP), or 'vision' (LLaVA)",
+    )
     p_lm.add_argument("--rank", type=int, default=0, help="Worker rank for multi-PC sharding (e.g. 0 for PC1, 1 for PC2)")
     p_lm.add_argument("--world-size", type=int, default=1, help="Total number of distributed training PCs")
 

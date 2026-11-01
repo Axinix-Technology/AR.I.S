@@ -1,5 +1,5 @@
 """
-AR.I.S — Enterprise Multi-Corpus Cognitive DataLoader (2026 Production Grade)
+AR.I.S â€” Enterprise Multi-Corpus Cognitive DataLoader (2026 Production Grade)
 Combines 4 Foundation Pillars:
   1. UltraChat 200k (Conversational Dialogue & Natural Interaction)
   2. Universal Dependencies v2.18 (Grammatical Syntax & Universal Treebanks)
@@ -32,6 +32,9 @@ class EnterpriseArisDataset(IterableDataset):
         qasrl_dir: Optional[Path],
         hotpotqa_dir: Optional[Path],
         tokenizer: ArisTokenizer,
+        gsm8k_dir: Optional[Path] = None,
+        mbpp_dir: Optional[Path] = None,
+        vision_dir: Optional[Path] = None,
         max_seq_len: int = 384,
         split: str = "train",
         focus: str = "all",
@@ -43,6 +46,9 @@ class EnterpriseArisDataset(IterableDataset):
         self.ud_archive_path = Path(ud_archive_path) if ud_archive_path else None
         self.qasrl_dir = Path(qasrl_dir) if qasrl_dir else None
         self.hotpotqa_dir = Path(hotpotqa_dir) if hotpotqa_dir else None
+        self.gsm8k_dir = Path(gsm8k_dir) if gsm8k_dir else None
+        self.mbpp_dir = Path(mbpp_dir) if mbpp_dir else None
+        self.vision_dir = Path(vision_dir) if vision_dir else None
         self.tokenizer = tokenizer
         self.max_seq_len = max_seq_len
         self.split = split
@@ -58,6 +64,15 @@ class EnterpriseArisDataset(IterableDataset):
 
         # QA-SRL files
         self.qasrl_files = sorted(list(self.qasrl_dir.glob("**/*.jsonl.gz"))) if self.qasrl_dir else []
+
+        # GSM8K Parquets (Problem Solving)
+        self.gsm8k_files = sorted(list(self.gsm8k_dir.glob("**/*.parquet"))) if self.gsm8k_dir else []
+
+        # MBPP Parquets (Foundational Coding)
+        self.mbpp_files = sorted(list(self.mbpp_dir.glob("**/*.parquet"))) if self.mbpp_dir else []
+
+        # Vision JSONs (Scene Understanding & Image Reasoning)
+        self.vision_files = sorted(list(self.vision_dir.glob("**/*.json"))) if self.vision_dir else []
 
     def _format_and_tokenize(self, prompt: str, response: str) -> Tuple[torch.Tensor, torch.Tensor]:
         """Formats into ChatML prompt/response and produces masked target tensor."""
@@ -200,11 +215,89 @@ class EnterpriseArisDataset(IterableDataset):
             except Exception:
                 continue
 
+    def _iter_gsm8k(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
+        """5. GSM8K: Multi-step mathematical problem solving and deductive deduction."""
+        if not self.gsm8k_files:
+            return
+        for p_file in self.gsm8k_files:
+            table = pq.read_table(p_file)
+            rows = table.to_pylist()
+            for r in rows:
+                question = r.get("question", "").strip()
+                answer = r.get("answer", "").strip()
+                if not question or not answer:
+                    continue
+                reasoning, _, final_num = answer.partition("####")
+                prompt = f"Solve the following mathematical problem step by step:\n{question}"
+                response = (
+                    f"<|thought|>\n{reasoning.strip()}\n"
+                    f"Final Calculation: {final_num.strip()}"
+                )
+                yield self._format_and_tokenize(prompt, response)
+
+    def _iter_mbpp(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
+        """6. MBPP: Foundational Grade 1 coding, algorithmic logic, and test assertions."""
+        if not self.mbpp_files:
+            return
+        for p_file in self.mbpp_files:
+            table = pq.read_table(p_file)
+            rows = table.to_pylist()
+            for r in rows:
+                text = r.get("text", "").strip()
+                code = r.get("code", "").strip()
+                test_list = r.get("test_list", [])
+                if not text or not code:
+                    continue
+                tests_str = "\n".join(test_list[:3]) if isinstance(test_list, list) else ""
+                prompt = f"Write a Python program to solve this task:\n{text}"
+                response = (
+                    f"<|thought|>\nFormulating algorithmic logic, edge cases, and unit tests.\n"
+                    f"```python\n{code}\n```\n"
+                    f"# Verification Assertions:\n{tests_str}"
+                )
+                yield self._format_and_tokenize(prompt, response)
+
+    def _iter_vision(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
+        """7. Vision / Multimodal: Visual scene understanding, object attributes, and spatial reasoning."""
+        if not self.vision_files:
+            return
+        for v_file in self.vision_files:
+            try:
+                with open(v_file, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                if not isinstance(data, list):
+                    continue
+                for item in data:
+                    convs = item.get("conversations", [])
+                    if len(convs) < 2:
+                        continue
+                    human_q = ""
+                    for msg in convs:
+                        role = msg.get("from", "")
+                        val = msg.get("value", "").strip()
+                        if role == "human":
+                            human_q = val
+                        elif role == "gpt" and human_q:
+                            asst_ans = val
+                            img_ctx = f"[Image Context: {item.get('image', 'scene')}]\n"
+                            prompt = f"{img_ctx}{human_q}"
+                            response = (
+                                f"<|thought|>\nAnalyzing visual features, spatial relationships, and object attributes:\n"
+                                f"{asst_ans}"
+                            )
+                            yield self._format_and_tokenize(prompt, response)
+                            human_q = ""
+            except Exception:
+                continue
+
     def _base_stream(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
         uc_iter = self._iter_ultrachat()
         hp_iter = self._iter_hotpotqa()
         qs_iter = self._iter_qasrl()
         ud_iter = self._iter_ud()
+        gsm_iter = self._iter_gsm8k()
+        mbpp_iter = self._iter_mbpp()
+        vis_iter = self._iter_vision()
 
         if self.focus == "language":
             # Language Focus: UltraChat (3) + Universal Dependencies (1)
@@ -245,35 +338,53 @@ class EnterpriseArisDataset(IterableDataset):
                             yield next(qs_iter)
                         except StopIteration:
                             pass
-        else:
-            # Default "all": 3 UltraChat : 2 HotpotQA : 2 QA-SRL : 1 Universal Dependencies
+
+        elif self.focus == "problem_solving":
+            # Problem Solving Focus: GSM8K multi-step math deduction
             while True:
-                for _ in range(3):
+                try:
+                    yield next(gsm_iter)
+                except StopIteration:
+                    gsm_iter = self._iter_gsm8k()
+                    try:
+                        yield next(gsm_iter)
+                    except StopIteration:
+                        break
+
+        elif self.focus == "coding":
+            # Coding Focus: MBPP Python problem solving and assertion logic
+            while True:
+                try:
+                    yield next(mbpp_iter)
+                except StopIteration:
+                    mbpp_iter = self._iter_mbpp()
+                    try:
+                        yield next(mbpp_iter)
+                    except StopIteration:
+                        break
+
+        elif self.focus == "vision":
+            # Vision Focus: Multimodal scene and image attribute descriptions
+            while True:
+                try:
+                    yield next(vis_iter)
+                except StopIteration:
+                    vis_iter = self._iter_vision()
+                    try:
+                        yield next(vis_iter)
+                    except StopIteration:
+                        break
+
+        else:
+            # Default "all": Balanced cognitive blend across 7 pillars
+            # 2 UltraChat : 1 UD : 1 HotpotQA : 1 QA-SRL : 2 GSM8K : 2 MBPP : 2 Vision
+            while True:
+                for _ in range(2):
                     try:
                         yield next(uc_iter)
                     except StopIteration:
                         uc_iter = self._iter_ultrachat()
                         yield next(uc_iter)
-
-                for _ in range(2):
-                    try:
-                        yield next(hp_iter)
-                    except StopIteration:
-                        hp_iter = self._iter_hotpotqa()
-                        try:
-                            yield next(hp_iter)
-                        except StopIteration:
-                            pass
-
-                for _ in range(2):
-                    try:
-                        yield next(qs_iter)
-                    except StopIteration:
-                        qs_iter = self._iter_qasrl()
-                        try:
-                            yield next(qs_iter)
-                        except StopIteration:
-                            pass
 
                 try:
                     yield next(ud_iter)
@@ -283,6 +394,54 @@ class EnterpriseArisDataset(IterableDataset):
                         yield next(ud_iter)
                     except StopIteration:
                         pass
+
+                try:
+                    yield next(hp_iter)
+                except StopIteration:
+                    hp_iter = self._iter_hotpotqa()
+                    try:
+                        yield next(hp_iter)
+                    except StopIteration:
+                        pass
+
+                try:
+                    yield next(qs_iter)
+                except StopIteration:
+                    qs_iter = self._iter_qasrl()
+                    try:
+                        yield next(qs_iter)
+                    except StopIteration:
+                        pass
+
+                for _ in range(2):
+                    try:
+                        yield next(gsm_iter)
+                    except StopIteration:
+                        gsm_iter = self._iter_gsm8k()
+                        try:
+                            yield next(gsm_iter)
+                        except StopIteration:
+                            pass
+
+                for _ in range(2):
+                    try:
+                        yield next(mbpp_iter)
+                    except StopIteration:
+                        mbpp_iter = self._iter_mbpp()
+                        try:
+                            yield next(mbpp_iter)
+                        except StopIteration:
+                            pass
+
+                for _ in range(2):
+                    try:
+                        yield next(vis_iter)
+                    except StopIteration:
+                        vis_iter = self._iter_vision()
+                        try:
+                            yield next(vis_iter)
+                        except StopIteration:
+                            pass
 
     def __iter__(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
         """
@@ -328,6 +487,9 @@ class EnterpriseDataLoader:
         qasrl_dir: Optional[Path],
         hotpotqa_dir: Optional[Path],
         tokenizer: ArisTokenizer,
+        gsm8k_dir: Optional[Path] = None,
+        mbpp_dir: Optional[Path] = None,
+        vision_dir: Optional[Path] = None,
         batch_size: int = 8,
         max_seq_len: int = 384,
         split: str = "train",
@@ -341,6 +503,9 @@ class EnterpriseDataLoader:
             qasrl_dir=qasrl_dir,
             hotpotqa_dir=hotpotqa_dir,
             tokenizer=tokenizer,
+            gsm8k_dir=gsm8k_dir,
+            mbpp_dir=mbpp_dir,
+            vision_dir=vision_dir,
             max_seq_len=max_seq_len,
             split=split,
             focus=focus,

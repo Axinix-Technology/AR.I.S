@@ -11,6 +11,7 @@ All architectural concepts, modules, foundational corpora, and training pipeline
 - [Benchmark Suite](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/B/BENCHMARK_SUITE.md) — Standardized cognitive evaluation suite measuring multi-hop deduction, causal semantic role accuracy, and Graph RAG retrieval precision.
 
 ### [C]
+- [Coding Knowledge & Test-Driven Substrate](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/C/CODING_KNOWLEDGE_SUBSTRATE.md) — Grade 1 foundational programming, AST syntax induction, and unit test assertions via Google Research MBPP.
 - [Curriculum & Training Protocols](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/C/CURRICULUM_AND_TRAINING_PROTOCOLS.md) — 5-stage developmental curriculum, gradient accumulation cool-training protocol, and cumulative plasticity directives.
 
 ### [D]
@@ -21,7 +22,13 @@ All architectural concepts, modules, foundational corpora, and training pipeline
 
 ### [M]
 - [Model Merging Protocol](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/M/MODEL_MERGING_PROTOCOL.md) — Collaborative distributed training via Model Soups, Spherical Linear Interpolation (SLERP), and task-vector arithmetic.
-- [Multi-Corpus Cognitive Architecture](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/M/MULTI_CORPUS_COGNITIVE_ARCHITECTURE.md) — Unified 4-pillar streaming architecture combining UltraChat, Universal Dependencies, QA-SRL 2020, and HotpotQA.
+- [Multi-Corpus Cognitive Architecture](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/M/MULTI_CORPUS_COGNITIVE_ARCHITECTURE.md) — Unified 7-pillar streaming architecture combining UltraChat, Universal Dependencies, QA-SRL 2020, HotpotQA, GSM8K, MBPP, and LLaVA-Instruct.
+
+### [P]
+- [Problem Solving & Mathematical Reasoning](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/P/PROBLEM_SOLVING_REASONING.md) — Multi-step word problems, arithmetic calculation steps, and latent deduction chains via OpenAI GSM8K.
 
 ### [R]
 - [Reasoning Pipeline](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/R/REASONING_PIPELINE.md) — Multi-hop evidence extraction and word-level causal attribution pipeline using neural latent thought tokens.
+
+### [V]
+- [Vision-Language & Multimodal Architecture](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/V/VISION_MULTIMODAL_ARCHITECTURE.md) — Scene understanding, spatial relationships, object attribute reasoning, and multimodal image descriptions via LLaVA-Instruct.

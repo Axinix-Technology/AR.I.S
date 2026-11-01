@@ -1,5 +1,5 @@
 """
-AR.I.S — Neural Model Trainer with Incremental Resumption
+AR.I.S â€” Neural Model Trainer with Incremental Resumption
 Features:
   - Phase-by-phase incremental training (e.g. today 500, tomorrow 1,000 -> cumulative 1,500)
   - Restores model weights, optimizer states, learning rate schedules, and step counts
@@ -58,6 +58,9 @@ class ArisTrainer:
         ud_archive_path: Optional[Path] = None,
         qasrl_dir: Optional[Path] = None,
         hotpotqa_dir: Optional[Path] = None,
+        gsm8k_dir: Optional[Path] = None,
+        mbpp_dir: Optional[Path] = None,
+        vision_dir: Optional[Path] = None,
         additional_steps: int = 500,
         batch_size: int = 8,
         accum_steps: int = 1,
@@ -75,11 +78,11 @@ class ArisTrainer:
         world_size: int = 1,
     ) -> Dict[str, Any]:
         """
-        Executes cumulative incremental training combining all 4 foundational corpora:
-        UltraChat + Universal Dependencies + QA-SRL + HotpotQA.
+        Executes cumulative incremental training combining all 7 foundational corpora:
+        UltraChat + Universal Dependencies + QA-SRL + HotpotQA + GSM8K + MBPP + Vision.
         Supports Protocol 1 (Thermal Management via Gradient Accumulation & Thread Limiter)
         and Windows Keep-Awake kernel lock.
-        Supports Modular Cognitive Focus ('all', 'language', 'reasoning') and Distributed Sharding (rank/world_size).
+        Supports Modular Cognitive Focus and Distributed Sharding (rank/world_size).
         """
         if max_threads and max_threads > 0:
             torch.set_num_threads(max_threads)
@@ -94,6 +97,9 @@ class ArisTrainer:
                 ud_archive_path=ud_archive_path,
                 qasrl_dir=qasrl_dir,
                 hotpotqa_dir=hotpotqa_dir,
+                gsm8k_dir=gsm8k_dir,
+                mbpp_dir=mbpp_dir,
+                vision_dir=vision_dir,
                 additional_steps=additional_steps,
                 batch_size=batch_size,
                 accum_steps=accum_steps,
@@ -119,6 +125,9 @@ class ArisTrainer:
         ud_archive_path: Optional[Path],
         qasrl_dir: Optional[Path],
         hotpotqa_dir: Optional[Path],
+        gsm8k_dir: Optional[Path],
+        mbpp_dir: Optional[Path],
+        vision_dir: Optional[Path],
         additional_steps: int,
         batch_size: int,
         accum_steps: int,
@@ -165,6 +174,9 @@ class ArisTrainer:
             ud_archive_path=ud_archive_path,
             qasrl_dir=qasrl_dir,
             hotpotqa_dir=hotpotqa_dir,
+            gsm8k_dir=gsm8k_dir,
+            mbpp_dir=mbpp_dir,
+            vision_dir=vision_dir,
             tokenizer=self.tokenizer,
             batch_size=batch_size,
             max_seq_len=max_seq_len,
