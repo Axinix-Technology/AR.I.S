@@ -181,7 +181,8 @@ cython_debug/
 .cursorindexingignore
 
 # Model Folder 
-/models/
+/models/*
+!/models/aris_bpe_tokenizer.json
 !/aris/models/
 !/aris/models/*.py
 !/aris/models/*/
