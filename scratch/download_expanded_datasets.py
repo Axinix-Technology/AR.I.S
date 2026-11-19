@@ -47,12 +47,28 @@ def download_all():
     vision_dir.mkdir(parents=True, exist_ok=True)
     vision_dest = vision_dir / "detail_23k.json"
     if not vision_dest.exists():
-        print("[3/3] Downloading LLaVA-Instruct detail_23k (liuhaotian/LLaVA-Instruct-150K)...")
+        print("[3/4] Downloading LLaVA-Instruct detail_23k (liuhaotian/LLaVA-Instruct-150K)...")
         src = hf_hub_download(repo_id="liuhaotian/LLaVA-Instruct-150K", filename="detail_23k.json", repo_type="dataset")
         shutil.copyfile(src, vision_dest)
         print(f"Vision dataset saved to {vision_dest} ({vision_dest.stat().st_size / (1024*1024):.2f} MB)")
     else:
         print(f"Vision dataset already exists at {vision_dest}")
+
+    # 4. UltraChat Dialogue (HuggingFaceH4/ultrachat_200k)
+    uc_dir = DATA_DIR / "ultrachat_200k" / "data"
+    uc_dir.mkdir(parents=True, exist_ok=True)
+    uc_dest = uc_dir / "train_sft.parquet"
+    if not uc_dest.exists():
+        print("[4/4] Downloading UltraChat SFT Dialogue (HuggingFaceH4/ultrachat_200k)...")
+        src = hf_hub_download(
+            repo_id="HuggingFaceH4/ultrachat_200k",
+            filename="data/test_sft-00000-of-00001-f7dfac4afe5b93f4.parquet",
+            repo_type="dataset",
+        )
+        shutil.copyfile(src, uc_dest)
+        print(f"UltraChat SFT saved to {uc_dest} ({uc_dest.stat().st_size / (1024*1024):.2f} MB)")
+    else:
+        print(f"UltraChat already exists at {uc_dest}")
 
     print("\nAll datasets downloaded successfully!")
 

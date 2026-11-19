@@ -14,14 +14,14 @@ from typing import Optional
 @dataclass
 class ArisConfig:
     # Vocabulary & Sequence
-    vocab_size: int = 8192
-    max_seq_len: int = 512
+    vocab_size: int = 4096
+    max_seq_len: int = 384
     
-    # Model Dimensions (Sweet spot for CPU: ~15M - 30M parameters)
-    embed_dim: int = 384
-    num_layers: int = 6
-    num_query_heads: int = 6
-    num_kv_heads: int = 2          # GQA (3 query heads per KV head)
+    # Model Dimensions (Gen 2 Cloud Architecture: ~24.6M parameters, 2x Doubling)
+    embed_dim: int = 512
+    num_layers: int = 8
+    num_query_heads: int = 8
+    num_kv_heads: int = 2          # GQA (4 query heads per KV head)
     ff_dim: Optional[int] = None   # SwiGLU intermediate dimension (default: 8/3 * embed_dim)
     
     # RoPE (Rotary Position Embeddings)

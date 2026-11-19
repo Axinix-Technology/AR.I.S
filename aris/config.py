@@ -43,13 +43,13 @@ DB_CONFIG = {
     "charset": "utf8mb4",
 }
 
-# Default Neural Architecture Hyperparameters (ArisLM)
+# Default Neural Architecture Hyperparameters (ArisLM Gen 2: ~24.6M Parameters)
 MODEL_CONFIG = {
-    "vocab_size": 8192,        # BPE Vocabulary size
-    "max_seq_len": 512,        # Maximum context window (tokens)
-    "embed_dim": 384,          # Dense representation dimension
-    "num_heads": 6,            # Multi-head attention heads (384 // 6 = 64 per head)
-    "num_layers": 6,           # Stacked Transformer Decoder blocks
-    "ff_dim": 1536,            # Feed-Forward hidden expansion (4x embed_dim)
-    "dropout": 0.1,            # Regularization dropout
+    "vocab_size": 4096,        # BPE Vocabulary size
+    "max_seq_len": 384,        # Maximum context window (tokens)
+    "embed_dim": 512,          # Dense representation dimension
+    "num_heads": 8,            # Multi-head attention heads
+    "num_layers": 8,           # Stacked Transformer Decoder blocks
+    "ff_dim": 1408,            # SwiGLU hidden expansion
+    "dropout": 0.0,            # Modern LLMs use 0.0 dropout
 }

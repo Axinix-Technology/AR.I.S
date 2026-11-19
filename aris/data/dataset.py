@@ -27,11 +27,11 @@ class EnterpriseArisDataset(IterableDataset):
 
     def __init__(
         self,
-        ultrachat_dir: Path,
-        ud_archive_path: Optional[Path],
-        qasrl_dir: Optional[Path],
-        hotpotqa_dir: Optional[Path],
-        tokenizer: ArisTokenizer,
+        ultrachat_dir: Optional[Path] = None,
+        ud_archive_path: Optional[Path] = None,
+        qasrl_dir: Optional[Path] = None,
+        hotpotqa_dir: Optional[Path] = None,
+        tokenizer: ArisTokenizer = None,
         gsm8k_dir: Optional[Path] = None,
         mbpp_dir: Optional[Path] = None,
         vision_dir: Optional[Path] = None,
@@ -43,7 +43,7 @@ class EnterpriseArisDataset(IterableDataset):
         world_size: int = 1,
     ):
         super().__init__()
-        self.ultrachat_dir = Path(ultrachat_dir)
+        self.ultrachat_dir = Path(ultrachat_dir) if ultrachat_dir else None
         self.ud_archive_path = Path(ud_archive_path) if ud_archive_path else None
         self.qasrl_dir = Path(qasrl_dir) if qasrl_dir else None
         self.hotpotqa_dir = Path(hotpotqa_dir) if hotpotqa_dir else None
@@ -59,7 +59,7 @@ class EnterpriseArisDataset(IterableDataset):
         self.world_size = max(1, world_size)
 
         # UltraChat Parquets
-        self.uc_files = sorted(list(self.ultrachat_dir.glob("*.parquet")))
+        self.uc_files = sorted(list(self.ultrachat_dir.glob("*.parquet"))) if self.ultrachat_dir and self.ultrachat_dir.exists() else []
 
         # HotpotQA Parquets
         self.hp_files = sorted(list(self.hotpotqa_dir.glob("**/*.parquet"))) if self.hotpotqa_dir else []
@@ -97,6 +97,8 @@ class EnterpriseArisDataset(IterableDataset):
 
     def _iter_ultrachat(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
         """1. UltraChat: Conversational dialogue turns."""
+        if not self.uc_files:
+            return
         for p_file in self.uc_files:
             table = pq.read_table(p_file, columns=["messages"])
             for dialogue in table["messages"].to_pylist():
@@ -415,83 +417,110 @@ class EnterpriseArisDataset(IterableDataset):
                         break
 
         else:
-            # Default "all": Balanced cognitive blend across all pillars + Custom Chat
-            # 2 UltraChat : 1 UD : 1 HotpotQA : 1 QA-SRL : 2 GSM8K : 2 MBPP : 2 Vision : 2 Custom Chat
-            while True:
-                for _ in range(2):
-                    try:
-                        yield next(uc_iter)
-                    except StopIteration:
-                        uc_iter = self._iter_ultrachat()
-                        yield next(uc_iter)
+            # Check that at least one dataset source is available
+            has_sources = any([
+                self.uc_files,
+                self.ud_archive_path and self.ud_archive_path.exists(),
+                self.hp_files,
+                self.qasrl_files,
+                self.gsm8k_files,
+                self.mbpp_files,
+                self.vision_files,
+                self.custom_chat_path and self.custom_chat_path.exists(),
+            ])
+            if not has_sources:
+                raise RuntimeError(
+                    "No datasets found in data/ directories! "
+                    "Run 'python scratch/download_expanded_datasets.py' to download foundational corpora."
+                )
 
-                try:
-                    yield next(ud_iter)
-                except StopIteration:
-                    ud_iter = self._iter_ud()
+            # Default "all": Dynamically interleave across all available pillars
+            while True:
+                if self.uc_files:
+                    for _ in range(2):
+                        try:
+                            yield next(uc_iter)
+                        except StopIteration:
+                            uc_iter = self._iter_ultrachat()
+                            try:
+                                yield next(uc_iter)
+                            except StopIteration:
+                                pass
+
+                if self.ud_archive_path and self.ud_archive_path.exists():
                     try:
                         yield next(ud_iter)
                     except StopIteration:
-                        pass
+                        ud_iter = self._iter_ud()
+                        try:
+                            yield next(ud_iter)
+                        except StopIteration:
+                            pass
 
-                try:
-                    yield next(hp_iter)
-                except StopIteration:
-                    hp_iter = self._iter_hotpotqa()
+                if self.hp_files:
                     try:
                         yield next(hp_iter)
                     except StopIteration:
-                        pass
+                        hp_iter = self._iter_hotpotqa()
+                        try:
+                            yield next(hp_iter)
+                        except StopIteration:
+                            pass
 
-                try:
-                    yield next(qs_iter)
-                except StopIteration:
-                    qs_iter = self._iter_qasrl()
+                if self.qasrl_files:
                     try:
                         yield next(qs_iter)
                     except StopIteration:
-                        pass
+                        qs_iter = self._iter_qasrl()
+                        try:
+                            yield next(qs_iter)
+                        except StopIteration:
+                            pass
 
-                for _ in range(2):
-                    try:
-                        yield next(gsm_iter)
-                    except StopIteration:
-                        gsm_iter = self._iter_gsm8k()
+                if self.gsm8k_files:
+                    for _ in range(2):
                         try:
                             yield next(gsm_iter)
                         except StopIteration:
-                            pass
+                            gsm_iter = self._iter_gsm8k()
+                            try:
+                                yield next(gsm_iter)
+                            except StopIteration:
+                                pass
 
-                for _ in range(2):
-                    try:
-                        yield next(mbpp_iter)
-                    except StopIteration:
-                        mbpp_iter = self._iter_mbpp()
+                if self.mbpp_files:
+                    for _ in range(2):
                         try:
                             yield next(mbpp_iter)
                         except StopIteration:
-                            pass
+                            mbpp_iter = self._iter_mbpp()
+                            try:
+                                yield next(mbpp_iter)
+                            except StopIteration:
+                                pass
 
-                for _ in range(2):
-                    try:
-                        yield next(vis_iter)
-                    except StopIteration:
-                        vis_iter = self._iter_vision()
+                if self.vision_files:
+                    for _ in range(2):
                         try:
                             yield next(vis_iter)
                         except StopIteration:
-                            pass
+                            vis_iter = self._iter_vision()
+                            try:
+                                yield next(vis_iter)
+                            except StopIteration:
+                                pass
 
                 # Interleave user-defined custom alignment dialogues when available
-                for _ in range(2):
-                    try:
-                        yield next(cust_iter)
-                    except StopIteration:
-                        cust_iter = self._iter_custom_chat()
+                if self.custom_chat_path and self.custom_chat_path.exists():
+                    for _ in range(2):
                         try:
                             yield next(cust_iter)
                         except StopIteration:
-                            pass
+                            cust_iter = self._iter_custom_chat()
+                            try:
+                                yield next(cust_iter)
+                            except StopIteration:
+                                pass
 
     def __iter__(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
         """
@@ -532,11 +561,11 @@ class EnterpriseDataLoader:
     @classmethod
     def get_loader(
         cls,
-        ultrachat_dir: Path,
-        ud_archive_path: Optional[Path],
-        qasrl_dir: Optional[Path],
-        hotpotqa_dir: Optional[Path],
         tokenizer: ArisTokenizer,
+        ultrachat_dir: Optional[Path] = None,
+        ud_archive_path: Optional[Path] = None,
+        qasrl_dir: Optional[Path] = None,
+        hotpotqa_dir: Optional[Path] = None,
         gsm8k_dir: Optional[Path] = None,
         mbpp_dir: Optional[Path] = None,
         vision_dir: Optional[Path] = None,

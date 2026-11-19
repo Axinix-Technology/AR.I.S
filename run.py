@@ -74,8 +74,10 @@ def handle_train_lm(args):
 
     parquet_dir = DATA_DIR / "ultrachat_200k" / "data"
     if not parquet_dir.exists():
-        print(f"Error: Dataset directory not found: {parquet_dir}")
-        return
+        print(f"Notice: UltraChat directory not found at {parquet_dir}, proceeding with available corpora.")
+        parquet_dir = None
+    else:
+        print(f"Loaded UltraChat Directory: {parquet_dir}")
 
     config = ArisConfig(
         vocab_size=tokenizer.vocab_size,
@@ -369,9 +371,9 @@ def main():
     p_lm.add_argument("--max-threads", type=int, default=4, help="Limit CPU threads to prevent overheating")
     p_lm.add_argument("--lr", type=float, default=3e-4)
     p_lm.add_argument("--max-seq-len", type=int, default=384)
-    p_lm.add_argument("--embed-dim", type=int, default=384)
-    p_lm.add_argument("--num-layers", type=int, default=6)
-    p_lm.add_argument("--num-query-heads", type=int, default=6)
+    p_lm.add_argument("--embed-dim", type=int, default=512)
+    p_lm.add_argument("--num-layers", type=int, default=8)
+    p_lm.add_argument("--num-query-heads", type=int, default=8)
     p_lm.add_argument("--num-kv-heads", type=int, default=2)
     p_lm.add_argument("--log-every", type=int, default=20)
     p_lm.add_argument("--save-every", type=int, default=200)
