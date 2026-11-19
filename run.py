@@ -100,8 +100,13 @@ def handle_train_lm(args):
 
     ud_path = Path(args.ud_archive) if args.ud_archive else None
     if ud_path and not ud_path.exists():
-        print(f"Warning: UD Archive not found at {ud_path}, proceeding without UD.")
-        ud_path = None
+        found_archives = list(BASE_DIR.glob("ud-treebanks-*.tgz"))
+        if found_archives:
+            ud_path = found_archives[0]
+            print(f"Loaded Universal Dependencies Archive: {ud_path}")
+        else:
+            print(f"Notice: UD Archive not found at {ud_path}, proceeding without UD.")
+            ud_path = None
     elif ud_path:
         print(f"Loaded Universal Dependencies Archive: {ud_path}")
 
