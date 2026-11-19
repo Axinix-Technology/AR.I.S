@@ -61,6 +61,7 @@ class ArisTrainer:
         gsm8k_dir: Optional[Path] = None,
         mbpp_dir: Optional[Path] = None,
         vision_dir: Optional[Path] = None,
+        custom_chat_path: Optional[Path] = None,
         additional_steps: int = 500,
         batch_size: int = 8,
         accum_steps: int = 1,
@@ -100,6 +101,7 @@ class ArisTrainer:
                 gsm8k_dir=gsm8k_dir,
                 mbpp_dir=mbpp_dir,
                 vision_dir=vision_dir,
+                custom_chat_path=custom_chat_path,
                 additional_steps=additional_steps,
                 batch_size=batch_size,
                 accum_steps=accum_steps,
@@ -128,6 +130,7 @@ class ArisTrainer:
         gsm8k_dir: Optional[Path],
         mbpp_dir: Optional[Path],
         vision_dir: Optional[Path],
+        custom_chat_path: Optional[Path],
         additional_steps: int,
         batch_size: int,
         accum_steps: int,
@@ -164,6 +167,9 @@ class ArisTrainer:
         if optimizer_state:
             try:
                 optimizer.load_state_dict(optimizer_state)
+                # Reset learning rate for the new session so it starts at requested lr and decays over additional_steps
+                for param_group in optimizer.param_groups:
+                    param_group["lr"] = lr
             except Exception:
                 print("  Note: Initialized fresh optimizer state for new learning phase.")
 
@@ -177,6 +183,7 @@ class ArisTrainer:
             gsm8k_dir=gsm8k_dir,
             mbpp_dir=mbpp_dir,
             vision_dir=vision_dir,
+            custom_chat_path=custom_chat_path,
             tokenizer=self.tokenizer,
             batch_size=batch_size,
             max_seq_len=max_seq_len,

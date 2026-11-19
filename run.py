@@ -138,6 +138,13 @@ def handle_train_lm(args):
     elif vision_dir:
         print(f"Loaded Vision Directory: {vision_dir}")
 
+    custom_chat_path = Path(args.custom_chat_path) if getattr(args, "custom_chat_path", None) else None
+    if custom_chat_path and not custom_chat_path.exists():
+        print(f"Warning: Custom chat file not found at {custom_chat_path}, proceeding without custom chat.")
+        custom_chat_path = None
+    elif custom_chat_path:
+        print(f"Loaded Custom Chat File: {custom_chat_path}")
+
     trainer.train(
         parquet_dir=parquet_dir,
         ud_archive_path=ud_path,
@@ -146,6 +153,7 @@ def handle_train_lm(args):
         gsm8k_dir=gsm8k_dir,
         mbpp_dir=mbpp_dir,
         vision_dir=vision_dir,
+        custom_chat_path=custom_chat_path,
         additional_steps=args.steps,
         batch_size=args.batch_size,
         accum_steps=args.accum_steps,
@@ -374,12 +382,13 @@ def main():
     p_lm.add_argument("--gsm8k-dir", type=str, default="data/gsm8k")
     p_lm.add_argument("--mbpp-dir", type=str, default="data/mbpp")
     p_lm.add_argument("--vision-dir", type=str, default="data/vision")
+    p_lm.add_argument("--custom-chat-path", type=str, default="data/custom_chat.json", help="Path to user-defined custom alignment chat JSON")
     p_lm.add_argument(
         "--focus",
         type=str,
         default="all",
-        choices=["all", "language", "reasoning", "problem_solving", "coding", "vision"],
-        help="Cognitive domain focus: 'all', 'language', 'reasoning', 'problem_solving' (GSM8K), 'coding' (MBPP), or 'vision' (LLaVA)",
+        choices=["all", "language", "reasoning", "problem_solving", "coding", "vision", "custom"],
+        help="Cognitive domain focus: 'all', 'language', 'reasoning', 'problem_solving', 'coding', 'vision', or 'custom' (own chat)",
     )
     p_lm.add_argument("--rank", type=int, default=0, help="Worker rank for multi-PC sharding (e.g. 0 for PC1, 1 for PC2)")
     p_lm.add_argument("--world-size", type=int, default=1, help="Total number of distributed training PCs")

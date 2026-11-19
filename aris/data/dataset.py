@@ -35,6 +35,7 @@ class EnterpriseArisDataset(IterableDataset):
         gsm8k_dir: Optional[Path] = None,
         mbpp_dir: Optional[Path] = None,
         vision_dir: Optional[Path] = None,
+        custom_chat_path: Optional[Path] = None,
         max_seq_len: int = 384,
         split: str = "train",
         focus: str = "all",
@@ -49,6 +50,7 @@ class EnterpriseArisDataset(IterableDataset):
         self.gsm8k_dir = Path(gsm8k_dir) if gsm8k_dir else None
         self.mbpp_dir = Path(mbpp_dir) if mbpp_dir else None
         self.vision_dir = Path(vision_dir) if vision_dir else None
+        self.custom_chat_path = Path(custom_chat_path) if custom_chat_path else None
         self.tokenizer = tokenizer
         self.max_seq_len = max_seq_len
         self.split = split
@@ -290,6 +292,30 @@ class EnterpriseArisDataset(IterableDataset):
             except Exception:
                 continue
 
+    def _iter_custom_chat(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
+        """8. Custom Chat: User-defined persona, identity, and specialized alignment dialogues."""
+        if not self.custom_chat_path or not self.custom_chat_path.exists():
+            return
+        try:
+            with open(self.custom_chat_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            if not isinstance(data, list):
+                return
+            for item in data:
+                messages = item.get("messages", [])
+                if len(messages) < 2:
+                    continue
+                for idx in range(len(messages) - 1):
+                    turn_user = messages[idx]
+                    turn_asst = messages[idx + 1]
+                    if turn_user.get("role") == "user" and turn_asst.get("role") == "assistant":
+                        u_text = turn_user.get("content", "").strip()
+                        a_text = turn_asst.get("content", "").strip()
+                        if u_text and a_text:
+                            yield self._format_and_tokenize(u_text, a_text)
+        except Exception:
+            return
+
     def _base_stream(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
         uc_iter = self._iter_ultrachat()
         hp_iter = self._iter_hotpotqa()
@@ -298,6 +324,7 @@ class EnterpriseArisDataset(IterableDataset):
         gsm_iter = self._iter_gsm8k()
         mbpp_iter = self._iter_mbpp()
         vis_iter = self._iter_vision()
+        cust_iter = self._iter_custom_chat()
 
         if self.focus == "language":
             # Language Focus: UltraChat (3) + Universal Dependencies (1)
@@ -375,9 +402,21 @@ class EnterpriseArisDataset(IterableDataset):
                     except StopIteration:
                         break
 
+        elif self.focus == "custom":
+            # Custom Chat Focus: 100% focused on user-defined conversations & persona alignment
+            while True:
+                try:
+                    yield next(cust_iter)
+                except StopIteration:
+                    cust_iter = self._iter_custom_chat()
+                    try:
+                        yield next(cust_iter)
+                    except StopIteration:
+                        break
+
         else:
-            # Default "all": Balanced cognitive blend across 7 pillars
-            # 2 UltraChat : 1 UD : 1 HotpotQA : 1 QA-SRL : 2 GSM8K : 2 MBPP : 2 Vision
+            # Default "all": Balanced cognitive blend across all pillars + Custom Chat
+            # 2 UltraChat : 1 UD : 1 HotpotQA : 1 QA-SRL : 2 GSM8K : 2 MBPP : 2 Vision : 2 Custom Chat
             while True:
                 for _ in range(2):
                     try:
@@ -443,6 +482,17 @@ class EnterpriseArisDataset(IterableDataset):
                         except StopIteration:
                             pass
 
+                # Interleave user-defined custom alignment dialogues when available
+                for _ in range(2):
+                    try:
+                        yield next(cust_iter)
+                    except StopIteration:
+                        cust_iter = self._iter_custom_chat()
+                        try:
+                            yield next(cust_iter)
+                        except StopIteration:
+                            pass
+
     def __iter__(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
         """
         Streams dataset according to cognitive focus and distributes samples across ranks.
@@ -490,6 +540,7 @@ class EnterpriseDataLoader:
         gsm8k_dir: Optional[Path] = None,
         mbpp_dir: Optional[Path] = None,
         vision_dir: Optional[Path] = None,
+        custom_chat_path: Optional[Path] = None,
         batch_size: int = 8,
         max_seq_len: int = 384,
         split: str = "train",
@@ -506,6 +557,7 @@ class EnterpriseDataLoader:
             gsm8k_dir=gsm8k_dir,
             mbpp_dir=mbpp_dir,
             vision_dir=vision_dir,
+            custom_chat_path=custom_chat_path,
             max_seq_len=max_seq_len,
             split=split,
             focus=focus,

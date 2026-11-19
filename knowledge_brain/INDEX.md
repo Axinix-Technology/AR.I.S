@@ -20,6 +20,9 @@ All architectural concepts, modules, foundational corpora, and training pipeline
 ### [G]
 - [Graph RAG Memory](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/G/GRAPH_RAG.md) — Hybrid neuro-symbolic knowledge graph pairing dense vector similarity with indexed multi-hop relational path traversal and Reciprocal Rank Fusion (RRF).
 
+### [K]
+- [Kaggle Cloud GPU Training Guide](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/K/KAGGLE_CLOUD_TRAINING_GUIDE.md) — 30 hours/week free GPU setup, notebook execution cells, and 1-click trained model checkpoint download.
+
 ### [M]
 - [Model Merging Protocol](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/M/MODEL_MERGING_PROTOCOL.md) — Collaborative distributed training via Model Soups, Spherical Linear Interpolation (SLERP), and task-vector arithmetic.
 - [Multi-Corpus Cognitive Architecture](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/M/MULTI_CORPUS_COGNITIVE_ARCHITECTURE.md) — Unified 7-pillar streaming architecture combining UltraChat, Universal Dependencies, QA-SRL 2020, HotpotQA, GSM8K, MBPP, and LLaVA-Instruct.
@@ -29,6 +32,9 @@ All architectural concepts, modules, foundational corpora, and training pipeline
 
 ### [R]
 - [Reasoning Pipeline](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/R/REASONING_PIPELINE.md) — Multi-hop evidence extraction and word-level causal attribution pipeline using neural latent thought tokens.
+
+### [S]
+- [Scaling & Parameter Progression Roadmap](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/S/SCALING_ROADMAP.md) — 3-month laptop pretraining roadmap following a strict 2x parameter doubling staircase (11.5M -> 23M -> 46M -> 92M).
 
 ### [V]
 - [Vision-Language & Multimodal Architecture](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/V/VISION_MULTIMODAL_ARCHITECTURE.md) — Scene understanding, spatial relationships, object attribute reasoning, and multimodal image descriptions via LLaVA-Instruct.

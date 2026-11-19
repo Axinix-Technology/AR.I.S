@@ -25,6 +25,9 @@ AR.I.S operates on the core principle of generic neural intelligence: avoiding a
 7. **LLaVA-Instruct (Multimodal Visual Reasoning)**:
    - Location: `data/vision/detail_23k.json`
    - Role: Visual scene comprehension, spatial relationships, lighting/color attributes, and image descriptions.
+8. **Custom Alignment & Persona (Supervised Fine-Tuning / SFT)**:
+   - Location: `data/custom_chat.json`
+   - Role: User-defined persona, identity, specialized directives, and respectful assistant alignment.
 
 ## 3. Dynamic Cognitive Interleaving Ratio
 When `--focus all` is selected, the streaming dataset interleaves batches in a balanced cognitive ratio:
@@ -35,12 +38,14 @@ When `--focus all` is selected, the streaming dataset interleaves batches in a b
 - 2 problems GSM8K (Mathematical Problem Solving)
 - 2 tasks MBPP (Coding Knowledge & Assertions)
 - 2 scenes LLaVA-Instruct (Vision & Spatial Understanding)
+- 2 turns Custom Alignment (User-defined Persona & Directives)
 
 ## 4. Modular Cognitive Focus Options
 The training engine and dataset support modular domain specialization via `--focus`:
-- `--focus all`: Full 7-pillar cognitive mixture.
+- `--focus all`: Full cognitive mixture across all 8 pillars.
 - `--focus language`: UltraChat + Universal Dependencies.
 - `--focus reasoning`: HotpotQA + QA-SRL.
 - `--focus problem_solving`: GSM8K (100% focused).
 - `--focus coding`: MBPP (100% focused).
 - `--focus vision`: LLaVA-Instruct (100% focused).
+- `--focus custom`: User-defined `data/custom_chat.json` (100% focused persona alignment).
