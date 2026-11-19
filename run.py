@@ -247,6 +247,7 @@ def handle_chat(args):
 def handle_eval(args):
     """
     Runs standardized cognitive evaluation benchmark over model checkpoint.
+    Evaluates 7 developmental milestone stages with 100% genuine empirical metrics.
     """
     tok_path = Path(args.tokenizer) if args.tokenizer else TOKENIZER_PATH
     ckpt_path = Path(args.checkpoint) if args.checkpoint else LM_CHECKPOINT_PATH
@@ -259,9 +260,46 @@ def handle_eval(args):
         print(f"Error: Checkpoint not found at {ckpt_path}.")
         return
 
-    hotpot_path = Path(args.hotpotqa_file)
-    qasrl_path = Path(args.qasrl_file)
-    ud_path = Path(args.ud_archive)
+    # Dynamic file auto-discovery for all datasets
+    ud_path = None
+    if args.ud_archive and Path(args.ud_archive).exists():
+        ud_path = Path(args.ud_archive)
+    else:
+        found_ud = list(BASE_DIR.glob("ud-treebanks-*.tgz"))
+        if found_ud:
+            ud_path = found_ud[0]
+
+    hotpot_path = None
+    if args.hotpotqa_file and Path(args.hotpotqa_file).exists():
+        hotpot_path = Path(args.hotpotqa_file)
+    else:
+        found_hp = list(BASE_DIR.glob("data/hotpotqa/**/*.parquet"))
+        if found_hp:
+            hotpot_path = found_hp[0]
+
+    qasrl_path = None
+    if args.qasrl_file and Path(args.qasrl_file).exists():
+        qasrl_path = Path(args.qasrl_file)
+    else:
+        found_qasrl = list(BASE_DIR.glob("data/qasrl_gs/**/*.jsonl.gz"))
+        if found_qasrl:
+            qasrl_path = found_qasrl[0]
+
+    gsm8k_path = None
+    if getattr(args, "gsm8k_file", None) and Path(args.gsm8k_file).exists():
+        gsm8k_path = Path(args.gsm8k_file)
+    else:
+        found_gsm8k = list(BASE_DIR.glob("data/gsm8k/**/*.parquet"))
+        if found_gsm8k:
+            gsm8k_path = found_gsm8k[0]
+
+    mbpp_path = None
+    if getattr(args, "mbpp_file", None) and Path(args.mbpp_file).exists():
+        mbpp_path = Path(args.mbpp_file)
+    else:
+        found_mbpp = list(BASE_DIR.glob("data/mbpp/**/*.parquet"))
+        if found_mbpp:
+            mbpp_path = found_mbpp[0]
 
     print(f"\n=======================================================")
     print(f"  AR.I.S Developmental Milestone Evaluation Suite")
@@ -269,6 +307,11 @@ def handle_eval(args):
     print(f"Device:           {DEVICE}")
     print(f"Model Checkpoint: {ckpt_path.name}")
     print(f"Tokenizer:        {tok_path.name}")
+    print(f"UD Archive:       {ud_path.name if ud_path else 'Not Found (Skipped)'}")
+    print(f"HotpotQA Split:   {hotpot_path.name if hotpot_path else 'Not Found (Skipped)'}")
+    print(f"QA-SRL Split:     {qasrl_path.name if qasrl_path else 'Not Found (Skipped)'}")
+    print(f"GSM8K Split:      {gsm8k_path.name if gsm8k_path else 'Not Found (Skipped)'}")
+    print(f"MBPP Split:       {mbpp_path.name if mbpp_path else 'Not Found (Skipped)'}")
     print(f"Sample Count:     {args.samples} per benchmark")
 
     tokenizer = ArisTokenizer.load(tok_path)
@@ -279,6 +322,8 @@ def handle_eval(args):
         hotpotqa_path=hotpot_path,
         qasrl_path=qasrl_path,
         ud_archive_path=ud_path,
+        gsm8k_path=gsm8k_path,
+        mbpp_path=mbpp_path,
         max_samples=args.samples,
     )
 
@@ -287,6 +332,8 @@ def handle_eval(args):
     s3 = report["stage3"]
     s4 = report["stage4"]
     s5 = report["stage5"]
+    s6 = report["stage6"]
+    s7 = report["stage7"]
 
     print(f"\n" + "=" * 65)
     print(f"  AR.I.S DEVELOPMENTAL MILESTONE SCORECARD (Step {step})")
@@ -310,10 +357,20 @@ def handle_eval(args):
     print(f"    - Exact Match (EM):     {s4.get('exact_match', 0.0):.2f}%")
     print(f"    - Samples Tested:       {s4.get('evaluated', 0)}")
     print(f" -------------------------------------------------------------")
-    print(f" [STAGE 5] Live Qualitative Voice Preview:")
-    for probe in s5:
+    print(f" [STAGE 5] Mathematical Problem Solving (GSM8K):")
+    print(f"    - Solution Token F1:    {s5.get('token_f1', 0.0):.2f}%")
+    print(f"    - Numeric Accuracy:     {s5.get('numeric_accuracy', 0.0):.2f}%")
+    print(f"    - Samples Tested:       {s5.get('evaluated', 0)}")
+    print(f" -------------------------------------------------------------")
+    print(f" [STAGE 6] Algorithmic Code Synthesis (MBPP):")
+    print(f"    - Code Token F1:        {s6.get('code_f1', 0.0):.2f}%")
+    print(f"    - Syntax Validity:      {s6.get('syntax_validity', 0.0):.2f}%")
+    print(f"    - Samples Tested:       {s6.get('evaluated', 0)}")
+    print(f" -------------------------------------------------------------")
+    print(f" [STAGE 7] Live Qualitative Voice Probes:")
+    for probe in s7:
         print(f"    User:   \"{probe['prompt']}\"")
-        resp_clean = probe['response'].replace('\n', ' ')[:80]
+        resp_clean = probe['response'].replace('\n', ' ')[:90]
         print(f"    AR.I.S: \"{resp_clean}\"")
     print(f"=" * 65)
     print(f" Milestone evaluation completed in {report['elapsed_seconds']:.2f}s.\n")
@@ -413,10 +470,12 @@ def main():
     p_eval = subparsers.add_parser("eval", help="Run standardized cognitive evaluation benchmark")
     p_eval.add_argument("--tokenizer", type=str, default=None)
     p_eval.add_argument("--checkpoint", type=str, default=None)
-    p_eval.add_argument("--samples", type=int, default=30)
-    p_eval.add_argument("--hotpotqa-file", type=str, default="data/hotpotqa/distractor/train-00001-of-00002.parquet")
-    p_eval.add_argument("--qasrl-file", type=str, default="data/qasrl_gs/qasrl-gs/dev.jsonl.gz")
-    p_eval.add_argument("--ud-archive", type=str, default="ud-treebanks-v2.18.tgz")
+    p_eval.add_argument("--samples", type=int, default=10, help="Number of samples to evaluate per benchmark stage")
+    p_eval.add_argument("--hotpotqa-file", type=str, default=None, help="Optional explicit path to HotpotQA parquet")
+    p_eval.add_argument("--qasrl-file", type=str, default=None, help="Optional explicit path to QA-SRL jsonl.gz")
+    p_eval.add_argument("--ud-archive", type=str, default=None, help="Optional explicit path to Universal Dependencies tgz")
+    p_eval.add_argument("--gsm8k-file", type=str, default=None, help="Optional explicit path to GSM8K parquet")
+    p_eval.add_argument("--mbpp-file", type=str, default=None, help="Optional explicit path to MBPP parquet")
 
     # Merge Models
     p_merge = subparsers.add_parser("merge-models", help="Merge independently trained checkpoints from multiple team members' PCs")

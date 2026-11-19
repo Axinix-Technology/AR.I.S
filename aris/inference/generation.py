@@ -55,8 +55,11 @@ class ArisInferenceEngine:
         )
 
         # Next token from prefill
-        next_token_logits = logits[:, -1, :] / max(temperature, 1e-5)
-        next_tokens = cls._sample_next_token(next_token_logits, top_k=top_k, top_p=top_p)
+        if temperature < 1e-4:
+            next_tokens = torch.argmax(logits[:, -1, :], dim=-1, keepdim=True)
+        else:
+            next_token_logits = logits[:, -1, :] / max(temperature, 1e-5)
+            next_tokens = cls._sample_next_token(next_token_logits, top_k=top_k, top_p=top_p)
 
         # Update finished states
         finished = finished | (next_tokens.squeeze(-1) == eos_id)
@@ -77,8 +80,11 @@ class ArisInferenceEngine:
                 offset=current_len - 1,
             )
 
-            next_token_logits = step_logits[:, -1, :] / max(temperature, 1e-5)
-            next_tokens = cls._sample_next_token(next_token_logits, top_k=top_k, top_p=top_p)
+            if temperature < 1e-4:
+                next_tokens = torch.argmax(step_logits[:, -1, :], dim=-1, keepdim=True)
+            else:
+                next_token_logits = step_logits[:, -1, :] / max(temperature, 1e-5)
+                next_tokens = cls._sample_next_token(next_token_logits, top_k=top_k, top_p=top_p)
 
             # Mask out tokens for already finished sequences
             next_tokens = torch.where(finished.unsqueeze(-1), torch.full_like(next_tokens, pad_id), next_tokens)
