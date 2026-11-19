@@ -13,7 +13,7 @@ from pathlib import Path
 import torch
 import pyarrow.parquet as pq
 
-from aris.config import DATA_DIR, MODELS_DIR, TOKENIZER_PATH, LM_CHECKPOINT_PATH, DEVICE
+from aris.config import BASE_DIR, DATA_DIR, MODELS_DIR, TOKENIZER_PATH, LM_CHECKPOINT_PATH, DEVICE
 from aris.configs.model_config import ArisConfig
 from aris.tokenizer.bpe_tokenizer import ArisTokenizer
 from aris.models.aris_lm import ArisLM
