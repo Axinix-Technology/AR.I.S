@@ -77,6 +77,7 @@ class ArisTrainer:
         focus: str = "all",
         rank: int = 0,
         world_size: int = 1,
+        backup_dir: Optional[Path] = None,
     ) -> Dict[str, Any]:
         """
         Executes cumulative incremental training combining all 7 foundational corpora:
@@ -84,6 +85,7 @@ class ArisTrainer:
         Supports Protocol 1 (Thermal Management via Gradient Accumulation & Thread Limiter)
         and Windows Keep-Awake kernel lock.
         Supports Modular Cognitive Focus and Distributed Sharding (rank/world_size).
+        Supports Cloud Auto-Backup (mirrors checkpoints directly to Google Drive upon each save).
         """
         if max_threads and max_threads > 0:
             torch.set_num_threads(max_threads)
@@ -116,6 +118,7 @@ class ArisTrainer:
                 focus=focus,
                 rank=rank,
                 world_size=world_size,
+                backup_dir=backup_dir,
             )
         finally:
             self._set_windows_sleep_state(False)
@@ -145,11 +148,19 @@ class ArisTrainer:
         focus: str = "all",
         rank: int = 0,
         world_size: int = 1,
+        backup_dir: Optional[Path] = None,
     ) -> Dict[str, Any]:
 
         save_path = self.checkpoint_dir / checkpoint_name
         current_step = 0
         optimizer_state = None
+
+        # Auto-restore from Google Drive backup if local checkpoint is missing
+        if resume and not save_path.exists() and backup_dir and (backup_dir / checkpoint_name).exists():
+            print(f"\n[Cloud Auto-Backup] Restoring checkpoint from Google Drive backup: {backup_dir / checkpoint_name}")
+            save_path.parent.mkdir(parents=True, exist_ok=True)
+            import shutil
+            shutil.copy2(backup_dir / checkpoint_name, save_path)
 
         if resume and save_path.exists():
             print(f"\n[Incremental Training] Found existing checkpoint: {save_path}")
@@ -263,7 +274,13 @@ class ArisTrainer:
                 running_loss = 0.0
 
             if session_step % save_every == 0 or current_step == target_total_steps:
-                self.save_checkpoint(save_path, step=current_step, optimizer=optimizer, loss=loss.item())
+                self.save_checkpoint(
+                    save_path,
+                    step=current_step,
+                    optimizer=optimizer,
+                    loss=loss.item(),
+                    backup_dir=backup_dir,
+                )
                 print(f"  --> Checkpoint saved! Cumulative trained steps: {current_step}")
 
         total_time = time.time() - start_time
@@ -284,8 +301,13 @@ class ArisTrainer:
         step: int,
         optimizer: Optional[torch.optim.Optimizer] = None,
         loss: Optional[float] = None,
+        backup_dir: Optional[Path] = None,
     ) -> None:
-        """Saves weights, config, and cumulative training state."""
+        """
+        Saves weights, config, and cumulative training state.
+        Immediately mirrors the saved checkpoint to backup_dir (Google Drive) if configured.
+        """
+        import shutil
         checkpoint = {
             "step": step,
             "loss": loss,
@@ -303,6 +325,16 @@ class ArisTrainer:
         if optimizer:
             checkpoint["optimizer_state_dict"] = optimizer.state_dict()
         torch.save(checkpoint, filepath)
+
+        # Immediate mirror to backup destination (Google Drive) on EVERY save
+        if backup_dir:
+            try:
+                backup_dir.mkdir(parents=True, exist_ok=True)
+                dest = backup_dir / filepath.name
+                shutil.copy2(filepath, dest)
+                print(f"  --> [Cloud Auto-Backup] Mirrored to Google Drive: {dest}")
+            except Exception as e:
+                print(f"  --> [Cloud Auto-Backup Warning] Could not mirror to {backup_dir}: {e}")
 
     @classmethod
     def load_model(cls, checkpoint_path: Path, device: Optional[torch.device] = None) -> Tuple[ArisLM, int]:

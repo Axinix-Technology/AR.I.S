@@ -152,6 +152,15 @@ def handle_train_lm(args):
     elif custom_chat_path:
         print(f"Loaded Custom Chat File: {custom_chat_path}")
 
+    # Cloud Auto-Backup: automatically detects Google Drive on Colab or uses --backup-dir
+    backup_dir = None
+    if getattr(args, "backup_dir", None):
+        backup_dir = Path(args.backup_dir)
+        print(f"[Cloud Auto-Backup] Backup directory configured: {backup_dir}")
+    elif Path("/content/drive/MyDrive").exists():
+        backup_dir = Path("/content/drive/MyDrive/ARIS_backup")
+        print(f"[Cloud Auto-Backup] Detected Google Drive! Auto-mirroring checkpoints upon every save to: {backup_dir}")
+
     trainer.train(
         parquet_dir=parquet_dir,
         ud_archive_path=ud_path,
@@ -174,6 +183,7 @@ def handle_train_lm(args):
         focus=args.focus,
         rank=args.rank,
         world_size=args.world_size,
+        backup_dir=backup_dir,
     )
 
 
@@ -257,8 +267,15 @@ def handle_eval(args):
         return
 
     if not ckpt_path.exists():
-        print(f"Error: Checkpoint not found at {ckpt_path}.")
-        return
+        drive_backup = Path("/content/drive/MyDrive/ARIS_backup") / ckpt_path.name
+        if drive_backup.exists():
+            print(f"[Cloud Auto-Backup] Restoring checkpoint from Google Drive: {drive_backup}")
+            ckpt_path.parent.mkdir(parents=True, exist_ok=True)
+            import shutil
+            shutil.copy2(drive_backup, ckpt_path)
+        else:
+            print(f"Error: Checkpoint not found at {ckpt_path}.")
+            return
 
     # Dynamic file auto-discovery for all datasets
     ud_path = None
@@ -456,6 +473,12 @@ def main():
     )
     p_lm.add_argument("--rank", type=int, default=0, help="Worker rank for multi-PC sharding (e.g. 0 for PC1, 1 for PC2)")
     p_lm.add_argument("--world-size", type=int, default=1, help="Total number of distributed training PCs")
+    p_lm.add_argument(
+        "--backup-dir",
+        type=str,
+        default=None,
+        help="Directory to automatically mirror saved checkpoints upon every save (e.g. /content/drive/MyDrive/ARIS_backup)",
+    )
 
     # Chat
     p_chat = subparsers.add_parser("chat", help="Start interactive dialogue session with ArisLM")

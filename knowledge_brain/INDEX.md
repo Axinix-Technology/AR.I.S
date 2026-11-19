@@ -11,6 +11,7 @@ All architectural concepts, modules, foundational corpora, and training pipeline
 - [Benchmark Suite](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/B/BENCHMARK_SUITE.md) — Standardized cognitive evaluation suite measuring multi-hop deduction, causal semantic role accuracy, and Graph RAG retrieval precision.
 
 ### [C]
+- [Cloud Auto-Backup & Google Drive Protocol](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/C/CLOUD_TRAINING_AND_BACKUP_PROTOCOL.md) — Automatic checkpoint mirroring and restoration substrate preventing data loss across Google Colab session disconnects.
 - [Coding Knowledge & Test-Driven Substrate](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/C/CODING_KNOWLEDGE_SUBSTRATE.md) — Grade 1 foundational programming, AST syntax induction, and unit test assertions via Google Research MBPP.
 - [Curriculum & Training Protocols](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/C/CURRICULUM_AND_TRAINING_PROTOCOLS.md) — 5-stage developmental curriculum, gradient accumulation cool-training protocol, and cumulative plasticity directives.
 
