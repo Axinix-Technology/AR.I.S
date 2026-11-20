@@ -10,6 +10,7 @@ Combines 4 Foundation Pillars:
 from __future__ import annotations
 import gzip
 import json
+import random
 from pathlib import Path
 from typing import Iterator, Tuple, List, Optional, Dict, Any
 import pyarrow.parquet as pq
@@ -35,6 +36,9 @@ class EnterpriseArisDataset(IterableDataset):
         gsm8k_dir: Optional[Path] = None,
         mbpp_dir: Optional[Path] = None,
         vision_dir: Optional[Path] = None,
+        squad_dir: Optional[Path] = None,
+        dolly_dir: Optional[Path] = None,
+        smoltalk_dir: Optional[Path] = None,
         custom_chat_path: Optional[Path] = None,
         max_seq_len: int = 384,
         split: str = "train",
@@ -50,6 +54,9 @@ class EnterpriseArisDataset(IterableDataset):
         self.gsm8k_dir = Path(gsm8k_dir) if gsm8k_dir else None
         self.mbpp_dir = Path(mbpp_dir) if mbpp_dir else None
         self.vision_dir = Path(vision_dir) if vision_dir else None
+        self.squad_dir = Path(squad_dir) if squad_dir else None
+        self.dolly_dir = Path(dolly_dir) if dolly_dir else None
+        self.smoltalk_dir = Path(smoltalk_dir) if smoltalk_dir else None
         self.custom_chat_path = Path(custom_chat_path) if custom_chat_path else None
         self.tokenizer = tokenizer
         self.max_seq_len = max_seq_len
@@ -76,6 +83,15 @@ class EnterpriseArisDataset(IterableDataset):
         # Vision JSONs (Scene Understanding & Image Reasoning)
         self.vision_files = sorted(list(self.vision_dir.glob("**/*.json"))) if self.vision_dir else []
 
+        # Stanford SQuAD 2.0 Parquets (Direct QA & Reading Comprehension)
+        self.squad_files = sorted(list(self.squad_dir.glob("**/*.parquet"))) if self.squad_dir and self.squad_dir.exists() else []
+
+        # Databricks Dolly-15k JSONL (Direct Human QA & Instructions)
+        self.dolly_files = sorted(list(self.dolly_dir.glob("**/*.jsonl"))) if self.dolly_dir and self.dolly_dir.exists() else []
+
+        # Hugging Face SmolTalk Parquets (Everyday Conversations & Magpie Ultra QA)
+        self.smoltalk_files = sorted(list(self.smoltalk_dir.glob("**/*.parquet"))) if self.smoltalk_dir and self.smoltalk_dir.exists() else []
+
     def _format_and_tokenize(self, prompt: str, response: str) -> Tuple[torch.Tensor, torch.Tensor]:
         """Formats into ChatML prompt/response and produces masked target tensor."""
         user_chat = self.tokenizer.format_chat_message("user", prompt)
@@ -99,9 +115,13 @@ class EnterpriseArisDataset(IterableDataset):
         """1. UltraChat: Conversational dialogue turns."""
         if not self.uc_files:
             return
-        for p_file in self.uc_files:
+        files = list(self.uc_files)
+        random.shuffle(files)
+        for p_file in files:
             table = pq.read_table(p_file, columns=["messages"])
-            for dialogue in table["messages"].to_pylist():
+            rows = table["messages"].to_pylist()
+            random.shuffle(rows)
+            for dialogue in rows:
                 if not dialogue or len(dialogue) < 2:
                     continue
                 for idx in range(len(dialogue) - 1):
@@ -115,9 +135,14 @@ class EnterpriseArisDataset(IterableDataset):
 
     def _iter_hotpotqa(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
         """2. HotpotQA: Multi-hop reasoning across multiple sentences with supporting evidence."""
-        for p_file in self.hp_files:
+        if not self.hp_files:
+            return
+        files = list(self.hp_files)
+        random.shuffle(files)
+        for p_file in files:
             table = pq.read_table(p_file)
             rows = table.to_pylist()
+            random.shuffle(rows)
             for r in rows:
                 question = r.get("question", "").strip()
                 answer = r.get("answer", "").strip()
@@ -318,6 +343,96 @@ class EnterpriseArisDataset(IterableDataset):
         except Exception:
             return
 
+    def _iter_squad(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
+        """9. SQuAD 2.0: High-density factual reading comprehension & direct Question Answering."""
+        if not self.squad_files:
+            return
+        files = list(self.squad_files)
+        random.shuffle(files)
+        for p_file in files:
+            table = pq.read_table(p_file)
+            rows = table.to_pylist()
+            random.shuffle(rows)
+            for r in rows:
+                question = r.get("question", "").strip()
+                context = r.get("context", "").strip()
+                answers = r.get("answers", {}).get("text", [])
+                if not question or not answers:
+                    continue
+                answer = answers[0].strip()
+                if not answer:
+                    continue
+
+                if context:
+                    prompt = f"Context:\n{context}\n\nQuestion: {question}"
+                else:
+                    prompt = f"Question: {question}"
+
+                response = (
+                    f"<|thought|>\n"
+                    f"Direct factual analysis of query.\n"
+                    f"Answer: {answer}"
+                )
+                yield self._format_and_tokenize(prompt, response)
+
+    def _iter_dolly(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
+        """10. Databricks Dolly-15k: Human-authored direct instruction, closed/open QA, and reasoning."""
+        if not self.dolly_files:
+            return
+        files = list(self.dolly_files)
+        random.shuffle(files)
+        for f_path in files:
+            try:
+                with open(f_path, "r", encoding="utf-8") as f:
+                    lines = f.readlines()
+                random.shuffle(lines)
+                for line in lines:
+                    item = json.loads(line)
+                    instruction = item.get("instruction", "").strip()
+                    context = item.get("context", "").strip()
+                    response = item.get("response", "").strip()
+                    if not instruction or not response:
+                        continue
+
+                    if context:
+                        prompt = f"Context:\n{context}\n\nInstruction: {instruction}"
+                    else:
+                        prompt = instruction
+
+                    target_resp = (
+                        f"<|thought|>\n"
+                        f"Synthesizing direct instruction response.\n"
+                        f"Answer: {response}"
+                    )
+                    yield self._format_and_tokenize(prompt, target_resp)
+            except Exception:
+                continue
+
+    def _iter_smoltalk(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
+        """11. SmolTalk: Compact LLM specialist dialogues, everyday conversations, and Magpie Ultra QA."""
+        if not self.smoltalk_files:
+            return
+        files = list(self.smoltalk_files)
+        random.shuffle(files)
+        for p_file in files:
+            try:
+                table = pq.read_table(p_file, columns=["messages"])
+                rows = table["messages"].to_pylist()
+                random.shuffle(rows)
+                for dialogue in rows:
+                    if not dialogue or len(dialogue) < 2:
+                        continue
+                    for idx in range(len(dialogue) - 1):
+                        turn_user = dialogue[idx]
+                        turn_asst = dialogue[idx + 1]
+                        if turn_user.get("role") == "user" and turn_asst.get("role") == "assistant":
+                            u_text = turn_user.get("content", "").strip()
+                            a_text = turn_asst.get("content", "").strip()
+                            if u_text and a_text:
+                                yield self._format_and_tokenize(u_text, a_text)
+            except Exception:
+                continue
+
     def _base_stream(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
         uc_iter = self._iter_ultrachat()
         hp_iter = self._iter_hotpotqa()
@@ -327,6 +442,9 @@ class EnterpriseArisDataset(IterableDataset):
         mbpp_iter = self._iter_mbpp()
         vis_iter = self._iter_vision()
         cust_iter = self._iter_custom_chat()
+        sq_iter = self._iter_squad()
+        dl_iter = self._iter_dolly()
+        st_iter = self._iter_smoltalk()
 
         if self.focus == "language":
             # Language Focus: UltraChat (3) + Universal Dependencies (1)
@@ -416,6 +534,49 @@ class EnterpriseArisDataset(IterableDataset):
                     except StopIteration:
                         break
 
+        elif self.focus == "qa":
+            # QA Focus: SQuAD 2.0 (3) + Dolly-15k (2) + SmolTalk Magpie & Everyday (2) + HotpotQA (1)
+            while True:
+                if self.squad_files:
+                    for _ in range(3):
+                        try:
+                            yield next(sq_iter)
+                        except StopIteration:
+                            sq_iter = self._iter_squad()
+                            try:
+                                yield next(sq_iter)
+                            except StopIteration:
+                                break
+                if self.dolly_files:
+                    for _ in range(2):
+                        try:
+                            yield next(dl_iter)
+                        except StopIteration:
+                            dl_iter = self._iter_dolly()
+                            try:
+                                yield next(dl_iter)
+                            except StopIteration:
+                                break
+                if self.smoltalk_files:
+                    for _ in range(2):
+                        try:
+                            yield next(st_iter)
+                        except StopIteration:
+                            st_iter = self._iter_smoltalk()
+                            try:
+                                yield next(st_iter)
+                            except StopIteration:
+                                break
+                if self.hp_files:
+                    try:
+                        yield next(hp_iter)
+                    except StopIteration:
+                        hp_iter = self._iter_hotpotqa()
+                        try:
+                            yield next(hp_iter)
+                        except StopIteration:
+                            pass
+
         else:
             # Check that at least one dataset source is available
             has_sources = any([
@@ -426,6 +587,9 @@ class EnterpriseArisDataset(IterableDataset):
                 self.gsm8k_files,
                 self.mbpp_files,
                 self.vision_files,
+                self.squad_files,
+                self.dolly_files,
+                self.smoltalk_files,
                 self.custom_chat_path and self.custom_chat_path.exists(),
             ])
             if not has_sources:
@@ -436,6 +600,39 @@ class EnterpriseArisDataset(IterableDataset):
 
             # Default "all": Dynamically interleave across all available pillars
             while True:
+                if self.squad_files:
+                    for _ in range(2):
+                        try:
+                            yield next(sq_iter)
+                        except StopIteration:
+                            sq_iter = self._iter_squad()
+                            try:
+                                yield next(sq_iter)
+                            except StopIteration:
+                                pass
+
+                if self.dolly_files:
+                    for _ in range(2):
+                        try:
+                            yield next(dl_iter)
+                        except StopIteration:
+                            dl_iter = self._iter_dolly()
+                            try:
+                                yield next(dl_iter)
+                            except StopIteration:
+                                pass
+
+                if self.smoltalk_files:
+                    for _ in range(2):
+                        try:
+                            yield next(st_iter)
+                        except StopIteration:
+                            st_iter = self._iter_smoltalk()
+                            try:
+                                yield next(st_iter)
+                            except StopIteration:
+                                pass
+
                 if self.uc_files:
                     for _ in range(2):
                         try:
@@ -569,6 +766,9 @@ class EnterpriseDataLoader:
         gsm8k_dir: Optional[Path] = None,
         mbpp_dir: Optional[Path] = None,
         vision_dir: Optional[Path] = None,
+        squad_dir: Optional[Path] = None,
+        dolly_dir: Optional[Path] = None,
+        smoltalk_dir: Optional[Path] = None,
         custom_chat_path: Optional[Path] = None,
         batch_size: int = 8,
         max_seq_len: int = 384,
@@ -586,6 +786,9 @@ class EnterpriseDataLoader:
             gsm8k_dir=gsm8k_dir,
             mbpp_dir=mbpp_dir,
             vision_dir=vision_dir,
+            squad_dir=squad_dir,
+            dolly_dir=dolly_dir,
+            smoltalk_dir=smoltalk_dir,
             custom_chat_path=custom_chat_path,
             max_seq_len=max_seq_len,
             split=split,

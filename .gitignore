@@ -200,7 +200,14 @@ AR.I.S/
 *.tar.gz
 *.jsonl.gz
 *.parquet
+*.pt
 data/hotpotqa/
 data/ultrachat_200k/
 data/qasrl_gs/
 data/aris_ultrachat_conversations.json
+data/squad_v2/
+data/dolly/
+data/smoltalk/
+data/gsm8k/
+data/mbpp/
+data/vision/

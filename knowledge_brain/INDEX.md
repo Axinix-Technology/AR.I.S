@@ -31,6 +31,9 @@ All architectural concepts, modules, foundational corpora, and training pipeline
 ### [P]
 - [Problem Solving & Mathematical Reasoning](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/P/PROBLEM_SOLVING_REASONING.md) — Multi-step word problems, arithmetic calculation steps, and latent deduction chains via OpenAI GSM8K.
 
+### [Q]
+- [QA & High-Density Instruction Dataset Architecture](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/Q/QA_AND_INSTRUCTION_DATASET_ARCHITECTURE.md) — Gold-standard open QA corpora (SQuAD 2.0, Dolly-15k, SmolTalk), addressing lexical over-saturation and thought-answer extraction.
+
 ### [R]
 - [Reasoning Pipeline](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/R/REASONING_PIPELINE.md) — Multi-hop evidence extraction and word-level causal attribution pipeline using neural latent thought tokens.
 

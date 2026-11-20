@@ -17,6 +17,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Load environment variables from .env
 load_dotenv(BASE_DIR / ".env")
 
+# Hugging Face Authentication for High-Volume Downloads
+HF_TOKEN = os.getenv("HF_TOKEN")
+if HF_TOKEN:
+    os.environ["HF_TOKEN"] = HF_TOKEN
+
 # Primary Directories
 DATA_DIR = BASE_DIR / "data"
 MODELS_DIR = BASE_DIR / "models"
@@ -30,8 +35,15 @@ WORKSPACE_DIR.mkdir(parents=True, exist_ok=True)
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Model Paths
-TOKENIZER_PATH = MODELS_DIR / "aris_bpe_tokenizer.json"
-LM_CHECKPOINT_PATH = MODELS_DIR / "aris_lm_checkpoint.pt"
+def _resolve_env_path(env_var: str, default: Path) -> Path:
+    val = os.getenv(env_var)
+    if not val:
+        return default
+    p = Path(val)
+    return p if p.is_absolute() else (BASE_DIR / p)
+
+TOKENIZER_PATH = _resolve_env_path("TOKENIZER_PATH", MODELS_DIR / "aris_bpe_tokenizer.json")
+LM_CHECKPOINT_PATH = _resolve_env_path("LM_CHECKPOINT_PATH", MODELS_DIR / "aris_lm_checkpoint.pt")
 
 # Database Configuration (MySQL Relational Memory)
 DB_CONFIG = {

@@ -145,6 +145,27 @@ def handle_train_lm(args):
     elif vision_dir:
         print(f"Loaded Vision Directory: {vision_dir}")
 
+    squad_dir = Path(args.squad_dir) if getattr(args, "squad_dir", None) else None
+    if squad_dir and not squad_dir.exists():
+        print(f"Warning: SQuAD directory not found at {squad_dir}, proceeding without SQuAD.")
+        squad_dir = None
+    elif squad_dir:
+        print(f"Loaded Stanford SQuAD 2.0 Directory: {squad_dir}")
+
+    dolly_dir = Path(args.dolly_dir) if getattr(args, "dolly_dir", None) else None
+    if dolly_dir and not dolly_dir.exists():
+        print(f"Warning: Dolly directory not found at {dolly_dir}, proceeding without Dolly.")
+        dolly_dir = None
+    elif dolly_dir:
+        print(f"Loaded Databricks Dolly-15k Directory: {dolly_dir}")
+
+    smoltalk_dir = Path(args.smoltalk_dir) if getattr(args, "smoltalk_dir", None) else None
+    if smoltalk_dir and not smoltalk_dir.exists():
+        print(f"Warning: SmolTalk directory not found at {smoltalk_dir}, proceeding without SmolTalk.")
+        smoltalk_dir = None
+    elif smoltalk_dir:
+        print(f"Loaded SmolTalk Directory: {smoltalk_dir}")
+
     custom_chat_path = Path(args.custom_chat_path) if getattr(args, "custom_chat_path", None) else None
     if custom_chat_path and not custom_chat_path.exists():
         print(f"Warning: Custom chat file not found at {custom_chat_path}, proceeding without custom chat.")
@@ -169,6 +190,9 @@ def handle_train_lm(args):
         gsm8k_dir=gsm8k_dir,
         mbpp_dir=mbpp_dir,
         vision_dir=vision_dir,
+        squad_dir=squad_dir,
+        dolly_dir=dolly_dir,
+        smoltalk_dir=smoltalk_dir,
         custom_chat_path=custom_chat_path,
         additional_steps=args.steps,
         batch_size=args.batch_size,
@@ -463,13 +487,16 @@ def main():
     p_lm.add_argument("--gsm8k-dir", type=str, default="data/gsm8k")
     p_lm.add_argument("--mbpp-dir", type=str, default="data/mbpp")
     p_lm.add_argument("--vision-dir", type=str, default="data/vision")
+    p_lm.add_argument("--squad-dir", type=str, default="data/squad_v2", help="Path to Stanford SQuAD 2.0 direct QA directory")
+    p_lm.add_argument("--dolly-dir", type=str, default="data/dolly", help="Path to Databricks Dolly-15k direct instruction directory")
+    p_lm.add_argument("--smoltalk-dir", type=str, default="data/smoltalk", help="Path to Hugging Face SmolTalk directory")
     p_lm.add_argument("--custom-chat-path", type=str, default="data/custom_chat.json", help="Path to user-defined custom alignment chat JSON")
     p_lm.add_argument(
         "--focus",
         type=str,
         default="all",
-        choices=["all", "language", "reasoning", "problem_solving", "coding", "vision", "custom"],
-        help="Cognitive domain focus: 'all', 'language', 'reasoning', 'problem_solving', 'coding', 'vision', or 'custom' (own chat)",
+        choices=["all", "qa", "language", "reasoning", "problem_solving", "coding", "vision", "custom"],
+        help="Cognitive domain focus: 'all', 'qa', 'language', 'reasoning', 'problem_solving', 'coding', 'vision', or 'custom' (own chat)",
     )
     p_lm.add_argument("--rank", type=int, default=0, help="Worker rank for multi-PC sharding (e.g. 0 for PC1, 1 for PC2)")
     p_lm.add_argument("--world-size", type=int, default=1, help="Total number of distributed training PCs")
