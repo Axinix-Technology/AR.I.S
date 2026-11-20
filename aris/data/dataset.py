@@ -184,19 +184,7 @@ class EnterpriseArisDataset(IterableDataset):
                         seen_titles.add(t)
 
                 prompt = f"Background Information:\n{context_str}\nQuestion: {question}"
-
-                if evidence_list:
-                    evidence_str = "\n".join(f"- {e}" for e in evidence_list[:3])
-                    response = (
-                        f"<|thought|>\n"
-                        f"Step 1: Connecting multi-sentence supporting facts:\n{evidence_str}\n"
-                        f"Step 2: Deducing target conclusion from evidence.\n"
-                        f"Answer: {answer}"
-                    )
-                else:
-                    response = f"<|thought|>\nSynthesizing information across background context.\nAnswer: {answer}"
-
-                yield self._format_and_tokenize(prompt, response)
+                yield self._format_and_tokenize(prompt, answer)
 
     def _iter_qasrl(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
         """3. QA-SRL: Word-level semantic causal reasoning (Who, What, Why, Where, How)."""
@@ -368,12 +356,7 @@ class EnterpriseArisDataset(IterableDataset):
                 else:
                     prompt = f"Question: {question}"
 
-                response = (
-                    f"<|thought|>\n"
-                    f"Direct factual analysis of query.\n"
-                    f"Answer: {answer}"
-                )
-                yield self._format_and_tokenize(prompt, response)
+                yield self._format_and_tokenize(prompt, answer)
 
     def _iter_dolly(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
         """10. Databricks Dolly-15k: Human-authored direct instruction, closed/open QA, and reasoning."""
@@ -399,12 +382,7 @@ class EnterpriseArisDataset(IterableDataset):
                     else:
                         prompt = instruction
 
-                    target_resp = (
-                        f"<|thought|>\n"
-                        f"Synthesizing direct instruction response.\n"
-                        f"Answer: {response}"
-                    )
-                    yield self._format_and_tokenize(prompt, target_resp)
+                    yield self._format_and_tokenize(prompt, response)
             except Exception:
                 continue
 
@@ -535,10 +513,10 @@ class EnterpriseArisDataset(IterableDataset):
                         break
 
         elif self.focus == "qa":
-            # QA Focus: SQuAD 2.0 (3) + Dolly-15k (2) + SmolTalk Magpie & Everyday (2) + HotpotQA (1)
+            # QA Focus: Balanced high-density QA + Grammatical and Fluency Anchors
             while True:
                 if self.squad_files:
-                    for _ in range(3):
+                    for _ in range(2):
                         try:
                             yield next(sq_iter)
                         except StopIteration:
@@ -574,6 +552,33 @@ class EnterpriseArisDataset(IterableDataset):
                         hp_iter = self._iter_hotpotqa()
                         try:
                             yield next(hp_iter)
+                        except StopIteration:
+                            pass
+                if self.uc_files:
+                    try:
+                        yield next(uc_iter)
+                    except StopIteration:
+                        uc_iter = self._iter_ultrachat()
+                        try:
+                            yield next(uc_iter)
+                        except StopIteration:
+                            pass
+                if self.ud_archive_path and self.ud_archive_path.exists():
+                    try:
+                        yield next(ud_iter)
+                    except StopIteration:
+                        ud_iter = self._iter_ud()
+                        try:
+                            yield next(ud_iter)
+                        except StopIteration:
+                            pass
+                if self.gsm8k_files:
+                    try:
+                        yield next(gsm_iter)
+                    except StopIteration:
+                        gsm_iter = self._iter_gsm8k()
+                        try:
+                            yield next(gsm_iter)
                         except StopIteration:
                             pass
 

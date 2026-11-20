@@ -382,8 +382,11 @@ class ArisBenchmarkSuite:
         ]
         previews = []
         for p in probes:
-            raw = self._generate(p, max_tokens=35, temperature=0.7)
-            previews.append({"prompt": p, "response": raw})
+            raw = self._generate(p, max_tokens=45, temperature=0.7)
+            clean_resp = raw
+            if "Answer:" in clean_resp:
+                clean_resp = clean_resp.split("Answer:", 1)[1].strip()
+            previews.append({"prompt": p, "response": clean_resp})
         return previews
 
     def run_full_evaluation(

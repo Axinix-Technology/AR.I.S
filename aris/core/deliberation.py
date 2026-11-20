@@ -84,23 +84,31 @@ class AutonomousDeliberationEngine:
         )
 
         gen_ids = output_tensor[0][len(prompt_ids):].tolist()
+        raw_with_tokens = self.tokenizer.decode(gen_ids, skip_special_tokens=False).strip()
         raw_response = self.tokenizer.decode(gen_ids, skip_special_tokens=True).strip()
 
         # Parse <|thought|> chain and answer if present
         thought = ""
         response_text = raw_response
 
-        if "<|thought|>" in raw_response:
-            parts = raw_response.split("<|thought|>")
-            if len(parts) > 1:
-                thought_body = parts[1]
-                if "Answer:" in thought_body:
-                    t_part, a_part = thought_body.split("Answer:", 1)
-                    thought = t_part.strip()
-                    response_text = a_part.strip()
-                else:
-                    thought = thought_body.strip()
-                    response_text = thought_body.strip()
+        if "<|thought|>" in raw_with_tokens:
+            parts = raw_with_tokens.split("<|thought|>", 1)
+            thought_body = parts[1].split("<|im_end|>", 1)[0]
+            if "Answer:" in thought_body:
+                t_part, a_part = thought_body.split("Answer:", 1)
+                thought = t_part.strip()
+                response_text = a_part.strip()
+            else:
+                thought = thought_body.strip()
+                response_text = thought_body.strip()
+        elif "Answer:" in raw_response:
+            parts = raw_response.split("Answer:", 1)
+            thought = parts[0].strip()
+            response_text = parts[1].strip()
+
+        # Clean any leaked special tokens from response text
+        for tok in ["<|im_start|>", "<|im_end|>", "<|thought|>", "<|pad|>"]:
+            response_text = response_text.replace(tok, "").strip()
 
         # 5. Continuous Memory Consolidation
         self.consolidate_knowledge(user_input, response_text)
