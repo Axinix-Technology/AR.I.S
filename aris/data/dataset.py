@@ -210,7 +210,7 @@ class EnterpriseArisDataset(IterableDataset):
 
                                 if q_str and answers:
                                     prompt = f"Sentence: {sentence}\nTarget Action: '{verb_word}'\nQuestion: {q_str}"
-                                    response = f"<|thought|>\nAnalyzing semantic argument for action '{verb_word}':\nResolved Argument: {answers[0]}"
+                                    response = f"<|thought|>\nAnalyzing semantic argument for action '{verb_word}'.\nAnswer: {answers[0]}"
                                     yield self._format_and_tokenize(prompt, response)
             except Exception:
                 continue

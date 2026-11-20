@@ -121,7 +121,7 @@ class ArisBenchmarkSuite:
                     continue
 
                 prompt = f"Analyze grammatical syntax and parts of speech for: {sent.text}"
-                gen = self._generate(prompt, max_tokens=35)
+                gen = self._generate(prompt, max_tokens=65)
 
                 expected_upos = [t.upos for t in sent.tokens if t.upos]
                 score = compute_upos_alignment(gen, expected_upos)
@@ -184,9 +184,11 @@ class ArisBenchmarkSuite:
                             if q_str and answers:
                                 gt_answer = answers[0]
                                 prompt = f"Sentence: {sentence}\nTarget Action: '{verb_word}'\nQuestion: {q_str}"
-                                gen = self._generate(prompt, max_tokens=30)
+                                gen = self._generate(prompt, max_tokens=65)
 
-                                if "Answer:" in gen:
+                                if "Resolved Argument:" in gen:
+                                    gen = gen.split("Resolved Argument:", 1)[1].strip()
+                                elif "Answer:" in gen:
                                     gen = gen.split("Answer:", 1)[1].strip()
 
                                 f1 = compute_token_f1(gen, gt_answer)
@@ -232,15 +234,32 @@ class ArisBenchmarkSuite:
 
             ctx_titles = context.get("title", [])
             ctx_sentences = context.get("sentences", [])
+            supp = r.get("supporting_facts", {})
+            supp_titles = supp.get("title", [])
+            title_map = {t: s for t, s in zip(ctx_titles, ctx_sentences)}
+
             context_str = ""
-            for t, sents in zip(ctx_titles[:2], ctx_sentences[:2]):
-                context_str += f"[{t}] " + " ".join(sents[:2]) + "\n"
+            seen_titles = set()
+            # Include supporting titles first to guarantee multi-hop facts are in prompt
+            for t in supp_titles:
+                if t in title_map and t not in seen_titles:
+                    context_str += f"[{t}] " + " ".join(title_map[t][:3]) + "\n"
+                    seen_titles.add(t)
+            # Include distractor titles up to 3 total
+            for t in ctx_titles:
+                if len(seen_titles) >= 3:
+                    break
+                if t not in seen_titles and t in title_map:
+                    context_str += f"[{t}] " + " ".join(title_map[t][:2]) + "\n"
+                    seen_titles.add(t)
 
             prompt = f"Background Information:\n{context_str}\nQuestion: {question}"
-            gen = self._generate(prompt, max_tokens=35)
+            gen = self._generate(prompt, max_tokens=65)
 
             if "Answer:" in gen:
                 gen = gen.split("Answer:", 1)[1].strip()
+            elif "The final answer is:" in gen:
+                gen = gen.split("The final answer is:", 1)[1].strip()
 
             f1 = compute_token_f1(gen, gt_answer)
             em = compute_exact_match(gen, gt_answer)

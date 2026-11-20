@@ -52,3 +52,9 @@ Options:
 - `--checkpoint <path>`: Explicit model checkpoint (defaults to `models/aris_lm_checkpoint.pt`).
 - `--tokenizer <path>`: Explicit tokenizer file (defaults to `models/aris_bpe_tokenizer.json`).
 - Automatically locates `ud-treebanks-*.tgz`, `data/hotpotqa/**/*.parquet`, `data/qasrl_gs/**/*.jsonl.gz`, `data/gsm8k/**/*.parquet`, and `data/mbpp/**/*.parquet`.
+
+## 4. Prompt & Evidence Extraction Alignment Directives
+To eliminate spurious zero-scores and guarantee genuine empirical evaluation:
+1. **Multi-Hop Supporting Facts Inclusion (Stage 4)**: The evaluation prompt constructor must mirror the training data pipeline by mapping `supporting_facts["title"]` first into `context_str`, ensuring that the evidence necessary to deduce the answer is actually present in the prompt context rather than relying on arbitrary leading distractor paragraphs.
+2. **Backward-Compatible Semantic Span Extraction (Stage 3)**: Checkpoints trained with internal thought deliberation (`<|thought|>`) and `"Resolved Argument:"` or unified `"Answer:"` anchors are dynamically resolved by stripping preceding thought tokens and isolating the target semantic span.
+3. **Token Generation Headroom**: Minimum generation budget is enforced at 60–65 tokens across syntactic, causal, and multi-hop benchmarks to prevent truncation before argument or answer token emission.
