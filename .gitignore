@@ -183,6 +183,7 @@ cython_debug/
 # Model Folder 
 /models/*
 !/models/aris_bpe_tokenizer.json
+!/models/aris_bpe_tokenizer_v2.json
 !/aris/models/
 !/aris/models/*.py
 !/aris/models/*/

@@ -19,6 +19,9 @@ All architectural concepts, modules, foundational corpora, and training pipeline
 - [Data Audit & Empirical Evaluation Foundation](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/D/DATA_AUDIT_AND_EVALUATION_FOUNDATION.md) — Rigorous data integrity manifest, SmolTalk turn-pair profiling, UltraChat deduplication, Decimal numeric parser, and sandboxed execution guards.
 - [Deliberation Engine](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/D/DELIBERATION_ENGINE.md) — Autonomous internal reasoning loop executing sub-query generation, self-directed memory lookup, and evidence synthesis.
 
+### [E]
+- [Clean Evaluation Harness V2 & Developmental Benchmark Protocol](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/E/EVALUATION_HARNESS_V2.md) — Unpolluted developmental evaluation suite on official held-out splits with strict Decimal parser, sandboxed execution, and bootstrap 95% CIs.
+
 ### [G]
 - [Graph RAG Memory](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/G/GRAPH_RAG.md) — Hybrid neuro-symbolic knowledge graph pairing dense vector similarity with indexed multi-hop relational path traversal and Reciprocal Rank Fusion (RRF).
 
