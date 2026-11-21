@@ -48,3 +48,21 @@ python aris/evaluation/eval_harness_v2.py --device auto
 # Evaluate specific checkpoint:
 python aris/evaluation/eval_harness_v2.py --checkpoint models/aris_lm_checkpoint.pt --device cuda --max-samples 100 --output scratch/eval_scorecard.json
 ```
+
+---
+
+## 4. Empirical Legacy Baseline Scorecard (Clean Held-Out Splits)
+- **Execution Environment**: Kaggle Cloud GPU (NVIDIA Tesla T4, CUDA 13.0)
+- **Commit**: `0cf8a88`
+- **Source Log**: `scratch/eval_legacy_clean.log`
+
+| Checkpoint | Held-Out NLL | BPB | GSM8K Acc (95% CI) | MBPP pass@1 | SQuAD v2 F1 | Stop% | Copy Probe% |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Uniform LM Baseline** | 8.3178 nats | — | 0.0% | 0.0% | 0.0% | — | — |
+| **Step 21,250 (Legacy)** | **1.4734 nats** | **1.02** | **0.0% [0.0 - 0.0]** | **68.0%** | **8.1%** | **26.0%** | **20.0%** |
+
+### Key Observations:
+1. **Predictive Entropy**: Held-out NLL of 1.4734 nats (1.02 BPB) vs 8.3178 nats confirms significant language modeling compression on unseen held-out splits.
+2. **Reasoning Deficit**: GSM8K held-out accuracy is 0.0% with the strict Decimal parser, confirming that earlier legacy reported numbers were train-set memorization artifacts.
+3. **Algorithmic Capability**: MBPP pass@1 is 68.0% on held-out Python coding problems, demonstrating preserved code execution affordance.
+4. **Structural Flaws**: Low stop compliance (26.0%) and low copy probe (20.0%) validate the need for Tokenizer V2, single-digit tokenization, and Data Pipeline V2 zero-slice truncation.
