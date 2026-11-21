@@ -1,4 +1,6 @@
-# Data Audit & Empirical Evaluation Foundation
+# [DRAFT - PENDING APPROVAL] Data Audit & Empirical Evaluation Foundation
+
+> **STATUS: DRAFT / UNAPPROVED**. This document contains working findings from Phase 2a preparation and is strictly pending formal user review and sign-off. It is not an approved architectural directive.
 
 This record establishes the verified empirical foundations for dataset integrity, token distributions, strict evaluation parsers, execution sandboxing, and scaling ladder parameters for AR.I.S.
 
