@@ -23,6 +23,7 @@ class ArisConfig:
     num_query_heads: int = 8
     num_kv_heads: int = 2          # GQA (4 query heads per KV head)
     ff_dim: Optional[int] = None   # SwiGLU intermediate dimension (default: 8/3 * embed_dim)
+    tie_word_embeddings: bool = True  # Weight tying between tok_emb and lm_head
     
     # RoPE (Rotary Position Embeddings)
     rope_theta: float = 10000.0
@@ -49,4 +50,47 @@ class ArisConfig:
     @property
     def head_dim(self) -> int:
         return self.embed_dim // self.num_query_heads
+
+    def expected_param_count(self, tied_embeddings: Optional[bool] = None) -> int:
+        """
+        Derives exact parameter count mathematically from config architecture.
+        Accounts for tied embeddings (tok_emb tied to lm_head).
+        """
+        if tied_embeddings is None:
+            tied_embeddings = self.tie_word_embeddings
+        head_dim = self.head_dim
+        tok_emb_params = self.vocab_size * self.embed_dim
+        lm_head_params = 0 if tied_embeddings else (self.vocab_size * self.embed_dim)
+        norm_f_params = self.embed_dim
+
+        # Per-block parameter calculation:
+        # 1. attn_norm: embed_dim
+        # 2. q_proj: embed_dim * (num_query_heads * head_dim)
+        # 3. k_proj: embed_dim * (num_kv_heads * head_dim)
+        # 4. v_proj: embed_dim * (num_kv_heads * head_dim)
+        # 5. out_proj: (num_query_heads * head_dim) * embed_dim
+        # 6. mlp_norm: embed_dim
+        # 7. w_gate: embed_dim * ff_dim
+        # 8. w_up: embed_dim * ff_dim
+        # 9. w_down: ff_dim * embed_dim
+        block_params = (
+            self.embed_dim  # attn_norm
+            + self.embed_dim * (self.num_query_heads * head_dim)  # q_proj
+            + self.embed_dim * (self.num_kv_heads * head_dim)     # k_proj
+            + self.embed_dim * (self.num_kv_heads * head_dim)     # v_proj
+            + (self.num_query_heads * head_dim) * self.embed_dim  # out_proj
+            + self.embed_dim  # mlp_norm
+            + self.embed_dim * self.ff_dim  # w_gate
+            + self.embed_dim * self.ff_dim  # w_up
+            + self.ff_dim * self.embed_dim  # w_down
+        )
+
+        return tok_emb_params + lm_head_params + norm_f_params + (self.num_layers * block_params)
+
+    def expected_state_dict_count(self) -> int:
+        """
+        Derives total serialized tensor element count in state_dict.
+        When weights are tied, PyTorch stores both tok_emb.weight and lm_head.weight.
+        """
+        return self.expected_param_count(tied_embeddings=False)
 

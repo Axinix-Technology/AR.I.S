@@ -58,10 +58,18 @@ class ArisLM(nn.Module):
         self.lm_head = nn.Linear(self.config.embed_dim, self.config.vocab_size, bias=False)
 
         # Weight Tying (Embeddings tied to LM Head)
-        self.tok_emb.weight = self.lm_head.weight
+        if getattr(self.config, "tie_word_embeddings", True):
+            self.tok_emb.weight = self.lm_head.weight
 
         # Weight Initialization
         self.apply(self._init_weights)
+
+        # Config-driven parameter count verification
+        expected_params = self.config.expected_param_count()
+        if self.num_parameters != expected_params:
+            raise ValueError(
+                f"Model parameter count mismatch: actual {self.num_parameters} != expected {expected_params}"
+            )
 
     def _init_weights(self, module: nn.Module) -> None:
         if isinstance(module, nn.Linear):

@@ -320,19 +320,12 @@ class ArisTrainer:
         Immediately mirrors the saved checkpoint to backup_dir (Google Drive) if configured.
         """
         import shutil
+        from dataclasses import asdict
         checkpoint = {
             "step": step,
             "loss": loss,
             "model_state_dict": self.model.state_dict(),
-            "model_config": {
-                "vocab_size": self.model.config.vocab_size,
-                "max_seq_len": self.model.config.max_seq_len,
-                "embed_dim": self.model.config.embed_dim,
-                "num_layers": self.model.config.num_layers,
-                "num_query_heads": self.model.config.num_query_heads,
-                "num_kv_heads": self.model.config.num_kv_heads,
-                "ff_dim": self.model.config.ff_dim,
-            },
+            "model_config": asdict(self.model.config),
         }
         if optimizer:
             checkpoint["optimizer_state_dict"] = optimizer.state_dict()
@@ -364,7 +357,17 @@ class ArisTrainer:
             num_query_heads=cfg_dict["num_query_heads"],
             num_kv_heads=cfg_dict["num_kv_heads"],
             ff_dim=cfg_dict.get("ff_dim"),
+            tie_word_embeddings=cfg_dict.get("tie_word_embeddings", True),
         )
+
+        # Validate checkpoint state_dict element count against config derivation
+        actual_sd_elements = sum(v.numel() for v in checkpoint["model_state_dict"].values())
+        expected_sd_elements = config.expected_state_dict_count()
+        if actual_sd_elements != expected_sd_elements:
+            raise ValueError(
+                f"Checkpoint state_dict count mismatch: actual {actual_sd_elements} != expected {expected_sd_elements}"
+            )
+
         model = ArisLM(config)
         model.load_state_dict(checkpoint["model_state_dict"])
         model.to(device)
