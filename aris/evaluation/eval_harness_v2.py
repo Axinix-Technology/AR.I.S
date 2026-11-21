@@ -298,7 +298,12 @@ class ArisEvalHarnessV2:
     # Benchmark Evaluation Suites
     # -----------------------------------------------------------------
     def eval_gsm8k_test(self, max_samples: int = 200) -> Dict[str, Any]:
-        tbl = pq.read_table(DATA_DIR / "gsm8k/test.parquet")
+        p = DATA_DIR / "gsm8k/test.parquet"
+        if not p.exists():
+            ensure_evaluation_datasets(DATA_DIR)
+        if not p.exists():
+            return {"task": "GSM8K Test", "samples": 0, "acc": 0.0, "ci_95": (0.0, 0.0), "stop_compliance": 0.0, "rep_rate": 0.0}
+        tbl = pq.read_table(p)
         rows = tbl.to_pylist()[:max_samples]
         scores = []
         stopped_list = []
@@ -326,7 +331,12 @@ class ArisEvalHarnessV2:
         }
 
     def eval_mbpp_test(self, max_samples: int = 100) -> Dict[str, Any]:
-        tbl = pq.read_table(DATA_DIR / "mbpp/test.parquet")
+        p = DATA_DIR / "mbpp/test.parquet"
+        if not p.exists():
+            ensure_evaluation_datasets(DATA_DIR)
+        if not p.exists():
+            return {"task": "MBPP Test (pass@1)", "samples": 0, "pass_at_1": 0.0, "ci_95": (0.0, 0.0), "stop_compliance": 0.0}
+        tbl = pq.read_table(p)
         rows = tbl.to_pylist()[:max_samples]
         scores = []
         stopped_list = []
@@ -359,7 +369,12 @@ class ArisEvalHarnessV2:
         }
 
     def eval_squad_validation(self, max_samples: int = 200) -> Dict[str, Any]:
-        tbl = pq.read_table(DATA_DIR / "squad_v2/validation.parquet")
+        p = DATA_DIR / "squad_v2/validation.parquet"
+        if not p.exists():
+            ensure_evaluation_datasets(DATA_DIR)
+        if not p.exists():
+            return {"task": "SQuAD v2 Validation", "samples": 0, "exact_match": 0.0, "em_ci_95": (0.0, 0.0), "f1_score": 0.0, "f1_ci_95": (0.0, 0.0)}
+        tbl = pq.read_table(p)
         rows = tbl.to_pylist()[:max_samples]
         em_scores = []
         f1_scores = []
@@ -417,6 +432,27 @@ class ArisEvalHarnessV2:
         }
 
 
+def ensure_evaluation_datasets(data_dir: Path):
+    """Ensures clean official held-out evaluation datasets exist on disk, auto-fetching if needed."""
+    eval_files = {
+        data_dir / "gsm8k/test.parquet": ("openai/gsm8k", "main/test-00000-of-00001.parquet"),
+        data_dir / "squad_v2/validation.parquet": ("rajpurkar/squad_v2", "squad_v2/validation-00000-of-00001.parquet"),
+        data_dir / "mbpp/test.parquet": ("google-research-datasets/mbpp", "full/test-00000-of-00001.parquet"),
+    }
+    try:
+        from huggingface_hub import hf_hub_download
+        import shutil
+        for dest, (repo_id, hf_file) in eval_files.items():
+            if not dest.exists():
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                print(f"Auto-fetching missing held-out split: {repo_id} ({dest.name})...")
+                src = hf_hub_download(repo_id=repo_id, filename=hf_file, repo_type="dataset")
+                shutil.copyfile(src, dest)
+                print(f"  Saved {dest.name} ({dest.stat().st_size / 1024:.1f} KB)")
+    except Exception as e:
+        print(f"Dataset auto-fetch note: {e}")
+
+
 # =====================================================================
 # 5. LEGACY CHECKPOINT SCORECARD EVALUATION (ONE FINAL CLEAN PASS)
 # =====================================================================
@@ -449,27 +485,36 @@ def evaluate_checkpoints(
     tokenizer = ArisTokenizer.load(tok_path)
     print(f"Loaded Tokenizer: {tok_path.name} (Vocab: {tokenizer.vocab_size:,})")
 
+    # Ensure held-out test splits exist (auto-fetch if in clean cloud/kaggle environment)
+    ensure_evaluation_datasets(DATA_DIR)
+
     # Assemble clean held-out pairs for NLL evaluation
     print("Assembling clean held-out test splits...")
     held_out_pairs = []
 
     # GSM8K Test
-    gsm_tbl = pq.read_table(DATA_DIR / "gsm8k/test.parquet")
-    for r in gsm_tbl.to_pylist()[:max_samples]:
-        held_out_pairs.append((r["question"], r["answer"]))
+    gsm_file = DATA_DIR / "gsm8k/test.parquet"
+    if gsm_file.exists():
+        gsm_tbl = pq.read_table(gsm_file)
+        for r in gsm_tbl.to_pylist()[:max_samples]:
+            held_out_pairs.append((r["question"], r["answer"]))
 
     # SQuAD Validation
-    sq_tbl = pq.read_table(DATA_DIR / "squad_v2/validation.parquet")
-    for r in sq_tbl.to_pylist()[:max_samples]:
-        ans = r.get("answers", {}).get("text", [])
-        if ans:
-            held_out_pairs.append((r["question"], ans[0]))
+    sq_file = DATA_DIR / "squad_v2/validation.parquet"
+    if sq_file.exists():
+        sq_tbl = pq.read_table(sq_file)
+        for r in sq_tbl.to_pylist()[:max_samples]:
+            ans = r.get("answers", {}).get("text", [])
+            if ans:
+                held_out_pairs.append((r["question"], ans[0]))
 
-    # UltraChat Test Gen
-    uc_tbl = pq.read_table(DATA_DIR / "ultrachat_200k/data/test_gen-00000-of-00001-3d4cd8309148a71f.parquet", columns=["messages"])
-    for d in uc_tbl["messages"][:max_samples].to_pylist():
-        if d and len(d) >= 2:
-            held_out_pairs.append((d[0].get("content", ""), d[1].get("content", "")))
+    # UltraChat Test Gen (if available)
+    uc_file = DATA_DIR / "ultrachat_200k/data/test_gen-00000-of-00001-3d4cd8309148a71f.parquet"
+    if uc_file.exists():
+        uc_tbl = pq.read_table(uc_file, columns=["messages"])
+        for d in uc_tbl["messages"][:max_samples].to_pylist():
+            if d and len(d) >= 2:
+                held_out_pairs.append((d[0].get("content", ""), d[1].get("content", "")))
 
     print(f"Total Held-Out Validation Pairs: {len(held_out_pairs):,}\n")
 
