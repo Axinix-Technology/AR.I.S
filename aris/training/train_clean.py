@@ -275,6 +275,7 @@ def train_clean_run(
                 "tokens_trained": tokens_trained,
                 "loss": accum_loss,
                 "config": cfg.__dict__,
+                "model_config": cfg.__dict__,
                 "model_state_dict": model.state_dict(),
                 "optimizer_state_dict": optimizer.state_dict(),
                 "pipeline_state": pipeline.get_state(),

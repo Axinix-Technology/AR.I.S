@@ -347,7 +347,7 @@ class ArisTrainer:
         from ..configs.model_config import ArisConfig
         device = device or torch.device("cuda" if torch.cuda.is_available() else "cpu")
         checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
-        cfg_dict = checkpoint["model_config"]
+        cfg_dict = checkpoint.get("model_config") or checkpoint.get("config", {})
 
         config = ArisConfig(
             vocab_size=cfg_dict["vocab_size"],

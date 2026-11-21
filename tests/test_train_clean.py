@@ -82,3 +82,44 @@ def test_batch_padding_and_forward_pass():
     assert loss is not None
     assert not torch.isnan(loss)
     assert loss.item() > 0.0
+
+
+def test_trainer_load_model_supports_both_config_keys(tmp_path):
+    import tempfile
+    from aris.training.trainer import ArisTrainer
+
+    cfg = ArisConfig(
+        vocab_size=8192,
+        max_seq_len=64,
+        embed_dim=128,
+        num_layers=2,
+        num_query_heads=4,
+        num_kv_heads=2,
+        ff_dim=384,
+        tie_word_embeddings=True,
+    )
+    model = ArisLM(cfg)
+
+    # 1. Test loading checkpoint with 'config' key
+    ckpt_file_1 = tmp_path / "test_ckpt_1.pt"
+    torch.save({
+        "step": 42,
+        "config": cfg.__dict__,
+        "model_state_dict": model.state_dict(),
+    }, ckpt_file_1)
+
+    loaded_m1, step1 = ArisTrainer.load_model(ckpt_file_1, device=torch.device("cpu"))
+    assert step1 == 42
+    assert loaded_m1.config.vocab_size == 8192
+
+    # 2. Test loading checkpoint with 'model_config' key
+    ckpt_file_2 = tmp_path / "test_ckpt_2.pt"
+    torch.save({
+        "step": 99,
+        "model_config": cfg.__dict__,
+        "model_state_dict": model.state_dict(),
+    }, ckpt_file_2)
+
+    loaded_m2, step2 = ArisTrainer.load_model(ckpt_file_2, device=torch.device("cpu"))
+    assert step2 == 99
+    assert loaded_m2.config.vocab_size == 8192
