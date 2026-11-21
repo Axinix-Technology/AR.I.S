@@ -204,8 +204,26 @@ def train_clean_run(
                 batch_inputs.append(inp)
                 batch_targets.append(tgt)
 
-            x = torch.stack(batch_inputs).to(device)
-            y = torch.stack(batch_targets).to(device)
+            # Collate and pad micro-batch to max_seq_len
+            padded_inputs = []
+            padded_targets = []
+            pad_id = getattr(cfg, "pad_token_id", 0)
+            target_seq_len = cfg.max_seq_len
+
+            for inp_t, tgt_t in zip(batch_inputs, batch_targets):
+                cur_len = len(inp_t)
+                if cur_len < target_seq_len:
+                    pad_len = target_seq_len - cur_len
+                    p_inp = torch.cat([inp_t, torch.full((pad_len,), pad_id, dtype=torch.long)])
+                    p_tgt = torch.cat([tgt_t, torch.full((pad_len,), -100, dtype=torch.long)])
+                else:
+                    p_inp = inp_t[:target_seq_len]
+                    p_tgt = tgt_t[:target_seq_len]
+                padded_inputs.append(p_inp)
+                padded_targets.append(p_tgt)
+
+            x = torch.stack(padded_inputs).to(device)
+            y = torch.stack(padded_targets).to(device)
 
             with torch.amp.autocast(device_type=device.type, dtype=amp_dtype, enabled=use_amp):
                 _, loss, _ = model(x, targets=y)
