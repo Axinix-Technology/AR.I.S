@@ -33,6 +33,7 @@ All architectural concepts, modules, foundational corpora, and training pipeline
 - [Multi-Corpus Cognitive Architecture](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/M/MULTI_CORPUS_COGNITIVE_ARCHITECTURE.md) — Unified 7-pillar streaming architecture combining UltraChat, Universal Dependencies, QA-SRL 2020, HotpotQA, GSM8K, MBPP, and LLaVA-Instruct.
 
 ### [P]
+- [Plan of Action: Clean Verification & Gen 3 (2×) Scaling Architecture](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/P/PLAN_OF_ACTION_GEN3_SCALING.md) — Strategic roadmap from Phase 2b pilot verification to Gen 3 (53.5M parameters, 2x doubling) with 5 advanced cognitive curricula.
 - [Problem Solving & Mathematical Reasoning](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/P/PROBLEM_SOLVING_REASONING.md) — Multi-step word problems, arithmetic calculation steps, and latent deduction chains via OpenAI GSM8K.
 
 ### [Q]
