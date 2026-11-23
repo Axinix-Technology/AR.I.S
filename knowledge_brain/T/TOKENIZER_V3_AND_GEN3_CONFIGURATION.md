@@ -50,10 +50,27 @@ This document records the architectural specification and empirical validation o
 
 ---
 
-## 3. Benefits of Combined 16k Vocab + 1,024 Context
+## 3. Empirical Domain Compression & Sequence Length Audit
 
-1. **Elimination of Sequence Truncation**:
-   - In Gen 2 (384 context), 160,988 long reasoning and coding samples were dropped.
-   - At 1,024 tokens with 16k compression ($\sim 4.5$ bytes/token $\approx 4,600$ characters per sequence), over 99% of multi-hop math proofs, unit test suites, and multi-turn tool calling dialogues fit natively within the context.
-2. **Native Tool Agency**:
-   - With `<|tool_call|>` and `<|tool_response|>`, AR.I.S natively emits and receives tool execution payloads without character-level parsing workarounds.
+Audited across **7,874 real manifest samples** spanning Code (MBPP), Math (GSM8K), Prose (SQuAD), and Multi-turn Chat (SmolTalk & Magpie):
+
+### A. Domain Compression Benchmark (V2 8k vs V3 16k)
+| Domain | Samples | Raw Bytes | V2 Tokens (8k) | V3 Tokens (16k) | V2 Bytes/Tok | V3 Bytes/Tok | Compression Gain |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Multi-turn Chat** | 2,500 | 11,598,277 | 3,069,012 | 2,627,792 | 3.78 | **4.41** | **+14.38%** |
+| **Code (MBPP)** | 374 | 171,474 | 84,585 | 74,872 | 2.03 | **2.29** | **+11.48%** |
+| **Prose / QA (SQuAD)** | 2,500 | 2,182,250 | 639,690 | 570,757 | 3.41 | **3.82** | **+10.78%** |
+| **Math (GSM8K)** | 2,500 | 1,341,013 | 516,704 | 487,154 | 2.60 | **2.75** | **+5.72%** |
+
+*Note on Math*: Math compression gain is +5.72% (vs +11% to +14% for code/chat) because `Digits(individual_digits=True)` deliberately preserves single-digit atomicity, trading slight token expansion for exact numeric calculation fidelity.
+
+### B. Sequence Length Percentiles & Context Retention (7,874 Samples)
+| Metric | Tokenizer V2 (8k) | Tokenizer V3 (16k) | Empirical Shift |
+| :--- | :--- | :--- | :--- |
+| **Median (P50)** | 240.0 tokens | **219.0 tokens** | $-21.0$ tokens |
+| **90th Percentile (P90)** | 1,758.4 tokens | **1,493.0 tokens** | $-265.4$ tokens |
+| **95th Percentile (P95)** | 2,152.3 tokens | **1,835.3 tokens** | $-317.0$ tokens |
+| **99th Percentile (P99)** | 3,285.9 tokens | **2,741.3 tokens** | $-544.6$ tokens |
+| **Retention in 384 Window** | 76.53% | **78.49%** | Explains the 23.5% drops in Gen 2 |
+| **Retention in 1,024 Window**| — | **83.48%** | **83.48% fit with zero context shrinking** |
+| **Residual Truncation (>1024)**| — | **16.52%** | Long 8-12 turn Magpie dialogues |
