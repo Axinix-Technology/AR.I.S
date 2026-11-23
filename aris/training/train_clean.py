@@ -177,6 +177,14 @@ def train_clean_run(
         if "pipeline_state" in ckpt:
             pipeline.set_state(ckpt["pipeline_state"])
             data_iter = iter(pipeline)
+        if "rng_state" in ckpt:
+            try:
+                g_rng = ckpt["rng_state"]
+                if isinstance(g_rng, torch.Tensor):
+                    g_rng = g_rng.to(device="cpu", dtype=torch.uint8)
+                torch.set_rng_state(g_rng)
+            except Exception:
+                pass
         print(f"  Resumed at Step {start_step:,} ({tokens_trained:,} tokens already completed)")
         if load_source != ckpt_path:
             print(f"  Target Save Checkpoint: {ckpt_path.name}")

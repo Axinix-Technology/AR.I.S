@@ -472,9 +472,18 @@ class ArisDataPipelineV2(IterableDataset):
                         # When completing skip, restore checkpoint RNG state if present
                         if yielded_so_far == skip_count + 1 and hasattr(self, "_saved_rng_state"):
                             if self._saved_rng_state is not None:
-                                random.setstate(self._saved_rng_state)
+                                try:
+                                    random.setstate(self._saved_rng_state)
+                                except Exception:
+                                    pass
                             if self._saved_torch_state is not None:
-                                torch.set_rng_state(self._saved_torch_state)
+                                try:
+                                    t_state = self._saved_torch_state
+                                    if isinstance(t_state, torch.Tensor):
+                                        t_state = t_state.to(device="cpu", dtype=torch.uint8)
+                                    torch.set_rng_state(t_state)
+                                except Exception:
+                                    pass
 
                         self.total_sequences_yielded += 1
                         self.corpus_seq_counts[corpus] = self.corpus_seq_counts.get(corpus, 0) + 1
@@ -511,7 +520,10 @@ class ArisDataPipelineV2(IterableDataset):
         """Restores exact pipeline progress and RNG state."""
         self.target_skip = state.get("total_sequences_yielded", 0)
         self._saved_rng_state = state.get("random_state")
-        self._saved_torch_state = state.get("torch_rng_state")
+        raw_t_state = state.get("torch_rng_state")
+        if isinstance(raw_t_state, torch.Tensor):
+            raw_t_state = raw_t_state.to(device="cpu", dtype=torch.uint8)
+        self._saved_torch_state = raw_t_state
         self.total_sequences_yielded = self.target_skip
         self.total_dropped_sequences = state.get("total_dropped_sequences", 0)
         self.total_decontaminated_sequences = state.get("total_decontaminated_sequences", 0)
