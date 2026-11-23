@@ -62,6 +62,7 @@ def train_clean_run(
     save_every: int = 500,
     device_name: str = "auto",
     checkpoint_name: str = "aris_lm_clean_small_10x.pt",
+    resume_from: Optional[str] = None,
     resume: bool = True,
 ):
     print("=" * 105)
@@ -152,9 +153,22 @@ def train_clean_run(
     start_step = 0
     tokens_trained = 0
 
-    if resume and ckpt_path.exists():
-        print(f"Resuming clean training from {ckpt_path}...")
-        ckpt = torch.load(ckpt_path, map_location=device, weights_only=False)
+    load_source = None
+    if resume_from:
+        candidate = Path(resume_from)
+        if not candidate.is_absolute():
+            candidate = BASE_DIR / resume_from if (BASE_DIR / resume_from).exists() else MODELS_DIR / resume_from
+        if candidate.exists():
+            load_source = candidate
+        else:
+            print(f"Warning: --resume-from path '{resume_from}' not found. Checking {ckpt_path}...")
+
+    if load_source is None and resume and ckpt_path.exists():
+        load_source = ckpt_path
+
+    if load_source and load_source.exists():
+        print(f"Resuming clean training from {load_source}...")
+        ckpt = torch.load(load_source, map_location=device, weights_only=False)
         model.load_state_dict(ckpt["model_state_dict"])
         if "optimizer_state_dict" in ckpt:
             optimizer.load_state_dict(ckpt["optimizer_state_dict"])
@@ -164,6 +178,8 @@ def train_clean_run(
             pipeline.set_state(ckpt["pipeline_state"])
             data_iter = iter(pipeline)
         print(f"  Resumed at Step {start_step:,} ({tokens_trained:,} tokens already completed)")
+        if load_source != ckpt_path:
+            print(f"  Target Save Checkpoint: {ckpt_path.name}")
 
     # 8. Mixed Precision Scaler
     amp_dtype = torch.bfloat16 if (device.type == "cuda" and torch.cuda.is_bf16_supported()) else torch.float16
@@ -302,7 +318,8 @@ if __name__ == "__main__":
     parser.add_argument("--min-lr", type=float, default=6e-5, help="Min learning rate")
     parser.add_argument("--warmup-steps", type=int, default=500, help="Warmup optimizer steps")
     parser.add_argument("--device", type=str, default="auto", choices=["auto", "cuda", "cpu"], help="Compute device")
-    parser.add_argument("--checkpoint", type=str, default=None, help="Checkpoint filename (defaults to aris_lm_clean_<rung>_<mult>x.pt)")
+    parser.add_argument("--checkpoint", type=str, default=None, help="Checkpoint filename to save (defaults to aris_lm_clean_<rung>_<mult>x.pt)")
+    parser.add_argument("--resume-from", type=str, default=None, help="Explicit checkpoint file path to resume from (e.g. models/aris_lm_clean_small_pilot.pt)")
     parser.add_argument("--save-every", type=int, default=500, help="Checkpoint frequency in steps")
     parser.add_argument("--log-every", type=int, default=50, help="Log print frequency in steps")
     parser.add_argument("--no-resume", dest="resume", action="store_false", help="Do not resume from existing checkpoint")
@@ -333,6 +350,7 @@ if __name__ == "__main__":
         warmup_steps=w_steps,
         device_name=args.device,
         checkpoint_name=ckpt_name,
+        resume_from=args.resume_from,
         save_every=args.save_every,
         log_every=args.log_every,
         resume=args.resume,
