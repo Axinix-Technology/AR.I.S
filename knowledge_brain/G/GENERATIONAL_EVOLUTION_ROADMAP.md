@@ -74,11 +74,16 @@ True **J.A.R.V.I.S-tier intelligence** cannot be reached in a single jump; it re
 - **Primary Goal**: Identifying internal blind spots.
 - **Key Capabilities**: AR.I.S inspects its own reasoning traces, identifies gaps in its knowledge, and natively synthesizes developmental training curricula without human prompt engineering.
 
-#### Gen 11: Learned Neural Self-Training Circles (Non-Code Based)
-- **Primary Goal**: Closed-loop self-training driven by neural objective formulation.
-- **Key Capabilities**:
-  - The model formulates its own synthetic reasoning proofs, self-evaluates outputs via epistemic verification, and orchestrates its own parameter updates.
-  - **Crucial Rule**: The training loop is governed by learned cognitive models, not hardcoded procedural scripts.
+#### Gen 11: Learned Neural Self-Training Circles (~20B Parameters & 148M+ Token Memory)
+- **Primary Goal**: Closed-loop self-training driven by neural objective formulation, operating over vast enterprise-scale memory.
+- **Architectural Specifications**:
+  - **Parameter Scale**: **~20B Parameters** (e.g. 20B Sparse MoE with ~4B active parameters per token, or compact dense 20B).
+  - **Hierarchical Context Memory**: **At least 148 Million Tokens** of accessible persistent knowledge:
+    - *Active Working Window*: 128k to 1M native tokens via RoPE base scaling / YaRN.
+    - *Persistent Working Memory*: 148M+ tokens indexed through the Neuro-Symbolic Graph RAG substrate and compressive associative memory tensors (capable of holding hundreds of entire codebases, product suites, and technical libraries in instant recall).
+  - **Self-Directed Learning**:
+    - The model formulates its own synthetic reasoning proofs, self-evaluates outputs via epistemic verification, and orchestrates its own parameter updates.
+    - **Crucial Rule**: The training loop is governed by learned cognitive models, not hardcoded procedural scripts.
 
 #### Gen 12: Sovereign Permission-Based Evolution (The J.A.R.V.I.S Summit)
 - **Primary Goal**: Continuous, aligned lifelong self-evolution under sovereign human authority.
@@ -97,17 +102,17 @@ True **J.A.R.V.I.S-tier intelligence** cannot be reached in a single jump; it re
 
 ## 3. 12-Generation Evolutionary Matrix
 
-| Phase | Gen | Target Parameters | Context Width | Defining Capability |
+| Phase | Gen | Target Parameters | Context Width / Memory | Defining Capability |
 | :--- | :--- | :--- | :--- | :--- |
-| **Phase 1** | **Gen 1** | 26.75M | 384 | Numerical stability & zero-loss masking |
-| | **Gen 2** | 26.75M | 384 | Conversational fluency & `<|im_end|>` stop compliance |
-| | **Gen 3** | **53.5M (2×)** | **2,048** | **Autonomous tool selection (`<|tool_call|>`)** |
-| **Phase 2** | **Gen 4** | 53.5M | 2,048 | Single-step tool observation & response synthesis |
-| | **Gen 5** | 100M+ | 4,096 | Multi-tool sequential chaining & error recovery |
-| | **Gen 6** | 100M+ | 8,192 | Autonomous task planning & execution |
-| **Phase 3** | **Gen 7** | 250M+ | 16k | Native vision & real-time visual perception |
-| | **Gen 8** | 250M+ | 16k | Streaming bidirectional conversational voice |
-| | **Gen 9** | 500M+ (MoE) | 32k | Full OS, GUI, and workspace embodiment |
-| **Phase 4** | **Gen 10** | 1B+ (MoE) | 64k | Autonomous cognitive curriculum synthesis |
-| | **Gen 11** | 1B+ (MoE) | 128k | Learned neural self-training circles |
-| | **Gen 12** | **Multi-Billion MoE** | **1M+** | **Sovereign Permission-Based Evolution (J.A.R.V.I.S)** |
+| **Phase 1** | **Gen 1** | 26.75M | 384 tokens | Numerical stability & zero-loss masking |
+| | **Gen 2** | 26.75M | 384 tokens | Conversational fluency & `<|im_end|>` stop compliance |
+| | **Gen 3** | **53.5M (2×)** | **2,048 tokens** | **Autonomous tool selection (`<|tool_call|>`)** |
+| **Phase 2** | **Gen 4** | 53.5M | 2,048 tokens | Single-step tool observation & response synthesis |
+| | **Gen 5** | 100M+ | 4,096 tokens | Multi-tool sequential chaining & error recovery |
+| | **Gen 6** | 100M+ | 8,192 tokens | Autonomous task planning & execution |
+| **Phase 3** | **Gen 7** | 250M+ | 16k tokens | Native vision & real-time visual perception |
+| | **Gen 8** | 250M+ | 16k tokens | Streaming bidirectional conversational voice |
+| | **Gen 9** | 500M+ (MoE) | 32k tokens | Full OS, GUI, and workspace embodiment |
+| **Phase 4** | **Gen 10** | 1B+ to 5B | 64k tokens | Autonomous cognitive curriculum synthesis |
+| | **Gen 11** | **~20B (MoE)** | **148M+ Hierarchical Memory** | **Learned neural self-training circles** |
+| | **Gen 12** | **Multi-Billion MoE** | **Infinite Lifelong Memory** | **Sovereign Permission-Based Evolution (J.A.R.V.I.S)** |
