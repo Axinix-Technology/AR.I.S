@@ -29,6 +29,9 @@ All architectural concepts, modules, foundational corpora, and training pipeline
 ### [K]
 - [Kaggle Cloud GPU Training Guide](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/K/KAGGLE_CLOUD_TRAINING_GUIDE.md) — 30 hours/week free GPU setup, notebook execution cells, and 1-click trained model checkpoint download.
 
+### [L]
+- [Loss & Pipeline Empirical Audit](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/L/LOSS_AND_PIPELINE_EMPIRICAL_AUDIT.md) — Empirical loss calculation proofs, token shift alignment verification, NaN guard testing, accumulation weighting discrepancy quantification, and benchmark leakage audit.
+
 ### [M]
 - [Model Merging Protocol](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/M/MODEL_MERGING_PROTOCOL.md) — Collaborative distributed training via Model Soups, Spherical Linear Interpolation (SLERP), and task-vector arithmetic.
 - [Multi-Corpus Cognitive Architecture](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/M/MULTI_CORPUS_COGNITIVE_ARCHITECTURE.md) — Unified 7-pillar streaming architecture combining UltraChat, Universal Dependencies, QA-SRL 2020, HotpotQA, GSM8K, MBPP, and LLaVA-Instruct.
