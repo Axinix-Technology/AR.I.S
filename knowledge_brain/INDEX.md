@@ -45,5 +45,8 @@ All architectural concepts, modules, foundational corpora, and training pipeline
 ### [S]
 - [Scaling & Parameter Progression Roadmap](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/S/SCALING_ROADMAP.md) — 3-month laptop pretraining roadmap following a strict 2x parameter doubling staircase (11.5M -> 23M -> 46M -> 92M).
 
+### [T]
+- [Ten-X (10×) Chinchilla Scaling Protocol & High-Density QA Ingestion](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/T/TEN_X_CHINCHILLA_SCALING_PROTOCOL.md) — 10× parameter budget training run (267.5M tokens, 21,768 steps) with OpenHermes & NuminaMath CoT integration on Tesla T4 GPU.
+
 ### [V]
 - [Vision-Language & Multimodal Architecture](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/V/VISION_MULTIMODAL_ARCHITECTURE.md) — Scene understanding, spatial relationships, object attribute reasoning, and multimodal image descriptions via LLaVA-Instruct.

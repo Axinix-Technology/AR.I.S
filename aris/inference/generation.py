@@ -28,6 +28,7 @@ class ArisInferenceEngine:
         temperature: float = 0.7,
         top_k: int = 40,
         top_p: float = 0.9,
+        repetition_penalty: float = 1.15,
         eos_id: int = 3,
         pad_id: int = 0,
     ) -> torch.Tensor:
@@ -35,6 +36,7 @@ class ArisInferenceEngine:
         Generates tokens using KV Caching and per-sequence EOS tracking.
         Args:
             input_ids: (Batch, PromptLen) LongTensor
+            repetition_penalty: multiplicative penalty for already generated tokens (1.0 = none)
         Returns:
             (Batch, PromptLen + GeneratedLen) LongTensor
         """
@@ -43,6 +45,16 @@ class ArisInferenceEngine:
 
         device = input_ids.device
         batch_size, prompt_len = input_ids.shape
+
+        def _apply_rep_penalty(logits_step: torch.Tensor, prev_list: List[torch.Tensor]) -> torch.Tensor:
+            if repetition_penalty <= 1.0 or not prev_list:
+                return logits_step
+            all_prev = torch.cat(prev_list, dim=1)
+            for b_idx in range(logits_step.shape[0]):
+                uniq = torch.unique(all_prev[b_idx])
+                vals = logits_step[b_idx, uniq]
+                logits_step[b_idx, uniq] = torch.where(vals > 0, vals / repetition_penalty, vals * repetition_penalty)
+            return logits_step
 
         # Per-sequence finished mask
         finished = torch.zeros(batch_size, dtype=torch.bool, device=device)
@@ -54,11 +66,13 @@ class ArisInferenceEngine:
             offset=0,
         )
 
+        step_logits = _apply_rep_penalty(logits[:, -1, :].clone(), [input_ids])
+
         # Next token from prefill
         if temperature < 1e-4:
-            next_tokens = torch.argmax(logits[:, -1, :], dim=-1, keepdim=True)
+            next_tokens = torch.argmax(step_logits, dim=-1, keepdim=True)
         else:
-            next_token_logits = logits[:, -1, :] / max(temperature, 1e-5)
+            next_token_logits = step_logits / max(temperature, 1e-5)
             next_tokens = cls._sample_next_token(next_token_logits, top_k=top_k, top_p=top_p)
 
         # Update finished states
@@ -80,10 +94,12 @@ class ArisInferenceEngine:
                 offset=current_len - 1,
             )
 
+            penalized_logits = _apply_rep_penalty(step_logits[:, -1, :].clone(), generated_ids)
+
             if temperature < 1e-4:
-                next_tokens = torch.argmax(step_logits[:, -1, :], dim=-1, keepdim=True)
+                next_tokens = torch.argmax(penalized_logits, dim=-1, keepdim=True)
             else:
-                next_token_logits = step_logits[:, -1, :] / max(temperature, 1e-5)
+                next_token_logits = penalized_logits / max(temperature, 1e-5)
                 next_tokens = cls._sample_next_token(next_token_logits, top_k=top_k, top_p=top_p)
 
             # Mask out tokens for already finished sequences

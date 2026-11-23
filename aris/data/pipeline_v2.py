@@ -349,7 +349,9 @@ class ArisDataPipelineV2(IterableDataset):
     def _iter_smoltalk(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
         everyday_files = self.corpus_files.get("smoltalk_everyday", [])
         magpie_files = self.corpus_files.get("smoltalk_magpie", [])
-        all_smol = everyday_files + magpie_files
+        openhermes_files = self.corpus_files.get("smoltalk_openhermes", [])
+        numina_files = self.corpus_files.get("smoltalk_numina", [])
+        all_smol = everyday_files + magpie_files + openhermes_files + numina_files
         if not all_smol:
             return
         while True:

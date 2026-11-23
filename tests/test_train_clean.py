@@ -123,3 +123,45 @@ def test_trainer_load_model_supports_both_config_keys(tmp_path):
     loaded_m2, step2 = ArisTrainer.load_model(ckpt_file_2, device=torch.device("cpu"))
     assert step2 == 99
     assert loaded_m2.config.vocab_size == 8192
+
+
+def test_budget_multiplier_calculations():
+    import math
+
+    # Small rung configuration
+    cfg = ArisConfig(
+        vocab_size=8192,
+        max_seq_len=384,
+        embed_dim=512,
+        num_layers=8,
+        num_query_heads=8,
+        num_kv_heads=2,
+        ff_dim=1408,
+        tie_word_embeddings=True,
+    )
+    param_count = cfg.expected_param_count()
+    assert param_count == 26_747_392
+
+    batch_size = 16
+    accum_steps = 2
+    tokens_per_step = batch_size * cfg.max_seq_len * accum_steps
+    assert tokens_per_step == 12_288
+
+    # 1.0x Pilot budget
+    pilot_tokens = int(param_count * 1.0)
+    pilot_steps = math.ceil(pilot_tokens / tokens_per_step)
+    assert pilot_tokens == 26_747_392
+    assert pilot_steps == 2_177
+
+    # 10.0x Scaling budget
+    ten_x_tokens = int(param_count * 10.0)
+    ten_x_steps = math.ceil(ten_x_tokens / tokens_per_step)
+    assert ten_x_tokens == 267_473_920
+    assert ten_x_steps == 21_768
+
+    # 20.0x Full Chinchilla budget
+    twenty_x_tokens = int(param_count * 20.0)
+    twenty_x_steps = math.ceil(twenty_x_tokens / tokens_per_step)
+    assert twenty_x_tokens == 534_947_840
+    assert twenty_x_steps == 43_535
+

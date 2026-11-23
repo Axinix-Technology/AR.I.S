@@ -124,6 +124,20 @@ DATA_MANIFEST: List[ManifestEntry] = [
         format="parquet",
         description="SmolTalk Magpie Ultra QA (99% train split, 1% hash carve-out)",
     ),
+    ManifestEntry(
+        path="data/smoltalk/openhermes_100k.parquet",
+        corpus="smoltalk_openhermes",
+        role="train",
+        format="parquet",
+        description="SmolTalk OpenHermes 100k diverse high-density QA & reasoning (99% train split, 1% hash carve-out)",
+    ),
+    ManifestEntry(
+        path="data/smoltalk/numina_cot_100k.parquet",
+        corpus="smoltalk_numina",
+        role="train",
+        format="parquet",
+        description="SmolTalk NuminaMath CoT 100k step-by-step mathematical reasoning (99% train split, 1% hash carve-out)",
+    ),
 
     # 7. QA-SRL 2020 (Semantic Causal Reasoning) - NO TRAINING SPLIT
     ManifestEntry(

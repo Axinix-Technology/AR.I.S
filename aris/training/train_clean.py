@@ -49,18 +49,19 @@ def get_cosine_lr(step: int, warmup_steps: int, total_steps: int, max_lr: float,
 
 def train_clean_run(
     rung: str = "small",
-    pilot: bool = True,
+    pilot: bool = False,
+    budget_mult: float = 10.0,
     total_steps: Optional[int] = None,
     batch_size: int = 16,
     accum_steps: int = 2,
     lr: float = 6e-4,
     min_lr: float = 6e-5,
-    warmup_steps: int = 100,
+    warmup_steps: int = 500,
     grad_clip: float = 1.0,
-    log_every: int = 20,
-    save_every: int = 200,
+    log_every: int = 50,
+    save_every: int = 500,
     device_name: str = "auto",
-    checkpoint_name: str = "aris_lm_clean_small_pilot.pt",
+    checkpoint_name: str = "aris_lm_clean_small_10x.pt",
     resume: bool = True,
 ):
     print("=" * 105)
@@ -115,22 +116,20 @@ def train_clean_run(
     print(f"Model Rung:          {rung.upper()} ({param_count:,} parameters)")
 
     # 4. Token & Step Budget Calculation
-    # 20x Chinchilla = params * 20
-    # 5% Pilot = 5% of 20x Chinchilla
+    # Chinchilla parameter multiplier: target_tokens = param_count * budget_mult
+    # Pilot run (pilot=True) runs 1.0x parameter count (5% of 20x Chinchilla)
     tokens_per_step = batch_size * cfg.max_seq_len * accum_steps  # 16 * 384 * 2 = 12,288 tokens/step
-    budget_20x_tokens = param_count * 20
     if pilot:
-        target_token_budget = int(budget_20x_tokens * 0.05)  # ~26.75M tokens for small rung
-        if total_steps is None:
-            total_steps = math.ceil(target_token_budget / tokens_per_step)
-        mode_label = f"5% Pilot Run ({target_token_budget:,} tokens / {total_steps:,} steps)"
+        target_token_budget = int(param_count * 1.0)
+        mode_label = f"Pilot Run (1.0x Parameters: {target_token_budget:,} tokens)"
     else:
-        target_token_budget = budget_20x_tokens
-        if total_steps is None:
-            total_steps = math.ceil(target_token_budget / tokens_per_step)
-        mode_label = f"Full 20x Chinchilla Run ({target_token_budget:,} tokens / {total_steps:,} steps)"
+        target_token_budget = int(param_count * budget_mult)
+        mode_label = f"{budget_mult:.1f}x Chinchilla Scaling Run ({target_token_budget:,} tokens)"
 
-    print(f"Training Mode:       {mode_label}")
+    if total_steps is None:
+        total_steps = math.ceil(target_token_budget / tokens_per_step)
+
+    print(f"Training Mode:       {mode_label} -> {total_steps:,} total optimizer steps")
     print(f"Tokens Per Step:     {tokens_per_step:,} (Batch: {batch_size}, SeqLen: {cfg.max_seq_len}, Accum: {accum_steps})")
     print(f"Max Learning Rate:   {lr:.2e} (Warmup: {warmup_steps} steps, Cosine Decay to {min_lr:.2e})")
     print("-" * 105)
@@ -294,31 +293,47 @@ def train_clean_run(
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="AR.I.S Clean Training Engine V2")
     parser.add_argument("--rung", type=str, default="small", choices=["small", "pico"], help="Model size rung")
-    parser.add_argument("--pilot", action="store_true", default=True, help="Run 5 percent token budget pilot")
-    parser.add_argument("--full", dest="pilot", action="store_false", help="Run 100 percent 20x Chinchilla budget")
+    parser.add_argument("--budget-mult", type=float, default=10.0, help="Chinchilla parameter multiple budget (e.g., 1.0 for pilot, 10.0 for 10x, 20.0 for full)")
+    parser.add_argument("--pilot", action="store_true", help="Run 1x parameter budget pilot (sets budget-mult to 1.0)")
     parser.add_argument("--steps", type=int, default=None, help="Explicit total steps override")
     parser.add_argument("--batch-size", type=int, default=16, help="Batch size per forward micro-step")
     parser.add_argument("--accum-steps", type=int, default=2, help="Gradient accumulation steps")
     parser.add_argument("--lr", type=float, default=6e-4, help="Max learning rate")
     parser.add_argument("--min-lr", type=float, default=6e-5, help="Min learning rate")
-    parser.add_argument("--warmup-steps", type=int, default=100, help="Warmup optimizer steps")
+    parser.add_argument("--warmup-steps", type=int, default=500, help="Warmup optimizer steps")
     parser.add_argument("--device", type=str, default="auto", choices=["auto", "cuda", "cpu"], help="Compute device")
-    parser.add_argument("--checkpoint", type=str, default="aris_lm_clean_small_pilot.pt", help="Checkpoint filename")
-    parser.add_argument("--save-every", type=int, default=200, help="Checkpoint frequency in steps")
-    parser.add_argument("--log-every", type=int, default=20, help="Log print frequency in steps")
+    parser.add_argument("--checkpoint", type=str, default=None, help="Checkpoint filename (defaults to aris_lm_clean_<rung>_<mult>x.pt)")
+    parser.add_argument("--save-every", type=int, default=500, help="Checkpoint frequency in steps")
+    parser.add_argument("--log-every", type=int, default=50, help="Log print frequency in steps")
+    parser.add_argument("--no-resume", dest="resume", action="store_false", help="Do not resume from existing checkpoint")
     args = parser.parse_args()
+
+    b_mult = 1.0 if args.pilot else args.budget_mult
+    ckpt_name = args.checkpoint
+    if ckpt_name is None:
+        if args.pilot:
+            ckpt_name = f"aris_lm_clean_{args.rung}_pilot.pt"
+        else:
+            mult_str = f"{int(b_mult)}" if b_mult.is_integer() else f"{b_mult}"
+            ckpt_name = f"aris_lm_clean_{args.rung}_{mult_str}x.pt"
+
+    w_steps = args.warmup_steps
+    if args.pilot and args.warmup_steps == 500:
+        w_steps = 100
 
     train_clean_run(
         rung=args.rung,
         pilot=args.pilot,
+        budget_mult=b_mult,
         total_steps=args.steps,
         batch_size=args.batch_size,
         accum_steps=args.accum_steps,
         lr=args.lr,
         min_lr=args.min_lr,
-        warmup_steps=args.warmup_steps,
+        warmup_steps=w_steps,
         device_name=args.device,
-        checkpoint_name=args.checkpoint,
+        checkpoint_name=ckpt_name,
         save_every=args.save_every,
         log_every=args.log_every,
+        resume=args.resume,
     )

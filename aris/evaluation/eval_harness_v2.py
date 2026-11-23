@@ -272,6 +272,7 @@ class ArisEvalHarnessV2:
         prompt: str,
         max_new_tokens: int = 64,
         stop_token_id: Optional[int] = None,
+        repetition_penalty: float = 1.0,
     ) -> Tuple[str, bool]:
         """Greedy autoregressive generation. Returns (text, stopped_on_token)."""
         stop_id = stop_token_id if stop_token_id is not None else getattr(self.tokenizer, "im_end_id", 5)
@@ -284,7 +285,12 @@ class ArisEvalHarnessV2:
         for _ in range(max_new_tokens):
             inp = torch.tensor([curr_ids], dtype=torch.long, device=self.device)
             logits, _, _ = self.model(inp)
-            next_token = int(torch.argmax(logits[0, -1, :]).item())
+            step_logits = logits[0, -1, :].clone()
+            if repetition_penalty > 1.0 and len(curr_ids) > len(input_ids):
+                gen_so_far = torch.tensor(curr_ids[len(input_ids):], dtype=torch.long, device=self.device).unique()
+                vals = step_logits[gen_so_far]
+                step_logits[gen_so_far] = torch.where(vals > 0, vals / repetition_penalty, vals * repetition_penalty)
+            next_token = int(torch.argmax(step_logits).item())
             if next_token == stop_id:
                 stopped_on_token = True
                 break

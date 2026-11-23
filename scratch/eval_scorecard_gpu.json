@@ -1,0 +1,24 @@
+[
+  {
+    "checkpoint": "Step 21,250 (Models Continuation Checkpoint)",
+    "device": "cuda",
+    "held_out_nll": 1.473411367535591,
+    "bpb": 1.018850784731503,
+    "gsm8k_acc": 0.0,
+    "gsm8k_ci": [
+      0.0,
+      0.0
+    ],
+    "mbpp_pass1": 68.0,
+    "mbpp_ci": [
+      56.00000000000001,
+      80.0
+    ],
+    "squad_f1": 8.139826839826839,
+    "squad_em": 5.0,
+    "stop_compliance": 26.0,
+    "rep_rate": 84.0,
+    "copy_probe": 20.0,
+    "add_probe": 0.0
+  }
+]

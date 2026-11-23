@@ -41,14 +41,23 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 def download_gsm8k():
     gsm8k_dir = DATA_DIR / "gsm8k"
     gsm8k_dir.mkdir(parents=True, exist_ok=True)
-    dest = gsm8k_dir / "train.parquet"
-    if not dest.exists():
-        print("[1/10] Downloading GSM8K (openai/gsm8k)...")
+    dest_train = gsm8k_dir / "train.parquet"
+    if not dest_train.exists():
+        print("[1/10] Downloading GSM8K train (openai/gsm8k)...")
         src = hf_hub_download(repo_id="openai/gsm8k", filename="main/train-00000-of-00001.parquet", repo_type="dataset", token=HF_TOKEN)
-        shutil.copyfile(src, dest)
-        print(f"       GSM8K saved: {dest.stat().st_size / (1024*1024):.2f} MB")
+        shutil.copyfile(src, dest_train)
+        print(f"       GSM8K train saved: {dest_train.stat().st_size / (1024*1024):.2f} MB")
     else:
-        print(f"[1/10] GSM8K already present: {dest.stat().st_size / (1024*1024):.2f} MB")
+        print(f"[1/10] GSM8K train already present: {dest_train.stat().st_size / (1024*1024):.2f} MB")
+
+    dest_test = gsm8k_dir / "test.parquet"
+    if not dest_test.exists():
+        print("       Downloading GSM8K held-out test (openai/gsm8k)...")
+        src = hf_hub_download(repo_id="openai/gsm8k", filename="main/test-00000-of-00001.parquet", repo_type="dataset", token=HF_TOKEN)
+        shutil.copyfile(src, dest_test)
+        print(f"       GSM8K test saved: {dest_test.stat().st_size / 1024:.2f} KB")
+    else:
+        print(f"       GSM8K test already present: {dest_test.stat().st_size / 1024:.2f} KB")
 
 
 def download_mbpp():
@@ -94,14 +103,23 @@ def download_ultrachat():
 def download_squad():
     squad_dir = DATA_DIR / "squad_v2"
     squad_dir.mkdir(parents=True, exist_ok=True)
-    dest = squad_dir / "train.parquet"
-    if not dest.exists():
-        print("[5/10] Downloading Stanford SQuAD 2.0 (rajpurkar/squad_v2)...")
+    dest_train = squad_dir / "train.parquet"
+    if not dest_train.exists():
+        print("[5/10] Downloading Stanford SQuAD 2.0 train (rajpurkar/squad_v2)...")
         src = hf_hub_download(repo_id="rajpurkar/squad_v2", filename="squad_v2/train-00000-of-00001.parquet", repo_type="dataset", token=HF_TOKEN)
-        shutil.copyfile(src, dest)
-        print(f"       SQuAD 2.0 saved: {dest.stat().st_size / (1024*1024):.2f} MB")
+        shutil.copyfile(src, dest_train)
+        print(f"       SQuAD 2.0 train saved: {dest_train.stat().st_size / (1024*1024):.2f} MB")
     else:
-        print(f"[5/10] SQuAD 2.0 already present: {dest.stat().st_size / (1024*1024):.2f} MB")
+        print(f"[5/10] SQuAD 2.0 train already present: {dest_train.stat().st_size / (1024*1024):.2f} MB")
+
+    dest_val = squad_dir / "validation.parquet"
+    if not dest_val.exists():
+        print("       Downloading Stanford SQuAD 2.0 validation (rajpurkar/squad_v2)...")
+        src = hf_hub_download(repo_id="rajpurkar/squad_v2", filename="squad_v2/validation-00000-of-00001.parquet", repo_type="dataset", token=HF_TOKEN)
+        shutil.copyfile(src, dest_val)
+        print(f"       SQuAD 2.0 validation saved: {dest_val.stat().st_size / (1024*1024):.2f} MB")
+    else:
+        print(f"       SQuAD 2.0 validation already present: {dest_val.stat().st_size / (1024*1024):.2f} MB")
 
 
 def download_dolly():
@@ -141,18 +159,47 @@ def download_smoltalk():
     else:
         print(f"[8/10] Magpie Ultra already present: {mp_dest.stat().st_size / (1024*1024):.2f} MB")
 
+    # 3. OpenHermes 100k Diverse High-Density QA
+    oh_dest = smol_dir / "openhermes_100k.parquet"
+    if not oh_dest.exists():
+        print("       Downloading SmolTalk OpenHermes 100k QA...")
+        src = hf_hub_download(repo_id="HuggingFaceTB/smoltalk", filename="data/openhermes-100k/train-00000-of-00001.parquet", repo_type="dataset", token=HF_TOKEN)
+        shutil.copyfile(src, oh_dest)
+        print(f"       OpenHermes 100k saved: {oh_dest.stat().st_size / (1024*1024):.2f} MB")
+    else:
+        print(f"       OpenHermes 100k already present: {oh_dest.stat().st_size / (1024*1024):.2f} MB")
+
+    # 4. NuminaMath CoT 100k Step-by-Step Math Reasoning
+    nm_dest = smol_dir / "numina_cot_100k.parquet"
+    if not nm_dest.exists():
+        print("       Downloading SmolTalk NuminaMath CoT 100k...")
+        src = hf_hub_download(repo_id="HuggingFaceTB/smoltalk", filename="data/numina-cot-100k/train-00000-of-00001.parquet", repo_type="dataset", token=HF_TOKEN)
+        shutil.copyfile(src, nm_dest)
+        print(f"       NuminaMath CoT 100k saved: {nm_dest.stat().st_size / (1024*1024):.2f} MB")
+    else:
+        print(f"       NuminaMath CoT 100k already present: {nm_dest.stat().st_size / (1024*1024):.2f} MB")
+
 
 def download_hotpotqa():
     hp_dir = DATA_DIR / "hotpotqa" / "distractor"
     hp_dir.mkdir(parents=True, exist_ok=True)
-    dest = hp_dir / "train-00000-of-00002.parquet"
-    if not dest.exists():
-        print("[9/10] Downloading HotpotQA Multi-Hop Reasoning (hotpotqa/hotpot_qa)...")
+    dest_train = hp_dir / "train-00000-of-00002.parquet"
+    if not dest_train.exists():
+        print("[9/10] Downloading HotpotQA Multi-Hop train (hotpotqa/hotpot_qa)...")
         src = hf_hub_download(repo_id="hotpotqa/hotpot_qa", filename="distractor/train-00000-of-00002.parquet", repo_type="dataset", token=HF_TOKEN)
-        shutil.copyfile(src, dest)
-        print(f"       HotpotQA saved: {dest.stat().st_size / (1024*1024):.2f} MB")
+        shutil.copyfile(src, dest_train)
+        print(f"       HotpotQA train saved: {dest_train.stat().st_size / (1024*1024):.2f} MB")
     else:
-        print(f"[9/10] HotpotQA already present: {dest.stat().st_size / (1024*1024):.2f} MB")
+        print(f"[9/10] HotpotQA train already present: {dest_train.stat().st_size / (1024*1024):.2f} MB")
+
+    dest_val = hp_dir / "validation.parquet"
+    if not dest_val.exists():
+        print("       Downloading HotpotQA Multi-Hop validation (hotpotqa/hotpot_qa)...")
+        src = hf_hub_download(repo_id="hotpotqa/hotpot_qa", filename="distractor/validation-00000-of-00001.parquet", repo_type="dataset", token=HF_TOKEN)
+        shutil.copyfile(src, dest_val)
+        print(f"       HotpotQA validation saved: {dest_val.stat().st_size / (1024*1024):.2f} MB")
+    else:
+        print(f"       HotpotQA validation already present: {dest_val.stat().st_size / (1024*1024):.2f} MB")
 
 
 def download_qasrl():
