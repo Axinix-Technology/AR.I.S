@@ -487,7 +487,12 @@ def evaluate_checkpoints(
             ("Step 21,250 (Models Continuation Checkpoint)", BASE_DIR / "models/aris_lm_checkpoint.pt"),
         ]
 
-    tok_path = Path(custom_tok) if custom_tok else (MODELS_DIR / "aris_bpe_tokenizer.json")
+    if custom_tok:
+        tok_path = Path(custom_tok)
+    elif (MODELS_DIR / "aris_bpe_tokenizer_v2.json").exists():
+        tok_path = MODELS_DIR / "aris_bpe_tokenizer_v2.json"
+    else:
+        tok_path = MODELS_DIR / "aris_bpe_tokenizer.json"
     tokenizer = ArisTokenizer.load(tok_path)
     print(f"Loaded Tokenizer: {tok_path.name} (Vocab: {tokenizer.vocab_size:,})")
 
