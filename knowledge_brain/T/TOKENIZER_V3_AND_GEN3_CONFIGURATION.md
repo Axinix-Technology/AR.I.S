@@ -61,6 +61,16 @@ Audited across **7,874 real manifest samples** spanning Code (MBPP), Math (GSM8K
 | **Code (MBPP)** | 374 | 171,474 | 84,585 | 74,872 | 2.03 | **2.29** | **+11.48%** |
 | **Prose / QA (SQuAD)** | 2,500 | 2,182,250 | 639,690 | 570,757 | 3.41 | **3.82** | **+10.78%** |
 | **Math (GSM8K)** | 2,500 | 1,341,013 | 516,704 | 487,154 | 2.60 | **2.75** | **+5.72%** |
+| **Total / Aggregate** | **7,874** | **15,293,014** | **4,309,991** | **3,760,575** | **3.55** | **4.07** | **+12.75%** |
+
+*Aggregate Reduction*: Across the 7,874 tested samples, Tokenizer V3 saved **549,416 tokens** ($12.75\%$ sample-weighted reduction).
+
+*Hardware & KV-Cache Accounting*:
+- **KV-Cache Size per Sequence (Inference)**:
+  $$M = 2 \times 12\text{ layers} \times 1024\text{ tokens} \times 2\text{ KV heads} \times 64\text{ dim} \times 2\text{ bytes} = \mathbf{6\text{ MiB per sequence}}$$
+- **Hardware Precision Protocol**:
+  - *Tesla T4 (Turing, Compute Capability 7.5)*: Does not support native BF16 Tensor Cores. Runs **AMP float16 with `torch.amp.GradScaler`**.
+  - *Ampere / Hopper (A100, H100, RTX 3090/4090)*: Native **AMP bfloat16** without scaler.
 
 *Note on Math*: Math compression gain is +5.72% (vs +11% to +14% for code/chat) because `Digits(individual_digits=True)` deliberately preserves single-digit atomicity, trading slight token expansion for exact numeric calculation fidelity.
 

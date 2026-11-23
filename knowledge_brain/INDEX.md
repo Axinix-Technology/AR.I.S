@@ -8,6 +8,7 @@ All architectural concepts, modules, foundational corpora, and training pipeline
 - [Authority & Governance Protocol](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/A/AUTHORITY_AND_GOVERNANCE_PROTOCOL.md) — 4-tier deciding authority hierarchy from Tier 0 sovereign user alignment to epistemic truth gating and autonomous discovery.
 
 ### [B]
+- [Benchmark Baseline: Gen 2 Milestone (117M Tokens)](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/B/BENCHMARK_GEN2_BASELINE.md) — Official frozen evaluation scorecard across GSM8K, MBPP, SQuAD v2, Held-Out NLL, and Gen 3 progression targets.
 - [Benchmark Suite](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/B/BENCHMARK_SUITE.md) — Standardized cognitive evaluation suite measuring multi-hop deduction, causal semantic role accuracy, and Graph RAG retrieval precision.
 
 ### [C]
