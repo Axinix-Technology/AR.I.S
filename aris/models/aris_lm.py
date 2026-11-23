@@ -120,7 +120,7 @@ class ArisLM(nn.Module):
             flat_targets = shift_targets.view(-1)
             num_valid = (flat_targets != -100).sum()
             if num_valid == 0:
-                loss = torch.tensor(0.0, device=logits.device, requires_grad=True)
+                loss = (shift_logits.sum() * 0.0)
             else:
                 loss = F.cross_entropy(
                     shift_logits.view(-1, self.config.vocab_size),
