@@ -184,6 +184,7 @@ cython_debug/
 /models/*
 !/models/aris_bpe_tokenizer.json
 !/models/aris_bpe_tokenizer_v2.json
+!/models/aris_bpe_tokenizer_v3.json
 !/aris/models/
 !/aris/models/*.py
 !/aris/models/*/

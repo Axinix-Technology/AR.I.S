@@ -51,6 +51,7 @@ All architectural concepts, modules, foundational corpora, and training pipeline
 
 ### [T]
 - [Ten-X (10×) Chinchilla Scaling Protocol & High-Density QA Ingestion](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/T/TEN_X_CHINCHILLA_SCALING_PROTOCOL.md) — 10× parameter budget training run (267.5M tokens, 21,768 steps) with OpenHermes & NuminaMath CoT integration on Tesla T4 GPU.
+- [Tokenizer V3 & Gen 3 Architecture (1,024 Context Window)](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/T/TOKENIZER_V3_AND_GEN3_CONFIGURATION.md) — 16,384 vocabulary size, native tool-calling tokens (<|tool_call|>, <|tool_response|>), digits splitting, and 63.6M parameter model configuration with 1,024-token active context.
 
 ### [U]
 - [Unified CLI & Cognitive Runtime Architecture](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/U/UNIFIED_CLI_AND_RUNTIME_ARCHITECTURE.md) — Single production entrypoint (run.py) unifying manifest-driven training, Gen 3 rungs, repetition-penalized KV cache chat, and clean held-out evaluation.

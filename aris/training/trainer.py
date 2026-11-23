@@ -114,15 +114,21 @@ class ArisTrainer:
                 vram_gb = torch.cuda.get_device_properties(0).total_memory / (1024**3)
                 print(f"GPU Hardware:        {gpu_name} ({vram_gb:.2f} GB VRAM)")
 
-            # 2. Load Frozen Tokenizer V2
-            tok_path = MODELS_DIR / "aris_bpe_tokenizer_v2.json"
+            # 2. Load Frozen Tokenizer (V3 for Gen 3/Medium if present, otherwise V2)
+            if rung.lower() in ("medium", "gen3") and (MODELS_DIR / "aris_bpe_tokenizer_v3.json").exists():
+                tok_path = MODELS_DIR / "aris_bpe_tokenizer_v3.json"
+            elif (MODELS_DIR / "aris_bpe_tokenizer_v2.json").exists():
+                tok_path = MODELS_DIR / "aris_bpe_tokenizer_v2.json"
+            else:
+                tok_path = MODELS_DIR / "aris_bpe_tokenizer.json"
             if not tok_path.exists():
-                raise FileNotFoundError(f"Tokenizer V2 artifact not found at {tok_path}")
+                raise FileNotFoundError(f"Tokenizer artifact not found at {tok_path}")
             tokenizer = ArisTokenizer.load(tok_path)
             print(f"Tokenizer:           {tok_path.name} (Vocab: {tokenizer.vocab_size:,})")
 
             # 3. Model Architecture Configuration from Rung
-            cfg = ArisConfig.from_rung(rung=rung, vocab_size=tokenizer.vocab_size, max_seq_len=384)
+            target_seq_len = 1024 if rung.lower() in ("medium", "gen3") else 384
+            cfg = ArisConfig.from_rung(rung=rung, vocab_size=tokenizer.vocab_size, max_seq_len=target_seq_len)
             param_count = cfg.expected_param_count()
             print(f"Model Rung:          {rung.upper()} ({param_count:,} parameters)")
 
