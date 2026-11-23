@@ -307,6 +307,12 @@ def train_clean_run(
             torch.save(checkpoint_payload, ckpt_path)
             print(f"  [Checkpoint Saved] -> {ckpt_path.name} (Step {step + 1:,}, Loss {accum_loss:.4f})")
 
+            # Milestone checkpoint archiving (prevent single-file overwriting across long runs)
+            if (step + 1) % 2500 == 0 or (step + 1) == total_steps:
+                milestone_path = ckpt_path.with_name(f"{ckpt_path.stem}_step_{step + 1}{ckpt_path.suffix}")
+                torch.save(checkpoint_payload, milestone_path)
+                print(f"  [Milestone Checkpoint Archived] -> {milestone_path.name}")
+
     total_time = time.time() - t_start
     print("-" * 105)
     print(f"Clean Training Run Completed in {int(total_time // 60)}m {int(total_time % 60):02d}s!")
