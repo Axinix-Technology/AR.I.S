@@ -264,6 +264,7 @@ def handle_chat(args):
                 temperature=args.temperature,
                 top_k=args.top_k,
                 top_p=args.top_p,
+                repetition_penalty=args.repetition_penalty,
             )
 
             if result["thought"]:
@@ -514,7 +515,8 @@ def main():
     p_chat.add_argument("--temperature", type=float, default=0.7)
     p_chat.add_argument("--top-k", type=int, default=40)
     p_chat.add_argument("--top-p", type=float, default=0.9)
-    p_chat.add_argument("--max-tokens", type=int, default=64)
+    p_chat.add_argument("--repetition-penalty", type=float, default=1.15, help="Multiplicative penalty for repeating previously generated tokens")
+    p_chat.add_argument("--max-tokens", type=int, default=128)
 
     # Evaluation Benchmark
     p_eval = subparsers.add_parser("eval", help="Run standardized cognitive evaluation benchmark")

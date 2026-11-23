@@ -46,6 +46,7 @@ class AutonomousDeliberationEngine:
         temperature: float = 0.7,
         top_k: int = 40,
         top_p: float = 0.9,
+        repetition_penalty: float = 1.15,
     ) -> Dict[str, Any]:
         """
         Executes a 5-step cognitive deliberation cycle:
@@ -80,6 +81,7 @@ class AutonomousDeliberationEngine:
             temperature=temperature,
             top_k=top_k,
             top_p=top_p,
+            repetition_penalty=repetition_penalty,
             eos_id=self.tokenizer.im_end_id,
         )
 
