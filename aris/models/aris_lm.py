@@ -117,11 +117,16 @@ class ArisLM(nn.Module):
             # Shift so that tokens < n predict n (standard causal next-token prediction)
             shift_logits = logits[..., :-1, :].contiguous()
             shift_targets = targets[..., 1:].contiguous()
-            loss = F.cross_entropy(
-                shift_logits.view(-1, self.config.vocab_size),
-                shift_targets.view(-1),
-                ignore_index=-100,
-            )
+            flat_targets = shift_targets.view(-1)
+            num_valid = (flat_targets != -100).sum()
+            if num_valid == 0:
+                loss = torch.tensor(0.0, device=logits.device, requires_grad=True)
+            else:
+                loss = F.cross_entropy(
+                    shift_logits.view(-1, self.config.vocab_size),
+                    flat_targets,
+                    ignore_index=-100,
+                )
 
         return logits, loss, new_kv_caches
 
