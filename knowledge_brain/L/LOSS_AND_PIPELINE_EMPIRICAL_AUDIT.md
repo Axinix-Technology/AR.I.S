@@ -110,3 +110,31 @@ Every generation receives explicit gradient signal to terminate output at the `<
 - Initial Loss: **9.0590**
 - Final Loss: **0.0052**
 - **Outcome**: The architecture easily converges to near-zero ($< 0.05$), proving the model and loss backpropagation pipeline are free of indexing flaws, gradient masks, or frozen layers.
+
+---
+
+## 7. Step 7,000 Step-Change Analysis, Archiving, & Bits-Per-Byte Normalization
+
+### A. The Step 7,000 Step-Change Root Cause
+Between steps 6,950 and 7,550, loss dropped from ~2.2 to ~1.37-1.5 while LR was nearly constant and grad norm fell from ~0.95 to ~0.78.
+Investigation of `aris/data/pipeline_v2.py` reveals the two structural causes:
+1. **Epoch Cap Exhaustion**:
+   - Small corpora have strict 3-epoch caps: MBPP (374 rows) exhausts at Step ~250. GSM8K (7,473 rows) exhausts at Step ~4,900.
+   - Once exhausted, their iterators raise `StopIteration`, leaving only long corpora active in `iter_map`.
+2. **File-Sequential Ingestion in SmolTalk**:
+   - `_iter_smoltalk` loads files in order: `everyday_conversations.parquet` (2,260 rows), then `smol_magpie_ultra.parquet` (68,257 rows), followed by OpenHermes / NuminaMath CoT.
+   - Around Step 7,000, the data composition within `smoltalk` shifted from general conversation turns to structured reasoning/math corpora, which have lower intrinsic entropy than colloquial dialogue.
+
+### B. Milestone Checkpoint Archiving
+To prevent overwriting checkpoints across long 20k+ step runs, `train_clean.py` automatically archives milestone checkpoints at fixed intervals:
+- Main tracking checkpoint: `aris_lm_clean_<rung>_<mult>x.pt` (updated every 500 steps).
+- Milestone checkpoints: `aris_lm_clean_<rung>_<mult>x_step_<N>.pt` (preserved every 2,500 steps).
+
+### C. Bits-Per-Byte (BPB) Normalization Across Vocabularies
+Nats per token cannot be compared across different tokenizer vocabularies without normalization:
+- For AR.I.S ($V = 8,192 = 2^{13}$): random uniform guess is $\ln(8,192) \approx 9.011$ nats ($13$ bits/token).
+- For a 32,000-vocab model (e.g. Llama): random guess is $\ln(32,000) \approx 10.373$ nats ($14.97$ bits/token).
+- Conversion to Bits Per Byte:
+  $$\text{Bits/Token} = \frac{\text{Loss (nats)}}{\ln(2)}$$
+  $$\text{Bits Per Byte (BPB)} = \frac{\text{Bits/Token}}{\text{Bytes/Token}}$$
+  At Loss = 1.0666 nats and average 3.2 bytes/token, AR.I.S achieves $\approx 0.48$ BPB.
