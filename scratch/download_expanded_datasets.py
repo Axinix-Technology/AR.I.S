@@ -265,5 +265,7 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="AR.I.S Master Dataset Downloader")
     parser.add_argument("--with-ud", action="store_true", help="Also download the 550MB Universal Dependencies Treebank archive")
+    parser.add_argument("--with", dest="with_feature", type=str, default=None, help="Include optional datasets like 'ud'")
     args = parser.parse_args()
-    download_all(with_ud=args.with_ud)
+    with_ud = args.with_ud or (args.with_feature is not None and args.with_feature.lower() == "ud")
+    download_all(with_ud=with_ud)
