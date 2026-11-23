@@ -23,7 +23,7 @@ All architectural concepts, modules, foundational corpora, and training pipeline
 - [Clean Evaluation Harness V2 & Developmental Benchmark Protocol](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/E/EVALUATION_HARNESS_V2.md) — Unpolluted developmental evaluation suite on official held-out splits with strict Decimal parser, sandboxed execution, and bootstrap 95% CIs.
 
 ### [G]
-- [Generational Evolutionary Roadmap (Gen 1 to Gen 6)](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/G/GENERATIONAL_EVOLUTION_ROADMAP.md) — 6-stage evolutionary staircase from Gen 1 stability and Gen 2 speaking to Gen 3 tool selection and Gen 6 autonomous agency.
+- [Generational Evolutionary Roadmap (Gen 1 to Gen 12)](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/G/GENERATIONAL_EVOLUTION_ROADMAP.md) — 12-stage evolutionary staircase from Gen 1 stability and Gen 3 tool selection to Gen 7 multimodal perception and Gen 12 permission-based self-evolution (J.A.R.V.I.S).
 - [Graph RAG Memory](file:///d:/Axinix%20Projects/AR.I.S/knowledge_brain/G/GRAPH_RAG.md) — Hybrid neuro-symbolic knowledge graph pairing dense vector similarity with indexed multi-hop relational path traversal and Reciprocal Rank Fusion (RRF).
 
 ### [K]

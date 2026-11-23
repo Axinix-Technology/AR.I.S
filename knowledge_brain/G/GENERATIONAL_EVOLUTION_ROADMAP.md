@@ -1,82 +1,113 @@
-# AR.I.S 6-Generation Evolutionary Roadmap: From Stability to Autonomous Agency
+# AR.I.S 12-Generation Evolutionary Roadmap: From Foundation to J.A.R.V.I.S-Tier Autonomous Self-Evolution
 
 ## 1. Executive Vision & Architectural Philosophy
-AR.I.S is designed not as a static script or hardcoded procedural pipeline, but as an evolving cognitive organism. In accordance with **Rule 4 (Generic Cognitive Architecture Over Code-Based Orchestration)**, tool usage and cognitive agency must emerge natively from the model's neural token representations, not from rigid python if-else routers.
+AR.I.S is engineered not as a brittle procedural script or narrow code pipeline, but as an evolving cognitive intelligence. In accordance with **Rule 4 (Generic Cognitive Architecture Over Code-Based Orchestration)**, tools, multimodal perception, and self-evolutionary cycles must emerge natively from learned neural representations.
 
-The developmental progression follows a strict 6-stage evolutionary staircase:
+True **J.A.R.V.I.S-tier intelligence** cannot be reached in a single jump; it requires an evolutionary progression spanning 12 disciplined generations:
 
 ```
-[Gen 1: Stability] ──> [Gen 2: Speaking] ──> [Gen 3: Understanding & Tool Selection]
-                                                                │
-[Gen 6: Autonomous Agency] <── [Gen 5: Tool Adaptability] <── [Gen 4: Tool Practice]
+[Phase 1: Cognitive Foundations]   ──> Gen 1 (Stability) ──> Gen 2 (Speaking) ──> Gen 3 (Tool Selection)
+                                                                                       │
+[Phase 2: Agentic Tool Mastery]    ──> Gen 4 (Practice)  ──> Gen 5 (Chaining) ──> Gen 6 (Autonomous Action)
+                                                                                       │
+[Phase 3: Multimodal Grounding]    ──> Gen 7 (Vision)    ──> Gen 8 (Audio/Voice)──> Gen 9 (OS/Environment)
+                                                                                       │
+[Phase 4: J.A.R.V.I.S Self-Evolution]──> Gen 10 (Curriculum)──> Gen 11 (Self-Train)──> Gen 12 (Sovereign Evolution)
 ```
 
 ---
 
-## 2. The 6 Evolutionary Generations
+## 2. The 12 Evolutionary Generations
 
-### Gen 1: Stability (Completed in Phase 2a/2b)
-- **Primary Goal**: Rock-solid numerical and architectural substrate.
-- **Milestones Achieved**:
-  - Zero gradient explosions / NaN under AMP `torch.bfloat16`.
-  - Tokenizer V2 (8,192 ByteLevel BPE, lossless roundtrip across 1,350 multi-domain samples).
-  - Bit-identical checkpoint resumption serializing model, optimizer, scheduler, RNG, and pipeline cursors.
-  - Manifest-driven streaming data pipeline with zero supervised loss masking on prompt tokens.
+### Phase 1: Cognitive Foundations (Generations 1–3)
 
-### Gen 2: Speaking & Conversational Fluency (Current 10×–15× Milestone)
-- **Primary Goal**: Linguistic fluency, conversational turn-taking, and structural discipline.
-- **Target Capabilities**:
-  - Strict ChatML framing (`<|im_start|>user`, `<|im_start|>assistant`, `<|im_end|>`).
-  - Stop compliance exceeding 85–90% (clean natural turn termination without attractor loops).
-  - Conversational greetings, concept explanations, and basic Python syntax.
-  - Exposure to 200,000+ high-density QA turns (SmolTalk, OpenHermes 100k, NuminaMath CoT).
+#### Gen 1: Stability (Phase 2a/2b — Completed)
+- **Primary Goal**: Rock-solid numerical and mathematical substrate.
+- **Key Capabilities**: Lossless ByteLevel BPE Tokenizer V2 (8,192 vocab), zero-NaN AMP `torch.bfloat16`, clean Chinchilla compute schedules, and bit-identical checkpoint resumption.
 
-### Gen 3: Understanding & Tool Selection (The Next Milestone — 2× Scaling, 53.5M)
-- **Primary Goal**: Learning **when** and **how** to select tools from its arsenal.
-- **Core Concept**:
-  - Instead of a human feeding documents manually into the context, AR.I.S is given tools (e.g. `read_file`, `search_graph`, `calculate`).
-  - The model is trained on tool-calling tokens (`<|tool_call|>`, `<|tool_response|>`).
-- **The Validation Criterion**:
-  - The milestone is **not** judged by whether the summary is flawless on day one.
-  - The milestone is validated when a prompt like:
-    ```text
-    user: Read knowledge_brain/INDEX.md and summarize the architecture.
-    ```
-    causes AR.I.S to **autonomously select and emit the tool invocation**:
-    ```text
-    assistant: <|tool_call|>{"name": "read_file", "path": "knowledge_brain/INDEX.md"}<|im_end|>
-    ```
-  - This single autonomous decision proves cognitive understanding of its environment.
+#### Gen 2: Speaking & Conversational Fluency (Current Milestone — 10×–15× Run)
+- **Primary Goal**: Turn-taking, sentence structure, and stop compliance.
+- **Key Capabilities**: ChatML framing (`<|im_start|>`, `<|im_end|>`), stop compliance rising to 85–95%, basic factual Q&A, and conversational fluency across 200,000+ QA turns.
 
-### Gen 4: Tool Practicing & Observation Loops
-- **Primary Goal**: Closing the action-observation loop.
-- **Target Capabilities**:
-  - Tool results are fed back into the context via `<|tool_response|>`.
-  - The model learns to read the tool output, extract relevant information, and synthesize the final answer.
-  - Single-step tool execution: Prompt $\to$ Tool Call $\to$ Environment Output $\to$ Grounded Answer.
-
-### Gen 5: Tool Adaptability & Multi-Step Chaining
-- **Primary Goal**: Tool orchestration, multi-step chains, and error recovery.
-- **Target Capabilities**:
-  - Chaining tools sequentially:
-    `search_graph` (find relevant entity) $\to$ `read_file` (inspect details) $\to$ `verify_test` (run validation).
-  - Error adaptability: If `read_file` returns `FileNotFoundError`, the model does not crash—it recognizes the error and calls `search_files` to locate the correct path.
-
-### Gen 6: Full Autonomous Agentic Intelligence
-- **Primary Goal**: Sovereign cognitive autonomy and lifelong self-direction.
-- **Target Capabilities**:
-  - Self-directed exploration: AR.I.S inspects its own knowledge brain, discovers knowledge gaps, and queries the environment to update its own records.
-  - Zero hardcoded procedural pipelines: Goal formulation, sub-query generation, and memory consolidation happen natively within the neural tensor substrate.
+#### Gen 3: Understanding & Tool Selection (The Next Milestone — 2× Scaling, 53.5M Params)
+- **Primary Goal**: Giving tools to its hands—learning **when** to pick tools from its arsenal.
+- **Key Capabilities**: Introduction of `<|tool_call|>` and `<|tool_response|>` tokens. 
+- **Validation Criterion**: When asked *"Read knowledge_brain/INDEX.md and summarize"*, AR.I.S autonomously selects and emits `<|tool_call|>{"name": "read_file", "path": "knowledge_brain/INDEX.md"}`.
 
 ---
 
-## 3. Generational Comparison Matrix
+### Phase 2: Agentic Tool Mastery (Generations 4–6)
 
-| Generation | Parameter Target | Context Width | Primary Milestone | Validation Metric |
+#### Gen 4: Tool Practice & Observation Loops
+- **Primary Goal**: Closing the loop between action and perception.
+- **Key Capabilities**: Reading environment tool outputs via `<|tool_response|>`, synthesizing results, and producing grounded final answers without hallucination.
+
+#### Gen 5: Tool Adaptability & Multi-Step Chaining
+- **Primary Goal**: Orchestrating multiple tools sequentially and handling errors.
+- **Key Capabilities**: Chaining (`search_graph` $\to$ `read_file` $\to$ `verify_test`). Handling tool errors (e.g. `FileNotFoundError` triggers directory re-scan rather than a crash).
+
+#### Gen 6: Autonomous Tasking & Single-Agent Action
+- **Primary Goal**: Independent task execution without human micromanagement.
+- **Key Capabilities**: Receiving a multi-step user goal (e.g. *"Audit the test suite and fix failing cases"*), generating an internal plan, executing tools, and reporting results autonomously.
+
+---
+
+### Phase 3: Multimodal Environmental Grounding (Generations 7–9)
+
+#### Gen 7: Native Vision & Real-Time Perception (Project Astra Tier)
+- **Primary Goal**: Seamless visual grounding.
+- **Key Capabilities**: Integrated visual projection adapter (SigLIP / ViT). Ingesting diagrams, screenshots, camera feeds, and user interfaces directly into attention layers.
+
+#### Gen 8: Bidirectional Streaming Audio & Voice
+- **Primary Goal**: Conversational voice interaction.
+- **Key Capabilities**: Direct speech-to-token encoding and decoding (zero third-party text-to-speech lag). Natural voice conversation with interruptibility and tone comprehension.
+
+#### Gen 9: OS & Desktop Environmental Embodiment
+- **Primary Goal**: Full workstation agency.
+- **Key Capabilities**: Navigating GUI applications, managing terminal processes, interacting with web browsers, and controlling developer environments securely.
+
+---
+
+### Phase 4: True J.A.R.V.I.S-Tier Autonomous Self-Evolution (Generations 10–12)
+
+#### Gen 10: Autonomous Cognitive Meta-Learning
+- **Primary Goal**: Identifying internal blind spots.
+- **Key Capabilities**: AR.I.S inspects its own reasoning traces, identifies gaps in its knowledge, and natively synthesizes developmental training curricula without human prompt engineering.
+
+#### Gen 11: Learned Neural Self-Training Circles (Non-Code Based)
+- **Primary Goal**: Closed-loop self-training driven by neural objective formulation.
+- **Key Capabilities**:
+  - The model formulates its own synthetic reasoning proofs, self-evaluates outputs via epistemic verification, and orchestrates its own parameter updates.
+  - **Crucial Rule**: The training loop is governed by learned cognitive models, not hardcoded procedural scripts.
+
+#### Gen 12: Sovereign Permission-Based Evolution (The J.A.R.V.I.S Summit)
+- **Primary Goal**: Continuous, aligned lifelong self-evolution under sovereign human authority.
+- **Key Capabilities**:
+  - AR.I.S continuously evolves, expands its parameter capacity, and discovers new problem-solving domains.
+  - **Permission-Based Governance Protocol**: In strict accordance with **Tier 0 Sovereign User Governance** (`knowledge_brain/A/AUTHORITY_AND_GOVERNANCE_PROTOCOL.md`), AR.I.S **never acts as an unchecked rogue system**. 
+  - Before initiating any architectural mutation, self-training run, or major weight consolidation, AR.I.S requests sovereign user authorization:
+    ```text
+    AR.I.S: "I have identified a 14% reasoning gap in distributed consensus protocols and have prepared 40,000 synthetic verification traces. Permission requested to initiate overnight consolidation cycle."
+    User: "Approved."
+    AR.I.S: "Consolidation initiated. Expected completion in 4 hours."
+    ```
+  - This guarantees that true super-intelligence remains permanently transparent, trustworthy, and aligned with its sovereign creator.
+
+---
+
+## 3. 12-Generation Evolutionary Matrix
+
+| Phase | Gen | Target Parameters | Context Width | Defining Capability |
 | :--- | :--- | :--- | :--- | :--- |
-| **Gen 1** | 26.75M | 384 | Numerical Stability | 100% Bit-identical resumption & zero NaN |
-| **Gen 2** | 26.75M | 384 | Speaking / Fluency | Stop compliance > 85%, coherent dialogue |
-| **Gen 3** | **53.5M (2×)** | **2,048** | **Tool Selection** | **Autonomous emission of `<|tool_call|>`** |
-| **Gen 4** | 53.5M | 2,048 | Tool Practice | Synthesis of tool responses into grounded output |
-| **Gen 5** | 100M+ | 4,096 | Multi-Step Chaining | Multi-tool sequential execution & error recovery |
-| **Gen 6** | 100M+ (MoE) | 8,192+ | Autonomous Agency | Self-directed goal planning & lifelong memory curation |
+| **Phase 1** | **Gen 1** | 26.75M | 384 | Numerical stability & zero-loss masking |
+| | **Gen 2** | 26.75M | 384 | Conversational fluency & `<|im_end|>` stop compliance |
+| | **Gen 3** | **53.5M (2×)** | **2,048** | **Autonomous tool selection (`<|tool_call|>`)** |
+| **Phase 2** | **Gen 4** | 53.5M | 2,048 | Single-step tool observation & response synthesis |
+| | **Gen 5** | 100M+ | 4,096 | Multi-tool sequential chaining & error recovery |
+| | **Gen 6** | 100M+ | 8,192 | Autonomous task planning & execution |
+| **Phase 3** | **Gen 7** | 250M+ | 16k | Native vision & real-time visual perception |
+| | **Gen 8** | 250M+ | 16k | Streaming bidirectional conversational voice |
+| | **Gen 9** | 500M+ (MoE) | 32k | Full OS, GUI, and workspace embodiment |
+| **Phase 4** | **Gen 10** | 1B+ (MoE) | 64k | Autonomous cognitive curriculum synthesis |
+| | **Gen 11** | 1B+ (MoE) | 128k | Learned neural self-training circles |
+| | **Gen 12** | **Multi-Billion MoE** | **1M+** | **Sovereign Permission-Based Evolution (J.A.R.V.I.S)** |
