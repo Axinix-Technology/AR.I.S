@@ -12,6 +12,7 @@ Key Capabilities:
 from __future__ import annotations
 import os
 import sys
+import re
 import gzip
 import json
 import random
@@ -57,12 +58,8 @@ class ArisDataPipelineV2(IterableDataset):
         self.held_out_13grams = held_out_13grams or set()
         self.seed = seed
 
-        # Default epoch caps: <=3 for small corpora to prevent overfit looping
-        self.epoch_caps = epoch_caps or {
-            "mbpp": 3,
-            "gsm8k": 3,
-            "dolly": 3,
-        }
+        # Default epoch caps: None (uncapped continuous streaming across all corpora)
+        self.epoch_caps = epoch_caps if epoch_caps is not None else {}
 
         # Corpus Tracking State
         self.corpus_seq_counts: Dict[str, int] = {}
@@ -202,9 +199,9 @@ class ArisDataPipelineV2(IterableDataset):
         files = self.corpus_files.get("gsm8k", [])
         if not files:
             return
-        cap = self.epoch_caps.get("gsm8k", 3)
+        cap = self.epoch_caps.get("gsm8k")
         epoch = 0
-        while epoch < cap:
+        while cap is None or epoch < cap:
             epoch += 1
             self.corpus_epochs["gsm8k"] = epoch
             for f in files:
@@ -219,8 +216,9 @@ class ArisDataPipelineV2(IterableDataset):
                     if self.check_13gram_contamination(q):
                         self.total_decontaminated_sequences += 1
                         continue
-                    resp = f"<|thought|>\nAnalyzing mathematical problem, variables, and computation steps:\n{a}\nFinal Calculation: {a.split('####')[-1].strip()}"
-                    sample = self._shrink_context_and_tokenize(q, resp, "gsm8k")
+                    # Natural chain-of-thought: strip internal calculator tags and deliver clean human reasoning
+                    clean_a = re.sub(r"<<.*?>>", "", a).strip()
+                    sample = self._shrink_context_and_tokenize(q, clean_a, "gsm8k")
                     if sample:
                         yield sample
 
@@ -228,9 +226,9 @@ class ArisDataPipelineV2(IterableDataset):
         files = self.corpus_files.get("mbpp", [])
         if not files:
             return
-        cap = self.epoch_caps.get("mbpp", 3)
+        cap = self.epoch_caps.get("mbpp")
         epoch = 0
-        while epoch < cap:
+        while cap is None or epoch < cap:
             epoch += 1
             self.corpus_epochs["mbpp"] = epoch
             for f in files:
@@ -240,14 +238,13 @@ class ArisDataPipelineV2(IterableDataset):
                 for r in rows:
                     text = r.get("text", "").strip()
                     code = r.get("code", "").strip()
-                    tests = "\n".join(r.get("test_list", [])[:3])
                     if not text or not code:
                         continue
                     if self.check_13gram_contamination(text):
                         self.total_decontaminated_sequences += 1
                         continue
                     p = f"Write a Python program to solve this task:\n{text}"
-                    resp = f"<|thought|>\nFormulating algorithmic logic, edge cases, and unit tests.\n```python\n{code}\n```\n# Verification Assertions:\n{tests}"
+                    resp = f"```python\n{code}\n```"
                     sample = self._shrink_context_and_tokenize(p, resp, "mbpp")
                     if sample:
                         yield sample
@@ -319,9 +316,9 @@ class ArisDataPipelineV2(IterableDataset):
         files = self.corpus_files.get("dolly", [])
         if not files:
             return
-        cap = self.epoch_caps.get("dolly", 3)
+        cap = self.epoch_caps.get("dolly")
         epoch = 0
-        while epoch < cap:
+        while cap is None or epoch < cap:
             epoch += 1
             self.corpus_epochs["dolly"] = epoch
             for f in files:
@@ -422,8 +419,8 @@ class ArisDataPipelineV2(IterableDataset):
                         if not sent.text or len(sent.tokens) < 3:
                             continue
                         upos_str = " ".join(f"{t.form}/{t.upos}" for t in sent.tokens)
-                        p = f"Analyze grammatical syntax and parts of speech for: {sent.text}"
-                        resp = f"Universal POS breakdown: {upos_str}"
+                        p = f"Sentence: {sent.text}\nProvide the Universal POS tags for each word."
+                        resp = upos_str
                         sample = self._shrink_context_and_tokenize(p, resp, "ud")
                         if sample:
                             yield sample

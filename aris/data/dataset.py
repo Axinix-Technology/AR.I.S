@@ -8,6 +8,7 @@ Combines 4 Foundation Pillars:
 """
 
 from __future__ import annotations
+import re
 import gzip
 import json
 import random
@@ -210,7 +211,7 @@ class EnterpriseArisDataset(IterableDataset):
 
                                 if q_str and answers:
                                     prompt = f"Sentence: {sentence}\nTarget Action: '{verb_word}'\nQuestion: {q_str}"
-                                    response = f"<|thought|>\nAnalyzing semantic argument for action '{verb_word}'.\nAnswer: {answers[0]}"
+                                    response = f"Answer: {answers[0]}"
                                     yield self._format_and_tokenize(prompt, response)
             except Exception:
                 continue
@@ -226,8 +227,8 @@ class EnterpriseArisDataset(IterableDataset):
                     if not sent.text or len(sent.tokens) < 3:
                         continue
                     upos_str = " ".join(f"{t.form}/{t.upos}" for t in sent.tokens)
-                    prompt = f"Analyze grammatical syntax and parts of speech for: {sent.text}"
-                    response = f"Universal POS breakdown: {upos_str}"
+                    prompt = f"Sentence: {sent.text}\nProvide the Universal POS tags for each word."
+                    response = upos_str
                     yield self._format_and_tokenize(prompt, response)
             except Exception:
                 continue
@@ -244,12 +245,9 @@ class EnterpriseArisDataset(IterableDataset):
                 answer = r.get("answer", "").strip()
                 if not question or not answer:
                     continue
-                reasoning, _, final_num = answer.partition("####")
+                clean_answer = re.sub(r"<<.*?>>", "", answer).strip()
                 prompt = f"Solve the following mathematical problem step by step:\n{question}"
-                response = (
-                    f"<|thought|>\n{reasoning.strip()}\n"
-                    f"Final Calculation: {final_num.strip()}"
-                )
+                response = clean_answer
                 yield self._format_and_tokenize(prompt, response)
 
     def _iter_mbpp(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
@@ -262,16 +260,10 @@ class EnterpriseArisDataset(IterableDataset):
             for r in rows:
                 text = r.get("text", "").strip()
                 code = r.get("code", "").strip()
-                test_list = r.get("test_list", [])
                 if not text or not code:
                     continue
-                tests_str = "\n".join(test_list[:3]) if isinstance(test_list, list) else ""
                 prompt = f"Write a Python program to solve this task:\n{text}"
-                response = (
-                    f"<|thought|>\nFormulating algorithmic logic, edge cases, and unit tests.\n"
-                    f"```python\n{code}\n```\n"
-                    f"# Verification Assertions:\n{tests_str}"
-                )
+                response = f"```python\n{code}\n```"
                 yield self._format_and_tokenize(prompt, response)
 
     def _iter_vision(self) -> Iterator[Tuple[torch.Tensor, torch.Tensor]]:
@@ -298,10 +290,7 @@ class EnterpriseArisDataset(IterableDataset):
                             asst_ans = val
                             img_ctx = f"[Image Context: {item.get('image', 'scene')}]\n"
                             prompt = f"{img_ctx}{human_q}"
-                            response = (
-                                f"<|thought|>\nAnalyzing visual features, spatial relationships, and object attributes:\n"
-                                f"{asst_ans}"
-                            )
+                            response = asst_ans
                             yield self._format_and_tokenize(prompt, response)
                             human_q = ""
             except Exception:
