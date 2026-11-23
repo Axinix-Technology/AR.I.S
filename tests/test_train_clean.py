@@ -6,7 +6,7 @@ import torch
 import pytest
 from aris.configs.model_config import ArisConfig
 from aris.models.aris_lm import ArisLM
-from aris.training.train_clean import get_cosine_lr
+from aris.training.trainer import get_cosine_lr
 
 
 def test_cosine_lr_schedule():

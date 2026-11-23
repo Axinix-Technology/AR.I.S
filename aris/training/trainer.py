@@ -1,41 +1,63 @@
 """
-AR.I.S â€” Neural Model Trainer with Incremental Resumption
+AR.I.S — Unified Neural Model Trainer with Proven Continuous Resumption
 Features:
-  - Phase-by-phase incremental training (e.g. today 500, tomorrow 1,000 -> cumulative 1,500)
-  - Restores model weights, optimizer states, learning rate schedules, and step counts
-  - Preserves previous learning progress without resetting weights or checkpoints
+  - Manifest-Driven Streaming: Ingests solely verified corpora via ArisDataPipelineV2.
+  - Zero-Slice Truncation: 100% of samples terminate with <|im_end|>; context shrinks to fit responses.
+  - Response-Only Loss Masking: Prompts masked with -100; zero double-shift causal alignment.
+  - Hardware Efficiency: Automatic Mixed Precision (AMP bfloat16 / float16) + Gradient Accumulation.
+  - Dynamic LR Schedule: Linear warmup with cosine decay to min_lr.
+  - Milestone Archiving: Preserves checkpoint milestones every 2,500 steps.
+  - Cloud Auto-Backup: Automatic mirroring to Google Drive on Google Colab.
 """
 
 from __future__ import annotations
+import os
 import sys
 import math
 import time
+import shutil
 from pathlib import Path
 from typing import Optional, Dict, Any, List, Tuple
+from dataclasses import asdict
+
 import torch
+import torch.nn as nn
 from torch.optim import AdamW
-from torch.optim.lr_scheduler import CosineAnnealingLR
+
+from ..config import BASE_DIR, DATA_DIR, MODELS_DIR
+from ..configs.model_config import ArisConfig
 from ..models.aris_lm import ArisLM
 from ..tokenizer.bpe_tokenizer import ArisTokenizer
-from ..data.dataset import EnterpriseDataLoader
+from ..data.pipeline_v2 import ArisDataPipelineV2
+
+
+def get_cosine_lr(step: int, warmup_steps: int, total_steps: int, max_lr: float, min_lr: float) -> float:
+    """Computes learning rate with linear warmup and cosine decay."""
+    if step < warmup_steps:
+        return max_lr * float(step + 1) / float(max(1, warmup_steps))
+    if step > total_steps:
+        return min_lr
+    decay_ratio = float(step - warmup_steps) / float(max(1, total_steps - warmup_steps))
+    coeff = 0.5 * (1.0 + math.cos(math.pi * decay_ratio))
+    return min_lr + coeff * (max_lr - min_lr)
 
 
 class ArisTrainer:
     """
-    Continuous & Incremental Training Engine for ArisLM.
+    Unified Production Trainer for Modern ArisLM Architecture.
     """
 
     def __init__(
         self,
-        model: ArisLM,
-        tokenizer: ArisTokenizer,
+        model: Optional[ArisLM] = None,
+        tokenizer: Optional[ArisTokenizer] = None,
         device: Optional[torch.device] = None,
         checkpoint_dir: Optional[Path] = None,
     ):
         self.device = device or torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.model = model.to(self.device)
+        self.model = model.to(self.device) if model is not None else None
         self.tokenizer = tokenizer
-        self.checkpoint_dir = Path(checkpoint_dir) if checkpoint_dir else Path("models")
+        self.checkpoint_dir = Path(checkpoint_dir) if checkpoint_dir else MODELS_DIR
         self.checkpoint_dir.mkdir(parents=True, exist_ok=True)
 
     @staticmethod
@@ -44,7 +66,6 @@ class ArisTrainer:
         if sys.platform == "win32":
             try:
                 import ctypes
-                # ES_CONTINUOUS = 0x80000000, ES_SYSTEM_REQUIRED = 0x00000001
                 if prevent_sleep:
                     ctypes.windll.kernel32.SetThreadExecutionState(0x80000000 | 0x00000001)
                 else:
@@ -52,299 +73,278 @@ class ArisTrainer:
             except Exception:
                 pass
 
-    def train(
-        self,
-        parquet_dir: Path,
-        ud_archive_path: Optional[Path] = None,
-        qasrl_dir: Optional[Path] = None,
-        hotpotqa_dir: Optional[Path] = None,
-        gsm8k_dir: Optional[Path] = None,
-        mbpp_dir: Optional[Path] = None,
-        vision_dir: Optional[Path] = None,
-        squad_dir: Optional[Path] = None,
-        dolly_dir: Optional[Path] = None,
-        smoltalk_dir: Optional[Path] = None,
-        custom_chat_path: Optional[Path] = None,
-        additional_steps: int = 500,
-        batch_size: int = 8,
-        accum_steps: int = 1,
-        max_threads: Optional[int] = None,
-        lr: float = 3e-4,
-        warmup_steps: int = 50,
+    @classmethod
+    def train_proven(
+        cls,
+        rung: str = "small",
+        pilot: bool = False,
+        budget_mult: float = 10.0,
+        total_steps: Optional[int] = None,
+        batch_size: int = 16,
+        accum_steps: int = 2,
+        lr: float = 6e-4,
+        min_lr: float = 6e-5,
+        warmup_steps: int = 500,
         grad_clip: float = 1.0,
-        save_every: int = 100,
-        log_every: int = 10,
-        max_seq_len: int = 384,
-        checkpoint_name: str = "aris_lm_checkpoint.pt",
+        log_every: int = 50,
+        save_every: int = 500,
+        device_name: str = "auto",
+        checkpoint_name: Optional[str] = None,
+        resume_from: Optional[str] = None,
         resume: bool = True,
-        focus: str = "all",
-        rank: int = 0,
-        world_size: int = 1,
         backup_dir: Optional[Path] = None,
-    ) -> Dict[str, Any]:
+    ) -> Path:
         """
-        Executes cumulative incremental training combining all 7 foundational corpora:
-        UltraChat + Universal Dependencies + QA-SRL + HotpotQA + GSM8K + MBPP + Vision.
-        Supports Protocol 1 (Thermal Management via Gradient Accumulation & Thread Limiter)
-        and Windows Keep-Awake kernel lock.
-        Supports Modular Cognitive Focus and Distributed Sharding (rank/world_size).
-        Supports Cloud Auto-Backup (mirrors checkpoints directly to Google Drive upon each save).
+        Executes the proven clean training pipeline across all corpora with AMP bfloat16.
         """
-        if max_threads and max_threads > 0:
-            torch.set_num_threads(max_threads)
-            print(f"[Protocol 1 Cool Training] Capped CPU Threads to {max_threads}")
-
-        self._set_windows_sleep_state(True)
-        print("[Protocol 1 Windows Keep-Awake] System sleep locked for unattended training.")
-
+        cls._set_windows_sleep_state(True)
         try:
-            return self._execute_train_loop(
-                parquet_dir=parquet_dir,
-                ud_archive_path=ud_archive_path,
-                qasrl_dir=qasrl_dir,
-                hotpotqa_dir=hotpotqa_dir,
-                gsm8k_dir=gsm8k_dir,
-                mbpp_dir=mbpp_dir,
-                vision_dir=vision_dir,
-                squad_dir=squad_dir,
-                dolly_dir=dolly_dir,
-                smoltalk_dir=smoltalk_dir,
-                custom_chat_path=custom_chat_path,
-                additional_steps=additional_steps,
-                batch_size=batch_size,
-                accum_steps=accum_steps,
-                lr=lr,
-                warmup_steps=warmup_steps,
-                grad_clip=grad_clip,
-                save_every=save_every,
-                log_every=log_every,
-                max_seq_len=max_seq_len,
-                checkpoint_name=checkpoint_name,
-                resume=resume,
-                focus=focus,
-                rank=rank,
-                world_size=world_size,
-                backup_dir=backup_dir,
+            print("=" * 105)
+            print("AR.I.S UNIFIED TRAINING ENGINE (PROVEN PIPELINE V2)")
+            print("=" * 105)
+
+            # 1. Resolve Device
+            if device_name == "auto":
+                device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+            else:
+                device = torch.device(device_name)
+            print(f"Compute Device:      {device}")
+            if device.type == "cuda":
+                gpu_name = torch.cuda.get_device_name(0)
+                vram_gb = torch.cuda.get_device_properties(0).total_memory / (1024**3)
+                print(f"GPU Hardware:        {gpu_name} ({vram_gb:.2f} GB VRAM)")
+
+            # 2. Load Frozen Tokenizer V2
+            tok_path = MODELS_DIR / "aris_bpe_tokenizer_v2.json"
+            if not tok_path.exists():
+                raise FileNotFoundError(f"Tokenizer V2 artifact not found at {tok_path}")
+            tokenizer = ArisTokenizer.load(tok_path)
+            print(f"Tokenizer:           {tok_path.name} (Vocab: {tokenizer.vocab_size:,})")
+
+            # 3. Model Architecture Configuration from Rung
+            cfg = ArisConfig.from_rung(rung=rung, vocab_size=tokenizer.vocab_size, max_seq_len=384)
+            param_count = cfg.expected_param_count()
+            print(f"Model Rung:          {rung.upper()} ({param_count:,} parameters)")
+
+            # 4. Token & Step Budget Calculation
+            tokens_per_step = batch_size * cfg.max_seq_len * accum_steps
+            b_mult = 1.0 if pilot else budget_mult
+            target_token_budget = int(param_count * b_mult)
+            mode_label = f"Pilot Run ({target_token_budget:,} tokens)" if pilot else f"{b_mult:.1f}x Chinchilla Scaling Run ({target_token_budget:,} tokens)"
+
+            if total_steps is None:
+                total_steps = math.ceil(target_token_budget / tokens_per_step)
+
+            print(f"Training Mode:       {mode_label} -> {total_steps:,} total optimizer steps")
+            print(f"Tokens Per Step:     {tokens_per_step:,} (Batch: {batch_size}, SeqLen: {cfg.max_seq_len}, Accum: {accum_steps})")
+            print(f"Max Learning Rate:   {lr:.2e} (Warmup: {warmup_steps} steps, Cosine Decay to {min_lr:.2e})")
+            print("-" * 105)
+
+            # 5. Initialize Model & Optimizer
+            model = ArisLM(cfg).to(device)
+            optimizer = AdamW(model.parameters(), lr=lr, betas=(0.9, 0.95), eps=1e-8, weight_decay=0.1)
+
+            # 6. Initialize Data Pipeline V2
+            print("Initializing Data Pipeline V2 across manifest-approved corpora...")
+            pipeline = ArisDataPipelineV2(
+                tokenizer=tokenizer,
+                max_seq_len=cfg.max_seq_len,
+                seed=42,
             )
-        finally:
-            self._set_windows_sleep_state(False)
-            print("[Protocol 1 Windows Keep-Awake] System sleep lock released.")
+            data_iter = iter(pipeline)
 
-    def _execute_train_loop(
-        self,
-        parquet_dir: Path,
-        ud_archive_path: Optional[Path],
-        qasrl_dir: Optional[Path],
-        hotpotqa_dir: Optional[Path],
-        gsm8k_dir: Optional[Path],
-        mbpp_dir: Optional[Path],
-        vision_dir: Optional[Path],
-        squad_dir: Optional[Path],
-        dolly_dir: Optional[Path],
-        smoltalk_dir: Optional[Path],
-        custom_chat_path: Optional[Path],
-        additional_steps: int,
-        batch_size: int,
-        accum_steps: int,
-        lr: float,
-        warmup_steps: int,
-        grad_clip: float,
-        save_every: int,
-        log_every: int,
-        max_seq_len: int,
-        checkpoint_name: str,
-        resume: bool,
-        focus: str = "all",
-        rank: int = 0,
-        world_size: int = 1,
-        backup_dir: Optional[Path] = None,
-    ) -> Dict[str, Any]:
-
-        save_path = self.checkpoint_dir / checkpoint_name
-        current_step = 0
-        optimizer_state = None
-
-        # Auto-restore from Google Drive backup if local checkpoint is missing
-        if resume and not save_path.exists() and backup_dir and (backup_dir / checkpoint_name).exists():
-            print(f"\n[Cloud Auto-Backup] Restoring checkpoint from Google Drive backup: {backup_dir / checkpoint_name}")
-            save_path.parent.mkdir(parents=True, exist_ok=True)
-            import shutil
-            shutil.copy2(backup_dir / checkpoint_name, save_path)
-
-        if resume and save_path.exists():
-            print(f"\n[Incremental Training] Found existing checkpoint: {save_path}")
-            checkpoint = torch.load(save_path, map_location=self.device, weights_only=False)
-            self.model.load_state_dict(checkpoint["model_state_dict"])
-            current_step = checkpoint.get("step", 0)
-            optimizer_state = checkpoint.get("optimizer_state_dict")
-            print(f"[Incremental Training] Resumed from cumulative step: {current_step}")
-        else:
-            print(f"\n[New Training] Starting fresh from step 0.")
-
-        target_total_steps = current_step + additional_steps
-
-        optimizer = AdamW(self.model.parameters(), lr=lr, betas=(0.9, 0.95), weight_decay=0.01)
-        if optimizer_state:
-            try:
-                optimizer.load_state_dict(optimizer_state)
-                # Reset learning rate for the new session so it starts at requested lr and decays over additional_steps
-                for param_group in optimizer.param_groups:
-                    param_group["lr"] = lr
-            except Exception:
-                print("  Note: Initialized fresh optimizer state for new learning phase.")
-
-        scheduler = CosineAnnealingLR(optimizer, T_max=max(1, additional_steps), eta_min=lr * 0.1)
-
-        loader = EnterpriseDataLoader.get_loader(
-            ultrachat_dir=parquet_dir,
-            ud_archive_path=ud_archive_path,
-            qasrl_dir=qasrl_dir,
-            hotpotqa_dir=hotpotqa_dir,
-            gsm8k_dir=gsm8k_dir,
-            mbpp_dir=mbpp_dir,
-            vision_dir=vision_dir,
-            squad_dir=squad_dir,
-            dolly_dir=dolly_dir,
-            smoltalk_dir=smoltalk_dir,
-            custom_chat_path=custom_chat_path,
-            tokenizer=self.tokenizer,
-            batch_size=batch_size,
-            max_seq_len=max_seq_len,
-            split="train",
-            focus=focus,
-            rank=rank,
-            world_size=world_size,
-        )
-
-        print(f"\n=======================================================")
-        print(f"  AR.I.S Incremental Neural Training Session")
-        print(f"=======================================================")
-        print(f"Device:             {self.device}")
-        print(f"Model Parameters:   {self.model.num_parameters:,}")
-        print(f"Starting Step:      {current_step}")
-        print(f"Steps this run:     +{additional_steps}")
-        print(f"Target Total Step:  {target_total_steps}")
-        print(f"Batch Size:         {batch_size}")
-        print(f"Cognitive Focus:    {focus.upper()}")
-        if world_size > 1:
-            print(f"Data Sharding:      Rank {rank} / World Size {world_size}")
-        print(f"Learning Rate:      {lr}\n")
-
-        self.model.train()
-        loader_iter = iter(loader)
-        running_loss = 0.0
-        session_step = 0
-        start_time = time.time()
-        history: List[Dict[str, Any]] = []
-
-        optimizer.zero_grad()
-
-        while current_step < target_total_steps:
-            try:
-                batch_inputs, batch_targets = next(loader_iter)
-            except StopIteration:
-                loader_iter = iter(loader)
-                batch_inputs, batch_targets = next(loader_iter)
-
-            batch_inputs = batch_inputs.to(self.device)
-            batch_targets = batch_targets.to(self.device)
-
-            _, loss, _ = self.model(batch_inputs, targets=batch_targets)
-            if loss is None or torch.isnan(loss):
-                continue
-
-            # Scale loss for gradient accumulation
-            scaled_loss = loss / accum_steps
-            scaled_loss.backward()
-            running_loss += loss.item()
-
-            # Execute optimizer step after accum_steps micro-steps
-            if (session_step + 1) % accum_steps == 0 or (current_step + 1) >= target_total_steps:
-                torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=grad_clip)
-                optimizer.step()
-
-                if session_step < warmup_steps and current_step < warmup_steps:
-                    warmup_lr = lr * float(session_step + 1) / float(max(1, warmup_steps))
-                    for param_group in optimizer.param_groups:
-                        param_group["lr"] = warmup_lr
+            # 7. Checkpoint Resolution
+            if checkpoint_name is None:
+                if pilot:
+                    ckpt_name = f"aris_lm_clean_{rung}_pilot.pt"
                 else:
-                    scheduler.step()
+                    mult_str = f"{int(b_mult)}" if b_mult.is_integer() else f"{b_mult}"
+                    ckpt_name = f"aris_lm_clean_{rung}_{mult_str}x.pt"
+            else:
+                ckpt_name = checkpoint_name
+
+            ckpt_path = MODELS_DIR / ckpt_name
+            start_step = 0
+            tokens_trained = 0
+
+            load_source = None
+            if resume_from:
+                candidate = Path(resume_from)
+                if not candidate.is_absolute():
+                    candidate = BASE_DIR / resume_from if (BASE_DIR / resume_from).exists() else MODELS_DIR / resume_from
+                if candidate.exists():
+                    load_source = candidate
+                else:
+                    print(f"Warning: --resume-from path '{resume_from}' not found. Checking {ckpt_path}...")
+
+            if load_source is None and resume and ckpt_path.exists():
+                load_source = ckpt_path
+
+            if load_source and load_source.exists():
+                print(f"Resuming clean training from {load_source}...")
+                ckpt = torch.load(load_source, map_location=device, weights_only=False)
+                model.load_state_dict(ckpt["model_state_dict"])
+                if "optimizer_state_dict" in ckpt:
+                    optimizer.load_state_dict(ckpt["optimizer_state_dict"])
+                start_step = ckpt.get("step", 0)
+                tokens_trained = ckpt.get("tokens_trained", start_step * tokens_per_step)
+                if "pipeline_state" in ckpt:
+                    pipeline.set_state(ckpt["pipeline_state"])
+                    data_iter = iter(pipeline)
+                if "rng_state" in ckpt:
+                    try:
+                        g_rng = ckpt["rng_state"]
+                        if isinstance(g_rng, torch.Tensor):
+                            g_rng = g_rng.to(device="cpu", dtype=torch.uint8)
+                        torch.set_rng_state(g_rng)
+                    except Exception:
+                        pass
+                print(f"  Resumed at Step {start_step:,} ({tokens_trained:,} tokens already completed)")
+                if load_source != ckpt_path:
+                    print(f"  Target Save Checkpoint: {ckpt_path.name}")
+
+            # 8. Mixed Precision Scaler
+            amp_dtype = torch.bfloat16 if (device.type == "cuda" and torch.cuda.is_bf16_supported()) else torch.float16
+            use_amp = (device.type == "cuda")
+            scaler = torch.amp.GradScaler("cuda", enabled=(use_amp and amp_dtype == torch.float16))
+
+            print(f"Precision:           {'AMP ' + str(amp_dtype) if use_amp else 'Float32 FP32'}")
+            print("=" * 105)
+            print(f"{'Step':8} | {'Loss':8} | {'LR':10} | {'GradNorm':9} | {'Throughput':14} | {'Tokens Done':14} | {'Progress':9} | {'ETA':10}")
+            print("-" * 105)
+
+            model.train()
+            optimizer.zero_grad()
+
+            t_start = time.time()
+            step_window_tokens = 0
+            step_window_start = time.time()
+
+            for step in range(start_step, total_steps):
+                curr_lr = get_cosine_lr(step, warmup_steps, total_steps, lr, min_lr)
+                for param_group in optimizer.param_groups:
+                    param_group["lr"] = curr_lr
+
+                accum_loss = 0.0
+
+                for micro_step in range(accum_steps):
+                    batch_inputs = []
+                    batch_targets = []
+                    for _ in range(batch_size):
+                        try:
+                            inp, tgt = next(data_iter)
+                        except StopIteration:
+                            data_iter = iter(pipeline)
+                            inp, tgt = next(data_iter)
+                        batch_inputs.append(inp)
+                        batch_targets.append(tgt)
+
+                    padded_inputs = []
+                    padded_targets = []
+                    pad_id = getattr(cfg, "pad_token_id", 0)
+                    target_seq_len = cfg.max_seq_len
+
+                    for inp_t, tgt_t in zip(batch_inputs, batch_targets):
+                        cur_len = len(inp_t)
+                        if cur_len < target_seq_len:
+                            pad_len = target_seq_len - cur_len
+                            p_inp = torch.cat([inp_t, torch.full((pad_len,), pad_id, dtype=torch.long)])
+                            p_tgt = torch.cat([tgt_t, torch.full((pad_len,), -100, dtype=torch.long)])
+                        else:
+                            p_inp = inp_t[:target_seq_len]
+                            p_tgt = tgt_t[:target_seq_len]
+                        padded_inputs.append(p_inp)
+                        padded_targets.append(p_tgt)
+
+                    x = torch.stack(padded_inputs).to(device)
+                    y = torch.stack(padded_targets).to(device)
+
+                    with torch.amp.autocast(device_type=device.type, dtype=amp_dtype, enabled=use_amp):
+                        _, loss, _ = model(x, targets=y)
+                        loss = loss / accum_steps
+
+                    if use_amp and amp_dtype == torch.float16:
+                        scaler.scale(loss).backward()
+                    else:
+                        loss.backward()
+
+                    accum_loss += loss.item()
+                    step_window_tokens += int((y != -100).sum().item())
+
+                tokens_trained += tokens_per_step
+
+                if use_amp and amp_dtype == torch.float16:
+                    scaler.unscale_(optimizer)
+                    grad_norm = nn.utils.clip_grad_norm_(model.parameters(), max_norm=grad_clip)
+                    scaler.step(optimizer)
+                    scaler.update()
+                else:
+                    grad_norm = nn.utils.clip_grad_norm_(model.parameters(), max_norm=grad_clip)
+                    optimizer.step()
 
                 optimizer.zero_grad()
-                current_step += 1
 
-            session_step += 1
+                if (step + 1) % log_every == 0 or (step + 1) == total_steps:
+                    now = time.time()
+                    elapsed_window = now - step_window_start
+                    tok_per_sec = (step_window_tokens / elapsed_window) if elapsed_window > 0 else 0.0
+                    pct_done = ((step + 1) / total_steps) * 100.0
+                    remaining_steps = total_steps - (step + 1)
+                    eta_sec = (remaining_steps * tokens_per_step / tok_per_sec) if tok_per_sec > 0 else 0
+                    eta_str = f"{int(eta_sec // 60)}m {int(eta_sec % 60):02d}s"
 
-            if session_step % log_every == 0:
-                avg_loss = running_loss / log_every
-                elapsed = time.time() - start_time
-                steps_per_sec = session_step / max(elapsed, 1e-5)
-                current_lr = optimizer.param_groups[0]["lr"]
+                    print(
+                        f"{step + 1:8,d} | {accum_loss:8.4f} | {curr_lr:10.2e} | {float(grad_norm):9.4f} | "
+                        f"{tok_per_sec:10.1f} tok/s | {tokens_trained:14,d} | {pct_done:8.1f}% | {eta_str:10}"
+                    )
+                    step_window_tokens = 0
+                    step_window_start = time.time()
 
-                print(f"[Step {current_step:05d} (Cumulative)] Loss: {avg_loss:.4f} | LR: {current_lr:.6f} | Speed: {steps_per_sec:.2f} st/s")
-                history.append({"step": current_step, "loss": round(avg_loss, 4), "lr": current_lr})
-                running_loss = 0.0
+                # Checkpointing
+                if (step + 1) % save_every == 0 or (step + 1) == total_steps:
+                    checkpoint_payload = {
+                        "step": step + 1,
+                        "tokens_trained": tokens_trained,
+                        "loss": accum_loss,
+                        "config": cfg.__dict__,
+                        "model_config": cfg.__dict__,
+                        "model_state_dict": model.state_dict(),
+                        "optimizer_state_dict": optimizer.state_dict(),
+                        "pipeline_state": pipeline.get_state(),
+                        "rng_state": torch.get_rng_state(),
+                    }
+                    torch.save(checkpoint_payload, ckpt_path)
+                    print(f"  [Checkpoint Saved] -> {ckpt_path.name} (Step {step + 1:,}, Loss {accum_loss:.4f})")
 
-            if session_step % save_every == 0 or current_step == target_total_steps:
-                self.save_checkpoint(
-                    save_path,
-                    step=current_step,
-                    optimizer=optimizer,
-                    loss=loss.item(),
-                    backup_dir=backup_dir,
-                )
-                print(f"  --> Checkpoint saved! Cumulative trained steps: {current_step}")
+                    # Milestone Archiving (every 2,500 steps)
+                    if (step + 1) % 2500 == 0 or (step + 1) == total_steps:
+                        milestone_path = ckpt_path.with_name(f"{ckpt_path.stem}_step_{step + 1}{ckpt_path.suffix}")
+                        torch.save(checkpoint_payload, milestone_path)
+                        print(f"  [Milestone Checkpoint Archived] -> {milestone_path.name}")
 
-        total_time = time.time() - start_time
-        print(f"\n[Training Phase Complete] Successfully completed +{session_step} steps in {total_time:.1f}s.")
-        print(f"Cumulative Model Knowledge: {current_step} total steps stored in {save_path}\n")
+                    # Mirror to Google Drive if backup_dir provided
+                    if backup_dir:
+                        try:
+                            backup_dir.mkdir(parents=True, exist_ok=True)
+                            dest = backup_dir / ckpt_path.name
+                            shutil.copy2(ckpt_path, dest)
+                            print(f"  --> [Cloud Auto-Backup] Mirrored to Google Drive: {dest}")
+                        except Exception as e:
+                            print(f"  --> [Cloud Auto-Backup Warning] Could not mirror to {backup_dir}: {e}")
 
-        return {
-            "cumulative_steps": current_step,
-            "session_steps": session_step,
-            "total_time_seconds": round(total_time, 2),
-            "final_checkpoint": str(save_path),
-            "history": history,
-        }
+            total_time = time.time() - t_start
+            print("-" * 105)
+            print(f"Clean Training Run Completed in {int(total_time // 60)}m {int(total_time % 60):02d}s!")
+            print(f"Final Checkpoint: {ckpt_path} ({ckpt_path.stat().st_size / (1024*1024):.2f} MB)")
+            print("=" * 105)
+            return ckpt_path
 
-    def save_checkpoint(
-        self,
-        filepath: Path,
-        step: int,
-        optimizer: Optional[torch.optim.Optimizer] = None,
-        loss: Optional[float] = None,
-        backup_dir: Optional[Path] = None,
-    ) -> None:
-        """
-        Saves weights, config, and cumulative training state.
-        Immediately mirrors the saved checkpoint to backup_dir (Google Drive) if configured.
-        """
-        import shutil
-        from dataclasses import asdict
-        checkpoint = {
-            "step": step,
-            "loss": loss,
-            "model_state_dict": self.model.state_dict(),
-            "model_config": asdict(self.model.config),
-        }
-        if optimizer:
-            checkpoint["optimizer_state_dict"] = optimizer.state_dict()
-        torch.save(checkpoint, filepath)
-
-        # Immediate mirror to backup destination (Google Drive) on EVERY save
-        if backup_dir:
-            try:
-                backup_dir.mkdir(parents=True, exist_ok=True)
-                dest = backup_dir / filepath.name
-                shutil.copy2(filepath, dest)
-                print(f"  --> [Cloud Auto-Backup] Mirrored to Google Drive: {dest}")
-            except Exception as e:
-                print(f"  --> [Cloud Auto-Backup Warning] Could not mirror to {backup_dir}: {e}")
+        finally:
+            cls._set_windows_sleep_state(False)
 
     @classmethod
     def load_model(cls, checkpoint_path: Path, device: Optional[torch.device] = None) -> Tuple[ArisLM, int]:
         """Loads ArisLM and returns (model, cumulative_step)."""
-        from ..configs.model_config import ArisConfig
         device = device or torch.device("cuda" if torch.cuda.is_available() else "cpu")
         checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
         cfg_dict = checkpoint.get("model_config") or checkpoint.get("config", {})
@@ -360,7 +360,6 @@ class ArisTrainer:
             tie_word_embeddings=cfg_dict.get("tie_word_embeddings", True),
         )
 
-        # Validate checkpoint state_dict element count against config derivation
         actual_sd_elements = sum(v.numel() for v in checkpoint["model_state_dict"].values())
         expected_sd_elements = config.expected_state_dict_count()
         if actual_sd_elements != expected_sd_elements:

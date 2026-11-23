@@ -47,6 +47,51 @@ class ArisConfig:
             hidden = int(2 * (4 * self.embed_dim) / 3)
             self.ff_dim = ((hidden + 63) // 64) * 64
 
+    @classmethod
+    def from_rung(cls, rung: str, vocab_size: int = 8192, max_seq_len: int = 384) -> ArisConfig:
+        """
+        Standardized Model Rungs:
+          - 'small':  26.75M params (d=512, L=8, n_q=8, n_kv=2, ff=1408)
+          - 'medium' / 'gen3': 58.34M params (d=640, L=12, n_q=10, n_kv=2, ff=1792)
+          - 'pico':   7.63M params  (d=256, L=4, n_q=4, n_kv=2, ff=704)
+        """
+        rung_lower = rung.lower()
+        if rung_lower in ("medium", "gen3"):
+            return cls(
+                vocab_size=vocab_size,
+                max_seq_len=max_seq_len,
+                embed_dim=640,
+                num_layers=12,
+                num_query_heads=10,
+                num_kv_heads=2,
+                ff_dim=1792,
+                tie_word_embeddings=True,
+            )
+        elif rung_lower == "small":
+            return cls(
+                vocab_size=vocab_size,
+                max_seq_len=max_seq_len,
+                embed_dim=512,
+                num_layers=8,
+                num_query_heads=8,
+                num_kv_heads=2,
+                ff_dim=1408,
+                tie_word_embeddings=True,
+            )
+        elif rung_lower == "pico":
+            return cls(
+                vocab_size=vocab_size,
+                max_seq_len=max_seq_len,
+                embed_dim=256,
+                num_layers=4,
+                num_query_heads=4,
+                num_kv_heads=2,
+                ff_dim=704,
+                tie_word_embeddings=True,
+            )
+        else:
+            raise ValueError(f"Unknown rung '{rung}'. Supported: 'small', 'medium' ('gen3'), 'pico'.")
+
     @property
     def head_dim(self) -> int:
         return self.embed_dim // self.num_query_heads

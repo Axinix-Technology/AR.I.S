@@ -1,4 +1,4 @@
-from .trainer import ArisTrainer
+from .trainer import ArisTrainer, get_cosine_lr
 
-__all__ = ["ArisTrainer"]
+__all__ = ["ArisTrainer", "get_cosine_lr"]
 
